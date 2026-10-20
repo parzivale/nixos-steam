@@ -101,6 +101,14 @@ let
         ((if d.what != "" then d.what else d.help) + confidence d.confidence)
         (optionalString (d.help != "") "Valve: ${d.help}")
         (
+          {
+            session = "**Session-only:** this is a one-shot action or per-invocation argument. Setting it here applies it on *every* launch, which is rarely what you want.";
+            internal = "**Internal:** Steam passes this to its own helper processes. Setting it on the client is unlikely to be useful.";
+            test = "**Valve test hook:** simulates failures or test states.";
+          }
+          .${d.kind or "persistent"} or ""
+        )
+        (
           if d.arg then
             "Passed as `${name}${optionalString (!lib.hasSuffix "=" name) " "}<value>`."
           else
@@ -176,7 +184,16 @@ let
         (optionalString (
           d.kind == "sdl-hint"
         ) "SDL hint; an environment variable of the same name overrides it.")
-        "Read by: ${concatStringsSep ", " d.binaries} (${concatStringsSep "; " d.access})."
+        (optionalString (d.kind == "runtime") "Launcher / runtime script variable.")
+        (optionalString ((d.values or null) != null)
+          "Values: ${concatStringsSep ", " (map (v: "`${v}`") d.values)}."
+        )
+        (
+          if d.binaries != [ ] then
+            "Read by: ${concatStringsSep ", " d.binaries} (${concatStringsSep "; " d.access})."
+          else
+            "Source: ${concatStringsSep "; " d.access}."
+        )
         "`true`/`false` are passed as `1`/`0`."
       ]
     );
@@ -189,6 +206,24 @@ let
     types.int
     types.str
   ];
+
+  # typed where the research gave a type (runtime/launcher variables), permissive otherwise
+  envType =
+    d:
+    let
+      t = d.type or null;
+      vals = if (d.enum or null) != null then d.enum else d.values or null;
+    in
+    if t == "bool" then
+      types.bool
+    else if t == "int" then
+      types.int
+    else if t == "path" || t == "string" then
+      types.str
+    else if t == "enum" && vals != null && vals != [ ] then
+      types.enum vals
+    else
+      envValueType;
 
   gameEnvDescription =
     name: d:
@@ -209,7 +244,7 @@ let
       lib.mapAttrsToList (n: v: "export ${n}=${lib.escapeShellArg (envValue v)}") vars
     );
 
-  gameEnv = filterAttrs (_: v: v != null) cfg.gameEnvironment;
+  gameEnv = filterAttrs (_: v: v != null) cfg.gameEnvironment // cfg.internal.gameEnvironment;
   perGameEnv = filterAttrs (_: g: g.environment != { }) cfg.games;
   useLaunchShell = gameEnv != { } || perGameEnv != { };
 
@@ -246,24 +281,75 @@ let
 
   applyData = {
     inherit (cfg) steamRoot userIds;
-    settings =
-      lib.mapAttrsToList (name: v: {
-        inherit (settingsData.${name}) store key;
-        value = settingValue settingsData.${name} v;
-      }) managedSettings
-      ++ launchOptionSettings;
+    settings = cfg.internal.settings;
     steamCfg =
       if steamCfg == { } && !cfg.manageSteamCfg then null else lib.mapAttrs (_: toString) steamCfg;
+    files = cfg.internal.files;
+    shortcuts = cfg.internal.shortcuts;
+    libraryFolders = cfg.internal.libraryFolders;
   };
   applyConfig = pkgs.writeText "nixos-steam-client.json" (builtins.toJSON applyData);
 
-  allArgs = switchArgs ++ convarArgs ++ cfg.extraArgs;
+  allArgs = switchArgs ++ convarArgs ++ cfg.internal.args ++ cfg.extraArgs;
   env =
     mapAttrs (_: envValue) (filterAttrs (_: v: v != null) cfg.environment)
+    // cfg.internal.environment
     // lib.optionalAttrs useLaunchShell { STEAM_GAME_LAUNCH_SHELL = "${launchShell}"; };
 in
 {
+  imports = [
+    ./games.nix
+    ./library.nix
+    ./files.nix
+    ./presets.nix
+  ];
+
   options.programs.steam.client = {
+    internal = {
+      settings = mkOption {
+        type = types.listOf (types.attrsOf types.str);
+        default = [ ];
+        internal = true;
+        description = "Entries `{ store; key; value; }` merged into Steam's VDF stores by steam-config-apply.";
+      };
+      files = mkOption {
+        type = types.attrsOf (types.nullOr types.str);
+        default = { };
+        internal = true;
+        description = "Files (relative to the Steam root) managed by steam-config-apply.";
+      };
+      shortcuts = mkOption {
+        type = types.listOf types.attrs;
+        default = [ ];
+        internal = true;
+        description = "Non-Steam shortcuts upserted into userdata/<id>/config/shortcuts.vdf.";
+      };
+      libraryFolders = mkOption {
+        type = types.listOf types.attrs;
+        default = [ ];
+        internal = true;
+        description = "Library folders ensured in steamapps/libraryfolders.vdf.";
+      };
+      args = mkOption {
+        type = types.listOf types.str;
+        default = [ ];
+        internal = true;
+        description = "Arguments contributed by feature modules.";
+      };
+      environment = mkOption {
+        type = types.attrsOf types.str;
+        default = { };
+        internal = true;
+        description = "Steam process environment contributed by feature modules.";
+      };
+      gameEnvironment = mkOption {
+        type = types.attrsOf types.str;
+        default = { };
+        internal = true;
+        description = "Game environment contributed by feature modules.";
+      };
+    };
+
     enable = lib.mkEnableOption ''
       declarative Steam client configuration. Wraps {option}`programs.steam.package` so that the options
       below are applied every time Steam starts
@@ -343,13 +429,7 @@ in
     environment = mapAttrs (
       name: d:
       mkOption {
-        type = types.nullOr (
-          types.oneOf [
-            types.bool
-            types.int
-            types.str
-          ]
-        );
+        type = types.nullOr (envType d);
         default = null;
         description = envDescription name d;
       }
@@ -361,7 +441,7 @@ in
         options = mapAttrs (
           name: d:
           mkOption {
-            type = types.nullOr envValueType;
+            type = types.nullOr (envType d);
             default = null;
             description = gameEnvDescription name d;
           }
@@ -489,6 +569,13 @@ in
         message = "programs.steam.client.games: keys must be numeric Steam app IDs.";
       }
     ];
+    programs.steam.client.internal.settings =
+      lib.mapAttrsToList (name: v: {
+        inherit (settingsData.${name}) store key;
+        value = settingValue settingsData.${name} v;
+      }) managedSettings
+      ++ launchOptionSettings;
+
     programs.steam.client.finalConfig = {
       args = allArgs;
       environment = env;

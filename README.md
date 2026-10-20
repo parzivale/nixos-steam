@@ -29,7 +29,7 @@ hidden, recovered by analysing the client itself (see [doc/](doc/README.md)).
             switches.language = "english";
 
             # console variables (passed as +name value)
-            convars."@nPeerContentDefaultMode" = 0;
+            convars.nPeerContentDefaultMode = 0;
 
             # environment variables and SDL hints
             environment.STEAM_SPEW_LEVELS = "Overlay=4,4";

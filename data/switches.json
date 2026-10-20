@@ -6,6 +6,7 @@
   "arg": true,
   "confidence": "low",
   "help": "",
+  "kind": "session",
   "what": "Steam UI (steamui.so) switch, probably supplying an access/activation code at startup; the related `-accesscode=` form is forwarded by the client's command-line handler alongside `-login`/`-applaunch`, so it likely takes `-accesscode=<code>`. Purpose not confirmed."
  },
  "-all_languages": {
@@ -15,6 +16,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "VGUI localization (vgui2_s.so) flag: load localization files for all languages instead of only the current `%language%` one, probably for translation testing. Presence flag."
  },
  "-allosarches": {
@@ -24,6 +26,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "Bootstrapper flag: request client packages for every OS architecture rather than only the running one, typically for mirroring or testing the package manifest. Presence flag."
  },
  "-allosvers": {
@@ -33,6 +36,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "Bootstrapper flag: request client packages for every OS version in the manifest, not just the current one. Presence flag; pairs with `-allosarches`."
  },
  "-allowbrowserviewunderlays": {
@@ -42,6 +46,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Allow browser view underlays",
+  "kind": "persistent",
   "what": "steamwebhelper flag (Valve: allow browser view underlays). It is the webhelper-side counterpart of `-cef-allow-browser-underlays`, which steamclient passes through when launching the webhelper."
  },
  "-allowremotediscovery": {
@@ -51,6 +56,7 @@
   "arg": false,
   "confidence": "low",
   "help": "",
+  "kind": "persistent",
   "what": "steamclient.so flag for the Remote Play / In-Home Streaming client manager: probably allows this client to be discovered by, or to discover, remote Steam clients. It sits next to the opposite switch `-preventsteamdiscovery`."
  },
  "-alwaysrelaunch": {
@@ -60,6 +66,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "Bootstrapper flag: always re-exec the client after the update step, even when nothing changed. Presence flag."
  },
  "-applaunch": {
@@ -69,6 +76,7 @@
   "arg": true,
   "confidence": "high",
   "help": "",
+  "kind": "session",
   "what": "Launch a game when Steam starts: `steam -applaunch <appid> [game args...]`. It is handled by the Steam UI command-line dispatcher (CSteamDoc::ExecCommandLine) and also forwarded to an already running instance."
  },
  "-arch": {
@@ -78,6 +86,7 @@
   "arg": false,
   "confidence": "low",
   "help": "",
+  "kind": "persistent",
   "what": "Registered in steamclient/chromehtml next to the CEF switches, and the bootstrapper uses it to request packages for a given architecture. Probably takes an architecture value such as `-arch x64`; the client also appends `&ARCH=%s` to the Steam UI URL."
  },
  "-batterytestmode": {
@@ -87,6 +96,7 @@
   "arg": false,
   "confidence": "high",
   "help": "rapidly cycle battery percentages for testing",
+  "kind": "test",
   "what": "Test hook in the steamclient system manager. It makes the reported battery percentage cycle rapidly instead of reading SDL_GetPowerInfo, so the battery UI can be exercised on Deck-style devices."
  },
  "-bigpicture": {
@@ -96,6 +106,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Start in Steam Big Picture mode",
+  "kind": "persistent",
   "what": "Start the client directly in Big Picture mode (steamui.so). Related switches: `-tenfoot` (alias), `-gamepadui` and `-nobigpicture` (force off)."
  },
  "-bootreserve": {
@@ -105,6 +116,7 @@
   "arg": false,
   "confidence": "low",
   "help": "",
+  "kind": "persistent",
   "what": "steamclient.so flag, probably reserving a block of disk space at boot as a safety buffer (sized by `-bootreservesizemb`). Evidence is only adjacent strings."
  },
  "-bootreservesizemb": {
@@ -114,6 +126,7 @@
   "arg": true,
   "confidence": "low",
   "help": "",
+  "kind": "persistent",
   "what": "steamclient.so switch that probably takes a size in MB for the `-bootreserve` reservation (`-bootreservesizemb <MB>`). Evidence is only the name."
  },
  "-bootstrapperproxy": {
@@ -123,6 +136,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "Bootstrapper switch that takes an argument: an HTTP proxy used for the bootstrapper's own package downloads."
  },
  "-buildid": {
@@ -132,6 +146,7 @@
   "arg": true,
   "confidence": "high",
   "help": "Build identifier for crash reporting",
+  "kind": "internal",
   "what": "steamsysinfo option: `-buildid <id>`, the build identifier attached to crash reports. It is used together with `-steamid`, `-logdir`, `-query` and `-out-file`."
  },
  "-cafeapplaunch": {
@@ -141,6 +156,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Launch apps in a cyber cafe context",
+  "kind": "persistent",
   "what": "steamclient.so switch: launch apps in a cyber-cafe (internet cafe licensing) context. Presence flag."
  },
  "-candidates": {
@@ -150,6 +166,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Show libjingle candidates for local connection as they are processed",
+  "kind": "persistent",
   "what": "steamclient.so debug flag: log the libjingle ICE candidates for local P2P/streaming connections as they are processed."
  },
  "-ccsyntax": {
@@ -159,6 +176,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Spew details about the localized strings we load",
+  "kind": "persistent",
   "what": "VGUI localization debug flag: log details about each localized string file and token that is loaded. Useful together with `-language`."
  },
  "-cef-allow-browser-underlays": {
@@ -168,6 +186,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Allow webhelper to create BrowserView underlays",
+  "kind": "persistent",
   "what": "CEF switch: allow steamwebhelper to create BrowserView underlays. steamclient forwards it to the webhelper as `-allowbrowserviewunderlays`."
  },
  "-cef-disable-breakpad": {
@@ -177,6 +196,7 @@
   "arg": false,
   "confidence": "high",
   "help": "disables breakpad in crash dumps",
+  "kind": "persistent",
   "what": "CEF switch: disable Breakpad crash reporting in steamwebhelper."
  },
  "-cef-disable-browser-underlays": {
@@ -186,6 +206,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Disables support for BrowserView underlays",
+  "kind": "persistent",
   "what": "CEF switch: turn off BrowserView underlay support in steamwebhelper. It is the opposite of `-cef-force-browser-underlays`."
  },
  "-cef-disable-gpu": {
@@ -195,6 +216,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Disable GPU usage in CEF (force software rendering/compositing)",
+  "kind": "persistent",
   "what": "CEF switch: disable GPU use in steamwebhelper, forcing software rendering and compositing. This is a common workaround for black or flickering Steam windows caused by driver problems."
  },
  "-cef-disable-gpu-compositing": {
@@ -204,6 +226,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Disable GPU accelerated compositing in browsers",
+  "kind": "persistent",
   "what": "CEF switch: disable GPU-accelerated compositing in steamwebhelper while other GPU use stays enabled."
  },
  "-cef-disable-gpu-sandbox": {
@@ -213,6 +236,7 @@
   "arg": false,
   "confidence": "high",
   "help": "disables CEF gpu-process sandbox",
+  "kind": "persistent",
   "what": "CEF switch: disable the Chromium GPU-process sandbox in steamwebhelper."
  },
  "-cef-disable-hang-timeouts": {
@@ -222,6 +246,7 @@
   "arg": false,
   "confidence": "high",
   "help": "disables GPU and renderer hang timeouts",
+  "kind": "persistent",
   "what": "CEF switch: disable Chromium's GPU and renderer hang watchdogs, so a stalled webhelper process isn't killed. Useful when debugging the webhelper."
  },
  "-cef-disable-hevc": {
@@ -231,6 +256,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Disables hevc support",
+  "kind": "persistent",
   "what": "CEF switch: disable HEVC (H.265) video support in steamwebhelper."
  },
  "-cef-disable-js-logging": {
@@ -240,6 +266,7 @@
   "arg": false,
   "confidence": "high",
   "help": "disables console and log file logging of JS console events",
+  "kind": "persistent",
   "what": "CEF switch: stop logging Steam UI JavaScript console messages to the console and to the webhelper log file."
  },
  "-cef-disable-logging": {
@@ -249,6 +276,7 @@
   "arg": false,
   "confidence": "high",
   "help": "disables logging from CEF",
+  "kind": "persistent",
   "what": "CEF switch: disable CEF/Chromium logging from steamwebhelper."
  },
  "-cef-disable-occlusion": {
@@ -258,6 +286,7 @@
   "arg": false,
   "confidence": "high",
   "help": "disables Chromium window occlusion testing",
+  "kind": "persistent",
   "what": "CEF switch: disable Chromium's window-occlusion detection, so hidden or covered Steam windows keep rendering."
  },
  "-cef-disable-renderer-restart": {
@@ -267,6 +296,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Disable auto-restart of renderer process for existing browsers",
+  "kind": "persistent",
   "what": "CEF switch: don't automatically restart a crashed renderer process for an existing browser."
  },
  "-cef-disable-safe-shutdown-workaround": {
@@ -276,6 +306,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Disable the usage of the safe browser shutdown workaround for Linux+NV",
+  "kind": "persistent",
   "what": "CEF switch: turn off the safe browser shutdown workaround that is otherwise applied on Linux with NVIDIA drivers. It is forwarded to the webhelper as `-disable_safe_shutdown_workaround`; the env var `STEAM_DISABLE_BROWSER_SHUTDOWN_WORKAROUND` has the same effect."
  },
  "-cef-disable-sandbox": {
@@ -285,6 +316,7 @@
   "arg": false,
   "confidence": "high",
   "help": "disables sandboxing in CEF",
+  "kind": "persistent",
   "what": "CEF switch: disable Chromium sandboxing in steamwebhelper. `-no-cef-sandbox` is registered next to it as an equivalent."
  },
  "-cef-disable-seccomp-sandbox": {
@@ -294,6 +326,7 @@
   "arg": false,
   "confidence": "high",
   "help": "disables CEF seccomp-bpf sandbox on Linux",
+  "kind": "persistent",
   "what": "CEF switch: disable only the Linux seccomp-bpf layer of the Chromium sandbox."
  },
  "-cef-disable-site-isolation": {
@@ -303,6 +336,7 @@
   "arg": false,
   "confidence": "high",
   "help": "disables per-process site-isolation",
+  "kind": "persistent",
   "what": "CEF switch: disable Chromium per-site process isolation, which reduces the number of renderer processes."
  },
  "-cef-disable-touch-focus-workaround": {
@@ -312,6 +346,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Disable touch input browser focus workaround",
+  "kind": "persistent",
   "what": "CEF switch: turn off the touch-input browser-focus workaround. It is forwarded to the webhelper as `-disabletouchfocusworkaround`."
  },
  "-cef-disable-xcomposite-workaround": {
@@ -321,6 +356,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Disable the glcomposer workaround applied to some video drivers",
+  "kind": "persistent",
   "what": "CEF switch: turn off the glcomposer/XComposite workaround that is applied automatically for some video drivers."
  },
  "-cef-enable-debugging": {
@@ -330,6 +366,7 @@
   "arg": false,
   "confidence": "high",
   "help": "enables Chromium remote debugging, defaulting to localhost:8080",
+  "kind": "persistent",
   "what": "CEF switch: enable Chromium remote debugging (DevTools protocol) on localhost:8080 by default; the port can be changed with `-devtools-port`. Afterwards you can attach Chrome DevTools to the Steam UI."
  },
  "-cef-enable-gpu-debugging": {
@@ -339,6 +376,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Enable GPU debugging in Chromium, costs a glGetError() call after every command",
+  "kind": "persistent",
   "what": "CEF switch: enable Chromium GPU debugging, which runs glGetError() after every GL command. It is very slow."
  },
  "-cef-enable-low-delay-live-stream": {
@@ -348,6 +386,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Reduce buffering requirements for live video playback",
+  "kind": "persistent",
   "what": "CEF switch: reduce buffering for live video playback (e.g. Steam Broadcasts) in the webhelper."
  },
  "-cef-enable-vaapi": {
@@ -357,6 +396,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Enable VA-API video decoding on Linux",
+  "kind": "persistent",
   "what": "CEF switch: enable VA-API hardware video decoding in steamwebhelper on Linux."
  },
  "-cef-force-accessibility": {
@@ -366,6 +406,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Force enable CEF accessibility features",
+  "kind": "persistent",
   "what": "CEF switch: force-enable Chromium accessibility. The webhelper is then started with `--force-renderer-accessibility`, for screen readers."
  },
  "-cef-force-browser-underlays": {
@@ -375,6 +416,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Force support for BrowserView underlays",
+  "kind": "persistent",
   "what": "CEF switch: force BrowserView underlays on even where they are off by default. It is forwarded to the webhelper as `-forcebrowserviewunderlays`."
  },
  "-cef-force-gpu": {
@@ -384,6 +426,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Force enable GPU acceleration",
+  "kind": "persistent",
   "what": "CEF switch: force GPU acceleration in steamwebhelper even where it would be disabled (e.g. by the blocklist)."
  },
  "-cef-force-gpu-blocklist": {
@@ -393,6 +436,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Force enable GPU blocklist",
+  "kind": "persistent",
   "what": "CEF switch: force Chromium's GPU driver blocklist on, so blocklisted GPUs fall back to software."
  },
  "-cef-force-hw-video-decode": {
@@ -402,6 +446,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Force enable HW accelerated video decoding",
+  "kind": "persistent",
   "what": "CEF switch: force hardware-accelerated video decoding in steamwebhelper."
  },
  "-cef-force-occlusion": {
@@ -411,6 +456,7 @@
   "arg": false,
   "confidence": "high",
   "help": "force enable Chromium window occlusion testing",
+  "kind": "persistent",
   "what": "CEF switch: force Chromium window-occlusion detection on. It is the opposite of `-cef-disable-occlusion`."
  },
  "-cef-force-opaque-backgrounds": {
@@ -420,6 +466,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Force the usage of opaque backgrounds for CEF",
+  "kind": "persistent",
   "what": "CEF switch: force opaque, non-transparent backgrounds for CEF browsers. Possibly a workaround for compositors that render transparency badly."
  },
  "-cef-force-sandbox": {
@@ -429,6 +476,7 @@
   "arg": false,
   "confidence": "high",
   "help": "force sandboxing in CEF",
+  "kind": "persistent",
   "what": "CEF switch: force the Chromium sandbox on even where Steam would disable it."
  },
  "-cef-full-memory-crash-report": {
@@ -438,6 +486,7 @@
   "arg": false,
   "confidence": "high",
   "help": "enables full crash dumps",
+  "kind": "persistent",
   "what": "CEF switch: write full-memory crash dumps for steamwebhelper crashes instead of minidumps."
  },
  "-cef-log-sandbox": {
@@ -447,6 +496,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Enable sandbox logging in CEF",
+  "kind": "persistent",
   "what": "CEF switch: enable logging of Chromium sandbox decisions in steamwebhelper."
  },
  "-cef-use-vulkan": {
@@ -456,6 +506,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Use vulkan ANGLE backend",
+  "kind": "persistent",
   "what": "CEF switch: run Chromium's ANGLE graphics layer on its Vulkan backend instead of the default GL backend."
  },
  "-cef-verbose-js-logging": {
@@ -465,6 +516,7 @@
   "arg": false,
   "confidence": "high",
   "help": "enables verbose logging of JS console events",
+  "kind": "persistent",
   "what": "CEF switch: log Steam UI JavaScript console events verbosely. It is forwarded to the webhelper as `-verbosejslogging`."
  },
  "-cef-verbose-logging": {
@@ -474,6 +526,7 @@
   "arg": false,
   "confidence": "high",
   "help": "enables verbose logging from CEF",
+  "kind": "persistent",
   "what": "CEF switch: enable verbose Chromium/CEF logging in steamwebhelper."
  },
  "-cef-verbose-modules": {
@@ -483,6 +536,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "enables verbose logging for specific CEF modules",
+  "kind": "persistent",
   "what": "CEF switch: enable verbose logging for selected CEF modules. It probably takes a module list in Chromium `--vmodule` style; the format is not confirmed."
  },
  "-child-update-ui": {
@@ -492,6 +546,7 @@
   "arg": false,
   "confidence": "high",
   "help": "",
+  "kind": "internal",
   "what": "Internal bootstrapper flag: marks a process as the forked child that draws the update/progress UI. It is not meant to be passed by hand."
  },
  "-child-update-ui-socket": {
@@ -501,6 +556,7 @@
   "arg": true,
   "confidence": "high",
   "help": "",
+  "kind": "internal",
   "what": "Internal bootstrapper switch: `-child-update-ui-socket <fd>` gives the update-UI child the IPC socket for talking to the parent bootstrapper."
  },
  "-chromeos": {
@@ -510,6 +566,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "ChromeOS (Borealis) integration flag read by tier0 platform detection. It makes Steam behave as the ChromeOS build."
  },
  "-chromeosverbose": {
@@ -520,6 +577,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "ChromeOS (Borealis) verbose flag: more logging for ChromeOS-specific paths, such as the disk-space management that calls `/usr/bin/crosdisk` (BEnsureDiskSpaceAvailable / BReleaseExcessDiskSpace)."
  },
  "-clearbeta": {
@@ -529,6 +587,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "session",
   "what": "Bootstrapper flag: leave the client beta and return to the stable branch by removing `package/beta`. Platform-specific branch prefixes (`steamdeck_`, `steampal_`, `chromeos_`) are handled near it."
  },
  "-clientbeta": {
@@ -539,6 +598,7 @@
   "arg": true,
   "confidence": "high",
   "help": "Overrides Steam client beta for single session",
+  "kind": "session",
   "what": "`-clientbeta <branch>`: run a different client beta branch for this session only, without changing the saved `package/beta`. The log says \"Overriding client beta for this session ... (clientbeta flag)\"."
  },
  "-compat": {
@@ -548,6 +608,7 @@
   "arg": false,
   "confidence": "low",
   "help": "",
+  "kind": "persistent",
   "what": "VGUI flag, probably a compatibility mode for UI DPI scaling (it sits next to the `DPIScaling` registry value and `-nodpiscale`)."
  },
  "-compat-disable-filtering": {
@@ -557,6 +618,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Disable filtering of normally unlisted runtimes.",
+  "kind": "persistent",
   "what": "Steam Play/compat tools switch: show compatibility tools/runtimes that are normally hidden (unlisted) in the selection UI."
  },
  "-compat-force-slr": {
@@ -566,6 +628,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "Force enable/disable using SLR 1.0 by default over legacy LD_* setup.",
+  "kind": "persistent",
   "what": "Steam Play switch: force the Steam Linux Runtime 1.0 (scout) container on or off by default for native Linux games, instead of the legacy LD_* library-path setup. Probably takes a 0/1 value."
  },
  "-complete_install_via_http": {
@@ -575,6 +638,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "Run installation completion over HTTP by default",
+  "kind": "persistent",
   "what": "steamclient.so switch: run install-completion steps over HTTP by default instead of the CM connection. Presence flag."
  },
  "-console": {
@@ -584,6 +648,7 @@
   "arg": false,
   "confidence": "high",
   "help": "",
+  "kind": "persistent",
   "what": "Steam UI flag: enable the developer console in the client (Console tab / `steam://open/console`), where the concommands documented here are typed. `-noconsole` is the opposite."
  },
  "-controllertypeoverride": {
@@ -593,6 +658,7 @@
   "arg": false,
   "confidence": "low",
   "help": "",
+  "kind": "persistent",
   "what": "steamclient.so controller switch that probably takes a controller type value and overrides the detected controller type. It sits next to `-forcedeckcontroller` and haptic convars."
  },
  "-debug_steamapi": {
@@ -602,6 +668,7 @@
   "arg": false,
   "confidence": "high",
   "help": "enables logging of Steam API functions",
+  "kind": "persistent",
   "what": "steamclient.so switch: log Steam API (steamworks interface) calls made by games. Output probably goes to the `apiwarning_log`/steam_api log."
  },
  "-debugamf": {
@@ -611,6 +678,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Enable AMF video encoding debug log",
+  "kind": "persistent",
   "what": "Steam UI switch: enable AMD AMF video-encoder debug logging. This affects Remote Play and game recording encode paths."
  },
  "-debugbreak": {
@@ -621,6 +689,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "Low-level (tier0) debug flag read by the bootstrapper, crashhandler, steamservice and others: trigger a debugger break at startup so a debugger can attach. Presence flag."
  },
  "-debugoutputlogs": {
@@ -631,6 +700,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "Mirror log output to the debug output/console as well as the log files. It is read by the bootstrapper, client, overlay and webhelper; `log_files_always_flush` and `STEAM_CLIENT_LOG_FOLDER` sit next to it."
  },
  "-deckard": {
@@ -640,6 +710,7 @@
   "arg": false,
   "confidence": "low",
   "help": "",
+  "kind": "persistent",
   "what": "tier0 platform flag named after the hardware codename Deckard (related to `-steamframe`). It makes the client behave as that device. Exact effect unknown."
  },
  "-delaypageload": {
@@ -649,6 +720,7 @@
   "arg": false,
   "confidence": "low",
   "help": "",
+  "kind": "persistent",
   "what": "steamwebhelper switch, probably delaying the initial page load in the webhelper (e.g. to give time to attach a debugger). Evidence is only the name."
  },
  "-dev": {
@@ -660,6 +732,7 @@
   "arg": false,
   "confidence": "high",
   "help": "enables developer spew",
+  "kind": "persistent",
   "what": "Developer mode: enables developer log output and dev features across the bootstrapper, client, UI and overlay. Examples are extra HTML context-menu items (View Source, Open DevTools, Inspect Element), the WebUI transport server-status endpoint, and devkit controller hooks."
  },
  "-devsites": {
@@ -670,6 +743,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Use local dev websites",
+  "kind": "persistent",
   "what": "Point the client's web pages (store, community, etc.) at Valve's local development websites instead of production. Used together with `-devsiteshost`."
  },
  "-devsiteshost": {
@@ -680,6 +754,7 @@
   "arg": true,
   "confidence": "high",
   "help": "Pass the hostname, will generate dev site domains like store.{hostname}.steam.dev",
+  "kind": "persistent",
   "what": "`-devsiteshost <hostname>`: build dev site domains such as `store.<hostname>.steam.dev` for `-devsites`. This is Valve-internal."
  },
  "-devtools-port": {
@@ -689,6 +764,7 @@
   "arg": true,
   "confidence": "high",
   "help": "",
+  "kind": "persistent",
   "what": "`-devtools-port <port>`: sets the Chromium remote-debugging port of steamwebhelper (passed as `--remote-debugging-port=%s`, bound to 127.0.0.1 with `--remote-allow-origins=*`). The default is 8080. Use it with `-cef-enable-debugging`."
  },
  "-disable-libusb": {
@@ -698,6 +774,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Disable support for controllers requiring exclusive USB access",
+  "kind": "persistent",
   "what": "Disable the steamclient controller support for devices that need exclusive USB (libusb) access. It is the opposite of `-enable-libusb`."
  },
  "-disable-overlay-gpu-pri": {
@@ -707,6 +784,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Disables setting webhelper GPU pri high when overlay visible",
+  "kind": "persistent",
   "what": "Overlay switch: don't raise steamwebhelper's GPU scheduling priority while the in-game overlay is visible. The delay between priority changes is set by `-overlay-gpu-pri-delay`."
  },
  "-disable-overlay-wait-for-cef-frame": {
@@ -716,6 +794,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Disables waiting for pending CEF frame render when overlay visible.",
+  "kind": "persistent",
   "what": "Overlay switch: don't wait for a pending CEF frame to finish rendering before presenting while the overlay is visible. Possibly reduces stalls at the cost of stale or partial overlay frames."
  },
  "-disable-winh264": {
@@ -725,6 +804,7 @@
   "arg": false,
   "confidence": "high",
   "help": "disables loading winh264.dll",
+  "kind": "persistent",
   "what": "Windows-only CEF switch: don't load winh264.dll for H.264 decoding. It has no effect on Linux."
  },
  "-disable_broadcast_webrtc": {
@@ -734,6 +814,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "steamclient.so flag: disable the WebRTC transport for Steam Broadcasting sessions (`Broadcast.BeginBroadcastSession`). Presence flag."
  },
  "-disable_safe_shutdown_workaround": {
@@ -743,6 +824,7 @@
   "arg": false,
   "confidence": "high",
   "help": "",
+  "kind": "persistent",
   "what": "steamwebhelper flag: skip the safe browser shutdown workaround (logs \"Skipping safe browser shutdown workaround: disabled\"). Same as setting `STEAM_DISABLE_BROWSER_SHUTDOWN_WORKAROUND`; the client sets it from `-cef-disable-safe-shutdown-workaround`."
  },
  "-disablehighdpi": {
@@ -752,6 +834,7 @@
   "arg": false,
   "confidence": "high",
   "help": "disables high-DPI support in CEF",
+  "kind": "persistent",
   "what": "CEF switch: disable high-DPI scaling support in steamwebhelper."
  },
  "-disablejslogging": {
@@ -761,6 +844,7 @@
   "arg": false,
   "confidence": "high",
   "help": "disable file and console logging of JS console events",
+  "kind": "persistent",
   "what": "steamwebhelper switch: disable file and console logging of JS console events. This is the webhelper-side form of `-cef-disable-js-logging`."
  },
  "-disablelauncherservice": {
@@ -770,6 +854,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Disable steam-runtime-launcher-service process.",
+  "kind": "persistent",
   "what": "steamclient.so switch: don't start the `steam-runtime-launcher-service` helper process. That process lets commands be run inside a game's pressure-vessel container for debugging."
  },
  "-disablepartnerlicenses": {
@@ -779,6 +864,7 @@
   "arg": false,
   "confidence": "high",
   "help": "disable automatically granted partner licenses - impacts all web and client sessions, don't try to use with multiple active steam clients!",
+  "kind": "persistent",
   "what": "Valve/partner dev switch: disable automatically granted partner licenses. Valve warns that this affects all web and client sessions of the account, so don't use it with several active clients."
  },
  "-disablerendererrestart": {
@@ -788,6 +874,7 @@
   "arg": false,
   "confidence": "high",
   "help": "disable auto-restarting a renderer for an existing browser",
+  "kind": "persistent",
   "what": "steamwebhelper switch: don't auto-restart a crashed renderer for an existing browser. This is the webhelper-side form of `-cef-disable-renderer-restart`."
  },
  "-disabletouchfocusworkaround": {
@@ -797,6 +884,7 @@
   "arg": false,
   "confidence": "high",
   "help": "disable touch input browser focus workaround",
+  "kind": "persistent",
   "what": "steamwebhelper switch: disable the touch-input focus workaround. This is the webhelper-side form of `-cef-disable-touch-focus-workaround`."
  },
  "-disablevulkanlayer": {
@@ -806,6 +894,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Prevents loading of Vulkan layer if overlay disabled",
+  "kind": "persistent",
   "what": "Overlay switch: when the overlay is disabled, also stop loading Steam's Vulkan overlay layer into games."
  },
  "-display-scale=": {
@@ -815,6 +904,7 @@
   "arg": true,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "VGUI (legacy UI) switch `-display-scale=<factor>`: overrides the X11 display scale factor, which otherwise comes from things like `GDK_SCALE`. The format is assumed numeric."
  },
  "-download": {
@@ -824,6 +914,7 @@
   "arg": false,
   "confidence": "low",
   "help": "",
+  "kind": "session",
   "what": "Bootstrapper flag: download the client package set only, probably without installing or launching. The related strings are about package download and metrics caching."
  },
  "-drop": {
@@ -833,6 +924,7 @@
   "arg": false,
   "confidence": "low",
   "help": "",
+  "kind": "persistent",
   "what": "Steam UI command-line verb handled by CSteamDoc::ExecCommandLine together with `-applaunch`/`-install`. It probably means drag-and-drop or dropped-file handling; the meaning is unclear."
  },
  "-dumpvideostream": {
@@ -842,6 +934,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Dump the game stream as an elementary video file",
+  "kind": "persistent",
   "what": "Remote Play debug switch: write the received game stream to disk as an elementary (raw H.264/HEVC) video file."
  },
  "-enable-desktop-gl-fallback": {
@@ -851,6 +944,7 @@
   "arg": false,
   "confidence": "low",
   "help": "",
+  "kind": "persistent",
   "what": "Steam UI switch, probably allowing a fallback to desktop OpenGL for UI rendering when the preferred path fails. It sits next to `-opengl`/`-fullscreenopengl`."
  },
  "-enable-devkit": {
@@ -860,6 +954,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Enable devkit functionality",
+  "kind": "persistent",
   "what": "Enable Steam devkit features in the client: the devkit service used for SteamOS/Deck game development, and app-management console commands such as `app_install`."
  },
  "-enable-keyring": {
@@ -869,6 +964,7 @@
   "arg": false,
   "confidence": "high",
   "help": "enables CEF usage of the Chromium keyring",
+  "kind": "persistent",
   "what": "CEF switch: let steamwebhelper use the Chromium/OS keyring (e.g. GNOME Keyring/KWallet) for stored secrets instead of basic storage."
  },
  "-enable-libusb": {
@@ -878,6 +974,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Enable support for controllers requiring exclusive USB access",
+  "kind": "persistent",
   "what": "Enable steamclient controller support for devices that need exclusive USB (libusb) access, instead of the kernel/hidraw path."
  },
  "-enable-libusb-gamecube": {
@@ -887,6 +984,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Enable support for Nintendo GameCube adapters in Wii-U mode",
+  "kind": "persistent",
   "what": "Enable support for the Nintendo GameCube controller adapter in Wii U mode through libusb."
  },
  "-exitsteam": {
@@ -897,6 +995,7 @@
   "arg": false,
   "confidence": "high",
   "help": "",
+  "kind": "session",
   "what": "Ask an already running Steam to exit. The bootstrapper forwards the command line to the running instance and the Steam UI handles it in CSteamDoc::ExecCommandLine. Comparable to `-shutdown`."
  },
  "-failsystemcheck": {
@@ -906,6 +1005,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "test",
   "what": "Bootstrapper test hook: make the system requirements check fail on purpose, to test the failure dialog."
  },
  "-flushconfig": {
@@ -915,6 +1015,7 @@
   "arg": false,
   "confidence": "low",
   "help": "",
+  "kind": "session",
   "what": "Steam UI flag, probably resetting or flushing local client configuration (for example cached UI/dialog config) at startup, much like Steam's old `steam://flushconfig`. Exact scope unconfirmed."
  },
  "-force-no-dbus-simulate-user-activity": {
@@ -924,6 +1025,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "Client/UI flag: never call the D-Bus 'simulate user activity' (screensaver inhibit / wake) method, probably for desktops where it misbehaves."
  },
  "-force-oobe-stage1": {
@@ -933,6 +1035,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Force show stage1 oobe",
+  "kind": "session",
   "what": "Force the first stage of the out-of-box experience (first-boot setup on Steam Deck/SteamOS) to show."
  },
  "-force-oobe-stage2": {
@@ -942,6 +1045,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Force show stage2 oobe",
+  "kind": "session",
   "what": "Force the second stage of the out-of-box experience (post-login setup on SteamOS/Deck) to show."
  },
  "-forcebrowserviewunderlays": {
@@ -951,6 +1055,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Force enable browser view underlays",
+  "kind": "persistent",
   "what": "steamwebhelper switch: force browser view underlays on. This is the webhelper-side form of `-cef-force-browser-underlays`."
  },
  "-forcecontrollerappid": {
@@ -960,6 +1065,7 @@
   "arg": true,
   "confidence": "high",
   "help": "Force a Specific AppID for Steam Controller Config - Prevents context/app switching from changing configuration",
+  "kind": "session",
   "what": "`-forcecontrollerappid <appid>`: lock Steam Input to the controller configuration of the given app, so switching apps or context doesn't change the active config. Used for testing controller configs."
  },
  "-forcedeckcontroller": {
@@ -970,6 +1076,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "steamclient.so flag: treat the built-in controller as a Steam Deck controller, as when running on a Deck (registry markers `IsSteamDeck`). Mainly for emulating Deck input."
  },
  "-forceguiupdater": {
@@ -979,6 +1086,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "Bootstrapper flag: always use the graphical update/progress window rather than the text UI."
  },
  "-forcemanifestsuffix": {
@@ -988,6 +1096,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "Bootstrapper switch that takes an argument: override the client manifest filename suffix (`steam_client_<suffix>`) to fetch a different manifest."
  },
  "-forcepackagedownload": {
@@ -997,6 +1106,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "session",
   "what": "Bootstrapper flag: re-download the client package zips even if the cached ones look valid."
  },
  "-forcesteamupdate": {
@@ -1006,6 +1116,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "session",
   "what": "Bootstrapper flag: force a client update check and apply the result at startup."
  },
  "-forceunsupportedos": {
@@ -1015,6 +1126,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "Bootstrapper flag: keep running on an OS that the manifest marks as unsupported."
  },
  "-foreground": {
@@ -1024,6 +1136,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "Steam UI command-line verb: bring the existing Steam window to the foreground. It is usually forwarded to the running instance."
  },
  "-friendsui": {
@@ -1033,6 +1146,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "Force-load the friends UI module (friendsui.so) in the client, UI and overlay. `-nofriendsui` is the opposite."
  },
  "-fs_log": {
@@ -1043,6 +1157,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Log file system accesses",
+  "kind": "persistent",
   "what": "Filesystem (filesystem_stdio) switch: log file-system accesses made by the client."
  },
  "-fs_logbins": {
@@ -1053,6 +1168,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Log the binaries we load during operation",
+  "kind": "persistent",
   "what": "Filesystem switch: log every binary/shared library loaded while running."
  },
  "-fs_target": {
@@ -1063,6 +1179,7 @@
   "arg": false,
   "confidence": "low",
   "help": "Set target syntax",
+  "kind": "persistent",
   "what": "Filesystem switch (Valve: \"Set target syntax\"): probably takes a value selecting the path/target syntax used by `-fs_log` output. Format unknown."
  },
  "-full_memory_dump": {
@@ -1072,6 +1189,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "Bootstrapper/crash-handler flag: write full memory dumps instead of minidumps on a crash. The related env var is `BREAKPAD_DUMP_LOCATION`."
  },
  "-fullscreen": {
@@ -1081,6 +1199,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Set BPM to fullscreen",
+  "kind": "persistent",
   "what": "Start Big Picture mode fullscreen. `-windowed` is the windowed counterpart."
  },
  "-fullscreenopengl": {
@@ -1090,6 +1209,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "Use the full screen OpenGL render for the UI",
+  "kind": "persistent",
   "what": "Legacy VGUI switch: use the full-screen OpenGL renderer for the UI. Probably a leftover from the old Big Picture."
  },
  "-gameid": {
@@ -1099,6 +1219,7 @@
   "arg": true,
   "confidence": "low",
   "help": "",
+  "kind": "session",
   "what": "Overlay (gameoverlayui) flag, probably `-gameid <gameid>`, telling the overlay process which game it is attached to. It is set by the client, not by users."
  },
  "-gameidlaunch": {
@@ -1108,6 +1229,7 @@
   "arg": true,
   "confidence": "medium",
   "help": "",
+  "kind": "session",
   "what": "Steam UI command-line verb: launch a game by its 64-bit game ID (which covers mods and shortcuts), e.g. `-gameidlaunch <gameid>`. Compare `-applaunch`, which takes an app ID."
  },
  "-gameinput": {
@@ -1117,6 +1239,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Use Microsoft GameInput for controller support",
+  "kind": "persistent",
   "what": "Use Microsoft GameInput for controller input. This is Windows-only and does nothing on Linux."
  },
  "-gamepadui": {
@@ -1126,6 +1249,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Start in gamepadui mode",
+  "kind": "persistent",
   "what": "Start in the gamepad UI (the Steam Deck / new Big Picture interface). On SteamOS it is used together with `-steamdeck`/`-steamos3`."
  },
  "-hardware-updater": {
@@ -1135,6 +1259,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "Steam UI flag: force-enable the hardware (controller/device firmware) updater. `-no-hardware-updater` is the opposite."
  },
  "-holo": {
@@ -1144,6 +1269,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "tier0 platform flag for SteamOS 3 (codename holo). It is treated the same as `-steamos3`."
  },
  "-hometest": {
@@ -1153,6 +1279,7 @@
   "arg": false,
   "confidence": "low",
   "help": "",
+  "kind": "test",
   "what": "Steam UI flag that exercises the hardware survey scheduling (SurveyDate, SurveyDateVersion, SurveyDateSteamDeckDelay) next to `-steamconsole`. Probably forces or tests the survey prompt; the effect is unclear."
  },
  "-html-enable-tooltips": {
@@ -1162,6 +1289,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Show browser tooltips",
+  "kind": "persistent",
   "what": "Show native browser tooltips (HTML `title` attributes) in the client's HTML surfaces."
  },
  "-html-perf-monitor": {
@@ -1171,6 +1299,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Draws html perf data",
+  "kind": "persistent",
   "what": "Draw an HTML performance overlay (frame timing data) on webhelper-rendered surfaces in the client and overlay."
  },
  "-ifrunning": {
@@ -1181,6 +1310,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "session",
   "what": "Bootstrapper/UI flag: only act (forward the command line, e.g. a `steam://` URL) if Steam is already running; don't start a new client otherwise."
  },
  "-inhibitbootstrap": {
@@ -1190,6 +1320,7 @@
   "arg": false,
   "confidence": "high",
   "help": "",
+  "kind": "persistent",
   "what": "Bootstrapper flag: skip the bootstrap/update step and start whatever client is installed. Same effect as `BootStrapperInhibitAll` in steam.cfg."
  },
  "-init_universe": {
@@ -1199,6 +1330,7 @@
   "arg": true,
   "confidence": "low",
   "help": "",
+  "kind": "internal",
   "what": "steamclient.so switch, probably `-init_universe <universe>`, which picks the Steam universe (public/beta/dev) at startup. Valve-internal."
  },
  "-install": {
@@ -1209,6 +1341,7 @@
   "arg": true,
   "confidence": "medium",
   "help": "",
+  "kind": "session",
   "what": "Steam UI command-line verb: start installing an app, probably `-install <appid>` (compare `-uninstall`). It is forwarded to the running instance."
  },
  "-installupdate": {
@@ -1218,6 +1351,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "session",
   "what": "Bootstrapper flag: apply a pending client update that was already downloaded (\"Found pending update\", \"Applying update...\")."
  },
  "-language": {
@@ -1228,6 +1362,7 @@
   "arg": true,
   "confidence": "high",
   "help": "Set Steam client UI language",
+  "kind": "persistent",
   "what": "`-language <name>`: sets the client UI language for this run, e.g. `-language german` or `schinese`. It also chooses the bootstrapper's `steambootstrapper_<lang>.txt` strings."
  },
  "-led-enumerate-sysfs-all": {
@@ -1237,6 +1372,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Enumerate all sysfs LED devices",
+  "kind": "persistent",
   "what": "Steam UI (device LED control) switch: list all LED devices under sysfs, not only the ones Steam recognises. `-testled` creates a fake LED for testing."
  },
  "-log_voice": {
@@ -1246,6 +1382,7 @@
   "arg": false,
   "confidence": "high",
   "help": "writes voice chat data to the logs/voice_log.txt file",
+  "kind": "persistent",
   "what": "Write voice chat data to `logs/voice_log.txt` for debugging."
  },
  "-logdir": {
@@ -1255,6 +1392,7 @@
   "arg": true,
   "confidence": "high",
   "help": "Directory to store logs",
+  "kind": "persistent",
   "what": "steamsysinfo option `-logdir <dir>`: the directory where the system-info tool writes its logs."
  },
  "-login": {
@@ -1264,6 +1402,7 @@
   "arg": true,
   "confidence": "high",
   "help": "Automatically logs in user",
+  "kind": "session",
   "what": "Automatically log in a user: `-login <username> [password]`. With credentials on the command line, `-rememberpassword` acts as if 'remember my password' was ticked."
  },
  "-lognetapi": {
@@ -1273,6 +1412,7 @@
   "arg": false,
   "confidence": "high",
   "help": "logs all P2P networking info to log/netapi_log.txt",
+  "kind": "persistent",
   "what": "Log all P2P networking (ISteamNetworking) activity to `logs/netapi_log.txt`."
  },
  "-longestloc": {
@@ -1282,6 +1422,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Use longest string for each localization token",
+  "kind": "persistent",
   "what": "Localization test switch: for each token, use the longest translation across all languages, so UI layouts can be checked for text overflow."
  },
  "-ltp": {
@@ -1291,6 +1432,7 @@
   "arg": false,
   "confidence": "high",
   "help": "use legacy token persistence scheme",
+  "kind": "persistent",
   "what": "steamclient.so switch: use the legacy scheme for storing the login refresh token (JWT) on disk, e.g. under `Software\\Valve\\Steam\\ConnectCache` in registry.vdf."
  },
  "-manuallyclearframes": {
@@ -1300,6 +1442,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Should the overlay be manually clearing frames to black (because the game doesn't clear the entire screen?)",
+  "kind": "persistent",
   "what": "gameoverlayui switch: make the overlay clear its frames to black itself, for games that don't clear the whole screen and would otherwise leave artifacts."
  },
  "-master_ipc_name_override": {
@@ -1310,6 +1453,7 @@
   "arg": true,
   "confidence": "medium",
   "help": "",
+  "kind": "internal",
   "what": "`-master_ipc_name_override <name>`: overrides the name of the master IPC/shared-memory channel used between the bootstrapper, client and UI. With a different name, a second, separate Steam instance can run (developer use)."
  },
  "-net_fake_state": {
@@ -1319,6 +1463,7 @@
   "arg": true,
   "confidence": "high",
   "help": "Set initial value for net_fake_state",
+  "kind": "test",
   "what": "`-net_fake_state <state>`: sets the initial value of the `net_fake_state` convar, which simulates network conditions. Valid states: normal, NoLAN, CaptivePortal_Redirected, CaptivePortal_InPlace, NoInternet, NoSteam."
  },
  "-net_start_wifi_disabled": {
@@ -1328,6 +1473,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Set the initial value for wifi enabled to false.  (Useful when emulating SteamDeck)",
+  "kind": "persistent",
   "what": "Start with Wi-Fi reported as disabled. Valve says this is useful when emulating a Steam Deck on a desktop."
  },
  "-no-cef-sandbox": {
@@ -1337,6 +1483,7 @@
   "arg": false,
   "confidence": "high",
   "help": "disables sandboxing in CEF",
+  "kind": "persistent",
   "what": "Disable the Chromium sandbox in steamwebhelper; same effect as `-cef-disable-sandbox`. Useful on systems without unprivileged user namespaces."
  },
  "-no-child-update-ui": {
@@ -1346,6 +1493,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "Bootstrapper flag: draw the update UI in the bootstrapper process itself instead of a forked `-child-update-ui` process."
  },
  "-no-dwrite": {
@@ -1355,6 +1503,7 @@
   "arg": false,
   "confidence": "high",
   "help": "forces vgui to use GDI text even if DWrite support is available",
+  "kind": "persistent",
   "what": "Windows-only: make VGUI use GDI text instead of DirectWrite. It has no effect on Linux."
  },
  "-no-hardware-updater": {
@@ -1364,6 +1513,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "Steam UI flag: disable the hardware/firmware updater (controller and device firmware update prompts). `-hardware-updater` is the opposite."
  },
  "-no-shared-textures": {
@@ -1373,6 +1523,7 @@
   "arg": false,
   "confidence": "high",
   "help": "forces overlay to avoid sharing texture handles with game process",
+  "kind": "persistent",
   "what": "Overlay switch: don't share GPU texture handles between the overlay and the game process; the overlay uses a copy path instead. Can work around overlay glitches with some drivers."
  },
  "-noassert": {
@@ -1383,6 +1534,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "tier0 flag read by the bootstrapper, crashhandler and helpers: don't break or show dialogs on (non-fatal) asserts. Similar in purpose to the `DONT_BREAK_ON_ASSERT` setting."
  },
  "-nobigpicture": {
@@ -1392,6 +1544,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Start in regular mode (force Big Picture mode off)",
+  "kind": "persistent",
   "what": "Force the normal desktop UI at startup, overriding a saved Big Picture or gamepad UI startup mode. The client logs \"forcing desktopui via -nobigpicture\"."
  },
  "-nobootstrapperupdate": {
@@ -1401,6 +1554,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "Bootstrapper flag: don't update the bootstrapper binary itself during the update step."
  },
  "-noconsole": {
@@ -1410,6 +1564,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "Steam UI flag: hide or disable the developer console. It is the opposite of `-console`."
  },
  "-nocrashdialog": {
@@ -1420,6 +1575,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "tier0/crash-handler flag: don't show a crash dialog when a Steam process crashes."
  },
  "-nocrashmonitor": {
@@ -1429,6 +1585,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "steamclient.so flag: don't start the crash-monitor process that watches the client."
  },
  "-nodircheck": {
@@ -1438,6 +1595,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "Bootstrapper flag: skip the install-directory checks, e.g. non-ASCII path and writability (`.writable`)."
  },
  "-nodpiscale": {
@@ -1447,6 +1605,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "VGUI flag: disable DPI scaling of the legacy VGUI UI, overriding the `DPIScaling` registry setting."
  },
  "-nofriendsui": {
@@ -1456,6 +1615,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "Don't load the friends UI module (friendsui.so). The friends list and chat are then unavailable."
  },
  "-noipv6": {
@@ -1465,6 +1625,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "steamclient.so flag: disable IPv6 networking and use only IPv4."
  },
  "-nojoy": {
@@ -1475,6 +1636,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Disable controller support",
+  "kind": "persistent",
   "what": "Disable controller support in steamclient and in the streaming client: no SDL/HID controller enumeration, no Steam Input."
  },
  "-nojsreload": {
@@ -1484,6 +1646,7 @@
   "arg": false,
   "confidence": "low",
   "help": "",
+  "kind": "persistent",
   "what": "Steam UI flag: don't reload the Steam UI JavaScript when it changes, probably a developer hot-reload setting."
  },
  "-nopcshutdown": {
@@ -1493,6 +1656,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Skip PC power operations",
+  "kind": "persistent",
   "what": "Steam UI switch: skip real PC power operations (shutdown/restart/suspend) when they are triggered from the UI, so testing Big Picture power menus doesn't power off the machine."
  },
  "-norepairfiles": {
@@ -1502,6 +1666,7 @@
   "arg": false,
   "confidence": "high",
   "help": "",
+  "kind": "persistent",
   "what": "Bootstrapper flag: skip repairing files that fail verification (\"Skipping file repair\")."
  },
  "-noshaders": {
@@ -1511,6 +1676,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Disable the shader manager",
+  "kind": "persistent",
   "what": "Disable the shader pre-caching manager (no shader cache downloads/uploads or Fossilize background processing)."
  },
  "-noverifyfiles": {
@@ -1520,6 +1686,7 @@
   "arg": false,
   "confidence": "high",
   "help": "",
+  "kind": "persistent",
   "what": "Bootstrapper flag: skip verifying client files at startup (\"Verification skipped\")."
  },
  "-offlinemode": {
@@ -1529,6 +1696,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Always attempt to start in offline mode",
+  "kind": "persistent",
   "what": "Always try to start Steam in offline mode, using cached credentials."
  },
  "-openalldevtools": {
@@ -1539,6 +1707,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Open Chrome devtools on launch for every HTML window",
+  "kind": "persistent",
   "what": "Open a Chrome DevTools window at launch for every HTML window: Steam UI, overlay (gamepad/desktop overlay) and friends."
  },
  "-opendevtools": {
@@ -1548,6 +1717,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Open Chrome devtools for shared JS context (offscreen window) on launch",
+  "kind": "persistent",
   "what": "Open Chrome DevTools at launch for the shared JS context, the offscreen SharedJSContext browser that hosts most Steam UI logic."
  },
  "-opengl": {
@@ -1557,6 +1727,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "Use the OpenGL render for the UI",
+  "kind": "persistent",
   "what": "Legacy VGUI switch: use the OpenGL renderer for the UI."
  },
  "-openoverlaydevtools": {
@@ -1566,6 +1737,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Open Chrome devtools on creation of any overlay browsers",
+  "kind": "persistent",
   "what": "Open Chrome DevTools automatically whenever an in-game overlay browser is created."
  },
  "-out-file": {
@@ -1575,6 +1747,7 @@
   "arg": true,
   "confidence": "high",
   "help": "Store the response in a file",
+  "kind": "internal",
   "what": "steamsysinfo option `-out-file <path>`: write the query response to a file instead of stdout."
  },
  "-overlay-gpu-pri-delay": {
@@ -1584,6 +1757,7 @@
   "arg": true,
   "confidence": "high",
   "help": "Set ms delay between overlay GPU priority changes",
+  "kind": "persistent",
   "what": "`-overlay-gpu-pri-delay <ms>`: delay in milliseconds between changes of the webhelper GPU priority as the overlay is shown or hidden."
  },
  "-overlaylogging": {
@@ -1593,6 +1767,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Enables logging from overlay renderer",
+  "kind": "persistent",
   "what": "Enable logging from the in-game overlay renderer, probably into gameprocess/overlay logs."
  },
  "-overlaytestmode": {
@@ -1602,6 +1777,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "Forces overlay testmode mode for debugging",
+  "kind": "persistent",
   "what": "Force the overlay into its test mode for debugging."
  },
  "-overrideminos": {
@@ -1611,6 +1787,7 @@
   "arg": false,
   "confidence": "high",
   "help": "",
+  "kind": "persistent",
   "what": "Bootstrapper flag: bypass the minimum-OS-version check. Valve's bootstrapper message documents it: \"You may override this check by passing -overrideminos\"."
  },
  "-pid": {
@@ -1620,6 +1797,7 @@
   "arg": true,
   "confidence": "high",
   "help": "Pid that we should be watching for",
+  "kind": "internal",
   "what": "Internal switch for overlay and HTML helper processes: `-pid <pid>` is the process they watch, i.e. the game the overlay is attached to. The client passes it."
  },
  "-pipewire": {
@@ -1629,6 +1807,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Enable PipeWire desktop capture",
+  "kind": "persistent",
   "what": "Enable PipeWire-based desktop capture, used by Remote Play and recording on Linux."
  },
  "-pipewire-dmabuf": {
@@ -1638,6 +1817,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Enable PipeWire desktop capture using DMA-BUF",
+  "kind": "persistent",
   "what": "Enable PipeWire desktop capture with DMA-BUF zero-copy buffers."
  },
  "-pipewire-fresh-start": {
@@ -1647,6 +1827,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Clear all Pipewire capture tokens and re-prompt user for what to capture",
+  "kind": "session",
   "what": "Clear all saved PipeWire capture tokens, so the user is asked again what to capture (the portal screen-share prompt)."
  },
  "-pipewire-record-deck-ui": {
@@ -1656,6 +1837,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Record Steam UI elements on SteamDeck",
+  "kind": "persistent",
   "what": "Include Steam UI elements in PipeWire captures/recordings on Steam Deck."
  },
  "-pretendeol": {
@@ -1665,6 +1847,7 @@
   "arg": false,
   "confidence": "low",
   "help": "",
+  "kind": "test",
   "what": "Steam UI test flag: pretend this OS/platform has reached end of life, to show the EOL warning UI."
  },
  "-pretendeol32": {
@@ -1674,6 +1857,7 @@
   "arg": false,
   "confidence": "low",
   "help": "",
+  "kind": "test",
   "what": "Steam UI test flag: pretend 32-bit support has reached end of life, to show the corresponding warning UI."
  },
  "-preventsteamdiscovery": {
@@ -1683,6 +1867,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "steamclient.so flag: stop this client from broadcasting or being discovered by other Steam clients on the LAN (Remote Play / In-Home Streaming discovery)."
  },
  "-private_ip_override": {
@@ -1692,6 +1877,7 @@
   "arg": false,
   "confidence": "low",
   "help": "",
+  "kind": "persistent",
   "what": "steamclient.so switch that probably takes an IP address to report as the machine's private/LAN IP, e.g. for streaming or P2P testing. Evidence is only the name."
  },
  "-profilestartup": {
@@ -1702,6 +1888,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "Profile client startup: record and log startup timing for steamui, steamclient and CEF (e.g. \"STARTUP SteamUI browser requested at +%.0fms\")."
  },
  "-pyrowavestats": {
@@ -1711,6 +1898,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Log pyrowave encoding performance to streaming_log.txt",
+  "kind": "persistent",
   "what": "Log performance of the pyrowave video encoder (used for Remote Play streaming) to `streaming_log.txt`."
  },
  "-query": {
@@ -1720,6 +1908,7 @@
   "arg": true,
   "confidence": "high",
   "help": "Value is one of EChildProcessQueryCommand",
+  "kind": "internal",
   "what": "steamsysinfo option `-query <command>`: picks which EChildProcessQueryCommand system-info query to run. Steam spawns steamsysinfo as a helper child process."
  },
  "-query-arg": {
@@ -1729,6 +1918,7 @@
   "arg": true,
   "confidence": "high",
   "help": "Argument for the query, the meaning depends on the query",
+  "kind": "internal",
   "what": "steamsysinfo option `-query-arg <value>`: the argument for the `-query` command; its meaning depends on the query."
  },
  "-quicklogin": {
@@ -1739,6 +1929,7 @@
   "arg": true,
   "confidence": "medium",
   "help": "Set the base used to construct quick login URLs",
+  "kind": "session",
   "what": "`-quicklogin <base>`: sets the base URL used to build quick-login URLs. A Valve dev option used with `-devsites`."
  },
  "-rememberpassword": {
@@ -1748,6 +1939,7 @@
   "arg": false,
   "confidence": "high",
   "help": "If logging in user with credentials specified on the command line, proceed as if 'remember my password' had been enabled",
+  "kind": "session",
   "what": "With `-login <user> <pass>`, act as if 'Remember my password' was ticked, so a refresh token is saved."
  },
  "-set_locale_disable": {
@@ -1757,6 +1949,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "Bootstrapper flag: skip the `setlocale()` call at startup (normally en_US.UTF-8 or the user locale)."
  },
  "-setbeta": {
@@ -1766,6 +1959,7 @@
   "arg": true,
   "confidence": "high",
   "help": "Sets Steam client beta branch",
+  "kind": "session",
   "what": "`-setbeta <branch>`: permanently switch the client to a beta branch by writing it to `package/beta`. The log says \"Changing client beta ... (changebeta flag)\"."
  },
  "-showallbetas": {
@@ -1775,6 +1969,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Disable client beta filtering",
+  "kind": "persistent",
   "what": "Show all client beta branches in the beta selection UI, not only the filtered list."
  },
  "-shutdown": {
@@ -1784,6 +1979,7 @@
   "arg": false,
   "confidence": "high",
   "help": "",
+  "kind": "session",
   "what": "Tell a running Steam instance to shut down. The command line is forwarded to it and handled by CSteamDoc::ExecCommandLine."
  },
  "-silent": {
@@ -1794,6 +1990,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Silent startup mode (tray mode only)",
+  "kind": "persistent",
   "what": "Start Steam silently, minimized to the system tray with no main window. The bootstrapper also respects it to keep its update UI quiet."
  },
  "-simulatedownloaderrors": {
@@ -1803,6 +2000,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "test",
   "what": "Bootstrapper test hook: simulate package download failures."
  },
  "-simulatefatalerror": {
@@ -1812,6 +2010,7 @@
   "arg": false,
   "confidence": "high",
   "help": "",
+  "kind": "test",
   "what": "Bootstrapper test hook: trigger a fatal error on purpose (\"Forcing a fatal error\")."
  },
  "-single_core": {
@@ -1822,6 +2021,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Force Steam to run on your primary CPU only",
+  "kind": "persistent",
   "what": "Restrict Steam (steamclient and steamservice) to the primary CPU core."
  },
  "-singleapp": {
@@ -1832,6 +2032,7 @@
   "arg": true,
   "confidence": "medium",
   "help": "",
+  "kind": "session",
   "what": "Single-app mode (`-singleapp <appid>` is likely): the bootstrapper and UI run Steam as a launcher for one app, reading `launcher\\appid` from config/config.vdf and erroring if it is missing. Used for branded launchers, e.g. with `-steamchina`."
  },
  "-sitelicense": {
@@ -1841,6 +2042,7 @@
   "arg": false,
   "confidence": "high",
   "help": "",
+  "kind": "persistent",
   "what": "steamclient.so flag: run this client as a site-license provider (internet cafe / site license host). It logs \"Running as site license provider\"; a convar can enable the same."
  },
  "-skipinitialbootstrap": {
@@ -1850,6 +2052,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "Bootstrapper flag: skip the first-run bootstrap step."
  },
  "-skipstreamingdrivers": {
@@ -1859,6 +2062,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Skip streaming driver checks",
+  "kind": "persistent",
   "what": "Remote Play switch: skip the streaming driver checks (virtual audio/input drivers) before starting a stream."
  },
  "-skipsystemcheck": {
@@ -1868,6 +2072,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "Bootstrapper flag: skip system-compatibility checks, e.g. the steam-runtime requirements check and GL renderer checks such as the VirtualBox 3D-acceleration warning."
  },
  "-sls-skip-version-check": {
@@ -1877,6 +2082,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "Don't validate the SLS version before starting",
+  "kind": "persistent",
   "what": "Steam UI switch: don't validate the SLS version before starting. SLS is probably Steam Link Service or a similar component; exact meaning unknown."
  },
  "-srt-logger-opened": {
@@ -1886,6 +2092,7 @@
   "arg": false,
   "confidence": "high",
   "help": "",
+  "kind": "internal",
   "what": "Internal flag added by steam.sh / the bootstrapper after it opens the srt-logger (writing `logs/console-linux.txt`), so the logger isn't opened twice, including after an exit-code-42 restart."
  },
  "-stack=": {
@@ -1895,6 +2102,7 @@
   "arg": true,
   "confidence": "low",
   "help": "",
+  "kind": "persistent",
   "what": "tier0 switch, probably `-stack=<size>`, setting the stack size for the main/worker threads. No usage strings."
  },
  "-steamchina": {
@@ -1904,6 +2112,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "Bootstrapper flag: run as the Steam China (Perfect World) client, with China-specific packages and universe; often used with `-singleapp`."
  },
  "-steamconsole": {
@@ -1913,6 +2122,7 @@
   "arg": false,
   "confidence": "low",
   "help": "",
+  "kind": "persistent",
   "what": "Steam UI flag, probably loading `steamconsole.so` or a standalone console mode. It appears next to the survey/`-hometest` code, so the exact effect is unclear."
  },
  "-steamdeck": {
@@ -1922,6 +2132,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "tier0 platform flag: run the client as if on a Steam Deck (enables Deck-specific UI and behavior). Commonly used with `-gamepadui` to emulate a Deck on desktop."
  },
  "-steamdeckdisplay": {
@@ -1932,6 +2143,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "Make the client (UI, CEF, overlay) assume a Steam Deck display/panel profile. It is read by almost every component and is probably used for Deck emulation."
  },
  "-steamframe": {
@@ -1941,6 +2153,7 @@
   "arg": false,
   "confidence": "low",
   "help": "",
+  "kind": "persistent",
   "what": "tier0 platform flag for the Steam Frame hardware (related to the `-deckard` codename). It makes the client behave as on that device."
  },
  "-steamid": {
@@ -1950,6 +2163,7 @@
   "arg": true,
   "confidence": "high",
   "help": "Steam user identifier",
+  "kind": "internal",
   "what": "steamsysinfo option `-steamid <id>`: the Steam user identifier attached to reports."
  },
  "-steaminstaller": {
@@ -1959,6 +2173,7 @@
   "arg": false,
   "confidence": "low",
   "help": "",
+  "kind": "persistent",
   "what": "Steam UI command-line verb, probably used by the Steam installer to hand off to the client after installation. Exact behavior unknown."
  },
  "-steammachinedisplay": {
@@ -1969,6 +2184,7 @@
   "arg": false,
   "confidence": "low",
   "help": "",
+  "kind": "persistent",
   "what": "Like `-steamdeckdisplay`, but makes the client assume a Steam Machine (TV/living-room) display profile."
  },
  "-steamos": {
@@ -1978,6 +2194,7 @@
   "arg": false,
   "confidence": "high",
   "help": "",
+  "kind": "persistent",
   "what": "Bootstrapper and steam.sh flag: run as SteamOS. steam.sh sets `STEAMOS=1` and skips the 32-bit library check; the client enables SteamOS behavior."
  },
  "-steamos3": {
@@ -1987,6 +2204,7 @@
   "arg": false,
   "confidence": "high",
   "help": "",
+  "kind": "persistent",
   "what": "SteamOS 3 (holo/jupiter, i.e. Steam Deck OS) platform flag, read by steam.sh and tier0. Equivalent to `-holo`."
  },
  "-steampid": {
@@ -1996,6 +2214,7 @@
   "arg": true,
   "confidence": "high",
   "help": "Steam pid that launched us",
+  "kind": "internal",
   "what": "Internal gameoverlayui switch: `-steampid <pid>`, the PID of the Steam process that launched the overlay."
  },
  "-system-composer": {
@@ -2005,6 +2224,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "Force the use of the system browser composer",
+  "kind": "persistent",
   "what": "Steam UI switch: force the system browser composer (compositing path) for Big Picture rather than Steam's own composer."
  },
  "-tenfoot": {
@@ -2014,6 +2234,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Start in Steam Big Picture mode",
+  "kind": "persistent",
   "what": "Start in Big Picture mode. This is the historical name and an alias of `-bigpicture`; the startup logic may promote it to the gamepad UI."
  },
  "-tesla": {
@@ -2023,6 +2244,7 @@
   "arg": false,
   "confidence": "low",
   "help": "",
+  "kind": "persistent",
   "what": "tier0 platform flag named after hardware codename Tesla. Effect unknown."
  },
  "-testled": {
@@ -2032,6 +2254,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Create a test LED device",
+  "kind": "test",
   "what": "Create a fake LED device to test the client's LED control features."
  },
  "-testlongoobeupdater": {
@@ -2041,6 +2264,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "test",
   "what": "steamclient system-manager test flag: use a slow dummy updater during the OOBE (\"applying dummy update\", progress posts), to test the long update flow."
  },
  "-testoobe": {
@@ -2050,6 +2274,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "test",
   "what": "Force the out-of-box experience flow (sets/reads `ForceOOBE`) in client, UI and CEF. Used for testing first-run setup."
  },
  "-testoobestage2": {
@@ -2059,6 +2284,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "test",
   "what": "Force OOBE stage 2 (registry `ForceOOBEStage2`) for testing."
  },
  "-testoobeupdater": {
@@ -2068,6 +2294,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Use a dummy updater during oobe",
+  "kind": "test",
   "what": "Use a dummy updater during the OOBE, so the system-update step can be tested without a real update."
  },
  "-testssa": {
@@ -2077,6 +2304,7 @@
   "arg": false,
   "confidence": "high",
   "help": "force display of SSA",
+  "kind": "test",
   "what": "Force the Steam Subscriber Agreement (SSA) acceptance dialog to show."
  },
  "-teststoragedata": {
@@ -2086,6 +2314,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "Enable test storage data",
+  "kind": "test",
   "what": "Steam UI test switch: show fake ('test') storage data, probably in the Storage Manager / storage settings page, so the UI can be tested without real drives."
  },
  "-testupdater": {
@@ -2095,6 +2324,7 @@
   "arg": false,
   "confidence": "low",
   "help": "",
+  "kind": "test",
   "what": "steamclient system-manager test flag: probably uses a test/dummy system updater (the SteamOS update path) instead of the real one. It sits near the battery/fan/suspend system-manager code."
  },
  "-textclient": {
@@ -2104,6 +2334,7 @@
   "arg": false,
   "confidence": "medium",
   "help": "",
+  "kind": "persistent",
   "what": "Bootstrapper flag: use the text/console update UI (CConsoleUpdateUI) instead of the graphical update window, e.g. for headless runs."
  },
  "-toggle-overlay-html-mode": {
@@ -2113,6 +2344,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Disables new faster overlay HTML path (or enables if on a branch it's not on by default for)",
+  "kind": "persistent",
   "what": "Flip the default of the new, faster overlay HTML rendering path: it turns the path off where it is on by default, and on in branches where it isn't yet the default."
  },
  "-uninstall": {
@@ -2122,6 +2354,7 @@
   "arg": true,
   "confidence": "medium",
   "help": "",
+  "kind": "session",
   "what": "Steam UI command-line verb: uninstall an app, probably `-uninstall <appid>`. It is forwarded to the running client (CSteamDoc::ExecCommandLine)."
  },
  "-use_xcomposite_workaround": {
@@ -2131,6 +2364,7 @@
   "arg": false,
   "confidence": "high",
   "help": "",
+  "kind": "persistent",
   "what": "steamwebhelper flag: capture window textures through the XComposite workaround path (\"using xcomposite workaround\"). Same as setting `STEAM_ENABLE_XCOMPOSITE_WORKAROUND`; the client sets it automatically for some drivers."
  },
  "-usepipewireaudio": {
@@ -2140,6 +2374,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Enabled the pipewire audio backend",
+  "kind": "persistent",
   "what": "steamclient.so switch: use the PipeWire audio backend (e.g. for voice, Remote Play or recording audio) instead of the default backend."
  },
  "-userchooser": {
@@ -2149,6 +2384,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Sends the user to the User Chooser even if they have 0 or 1 accounts",
+  "kind": "persistent",
   "what": "Always show the account chooser at login, even with 0 or 1 saved accounts."
  },
  "-verbose": {
@@ -2158,6 +2394,7 @@
   "arg": false,
   "confidence": "low",
   "help": "",
+  "kind": "persistent",
   "what": "steamclient.so flag found next to the site-license code. It probably makes site-license provider mode log more detail; any wider effect is unknown."
  },
  "-verbose-computer-activity": {
@@ -2167,6 +2404,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Verbose computer activity detection.",
+  "kind": "persistent",
   "what": "Log verbosely how the client detects user/computer activity, i.e. idle vs. active (used for away status and idle-time features)."
  },
  "-verbosejslogging": {
@@ -2176,6 +2414,7 @@
   "arg": false,
   "confidence": "high",
   "help": "enable verbose logging of JS console events",
+  "kind": "persistent",
   "what": "steamwebhelper switch: log JS console events verbosely. This is the webhelper-side form of `-cef-verbose-js-logging`."
  },
  "-verifyfiles": {
@@ -2186,6 +2425,7 @@
   "arg": false,
   "confidence": "high",
   "help": "",
+  "kind": "session",
   "what": "Bootstrapper flag: verify the checksums of all client files at startup and repair mismatches (\"Verifying all file checksums\"). It is also read in steamclient.so. steam.sh tries to add it after a failed runtime unpack, but a script bug means the flag never reaches the client."
  },
  "-vguifocus": {
@@ -2195,6 +2435,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Print out details of which panel has keyboard focus",
+  "kind": "persistent",
   "what": "VGUI debug switch: print which panel has keyboard focus. Only affects legacy VGUI panels."
  },
  "-vguimessages": {
@@ -2204,6 +2445,7 @@
   "arg": false,
   "confidence": "high",
   "help": "set to see debug vgiui2 messages",
+  "kind": "persistent",
   "what": "VGUI debug switch: print debug output for vgui2 panel messages."
  },
  "-voicerelay": {
@@ -2213,6 +2455,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Only allow 'relay' connections for voice (testing).",
+  "kind": "persistent",
   "what": "Testing switch: allow voice chat only through relay connections, with no direct P2P."
  },
  "-vrdisable": {
@@ -2222,6 +2465,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Disable VR - never even try to load OpenVR DLLs",
+  "kind": "persistent",
   "what": "Disable SteamVR integration completely: Steam never loads the OpenVR libraries."
  },
  "-vrforce": {
@@ -2231,6 +2475,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Always perform Hmd status check even if we crashed the last time we tried",
+  "kind": "persistent",
   "what": "Always run the HMD (headset) status check at startup, even if it crashed last time. By default a crash disables the check."
  },
  "-vrlinkforceenable": {
@@ -2240,6 +2485,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Force-enable VR Link capability for testing regardless of platform/encoder",
+  "kind": "persistent",
   "what": "Testing switch: report VR Link (streaming VR to a headset) as available regardless of platform or video encoder."
  },
  "-vronly": {
@@ -2249,6 +2495,7 @@
   "arg": false,
   "confidence": "low",
   "help": "",
+  "kind": "persistent",
   "what": "Legacy Steam UI switch, probably a VR-only startup mode with no desktop UI. It is registered next to the old `-opengl` UI renderer switches."
  },
  "-vrskip": {
@@ -2258,6 +2505,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Skip VR initialization entirely no matter who asks for it",
+  "kind": "persistent",
   "what": "Skip VR initialization entirely, no matter which component asks for it."
  },
  "-vrverbose": {
@@ -2267,6 +2515,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Output additional logging for diagnostics",
+  "kind": "persistent",
   "what": "Write extra VR diagnostic logging."
  },
  "-websocket": {
@@ -2276,6 +2525,7 @@
   "arg": false,
   "confidence": "high",
   "help": "forces connection to Steam backend to be via WebSocket",
+  "kind": "persistent",
   "what": "Connect to the Steam backend (CM servers) over WebSocket instead of TCP/UDP. Can help behind restrictive firewalls or proxies."
  },
  "-websocketignorecertissues": {
@@ -2285,6 +2535,7 @@
   "arg": false,
   "confidence": "high",
   "help": "says it's ok to ignore cert validation issues if using WebSocket connections, for dev use only",
+  "kind": "persistent",
   "what": "With `-websocket`, ignore TLS certificate validation errors on the WebSocket CM connection. Valve marks it as for dev use only."
  },
  "-windowed": {
@@ -2295,6 +2546,7 @@
   "arg": false,
   "confidence": "high",
   "help": "Set BPM to windowed",
+  "kind": "persistent",
   "what": "Run Big Picture in a window instead of fullscreen. The bootstrapper also reads it to choose a windowed update UI."
  }
 }

@@ -5,13 +5,19 @@ python3.pkgs.buildPythonApplication {
   version = "0.1.0";
   format = "other";
 
-  src = ./steam_config_apply.py;
-  dontUnpack = true;
+  src = ./.;
 
   installPhase = ''
     runHook preInstall
-    install -Dm755 $src $out/bin/steam-config-apply
+    install -Dm755 steam_config_apply.py $out/bin/steam-config-apply
     runHook postInstall
+  '';
+
+  doCheck = true;
+  checkPhase = ''
+    runHook preCheck
+    HOME=$TMPDIR python3 -m unittest -v test_steam_config_apply
+    runHook postCheck
   '';
 
   meta = {

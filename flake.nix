@@ -54,7 +54,9 @@
                 ];
               };
             in
-            pkgs.writeText "module-eval" sys.config.programs.steam.package.drvPath;
+            pkgs.writeText "module-eval" (
+              builtins.unsafeDiscardStringContext sys.config.programs.steam.package.drvPath
+            );
         };
 
       formatter = forAllSystems (pkgs: pkgs.nixfmt);

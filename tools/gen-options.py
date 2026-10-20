@@ -110,6 +110,18 @@ write('settings.json', settings)
 print('  skipped (computed/read-only/no key):', len(skipped))
 
 # ---------------------------------------------------------------- switches
+# one-shot actions / per-invocation arguments: valid, but rarely what you want on every launch
+SESSION = {'-applaunch', '-gameid', '-gameidlaunch', '-install', '-uninstall', '-login', '-quicklogin', '-rememberpassword',
+           '-shutdown', '-exitsteam', '-clearbeta', '-setbeta', '-clientbeta', '-download', '-forcesteamupdate',
+           '-forcepackagedownload', '-installupdate', '-pipewire-fresh-start', '-flushconfig', '-accesscode', '-ifrunning',
+           '-verifyfiles', '-force-oobe-stage1', '-force-oobe-stage2', '-singleapp', '-forcecontrollerappid'}
+# arguments Steam passes to its own helper processes
+INTERNAL_SW = {'-pid', '-steampid', '-steamid', '-query', '-query-arg', '-out-file', '-child-update-ui-socket',
+               '-child-update-ui', '-master_ipc_name_override', '-srt-logger-opened', '-buildid', '-init_universe'}
+# Valve test hooks
+TEST_SW = {'-simulatedownloaderrors', '-simulatefatalerror', '-batterytestmode', '-failsystemcheck', '-testupdater',
+           '-testoobe', '-testoobestage2', '-testoobeupdater', '-testlongoobeupdater', '-teststoragedata', '-testssa',
+           '-testled', '-pretendeol', '-pretendeol32', '-hometest', '-net_fake_state'}
 switches = {}
 for r in recs:
     if r['kind'] != 'cli' or not r['name'].startswith('-'):
@@ -126,6 +138,7 @@ for name, e in switches.items():
                 or bool(re.search(re.escape(name) + r'[ =]<', what)))
     e['access'] = sorted(a for a in e['access'] if a)
     e['what'], e['confidence'] = what, conf
+    e['kind'] = ('session' if name in SESSION else 'internal' if name in INTERNAL_SW else 'test' if name in TEST_SW else 'persistent')
 write('switches.json', switches)
 
 # ---------------------------------------------------------------- convars
@@ -159,6 +172,13 @@ for name, e in env.items():
     e['access'] = sorted(a for a in e['access'] if a)
     e['binaries'] = sorted(e['binaries'])
     e['what'], e['confidence'] = d(e['kind'], name)
+# variables documented from the launcher/runtime scripts (research/runtime-environment.json)
+RT = 'research/runtime-environment.json'
+runtime = json.load(open(RT)) if os.path.exists(RT) else {}
+for name, r in runtime.items():
+    if r['target'] in ('steam', 'both') and name not in env:
+        env[name] = dict(kind='runtime', access=['read by ' + r['source']], binaries=[], what=r['what'],
+                         confidence=r['confidence'], type=r['type'], values=r.get('values'))
 write('environment.json', env)
 
 # ---------------------------------------------------------------- environment Steam builds for games
@@ -171,4 +191,8 @@ for r in recs:
         e['values'].append(str(r['value']))
 for name, e in genv.items():
     e['what'], e['confidence'] = d('game-env', name)
+for name, r in runtime.items():
+    if r['target'] in ('game', 'both') and name not in genv:
+        genv[name] = dict(values=[], what=r['what'], confidence=r['confidence'], type=r['type'], enum=r.get('values'),
+                          source=r['source'])
 write('game-environment.json', genv)

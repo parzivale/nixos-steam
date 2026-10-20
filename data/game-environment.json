@@ -107,6 +107,30 @@
   ],
   "what": "Steam sets it to C for Proton/compat launches, after saving the user's value in HOST_LC_ALL, unless the app has DisableLinuxLocaleOverride. This avoids locale-dependent parsing bugs, such as decimal commas, in Windows games."
  },
+ "LD_AUDIT": {
+  "confidence": "medium",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "string",
+  "values": [],
+  "what": "Captured and unset by pressure-vessel-unruntime and passed into the container as --ld-audits."
+ },
+ "LD_LIBRARY_PATH": {
+  "confidence": "medium",
+  "enum": null,
+  "source": "steam-sh.md",
+  "type": "string",
+  "values": [],
+  "what": "Rebuilt by steam.sh and the scout run.sh for the client; for games, non-scout entries are captured by _v2-entry-point into PRESSURE_VESSEL_APP_LD_LIBRARY_PATH and unset."
+ },
+ "LD_PRELOAD": {
+  "confidence": "medium",
+  "enum": null,
+  "source": "steam-sh.md",
+  "type": "string",
+  "values": [],
+  "what": "Moved into the gdb args file under gdb by steam.sh; for games captured by _v2-entry-point/pressure-vessel-unruntime and passed as --ld-preloads (overlay preloads handled specially)."
+ },
  "MESA_DISK_CACHE_READ_ONLY_FOZ_DBS": {
   "confidence": "high",
   "values": [],
@@ -169,6 +193,252 @@
   ],
   "what": "Steam sets it to 1 when it runs pressure-vessel helper commands, for example gathering container runtime info into logs/container-runtime-info.txt. It turns off interactive pressure-vessel features."
  },
+ "PRESSURE_VESSEL_BWRAP": {
+  "confidence": "high",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "path",
+  "values": [],
+  "what": "Path to an alternative bwrap executable for pressure-vessel and the runtime diagnostic tools."
+ },
+ "PRESSURE_VESSEL_COPY_RUNTIME_INTO": {
+  "confidence": "medium",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "path",
+  "values": [],
+  "what": "Deprecated older form of PRESSURE_VESSEL_COPY_RUNTIME that takes a directory."
+ },
+ "PRESSURE_VESSEL_DETERMINISTIC": {
+  "confidence": "medium",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "bool",
+  "values": [],
+  "what": "Sort directory listings so output is reproducible (debugging)."
+ },
+ "PRESSURE_VESSEL_DEVEL": {
+  "confidence": "medium",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "bool",
+  "values": [],
+  "what": "Equivalent of --devel: unsupported developer mode."
+ },
+ "PRESSURE_VESSEL_EMULATOR": {
+  "confidence": "low",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "string",
+  "values": [],
+  "what": "Emulator (FEX) integration for pressure-vessel, paired with STEAM_COMPAT_EMULATOR."
+ },
+ "PRESSURE_VESSEL_FDO_APP_ID": {
+  "confidence": "medium",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "string",
+  "values": [],
+  "what": "App ID used when pressure-vessel runs as a Flatpak sub-sandbox."
+ },
+ "PRESSURE_VESSEL_FILESYSTEMS_RO": {
+  "confidence": "high",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "string",
+  "values": [],
+  "what": "Colon-separated host paths shared read-only into the container."
+ },
+ "PRESSURE_VESSEL_FILESYSTEMS_RW": {
+  "confidence": "high",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "string",
+  "values": [],
+  "what": "Colon-separated host paths shared read-write into the container."
+ },
+ "PRESSURE_VESSEL_GC_RUNTIMES": {
+  "confidence": "high",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "bool",
+  "values": [],
+  "what": "Garbage-collect old runtime copies in the variable dir (default on)."
+ },
+ "PRESSURE_VESSEL_GENERATE_LOCALES": {
+  "confidence": "high",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "bool",
+  "values": [],
+  "what": "Generate missing locales in the container (default on)."
+ },
+ "PRESSURE_VESSEL_GRAPHICS_PROVIDER": {
+  "confidence": "high",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "path",
+  "values": [],
+  "what": "Sysroot to take graphics drivers from (e.g. / or /run/host); empty means no host graphics."
+ },
+ "PRESSURE_VESSEL_HOME": {
+  "confidence": "medium",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "path",
+  "values": [],
+  "what": "Legacy: location of the fake per-game home directory."
+ },
+ "PRESSURE_VESSEL_HOST_GRAPHICS": {
+  "confidence": "medium",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "bool",
+  "values": [],
+  "what": "Legacy boolean; 0 disables use of host graphics drivers."
+ },
+ "PRESSURE_VESSEL_IMPORT_CA_CERTS": {
+  "confidence": "medium",
+  "enum": null,
+  "source": "steam-sh.md",
+  "type": "bool",
+  "values": [],
+  "what": "Imports host CA certificates into the container; steamwebhelper.sh sets it to 1 only when the Valve-internal CA file exists."
+ },
+ "PRESSURE_VESSEL_IMPORT_OPENXR_1_LAYERS": {
+  "confidence": "medium",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "bool",
+  "values": [],
+  "what": "Import host OpenXR 1 API layers into the container."
+ },
+ "PRESSURE_VESSEL_IMPORT_OPENXR_1_RUNTIMES": {
+  "confidence": "medium",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "bool",
+  "values": [],
+  "what": "Import host OpenXR 1 runtimes into the container."
+ },
+ "PRESSURE_VESSEL_IMPORT_VULKAN_LAYERS": {
+  "confidence": "high",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "bool",
+  "values": [],
+  "what": "Import host Vulkan layers into the container (default on)."
+ },
+ "PRESSURE_VESSEL_LOG_INFO": {
+  "confidence": "high",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "bool",
+  "values": [],
+  "what": "Make pressure-vessel / runtime tools log at info level."
+ },
+ "PRESSURE_VESSEL_LOG_WITH_TIMESTAMP": {
+  "confidence": "high",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "bool",
+  "values": [],
+  "what": "Prefix pressure-vessel / runtime tool log lines with timestamps."
+ },
+ "PRESSURE_VESSEL_PREFIX": {
+  "confidence": "medium",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "path",
+  "values": [],
+  "what": "Alternative pressure-vessel installation directory (default <runtime>/pressure-vessel)."
+ },
+ "PRESSURE_VESSEL_REMOVE_GAME_OVERLAY": {
+  "confidence": "high",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "bool",
+  "values": [],
+  "what": "Remove the Steam overlay from LD_PRELOAD inside the container."
+ },
+ "PRESSURE_VESSEL_SHARE_HOME": {
+  "confidence": "high",
+  "enum": null,
+  "source": "steam-sh.md",
+  "type": "bool",
+  "values": [],
+  "what": "1 shares the real home directory with the container, 0 gives a per-app fake home (the webhelper always forces 1)."
+ },
+ "PRESSURE_VESSEL_SHARE_PID": {
+  "confidence": "high",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "bool",
+  "values": [],
+  "what": "Share the PID namespace with the host (default on)."
+ },
+ "PRESSURE_VESSEL_SHELL": {
+  "confidence": "high",
+  "enum": [
+   "none",
+   "after",
+   "fail",
+   "instead"
+  ],
+  "source": "steam-runtime.md",
+  "type": "enum",
+  "values": [],
+  "what": "Opens an interactive shell in the container at the given point."
+ },
+ "PRESSURE_VESSEL_SINGLE_THREAD": {
+  "confidence": "medium",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "bool",
+  "values": [],
+  "what": "Avoid parallelism in pressure-vessel (debugging)."
+ },
+ "PRESSURE_VESSEL_TERMINAL": {
+  "confidence": "high",
+  "enum": [
+   "none",
+   "auto",
+   "tty",
+   "xterm"
+  ],
+  "source": "steam-runtime.md",
+  "type": "enum",
+  "values": [],
+  "what": "Where the interactive pressure-vessel shell is attached."
+ },
+ "PRESSURE_VESSEL_VARIABLE_DIR": {
+  "confidence": "high",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "path",
+  "values": [],
+  "what": "Directory for mutable runtime copies and logs, passed to pressure-vessel as --variable-dir (default <runtime>/var)."
+ },
+ "PRESSURE_VESSEL_VERBOSE": {
+  "confidence": "high",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "bool",
+  "values": [],
+  "what": "Verbose logging from pressure-vessel-wrap, pv-adverb, launch-client and launcher-service."
+ },
+ "PRESSURE_VESSEL_WORKAROUNDS": {
+  "confidence": "low",
+  "enum": [
+   "bwrap-setuid",
+   "bwrap-no-perms",
+   "limit-shared-dirs"
+  ],
+  "source": "steam-runtime.md",
+  "type": "string",
+  "values": [],
+  "what": "Comma-separated pressure-vessel workaround flags (spellings inferred from PV_WORKAROUND_FLAGS_* enum names)."
+ },
  "PROTON_CRASH_REPORT_DIR": {
   "confidence": "high",
   "values": [
@@ -182,6 +452,14 @@
    "1"
   ],
   "what": "Steam sets it to 1 for helper processes it runs through Proton (for example the DRM-download job), so Proton hides their console or process window."
+ },
+ "PROTON_LOG": {
+  "confidence": "medium",
+  "enum": null,
+  "source": "bootstrapper.md",
+  "type": "bool",
+  "values": [],
+  "what": "Proton logging switch, inspected by steam-launch-wrapper."
  },
  "PROTON_REMOTE_DEBUG_CMD": {
   "confidence": "high",
@@ -229,6 +507,46 @@
   ],
   "what": "Steam sets it to 0 so the game's SDL does not use its HIDAPI driver for Steam's virtual Xbox-style controllers, which avoids conflicts with Steam Input."
  },
+ "SRT_LAUNCHER_SERVICE_STOP_ON_EXIT": {
+  "confidence": "low",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "bool",
+  "values": [],
+  "what": "Whether the in-container launcher service stops when the main game process exits."
+ },
+ "SRT_LAUNCHER_SERVICE_STOP_ON_NAME_LOSS": {
+  "confidence": "low",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "bool",
+  "values": [],
+  "what": "Whether the launcher service stops when it loses its D-Bus name."
+ },
+ "SRT_LOG": {
+  "confidence": "medium",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "string",
+  "values": [],
+  "what": "Comma-separated debug-log flags for all steam-runtime-tools programs (upstream doc)."
+ },
+ "SRT_LOG_ROTATION": {
+  "confidence": "high",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "bool",
+  "values": [],
+  "what": "0 disables log rotation in srt-logger (client console log) and acts like STEAM_LINUX_RUNTIME_KEEP_LOGS in _v2-entry-point."
+ },
+ "SRT_LOG_TO_JOURNAL": {
+  "confidence": "medium",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "bool",
+  "values": [],
+  "what": "Send steam-runtime-tools diagnostics to the systemd Journal."
+ },
  "STEAMVIDEOTOKEN": {
   "confidence": "low",
   "values": [],
@@ -246,6 +564,22 @@
   ],
   "what": "AppID of the game that a compatibility tool such as Proton or the Steam Linux Runtime is running (0 when not applicable). Proton uses it, for example, to apply per-game fixes."
  },
+ "STEAM_COMPAT_APP_LIBRARY_PATH": {
+  "confidence": "medium",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "string",
+  "values": [],
+  "what": "Deprecated predecessor of STEAM_COMPAT_LIBRARY_PATHS read by pressure-vessel-wrap."
+ },
+ "STEAM_COMPAT_APP_LIBRARY_PATHS": {
+  "confidence": "medium",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "string",
+  "values": [],
+  "what": "Deprecated predecessor of STEAM_COMPAT_LIBRARY_PATHS read by pressure-vessel-wrap."
+ },
  "STEAM_COMPAT_CLIENT_INSTALL_PATH": {
   "confidence": "high",
   "values": [],
@@ -261,12 +595,28 @@
   "values": [],
   "what": "Per-game compatibility data directory, steamapps/compatdata/<appid>. Proton keeps the Wine prefix in it (the pfx/ subdirectory)."
  },
+ "STEAM_COMPAT_EMULATOR": {
+  "confidence": "medium",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "path",
+  "values": [],
+  "what": "Existing emulator (FEX) file used for the ARM emulation path by _v2-entry-point and pressure-vessel."
+ },
  "STEAM_COMPAT_FLAGS": {
   "confidence": "high",
   "values": [
    "search-cwd"
   ],
   "what": "Comma-separated flags for the Steam Runtime/compat layer. Steam sets search-cwd so the game's working directory is added to the library search path, a behaviour that LD_LIBRARY_PATH-based runtimes need."
+ },
+ "STEAM_COMPAT_GRAPHICS_PROVIDER": {
+  "confidence": "medium",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "path",
+  "values": [],
+  "what": "Existing graphics-provider path required for the emulation path, also read directly by pressure-vessel."
  },
  "STEAM_COMPAT_INSTALL_PATH": {
   "confidence": "high",
@@ -283,6 +633,17 @@
   "values": [],
   "what": "Colon-separated list of Steam library folders that the game and tools may need. pressure-vessel shares them into the container."
  },
+ "STEAM_COMPAT_MACHINE_ARCHITECTURE": {
+  "confidence": "high",
+  "enum": [
+   "aarch64-linux-gnu",
+   "x86_64-linux-gnu"
+  ],
+  "source": "steam-runtime.md",
+  "type": "enum",
+  "values": [],
+  "what": "With STEAM_COMPAT_EMULATOR and STEAM_COMPAT_GRAPHICS_PROVIDER, selects pressure-vessel-arm64 or -amd64 for the FEX/ARM emulation path in _v2-entry-point."
+ },
  "STEAM_COMPAT_MEDIA_PATH": {
   "confidence": "medium",
   "values": [],
@@ -293,6 +654,14 @@
   "values": [],
   "what": "Colon-separated extra paths that pressure-vessel should share into the game's container. Steam passes on any user value and adds its own paths."
  },
+ "STEAM_COMPAT_MOUNT_PATHS": {
+  "confidence": "medium",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "string",
+  "values": [],
+  "what": "Older spelling of STEAM_COMPAT_MOUNTS: extra colon-separated paths to share into the container."
+ },
  "STEAM_COMPAT_PROTON": {
   "confidence": "high",
   "values": [
@@ -300,10 +669,34 @@
   ],
   "what": "Set to 1 when the selected compat tool is Proton, so layers and tools know the game runs under Wine/Proton."
  },
+ "STEAM_COMPAT_RUNTIME_SDL2": {
+  "confidence": "low",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "bool",
+  "values": [],
+  "what": "Override a game's bundled SDL2 with the runtime's copy (inferred from name)."
+ },
+ "STEAM_COMPAT_RUNTIME_SDL3": {
+  "confidence": "low",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "bool",
+  "values": [],
+  "what": "Override a game's bundled SDL3 with the runtime's copy (inferred from name)."
+ },
  "STEAM_COMPAT_SHADER_PATH": {
   "confidence": "high",
   "values": [],
   "what": "The game's shader cache directory, steamapps/shadercache/<appid>. Proton and DXVK/VKD3D use it for their caches, and pressure-vessel shares it into the container."
+ },
+ "STEAM_COMPAT_TOOL_PATH": {
+  "confidence": "low",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "path",
+  "values": [],
+  "what": "Singular form of STEAM_COMPAT_TOOL_PATHS (compat tool install directory) read by pressure-vessel."
  },
  "STEAM_COMPAT_TOOL_PATHS": {
   "confidence": "high",
@@ -344,6 +737,38 @@
   ],
   "what": "Steam sets it to 1 so steam-launch-wrapper puts the game in its own transient systemd scope (app-steam-app<ID>-<pid>.scope)."
  },
+ "STEAM_LINUX_RUNTIME_KEEP_LOGS": {
+  "confidence": "high",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "bool",
+  "values": [],
+  "what": "1 keeps older slr-<app>-*.log files for the same app instead of deleting them."
+ },
+ "STEAM_LINUX_RUNTIME_LOG": {
+  "confidence": "high",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "bool",
+  "values": [],
+  "what": "1 makes _v2-entry-point log to slr-app<APPID>-t<timestamp>.log (with slr-latest.log symlink) and enables PRESSURE_VESSEL_LOG_INFO and timestamps."
+ },
+ "STEAM_LINUX_RUNTIME_LOG_DIR": {
+  "confidence": "high",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "path",
+  "values": [],
+  "what": "Directory for SLR log files (default $PRESSURE_VESSEL_VARIABLE_DIR, else <runtime>/var)."
+ },
+ "STEAM_LINUX_RUNTIME_VERBOSE": {
+  "confidence": "high",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "bool",
+  "values": [],
+  "what": "1 makes the SLR entry point (and pv-run.sh) verbose and exports PRESSURE_VESSEL_VERBOSE=1."
+ },
  "STEAM_OVERLAY_DISABLE_WAIT_FOR_CEF_FRAME": {
   "confidence": "low",
   "values": [
@@ -362,6 +787,22 @@
   "confidence": "medium",
   "values": [],
   "what": "Filled from the app's OverlayWindowBlacklist setting. It lists windows or executables the overlay renderer should not hook in this game."
+ },
+ "STEAM_RUNTIME_PREFER_HOST_LIBRARIES": {
+  "confidence": "high",
+  "enum": null,
+  "source": "steam-runtime.md",
+  "type": "bool",
+  "values": [],
+  "what": "Deprecated and has no effect; scout run.sh only logs a deprecation warning for 0."
+ },
+ "STEAM_RUNTIME_SCOUT": {
+  "confidence": "medium",
+  "enum": null,
+  "source": "steam-sh.md",
+  "type": "path",
+  "values": [],
+  "what": "Location of the unpacked scout LDLP runtime (default ubuntu12_32/steam-runtime), read by steam.sh and steamwebhelper.sh and by pressure-vessel for scout-on-SLR games."
  },
  "SteamAppId": {
   "confidence": "high",
@@ -549,6 +990,14 @@
   "confidence": "medium",
   "values": [],
   "what": "Number of audio channels the Remote Play client wants (for example 2 or 6). Streaming audio capture uses it to match the client's speaker setup."
+ },
+ "WINEDEBUG": {
+  "confidence": "medium",
+  "enum": null,
+  "source": "bootstrapper.md",
+  "type": "string",
+  "values": [],
+  "what": "Wine debug channel specification, inspected by steam-launch-wrapper."
  },
  "XR_RUNTIME_JSON": {
   "confidence": "medium",

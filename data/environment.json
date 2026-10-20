@@ -100,6 +100,36 @@
   "kind": "env",
   "what": "Debug switch in the shared filesystem/path code. When set, the case-insensitive path-matching logic logs each step (\"Matched '%s' -> '%s'\", \"Unmatched\", \"Lowered\"), which helps diagnose files not found because of case differences."
  },
+ "DEBUGGER": {
+  "access": [
+   "read by steam-sh.md"
+  ],
+  "binaries": [],
+  "confidence": "high",
+  "kind": "runtime",
+  "type": "string",
+  "values": [
+   "gdb",
+   "cgdb",
+   "valgrind",
+   "callgrind",
+   "strace",
+   "lldb-mi",
+   "gdbserver"
+  ],
+  "what": "Launches the legacy ubuntu12_32 client under the given debugger (special-cased values listed, anything else is used as a command prefix), disables srt-logger, and is unset for recursive launches; ignored on the steamrt64 path."
+ },
+ "DEBUGGER_ARGS": {
+  "access": [
+   "read by steam-sh.md"
+  ],
+  "binaries": [],
+  "confidence": "high",
+  "kind": "runtime",
+  "type": "string",
+  "values": null,
+  "what": "Extra arguments passed to the debugger selected by DEBUGGER."
+ },
  "DEBUG_DRM": {
   "access": [
    "read"
@@ -471,6 +501,28 @@
   "confidence": "medium",
   "kind": "env",
   "what": "Standard locale override. steamclient reads it when building a game's environment: the host value is kept as HOST_LC_ALL, and Proton/compat launches may get a Steam-chosen locale unless the app sets DisableLinuxLocaleOverride."
+ },
+ "LD_LIBRARY_PATH": {
+  "access": [
+   "read by steam-sh.md"
+  ],
+  "binaries": [],
+  "confidence": "medium",
+  "kind": "runtime",
+  "type": "string",
+  "values": null,
+  "what": "Rebuilt by steam.sh and the scout run.sh for the client; for games, non-scout entries are captured by _v2-entry-point into PRESSURE_VESSEL_APP_LD_LIBRARY_PATH and unset."
+ },
+ "LD_PRELOAD": {
+  "access": [
+   "read by steam-sh.md"
+  ],
+  "binaries": [],
+  "confidence": "medium",
+  "kind": "runtime",
+  "type": "string",
+  "values": null,
+  "what": "Moved into the gdb args file under gdb by steam.sh; for games captured by _v2-entry-point/pressure-vessel-unruntime and passed as --ld-preloads (overlay preloads handled specially)."
  },
  "MANGOHUD_CONFIGFILE": {
   "access": [
@@ -1044,6 +1096,17 @@
   "kind": "sdl-hint",
   "what": "The streaming client sets it to 0 so TV remotes (Android TV builds) are not exposed as joysticks."
  },
+ "SDL_VIDEODRIVER": {
+  "access": [
+   "read by steam-sh.md"
+  ],
+  "binaries": [],
+  "confidence": "high",
+  "kind": "runtime",
+  "type": "string",
+  "values": null,
+  "what": "SDL2 video driver; steam.sh and the bootstrapper rewrite an exact `wayland` to `wayland,x11` so X11 fallback is possible."
+ },
  "SDL_VIDEO_ALLOW_SCREENSAVER": {
   "access": [
    "set"
@@ -1330,6 +1393,94 @@
   "kind": "env",
   "what": "Debug switch for the bootstrapper. Before an elevated (admin) self-update it makes the process sleep (\"pid %u sleeping...\") so a debugger can attach. Mostly relevant on Windows."
  },
+ "SRT_LOG": {
+  "access": [
+   "read by steam-runtime.md"
+  ],
+  "binaries": [],
+  "confidence": "medium",
+  "kind": "runtime",
+  "type": "string",
+  "values": null,
+  "what": "Comma-separated debug-log flags for all steam-runtime-tools programs (upstream doc)."
+ },
+ "SRT_LOGGER": {
+  "access": [
+   "read by steam-runtime.md"
+  ],
+  "binaries": [],
+  "confidence": "medium",
+  "kind": "runtime",
+  "type": "path",
+  "values": null,
+  "what": "Path to the srt-logger executable used by logger-0.bash (default: next to logger-0.bash)."
+ },
+ "SRT_LOGGER_TIMESTAMPS": {
+  "access": [
+   "read by steam-runtime.md"
+  ],
+  "binaries": [],
+  "confidence": "medium",
+  "kind": "runtime",
+  "type": "bool",
+  "values": null,
+  "what": "Whether srt-logger adds timestamps to logged lines."
+ },
+ "SRT_LOGGER_USE_JOURNAL": {
+  "access": [
+   "read by steam-runtime.md"
+  ],
+  "binaries": [],
+  "confidence": "medium",
+  "kind": "runtime",
+  "type": "bool",
+  "values": null,
+  "what": "Whether srt-logger also writes to the systemd Journal."
+ },
+ "SRT_LOG_DIR": {
+  "access": [
+   "read by steam-runtime.md"
+  ],
+  "binaries": [],
+  "confidence": "medium",
+  "kind": "runtime",
+  "type": "path",
+  "values": null,
+  "what": "Log directory for srt-logger."
+ },
+ "SRT_LOG_ROTATION": {
+  "access": [
+   "read by steam-runtime.md"
+  ],
+  "binaries": [],
+  "confidence": "high",
+  "kind": "runtime",
+  "type": "bool",
+  "values": null,
+  "what": "0 disables log rotation in srt-logger (client console log) and acts like STEAM_LINUX_RUNTIME_KEEP_LOGS in _v2-entry-point."
+ },
+ "SRT_LOG_TERMINAL": {
+  "access": [
+   "read by steam-runtime.md"
+  ],
+  "binaries": [],
+  "confidence": "low",
+  "kind": "runtime",
+  "type": "path",
+  "values": null,
+  "what": "Terminal to which srt-logger mirrors output."
+ },
+ "SRT_LOG_TO_JOURNAL": {
+  "access": [
+   "read by steam-runtime.md"
+  ],
+  "binaries": [],
+  "confidence": "medium",
+  "kind": "runtime",
+  "type": "bool",
+  "values": null,
+  "what": "Send steam-runtime-tools diagnostics to the systemd Journal."
+ },
  "STEAMNETWORKINGSOCKETS_LOG_FILE": {
   "access": [
    "read"
@@ -1353,6 +1504,17 @@
   "confidence": "high",
   "kind": "env",
   "what": "Numeric verbosity of the SteamNetworkingSockets debug log written to STEAMNETWORKINGSOCKETS_LOG_FILE."
+ },
+ "STEAMOS": {
+  "access": [
+   "read by steam-sh.md"
+  ],
+  "binaries": [],
+  "confidence": "high",
+  "kind": "runtime",
+  "type": "bool",
+  "values": null,
+  "what": "Set to 1 by steam.sh for -steamos/-steamos3 (can be preset); when non-empty the ldd missing-32-bit-library check is skipped (legacy path)."
  },
  "STEAMOS_STEAM_REBOOT_SENTINEL": {
   "access": [
@@ -1406,6 +1568,17 @@
   "confidence": "medium",
   "kind": "env",
   "what": "Second video-unlock token that steamwebhelper sets to a fixed constant (7b7fe2a66d548a0daf01c44056f5) alongside STEAMVIDEOTOKEN, so the bundled CEF/ffmpeg allows proprietary codecs. Internal."
+ },
+ "STEAMWEBHELPER_USE_TERMINAL": {
+  "access": [
+   "read by steam-sh.md"
+  ],
+  "binaries": [],
+  "confidence": "high",
+  "kind": "runtime",
+  "type": "bool",
+  "values": null,
+  "what": "Any non-empty value makes ubuntu12_64/steamwebhelper.sh pass --terminal-level=debug to srt-logger so webhelper output also goes to the terminal (legacy client path, undocumented)."
  },
  "STEAM_ALLOW_DRIVE_ADOPT": {
   "access": [
@@ -1559,6 +1732,17 @@
   "confidence": "low",
   "kind": "env",
   "what": "Read by steamclient while it loads local compatibility tools (compatibilitytools.d). It probably lets developers override the app-to-compat-tool mapping (normally stored in the CompatToolMapping config) from the environment."
+ },
+ "STEAM_DEBUG": {
+  "access": [
+   "read by steam-sh.md"
+  ],
+  "binaries": [],
+  "confidence": "high",
+  "kind": "runtime",
+  "type": "bool",
+  "values": null,
+  "what": "Any non-empty value makes steam.sh run `set -x` and trace the whole launcher script."
  },
  "STEAM_DEBUGCEF": {
   "access": [
@@ -1720,6 +1904,24 @@
   "confidence": "high",
   "kind": "env",
   "what": "Colon-separated list of extra directories that Steam scans for custom compatibility tools (Proton builds and so on), in addition to /usr/share/steam/compatibilitytools.d, /usr/local/share/steam/compatibilitytools.d and <steamroot>/compatibilitytools.d."
+ },
+ "STEAM_FORCE_CLIENT": {
+  "access": [
+   "read by steam-sh.md"
+  ],
+  "binaries": [],
+  "confidence": "high",
+  "kind": "runtime",
+  "type": "enum",
+  "values": [
+   "ubuntu12_32",
+   "scout",
+   "ldlp",
+   "steamrt64",
+   "steamrt3c",
+   "steamrt"
+  ],
+  "what": "Persistently selects the client by deleting (ubuntu12_32/scout/ldlp) or creating (steamrt64/steamrt3c/steamrt) the $STEAMROOT/.steam-enable-steamrt64-client opt-in flag."
  },
  "STEAM_FOSSILIZE_DUMP_PATH": {
   "access": [
@@ -2110,6 +2312,28 @@
   "kind": "env",
   "what": "Path of the Steam Runtime in use, or empty/0. The bootstrapper uses it when re-executing between scout and steamrt3, the hardware survey reports \"<Runtime disabled>\" when it is off, and steam-launch-wrapper logs \"STEAM_RUNTIME not in use\". steam.sh unsets it on the steamrt3 path."
  },
+ "STEAM_RUNTIME_DIALOG_UI": {
+  "access": [
+   "read by steam-runtime.md"
+  ],
+  "binaries": [],
+  "confidence": "medium",
+  "kind": "runtime",
+  "type": "path",
+  "values": null,
+  "what": "External dialog program that steam-runtime-dialog uses if it passes --check-features."
+ },
+ "STEAM_RUNTIME_DIALOG__FORCE_XTERM": {
+  "access": [
+   "read by steam-runtime.md"
+  ],
+  "binaries": [],
+  "confidence": "medium",
+  "kind": "runtime",
+  "type": "bool",
+  "values": null,
+  "what": "Non-empty forces steam-runtime-dialog's xterm fallback (undocumented)."
+ },
  "STEAM_RUNTIME_LIBRARY_PATH": {
   "access": [
    "read"
@@ -2133,6 +2357,28 @@
   "kind": "env",
   "what": "Controls srt-logger capture of the client's output into logs/console-linux.txt. 0 disables it, which helps when attaching debuggers; the bootstrapper logs \"enable configured via STEAM_RUNTIME_LOGGER\"."
  },
+ "STEAM_RUNTIME_PREFER_HOST_LIBRARIES": {
+  "access": [
+   "read by steam-runtime.md"
+  ],
+  "binaries": [],
+  "confidence": "high",
+  "kind": "runtime",
+  "type": "bool",
+  "values": null,
+  "what": "Deprecated and has no effect; scout run.sh only logs a deprecation warning for 0."
+ },
+ "STEAM_RUNTIME_SCOUT": {
+  "access": [
+   "read by steam-sh.md"
+  ],
+  "binaries": [],
+  "confidence": "medium",
+  "kind": "runtime",
+  "type": "path",
+  "values": null,
+  "what": "Location of the unpacked scout LDLP runtime (default ubuntu12_32/steam-runtime), read by steam.sh and steamwebhelper.sh and by pressure-vessel for scout-on-SLR games."
+ },
  "STEAM_RUNTIME_STEAMRT": {
   "access": [
    "read"
@@ -2151,6 +2397,39 @@
   "confidence": "high",
   "kind": "env",
   "what": "Developer override for the steamrt3c (sniper-based) runtime directory, default <steamroot>/steamrt64/pv-runtime/steam-runtime-steamrt. The client, webhelper and helpers read it to locate the runtime."
+ },
+ "STEAM_RUNTIME_STEAMRT_SDK_ROOT": {
+  "access": [
+   "read by steam-runtime.md"
+  ],
+  "binaries": [],
+  "confidence": "medium",
+  "kind": "runtime",
+  "type": "path",
+  "values": null,
+  "what": "SDK sysroot used by the developer wrapper `pv-run.sh --sdk` (default steamrt64/pv-sdk; SDK not shipped)."
+ },
+ "STEAM_RUNTIME_USE_LIBCURL_SHIM": {
+  "access": [
+   "read by steam-runtime.md"
+  ],
+  "binaries": [],
+  "confidence": "high",
+  "kind": "runtime",
+  "type": "bool",
+  "values": null,
+  "what": "1 makes scout run.sh prepend libcurl_compat_{32,64} to the library path (defaulted to 1 under valgrind-family DEBUGGER); undocumented, legacy client path."
+ },
+ "STEAM_RUNTIME_VERBOSE": {
+  "access": [
+   "read by steam-runtime.md"
+  ],
+  "binaries": [],
+  "confidence": "high",
+  "kind": "runtime",
+  "type": "bool",
+  "values": null,
+  "what": "Non-empty enables debug output from scout setup.sh and steam-runtime-dialog."
  },
  "STEAM_SPEW_LEVELS": {
   "access": [
@@ -2215,6 +2494,17 @@
   "kind": "env",
   "what": "SteamOS session switch read by steamui. It probably makes Steam's Wi-Fi management talk to wpa_supplicant directly instead of going through NetworkManager."
  },
+ "STEAM_VALGRIND": {
+  "access": [
+   "read by steam-sh.md"
+  ],
+  "binaries": [],
+  "confidence": "high",
+  "kind": "runtime",
+  "type": "string",
+  "values": null,
+  "what": "Extra arguments passed to valgrind when DEBUGGER=valgrind."
+ },
  "STEAM_VKOVERLAY_FORCE_YCBCR_SUPPORT": {
   "access": [
    "read"
@@ -2225,6 +2515,17 @@
   "confidence": "medium",
   "kind": "env",
   "what": "Read by the Steam overlay Vulkan layer. It forces the layer to treat VK_KHR_sampler_ycbcr_conversion as supported (and enables its dependencies), probably so overlay video and streaming frames in YCbCr formats can be sampled."
+ },
+ "STEAM_ZENITY": {
+  "access": [
+   "read by steam-sh.md"
+  ],
+  "binaries": [],
+  "confidence": "medium",
+  "kind": "runtime",
+  "type": "path",
+  "values": null,
+  "what": "Dialog binary used by steam.sh/steam_msg.sh and runtime unpack progress dialogs; steam.sh sets it to the host zenity or `zenity`, and steam-runtime-steamrt.sh prefers ~/.steam/root/steam-dialog and unsets it if it points into scout."
  },
  "SUPPRESS_STEAM_OVERLAY": {
   "access": [
@@ -2597,6 +2898,17 @@
   "confidence": "high",
   "kind": "env",
   "what": "XDG config directory (default ~/.config). Steam reads it to resolve XDG user directories (user-dirs.dirs) and other per-user config paths."
+ },
+ "XDG_CURRENT_DESKTOP": {
+  "access": [
+   "read by steam-sh.md"
+  ],
+  "binaries": [],
+  "confidence": "high",
+  "kind": "runtime",
+  "type": "string",
+  "values": null,
+  "what": "When equal to `gamescope`, steam.sh/steam_msg.sh only log messages instead of showing blocking zenity/xterm dialogs."
  },
  "XDG_DATA_HOME": {
   "access": [
