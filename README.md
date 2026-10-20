@@ -13,7 +13,7 @@ hidden, recovered by analysing the client itself (see [doc/](doc/README.md)).
     nixosConfigurations.myhost = nixpkgs.lib.nixosSystem {
       modules = [
         nixos-steam.nixosModules.default
-        {
+        ({ pkgs, ... }: {
           programs.steam.enable = true;
           programs.steam.client = {
             enable = true;
@@ -61,7 +61,7 @@ hidden, recovered by analysing the client itself (see [doc/](doc/README.md)).
               steamInput = "enable";
             };
           };
-        }
+        })
       ];
     };
   };
