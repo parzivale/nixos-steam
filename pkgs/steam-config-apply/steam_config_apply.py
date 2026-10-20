@@ -423,6 +423,20 @@ def main():
             log.append(f'userdata/{uid}/7/remote/sharedconfig.vdf')
         if cfg.get('shortcuts') and apply_shortcuts(os.path.join(udir, uid, 'config', 'shortcuts.vdf'), cfg['shortcuts']):
             log.append(f'userdata/{uid}/config/shortcuts.vdf')
+        for rel, src in (cfg.get('userFiles') or {}).items():
+            dst = os.path.join(udir, uid, rel)
+            data = open(src, 'rb').read()
+            try:
+                if open(dst, 'rb').read() == data:
+                    continue
+            except FileNotFoundError:
+                pass
+            os.makedirs(os.path.dirname(dst), exist_ok=True)
+            fd, tmp = tempfile.mkstemp(dir=os.path.dirname(dst), prefix='.nixos-steam.')
+            with os.fdopen(fd, 'wb') as f:
+                f.write(data)
+            os.replace(tmp, dst)
+            log.append(f'userdata/{uid}/{rel}')
 
     scfg = cfg.get('steamCfg')
     if scfg is not None:

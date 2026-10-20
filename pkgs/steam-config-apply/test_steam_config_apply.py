@@ -104,6 +104,18 @@ class Libraries(unittest.TestCase):
         self.assertFalse(os.path.exists(os.path.join(lib, 'steamapps', 'appmanifest_999.acf')))
 
 
+class UserFiles(unittest.TestCase):
+    def test_copies_into_each_account(self):
+        e = Env()
+        src = os.path.join(e.tmp.name, 'hero.png')
+        with open(src, 'wb') as f:
+            f.write(b'\x89PNG')
+        cfg = {'userFiles': {'config/grid/570_hero.png': src}}
+        self.assertIn('570_hero.png', e.run(cfg))
+        self.assertEqual(e.read(ROOT + 'userdata/123/config/grid/570_hero.png', binary=True), b'\x89PNG')
+        self.assertEqual(e.run(cfg), '')
+
+
 class Files(unittest.TestCase):
     def test_managed_files_lifecycle(self):
         e = Env()

@@ -1,0 +1,299 @@
+[
+ {
+  "boolEncoding": [
+   "1",
+   "0"
+  ],
+  "confidence": "medium",
+  "file": "localconfig",
+  "option": "overlay",
+  "path": "apps/<appid>/OverlayAppEnable",
+  "settable": true,
+  "type": "bool",
+  "values": null,
+  "what": "Per-app Steam Overlay enable (root-level 'apps' section of UserLocalConfigStore, not under Software)."
+ },
+ {
+  "boolEncoding": [
+   "1",
+   "0"
+  ],
+  "confidence": "high",
+  "file": "localconfig",
+  "option": "forceIdentAsSteamDeck",
+  "path": "Software/Valve/Steam/apps/<appid>/ForceIdentAsSteamDeck",
+  "settable": true,
+  "type": "bool",
+  "values": null,
+  "what": "Report Steam Deck to the game (sets SteamDeck=1 env / SDK ident)."
+ },
+ {
+  "boolEncoding": [
+   "1",
+   "0"
+  ],
+  "confidence": "medium",
+  "file": "localconfig",
+  "option": "resolution",
+  "path": "Software/Valve/Steam/apps/<appid>/ResolutionOverride2",
+  "settable": true,
+  "type": "string",
+  "values": {
+   "<W>x<H>": "<W>x<H>",
+   "default": "Default",
+   "native": "Native"
+  },
+  "what": "Maximum game resolution (gamescope); 'WxH' or 'Native'; absent/'Default' = global setting."
+ },
+ {
+  "boolEncoding": [
+   "1",
+   "0"
+  ],
+  "confidence": "high",
+  "file": "localconfig",
+  "option": "resolutionApplyToInternalDisplay",
+  "path": "Software/Valve/Steam/apps/<appid>/ResolutionOverrideInternalDisplay",
+  "settable": true,
+  "type": "bool",
+  "values": null,
+  "what": "Also apply the resolution override on the internal (Deck) display."
+ },
+ {
+  "boolEncoding": [
+   "1",
+   "0"
+  ],
+  "confidence": "high",
+  "file": "appmanifest",
+  "option": "autoUpdate",
+  "path": "AutoUpdateBehavior",
+  "settable": true,
+  "type": "enum",
+  "values": {
+   "always": "3",
+   "default": "0",
+   "highPriority": "2",
+   "onLaunch": "1"
+  },
+  "what": "Per-app auto-update behaviour."
+ },
+ {
+  "boolEncoding": [
+   "1",
+   "0"
+  ],
+  "confidence": "high",
+  "file": "appmanifest",
+  "option": "backgroundDownloads",
+  "path": "AllowOtherDownloadsWhileRunning",
+  "settable": true,
+  "type": "enum",
+  "values": {
+   "allow": "1",
+   "default": "0",
+   "never": "2"
+  },
+  "what": "Whether other downloads may run while this app is running."
+ },
+ {
+  "boolEncoding": [
+   "1",
+   "0"
+  ],
+  "confidence": "medium",
+  "file": "appmanifest",
+  "option": "language",
+  "path": "UserConfig/language",
+  "settable": true,
+  "type": "string",
+  "values": null,
+  "what": "Per-app game language (Steam language name, e.g. 'english'); MountedConfig/language mirrors what is installed and a mismatch triggers a content update."
+ },
+ {
+  "boolEncoding": [
+   "1",
+   "0"
+  ],
+  "confidence": "high",
+  "file": "sharedconfig",
+  "option": "cloudSync",
+  "path": "Software/Valve/Steam/apps/<appid>/cloudenabled",
+  "settable": true,
+  "type": "bool",
+  "values": null,
+  "what": "Per-app Steam Cloud enable (roaming/cloud-synced store)."
+ },
+ {
+  "boolEncoding": [
+   "1",
+   "0"
+  ],
+  "confidence": "high",
+  "file": "localconfig",
+  "option": "cloudSyncOnSuspend",
+  "path": "Software/Valve/Steam/apps/<appid>/cloudsynconsuspendenabled",
+  "settable": true,
+  "type": "bool",
+  "values": null,
+  "what": "Sync Steam Cloud files on suspend/resume."
+ },
+ {
+  "boolEncoding": [
+   "1",
+   "0"
+  ],
+  "confidence": "medium",
+  "file": "localconfig",
+  "option": "steamInput",
+  "path": "apps/<appid>/UseSteamControllerConfig",
+  "settable": true,
+  "type": "enum",
+  "values": {
+   "default": "1",
+   "disable": "0",
+   "enable": "2"
+  },
+  "what": "Per-game Steam Input (third-party controller configuration) override."
+ },
+ {
+  "boolEncoding": [
+   "1",
+   "0"
+  ],
+  "confidence": "medium",
+  "file": "localconfig",
+  "option": "rumbleIntensity",
+  "path": "apps/<appid>/SteamControllerRumbleIntensityV2",
+  "settable": true,
+  "type": "enum",
+  "values": {
+   "eightBit": "16",
+   "extraHigh": "60",
+   "extraLow": "16000",
+   "global": "0",
+   "high": "100",
+   "low": "8000",
+   "medium": "320",
+   "mediumHigh": "200",
+   "mediumLow": "1000"
+  },
+  "what": "Per-game controller rumble intensity (0 = use global)."
+ },
+ {
+  "boolEncoding": [
+   "1",
+   "0"
+  ],
+  "confidence": "high",
+  "file": "localconfig",
+  "option": "rpo",
+  "path": "Software/Valve/Steam/apps/<appid>/RPOEnable",
+  "settable": true,
+  "type": "bool",
+  "values": null,
+  "what": "Renderpass optimizations (experimental) per app."
+ },
+ {
+  "boolEncoding": [
+   "1",
+   "0"
+  ],
+  "confidence": "high",
+  "file": "localconfig",
+  "option": "tso",
+  "path": "Software/Valve/Steam/apps/<appid>/TSOEnable",
+  "settable": true,
+  "type": "enum",
+  "values": {
+   "auto": "0",
+   "off": "2",
+   "on": "1"
+  },
+  "what": "ARM translation memory ordering (TSO) mode."
+ },
+ {
+  "boolEncoding": [
+   "1",
+   "0"
+  ],
+  "confidence": "high",
+  "file": "localconfig",
+  "option": "fdm",
+  "path": "Software/Valve/Steam/apps/<appid>/FDMEnable",
+  "settable": true,
+  "type": "bool",
+  "values": null,
+  "what": "Foveated rendering (eye-tracked VRS) per app."
+ },
+ {
+  "boolEncoding": [
+   "1",
+   "0"
+  ],
+  "confidence": "medium",
+  "file": "appmanifest",
+  "option": "disabledDlc",
+  "path": "UserConfig/DisabledDLC",
+  "settable": true,
+  "type": "string",
+  "values": null,
+  "what": "Comma-separated DLC appids the user disabled (MountedConfig/DisabledDLC mirrors installed state)."
+ },
+ {
+  "boolEncoding": [
+   "1",
+   "0"
+  ],
+  "confidence": "medium",
+  "file": "appmanifest",
+  "option": "beta",
+  "path": "UserConfig/BetaKey",
+  "settable": true,
+  "type": "string",
+  "values": null,
+  "what": "Selected beta branch name (absent/'public' = default)."
+ },
+ {
+  "boolEncoding": [
+   "1",
+   "0"
+  ],
+  "confidence": "medium",
+  "file": "localconfig",
+  "option": "gameRecording",
+  "path": "GameRecording/PerGameSettings/<appid>/enabled",
+  "settable": true,
+  "type": "bool",
+  "values": null,
+  "what": "Per-game background recording override (Game Recording > per-game settings): record this game."
+ },
+ {
+  "boolEncoding": [
+   "1",
+   "0"
+  ],
+  "confidence": "medium",
+  "file": "localconfig",
+  "option": "gameRecordingMinutes",
+  "path": "GameRecording/PerGameSettings/<appid>/minutes",
+  "settable": true,
+  "type": "int",
+  "values": null,
+  "what": "Per-game background recording buffer length, in minutes."
+ },
+ {
+  "boolEncoding": [
+   "1",
+   "0"
+  ],
+  "confidence": "medium",
+  "file": "localconfig",
+  "option": "gameRecordingBitrate",
+  "path": "GameRecording/PerGameSettings/<appid>/video_bitrate",
+  "settable": true,
+  "type": "int",
+  "values": null,
+  "what": "Per-game recording video bitrate override."
+ }
+]

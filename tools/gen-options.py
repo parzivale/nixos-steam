@@ -196,3 +196,26 @@ for name, r in runtime.items():
         genv[name] = dict(values=[], what=r['what'], confidence=r['confidence'], type=r['type'], enum=r.get('values'),
                           source=r['source'])
 write('game-environment.json', genv)
+
+# ---------------------------------------------------------------- per-app properties (research/app-properties.json)
+AP = 'research/app-properties.json'
+FILES = {'localconfig', 'sharedconfig', 'config', 'registry', 'appmanifest'}
+HANDLED_ELSEWHERE = {'launchOptions', 'compatTool', 'gameRecording', 'perf', 'launchOptionSelection'}
+props = []
+for p in (json.load(open(AP)) if os.path.exists(AP) else []):
+    if p['file'] not in FILES or p['option'] in HANDLED_ELSEWHERE:
+        continue
+    vals = p.get('values')
+    if p['type'] == 'enum' and vals and any('<' in k for k in vals):
+        p['type'], vals = 'string', None  # free-form with documented special values (e.g. resolution "WxH")
+    props.append(dict(option=p['option'], file=p['file'], path=p['path'], type=p['type'], values=vals,
+                      boolEncoding=p.get('boolEncoding') or ['1', '0'], what=p['what'], confidence=p['confidence'],
+                      settable=True))
+# per-game recording settings live under one key per game
+for opt, leaf, typ, what in [
+        ('gameRecording', 'enabled', 'bool', 'Per-game background recording override (Game Recording > per-game settings): record this game.'),
+        ('gameRecordingMinutes', 'minutes', 'int', 'Per-game background recording buffer length, in minutes.'),
+        ('gameRecordingBitrate', 'video_bitrate', 'int', 'Per-game recording video bitrate override.')]:
+    props.append(dict(option=opt, file='localconfig', path=f'GameRecording/PerGameSettings/<appid>/{leaf}', type=typ,
+                      values=None, boolEncoding=['1', '0'], what=what, confidence='medium', settable=True))
+write('app-properties.json', props)

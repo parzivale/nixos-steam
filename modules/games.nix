@@ -71,6 +71,15 @@ let
     ) props
   );
 
+  # suffixes Steam uses in userdata/<id>/config/grid for each artwork type
+  artworkSuffix = {
+    grid = "p"; # vertical library capsule
+    wide = ""; # horizontal capsule
+    hero = "_hero";
+    logo = "_logo";
+    icon = "_icon";
+  };
+
   compatEntries =
     appid: name: cfgStr: priority:
     let
@@ -122,6 +131,17 @@ in
                 `CompatToolMapping/<appid>` (priority 250, as when chosen in the UI).
               '';
             };
+            artwork = lib.genAttrs (builtins.attrNames artworkSuffix) (
+              kind:
+              mkOption {
+                type = types.nullOr types.path;
+                default = null;
+                description = ''
+                  Custom ${kind} image for this game, copied to `userdata/<id>/config/grid/<appid>${artworkSuffix.${kind}}.<ext>`
+                  (the file Steam uses for "Set Custom Artwork"). PNG or JPEG; the extension of the source is kept.
+                '';
+              }
+            );
             compatToolConfig = mkOption {
               type = types.str;
               default = "";
@@ -134,6 +154,21 @@ in
   };
 
   config = mkIf cfg.enable {
+    programs.steam.client.internal.userFiles = lib.mkMerge (
+      lib.mapAttrsToList (
+        appid: g:
+        lib.mapAttrs' (
+          kind: src:
+          lib.nameValuePair "config/grid/${appid}${artworkSuffix.${kind}}${
+            let
+              m = builtins.match ".*(\\.[A-Za-z0-9]+)$" (toString src);
+            in
+            if m == null then ".png" else builtins.head m
+          }" "${src}"
+        ) (lib.filterAttrs (_: v: v != null) g.artwork)
+      ) cfg.games
+    );
+
     programs.steam.client.internal.settings =
       lib.optionals (cfg.defaultCompatTool != null) (compatEntries "0" cfg.defaultCompatTool "" 75)
       ++ lib.concatLists (

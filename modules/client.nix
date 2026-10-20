@@ -286,6 +286,7 @@ let
       if steamCfg == { } && !cfg.manageSteamCfg then null else lib.mapAttrs (_: toString) steamCfg;
     files = cfg.internal.files;
     shortcuts = cfg.internal.shortcuts;
+    userFiles = cfg.internal.userFiles;
     libraryFolders = cfg.internal.libraryFolders;
   };
   applyConfig = pkgs.writeText "nixos-steam-client.json" (builtins.toJSON applyData);
@@ -317,6 +318,12 @@ in
         default = { };
         internal = true;
         description = "Files (relative to the Steam root) managed by steam-config-apply.";
+      };
+      userFiles = mkOption {
+        type = types.attrsOf types.str;
+        default = { };
+        internal = true;
+        description = "Files copied into userdata/<id>/ (relative path -> source path) for every managed account.";
       };
       shortcuts = mkOption {
         type = types.listOf types.attrs;
