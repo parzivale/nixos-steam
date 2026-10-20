@@ -1,0 +1,1942 @@
+{
+ "cli:-accesscode": {
+  "what": "Steam UI (steamui.so) switch, probably supplying an access/activation code at startup; the related `-accesscode=` form is forwarded by the client's command-line handler alongside `-login`/`-applaunch`, so it likely takes `-accesscode=<code>`. Purpose not confirmed.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "cli:-all_languages": {
+  "what": "VGUI localization (vgui2_s.so) flag: load localization files for all languages instead of only the current `%language%` one, probably for translation testing. Presence flag.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "cli:-allosarches": {
+  "what": "Bootstrapper flag: request client packages for every OS architecture rather than only the running one, typically for mirroring or testing the package manifest. Presence flag.",
+  "basis": "script",
+  "confidence": "medium"
+ },
+ "cli:-allosvers": {
+  "what": "Bootstrapper flag: request client packages for every OS version in the manifest, not just the current one. Presence flag; pairs with `-allosarches`.",
+  "basis": "script",
+  "confidence": "medium"
+ },
+ "cli:-allowbrowserviewunderlays": {
+  "what": "steamwebhelper flag (Valve: allow browser view underlays). It is the webhelper-side counterpart of `-cef-allow-browser-underlays`, which steamclient passes through when launching the webhelper.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-allowremotediscovery": {
+  "what": "steamclient.so flag for the Remote Play / In-Home Streaming client manager: probably allows this client to be discovered by, or to discover, remote Steam clients. It sits next to the opposite switch `-preventsteamdiscovery`.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "cli:-alwaysrelaunch": {
+  "what": "Bootstrapper flag: always re-exec the client after the update step, even when nothing changed. Presence flag.",
+  "basis": "script",
+  "confidence": "medium"
+ },
+ "cli:-applaunch": {
+  "what": "Launch a game when Steam starts: `steam -applaunch <appid> [game args...]`. It is handled by the Steam UI command-line dispatcher (CSteamDoc::ExecCommandLine) and also forwarded to an already running instance.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "cli:-arch": {
+  "what": "Registered in steamclient/chromehtml next to the CEF switches, and the bootstrapper uses it to request packages for a given architecture. Probably takes an architecture value such as `-arch x64`; the client also appends `&ARCH=%s` to the Steam UI URL.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "cli:-batterytestmode": {
+  "what": "Test hook in the steamclient system manager. It makes the reported battery percentage cycle rapidly instead of reading SDL_GetPowerInfo, so the battery UI can be exercised on Deck-style devices.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-bigpicture": {
+  "what": "Start the client directly in Big Picture mode (steamui.so). Related switches: `-tenfoot` (alias), `-gamepadui` and `-nobigpicture` (force off).",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-bootreserve": {
+  "what": "steamclient.so flag, probably reserving a block of disk space at boot as a safety buffer (sized by `-bootreservesizemb`). Evidence is only adjacent strings.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "cli:-bootreservesizemb": {
+  "what": "steamclient.so switch that probably takes a size in MB for the `-bootreserve` reservation (`-bootreservesizemb <MB>`). Evidence is only the name.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "cli:-bootstrapperproxy": {
+  "what": "Bootstrapper switch that takes an argument: an HTTP proxy used for the bootstrapper's own package downloads.",
+  "basis": "script",
+  "confidence": "medium"
+ },
+ "cli:-buildid": {
+  "what": "steamsysinfo option: `-buildid <id>`, the build identifier attached to crash reports. It is used together with `-steamid`, `-logdir`, `-query` and `-out-file`.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cafeapplaunch": {
+  "what": "steamclient.so switch: launch apps in a cyber-cafe (internet cafe licensing) context. Presence flag.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-candidates": {
+  "what": "steamclient.so debug flag: log the libjingle ICE candidates for local P2P/streaming connections as they are processed.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-ccsyntax": {
+  "what": "VGUI localization debug flag: log details about each localized string file and token that is loaded. Useful together with `-language`.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-allow-browser-underlays": {
+  "what": "CEF switch: allow steamwebhelper to create BrowserView underlays. steamclient forwards it to the webhelper as `-allowbrowserviewunderlays`.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-disable-breakpad": {
+  "what": "CEF switch: disable Breakpad crash reporting in steamwebhelper.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-disable-browser-underlays": {
+  "what": "CEF switch: turn off BrowserView underlay support in steamwebhelper. It is the opposite of `-cef-force-browser-underlays`.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-disable-gpu": {
+  "what": "CEF switch: disable GPU use in steamwebhelper, forcing software rendering and compositing. This is a common workaround for black or flickering Steam windows caused by driver problems.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-disable-gpu-compositing": {
+  "what": "CEF switch: disable GPU-accelerated compositing in steamwebhelper while other GPU use stays enabled.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-disable-gpu-sandbox": {
+  "what": "CEF switch: disable the Chromium GPU-process sandbox in steamwebhelper.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-disable-hang-timeouts": {
+  "what": "CEF switch: disable Chromium's GPU and renderer hang watchdogs, so a stalled webhelper process isn't killed. Useful when debugging the webhelper.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-disable-hevc": {
+  "what": "CEF switch: disable HEVC (H.265) video support in steamwebhelper.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-disable-js-logging": {
+  "what": "CEF switch: stop logging Steam UI JavaScript console messages to the console and to the webhelper log file.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-disable-logging": {
+  "what": "CEF switch: disable CEF/Chromium logging from steamwebhelper.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-disable-occlusion": {
+  "what": "CEF switch: disable Chromium's window-occlusion detection, so hidden or covered Steam windows keep rendering.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-disable-renderer-restart": {
+  "what": "CEF switch: don't automatically restart a crashed renderer process for an existing browser.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-disable-safe-shutdown-workaround": {
+  "what": "CEF switch: turn off the safe browser shutdown workaround that is otherwise applied on Linux with NVIDIA drivers. It is forwarded to the webhelper as `-disable_safe_shutdown_workaround`; the env var `STEAM_DISABLE_BROWSER_SHUTDOWN_WORKAROUND` has the same effect.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-disable-sandbox": {
+  "what": "CEF switch: disable Chromium sandboxing in steamwebhelper. `-no-cef-sandbox` is registered next to it as an equivalent.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-disable-seccomp-sandbox": {
+  "what": "CEF switch: disable only the Linux seccomp-bpf layer of the Chromium sandbox.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-disable-site-isolation": {
+  "what": "CEF switch: disable Chromium per-site process isolation, which reduces the number of renderer processes.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-disable-touch-focus-workaround": {
+  "what": "CEF switch: turn off the touch-input browser-focus workaround. It is forwarded to the webhelper as `-disabletouchfocusworkaround`.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-disable-xcomposite-workaround": {
+  "what": "CEF switch: turn off the glcomposer/XComposite workaround that is applied automatically for some video drivers.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-enable-debugging": {
+  "what": "CEF switch: enable Chromium remote debugging (DevTools protocol) on localhost:8080 by default; the port can be changed with `-devtools-port`. Afterwards you can attach Chrome DevTools to the Steam UI.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-enable-gpu-debugging": {
+  "what": "CEF switch: enable Chromium GPU debugging, which runs glGetError() after every GL command. It is very slow.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-enable-low-delay-live-stream": {
+  "what": "CEF switch: reduce buffering for live video playback (e.g. Steam Broadcasts) in the webhelper.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-enable-vaapi": {
+  "what": "CEF switch: enable VA-API hardware video decoding in steamwebhelper on Linux.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-force-accessibility": {
+  "what": "CEF switch: force-enable Chromium accessibility. The webhelper is then started with `--force-renderer-accessibility`, for screen readers.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-force-browser-underlays": {
+  "what": "CEF switch: force BrowserView underlays on even where they are off by default. It is forwarded to the webhelper as `-forcebrowserviewunderlays`.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-force-gpu": {
+  "what": "CEF switch: force GPU acceleration in steamwebhelper even where it would be disabled (e.g. by the blocklist).",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-force-gpu-blocklist": {
+  "what": "CEF switch: force Chromium's GPU driver blocklist on, so blocklisted GPUs fall back to software.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-force-hw-video-decode": {
+  "what": "CEF switch: force hardware-accelerated video decoding in steamwebhelper.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-force-occlusion": {
+  "what": "CEF switch: force Chromium window-occlusion detection on. It is the opposite of `-cef-disable-occlusion`.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-force-opaque-backgrounds": {
+  "what": "CEF switch: force opaque, non-transparent backgrounds for CEF browsers. Possibly a workaround for compositors that render transparency badly.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-force-sandbox": {
+  "what": "CEF switch: force the Chromium sandbox on even where Steam would disable it.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-full-memory-crash-report": {
+  "what": "CEF switch: write full-memory crash dumps for steamwebhelper crashes instead of minidumps.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-log-sandbox": {
+  "what": "CEF switch: enable logging of Chromium sandbox decisions in steamwebhelper.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-use-vulkan": {
+  "what": "CEF switch: run Chromium's ANGLE graphics layer on its Vulkan backend instead of the default GL backend.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-verbose-js-logging": {
+  "what": "CEF switch: log Steam UI JavaScript console events verbosely. It is forwarded to the webhelper as `-verbosejslogging`.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-verbose-logging": {
+  "what": "CEF switch: enable verbose Chromium/CEF logging in steamwebhelper.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-cef-verbose-modules": {
+  "what": "CEF switch: enable verbose logging for selected CEF modules. It probably takes a module list in Chromium `--vmodule` style; the format is not confirmed.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "cli:-child-update-ui": {
+  "what": "Internal bootstrapper flag: marks a process as the forked child that draws the update/progress UI. It is not meant to be passed by hand.",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "cli:-child-update-ui-socket": {
+  "what": "Internal bootstrapper switch: `-child-update-ui-socket <fd>` gives the update-UI child the IPC socket for talking to the parent bootstrapper.",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "cli:-chromeos": {
+  "what": "ChromeOS (Borealis) integration flag read by tier0 platform detection. It makes Steam behave as the ChromeOS build.",
+  "basis": "script",
+  "confidence": "medium"
+ },
+ "cli:-chromeosverbose": {
+  "what": "ChromeOS (Borealis) verbose flag: more logging for ChromeOS-specific paths, such as the disk-space management that calls `/usr/bin/crosdisk` (BEnsureDiskSpaceAvailable / BReleaseExcessDiskSpace).",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "cli:-clearbeta": {
+  "what": "Bootstrapper flag: leave the client beta and return to the stable branch by removing `package/beta`. Platform-specific branch prefixes (`steamdeck_`, `steampal_`, `chromeos_`) are handled near it.",
+  "basis": "script",
+  "confidence": "medium"
+ },
+ "cli:-clientbeta": {
+  "what": "`-clientbeta <branch>`: run a different client beta branch for this session only, without changing the saved `package/beta`. The log says \"Overriding client beta for this session ... (clientbeta flag)\".",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-compat": {
+  "what": "VGUI flag, probably a compatibility mode for UI DPI scaling (it sits next to the `DPIScaling` registry value and `-nodpiscale`).",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "cli:-compat-disable-filtering": {
+  "what": "Steam Play/compat tools switch: show compatibility tools/runtimes that are normally hidden (unlisted) in the selection UI.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-compat-force-slr": {
+  "what": "Steam Play switch: force the Steam Linux Runtime 1.0 (scout) container on or off by default for native Linux games, instead of the legacy LD_* library-path setup. Probably takes a 0/1 value.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "cli:-complete_install_via_http": {
+  "what": "steamclient.so switch: run install-completion steps over HTTP by default instead of the CM connection. Presence flag.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "cli:-console": {
+  "what": "Steam UI flag: enable the developer console in the client (Console tab / `steam://open/console`), where the concommands documented here are typed. `-noconsole` is the opposite.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "cli:-controllertypeoverride": {
+  "what": "steamclient.so controller switch that probably takes a controller type value and overrides the detected controller type. It sits next to `-forcedeckcontroller` and haptic convars.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "cli:-debug_steamapi": {
+  "what": "steamclient.so switch: log Steam API (steamworks interface) calls made by games. Output probably goes to the `apiwarning_log`/steam_api log.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-debugamf": {
+  "what": "Steam UI switch: enable AMD AMF video-encoder debug logging. This affects Remote Play and game recording encode paths.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-debugbreak": {
+  "what": "Low-level (tier0) debug flag read by the bootstrapper, crashhandler, steamservice and others: trigger a debugger break at startup so a debugger can attach. Presence flag.",
+  "basis": "script",
+  "confidence": "medium"
+ },
+ "cli:-debugoutputlogs": {
+  "what": "Mirror log output to the debug output/console as well as the log files. It is read by the bootstrapper, client, overlay and webhelper; `log_files_always_flush` and `STEAM_CLIENT_LOG_FOLDER` sit next to it.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "cli:-deckard": {
+  "what": "tier0 platform flag named after the hardware codename Deckard (related to `-steamframe`). It makes the client behave as that device. Exact effect unknown.",
+  "basis": "script",
+  "confidence": "low"
+ },
+ "cli:-delaypageload": {
+  "what": "steamwebhelper switch, probably delaying the initial page load in the webhelper (e.g. to give time to attach a debugger). Evidence is only the name.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "cli:-dev": {
+  "what": "Developer mode: enables developer log output and dev features across the bootstrapper, client, UI and overlay. Examples are extra HTML context-menu items (View Source, Open DevTools, Inspect Element), the WebUI transport server-status endpoint, and devkit controller hooks.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-devsites": {
+  "what": "Point the client's web pages (store, community, etc.) at Valve's local development websites instead of production. Used together with `-devsiteshost`.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-devsiteshost": {
+  "what": "`-devsiteshost <hostname>`: build dev site domains such as `store.<hostname>.steam.dev` for `-devsites`. This is Valve-internal.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-devtools-port": {
+  "what": "`-devtools-port <port>`: sets the Chromium remote-debugging port of steamwebhelper (passed as `--remote-debugging-port=%s`, bound to 127.0.0.1 with `--remote-allow-origins=*`). The default is 8080. Use it with `-cef-enable-debugging`.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "cli:-disable-libusb": {
+  "what": "Disable the steamclient controller support for devices that need exclusive USB (libusb) access. It is the opposite of `-enable-libusb`.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-disable-overlay-gpu-pri": {
+  "what": "Overlay switch: don't raise steamwebhelper's GPU scheduling priority while the in-game overlay is visible. The delay between priority changes is set by `-overlay-gpu-pri-delay`.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-disable-overlay-wait-for-cef-frame": {
+  "what": "Overlay switch: don't wait for a pending CEF frame to finish rendering before presenting while the overlay is visible. Possibly reduces stalls at the cost of stale or partial overlay frames.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-disable-winh264": {
+  "what": "Windows-only CEF switch: don't load winh264.dll for H.264 decoding. It has no effect on Linux.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-disable_broadcast_webrtc": {
+  "what": "steamclient.so flag: disable the WebRTC transport for Steam Broadcasting sessions (`Broadcast.BeginBroadcastSession`). Presence flag.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "cli:-disable_safe_shutdown_workaround": {
+  "what": "steamwebhelper flag: skip the safe browser shutdown workaround (logs \"Skipping safe browser shutdown workaround: disabled\"). Same as setting `STEAM_DISABLE_BROWSER_SHUTDOWN_WORKAROUND`; the client sets it from `-cef-disable-safe-shutdown-workaround`.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "cli:-disablehighdpi": {
+  "what": "CEF switch: disable high-DPI scaling support in steamwebhelper.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-disablejslogging": {
+  "what": "steamwebhelper switch: disable file and console logging of JS console events. This is the webhelper-side form of `-cef-disable-js-logging`.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-disablelauncherservice": {
+  "what": "steamclient.so switch: don't start the `steam-runtime-launcher-service` helper process. That process lets commands be run inside a game's pressure-vessel container for debugging.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-disablepartnerlicenses": {
+  "what": "Valve/partner dev switch: disable automatically granted partner licenses. Valve warns that this affects all web and client sessions of the account, so don't use it with several active clients.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-disablerendererrestart": {
+  "what": "steamwebhelper switch: don't auto-restart a crashed renderer for an existing browser. This is the webhelper-side form of `-cef-disable-renderer-restart`.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-disabletouchfocusworkaround": {
+  "what": "steamwebhelper switch: disable the touch-input focus workaround. This is the webhelper-side form of `-cef-disable-touch-focus-workaround`.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-disablevulkanlayer": {
+  "what": "Overlay switch: when the overlay is disabled, also stop loading Steam's Vulkan overlay layer into games.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-display-scale=": {
+  "what": "VGUI (legacy UI) switch `-display-scale=<factor>`: overrides the X11 display scale factor, which otherwise comes from things like `GDK_SCALE`. The format is assumed numeric.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "cli:-download": {
+  "what": "Bootstrapper flag: download the client package set only, probably without installing or launching. The related strings are about package download and metrics caching.",
+  "basis": "script",
+  "confidence": "low"
+ },
+ "cli:-drop": {
+  "what": "Steam UI command-line verb handled by CSteamDoc::ExecCommandLine together with `-applaunch`/`-install`. It probably means drag-and-drop or dropped-file handling; the meaning is unclear.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "cli:-dumpvideostream": {
+  "what": "Remote Play debug switch: write the received game stream to disk as an elementary (raw H.264/HEVC) video file.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-enable-desktop-gl-fallback": {
+  "what": "Steam UI switch, probably allowing a fallback to desktop OpenGL for UI rendering when the preferred path fails. It sits next to `-opengl`/`-fullscreenopengl`.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "cli:-enable-devkit": {
+  "what": "Enable Steam devkit features in the client: the devkit service used for SteamOS/Deck game development, and app-management console commands such as `app_install`.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-enable-keyring": {
+  "what": "CEF switch: let steamwebhelper use the Chromium/OS keyring (e.g. GNOME Keyring/KWallet) for stored secrets instead of basic storage.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-enable-libusb": {
+  "what": "Enable steamclient controller support for devices that need exclusive USB (libusb) access, instead of the kernel/hidraw path.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-enable-libusb-gamecube": {
+  "what": "Enable support for the Nintendo GameCube controller adapter in Wii U mode through libusb.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-exitsteam": {
+  "what": "Ask an already running Steam to exit. The bootstrapper forwards the command line to the running instance and the Steam UI handles it in CSteamDoc::ExecCommandLine. Comparable to `-shutdown`.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "cli:-failsystemcheck": {
+  "what": "Bootstrapper test hook: make the system requirements check fail on purpose, to test the failure dialog.",
+  "basis": "script",
+  "confidence": "medium"
+ },
+ "cli:-flushconfig": {
+  "what": "Steam UI flag, probably resetting or flushing local client configuration (for example cached UI/dialog config) at startup, much like Steam's old `steam://flushconfig`. Exact scope unconfirmed.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "cli:-force-no-dbus-simulate-user-activity": {
+  "what": "Client/UI flag: never call the D-Bus 'simulate user activity' (screensaver inhibit / wake) method, probably for desktops where it misbehaves.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "cli:-force-oobe-stage1": {
+  "what": "Force the first stage of the out-of-box experience (first-boot setup on Steam Deck/SteamOS) to show.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-force-oobe-stage2": {
+  "what": "Force the second stage of the out-of-box experience (post-login setup on SteamOS/Deck) to show.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-forcebrowserviewunderlays": {
+  "what": "steamwebhelper switch: force browser view underlays on. This is the webhelper-side form of `-cef-force-browser-underlays`.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-forcecontrollerappid": {
+  "what": "`-forcecontrollerappid <appid>`: lock Steam Input to the controller configuration of the given app, so switching apps or context doesn't change the active config. Used for testing controller configs.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-forcedeckcontroller": {
+  "what": "steamclient.so flag: treat the built-in controller as a Steam Deck controller, as when running on a Deck (registry markers `IsSteamDeck`). Mainly for emulating Deck input.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "cli:-forceguiupdater": {
+  "what": "Bootstrapper flag: always use the graphical update/progress window rather than the text UI.",
+  "basis": "script",
+  "confidence": "medium"
+ },
+ "cli:-forcemanifestsuffix": {
+  "what": "Bootstrapper switch that takes an argument: override the client manifest filename suffix (`steam_client_<suffix>`) to fetch a different manifest.",
+  "basis": "script",
+  "confidence": "medium"
+ },
+ "cli:-forcepackagedownload": {
+  "what": "Bootstrapper flag: re-download the client package zips even if the cached ones look valid.",
+  "basis": "script",
+  "confidence": "medium"
+ },
+ "cli:-forcesteamupdate": {
+  "what": "Bootstrapper flag: force a client update check and apply the result at startup.",
+  "basis": "script",
+  "confidence": "medium"
+ },
+ "cli:-forceunsupportedos": {
+  "what": "Bootstrapper flag: keep running on an OS that the manifest marks as unsupported.",
+  "basis": "script",
+  "confidence": "medium"
+ },
+ "cli:-foreground": {
+  "what": "Steam UI command-line verb: bring the existing Steam window to the foreground. It is usually forwarded to the running instance.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "cli:-friendsui": {
+  "what": "Force-load the friends UI module (friendsui.so) in the client, UI and overlay. `-nofriendsui` is the opposite.",
+  "basis": "script",
+  "confidence": "medium"
+ },
+ "cli:-fs_log": {
+  "what": "Filesystem (filesystem_stdio) switch: log file-system accesses made by the client.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-fs_logbins": {
+  "what": "Filesystem switch: log every binary/shared library loaded while running.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-fs_target": {
+  "what": "Filesystem switch (Valve: \"Set target syntax\"): probably takes a value selecting the path/target syntax used by `-fs_log` output. Format unknown.",
+  "basis": "valve-help",
+  "confidence": "low"
+ },
+ "cli:-full_memory_dump": {
+  "what": "Bootstrapper/crash-handler flag: write full memory dumps instead of minidumps on a crash. The related env var is `BREAKPAD_DUMP_LOCATION`.",
+  "basis": "script",
+  "confidence": "medium"
+ },
+ "cli:-fullscreen": {
+  "what": "Start Big Picture mode fullscreen. `-windowed` is the windowed counterpart.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-fullscreenopengl": {
+  "what": "Legacy VGUI switch: use the full-screen OpenGL renderer for the UI. Probably a leftover from the old Big Picture.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "cli:-gameid": {
+  "what": "Overlay (gameoverlayui) flag, probably `-gameid <gameid>`, telling the overlay process which game it is attached to. It is set by the client, not by users.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "cli:-gameidlaunch": {
+  "what": "Steam UI command-line verb: launch a game by its 64-bit game ID (which covers mods and shortcuts), e.g. `-gameidlaunch <gameid>`. Compare `-applaunch`, which takes an app ID.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "cli:-gameinput": {
+  "what": "Use Microsoft GameInput for controller input. This is Windows-only and does nothing on Linux.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-gamepadui": {
+  "what": "Start in the gamepad UI (the Steam Deck / new Big Picture interface). On SteamOS it is used together with `-steamdeck`/`-steamos3`.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-hardware-updater": {
+  "what": "Steam UI flag: force-enable the hardware (controller/device firmware) updater. `-no-hardware-updater` is the opposite.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "cli:-holo": {
+  "what": "tier0 platform flag for SteamOS 3 (codename holo). It is treated the same as `-steamos3`.",
+  "basis": "script",
+  "confidence": "medium"
+ },
+ "cli:-hometest": {
+  "what": "Steam UI flag that exercises the hardware survey scheduling (SurveyDate, SurveyDateVersion, SurveyDateSteamDeckDelay) next to `-steamconsole`. Probably forces or tests the survey prompt; the effect is unclear.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "cli:-html-enable-tooltips": {
+  "what": "Show native browser tooltips (HTML `title` attributes) in the client's HTML surfaces.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-html-perf-monitor": {
+  "what": "Draw an HTML performance overlay (frame timing data) on webhelper-rendered surfaces in the client and overlay.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-ifrunning": {
+  "what": "Bootstrapper/UI flag: only act (forward the command line, e.g. a `steam://` URL) if Steam is already running; don't start a new client otherwise.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "cli:-inf": {
+  "what": "False positive: matched by the string `inf` that number formatting uses (inf/nan/%.*g). It is not a real switch.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "cli:-inhibitbootstrap": {
+  "what": "Bootstrapper flag: skip the bootstrap/update step and start whatever client is installed. Same effect as `BootStrapperInhibitAll` in steam.cfg.",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "cli:-init_universe": {
+  "what": "steamclient.so switch, probably `-init_universe <universe>`, which picks the Steam universe (public/beta/dev) at startup. Valve-internal.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "cli:-install": {
+  "what": "Steam UI command-line verb: start installing an app, probably `-install <appid>` (compare `-uninstall`). It is forwarded to the running instance.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "cli:-installupdate": {
+  "what": "Bootstrapper flag: apply a pending client update that was already downloaded (\"Found pending update\", \"Applying update...\").",
+  "basis": "script",
+  "confidence": "medium"
+ },
+ "cli:-language": {
+  "what": "`-language <name>`: sets the client UI language for this run, e.g. `-language german` or `schinese`. It also chooses the bootstrapper's `steambootstrapper_<lang>.txt` strings.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-led-enumerate-sysfs-all": {
+  "what": "Steam UI (device LED control) switch: list all LED devices under sysfs, not only the ones Steam recognises. `-testled` creates a fake LED for testing.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-log_voice": {
+  "what": "Write voice chat data to `logs/voice_log.txt` for debugging.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-logdir": {
+  "what": "steamsysinfo option `-logdir <dir>`: the directory where the system-info tool writes its logs.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-login": {
+  "what": "Automatically log in a user: `-login <username> [password]`. With credentials on the command line, `-rememberpassword` acts as if 'remember my password' was ticked.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-lognetapi": {
+  "what": "Log all P2P networking (ISteamNetworking) activity to `logs/netapi_log.txt`.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-longestloc": {
+  "what": "Localization test switch: for each token, use the longest translation across all languages, so UI layouts can be checked for text overflow.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-ltp": {
+  "what": "steamclient.so switch: use the legacy scheme for storing the login refresh token (JWT) on disk, e.g. under `Software\\Valve\\Steam\\ConnectCache` in registry.vdf.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-manuallyclearframes": {
+  "what": "gameoverlayui switch: make the overlay clear its frames to black itself, for games that don't clear the whole screen and would otherwise leave artifacts.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-master_ipc_name_override": {
+  "what": "`-master_ipc_name_override <name>`: overrides the name of the master IPC/shared-memory channel used between the bootstrapper, client and UI. With a different name, a second, separate Steam instance can run (developer use).",
+  "basis": "script",
+  "confidence": "medium"
+ },
+ "cli:-net_fake_state": {
+  "what": "`-net_fake_state <state>`: sets the initial value of the `net_fake_state` convar, which simulates network conditions. Valid states: normal, NoLAN, CaptivePortal_Redirected, CaptivePortal_InPlace, NoInternet, NoSteam.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-net_start_wifi_disabled": {
+  "what": "Start with Wi-Fi reported as disabled. Valve says this is useful when emulating a Steam Deck on a desktop.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-no-cef-sandbox": {
+  "what": "Disable the Chromium sandbox in steamwebhelper; same effect as `-cef-disable-sandbox`. Useful on systems without unprivileged user namespaces.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-no-child-update-ui": {
+  "what": "Bootstrapper flag: draw the update UI in the bootstrapper process itself instead of a forked `-child-update-ui` process.",
+  "basis": "script",
+  "confidence": "medium"
+ },
+ "cli:-no-dwrite": {
+  "what": "Windows-only: make VGUI use GDI text instead of DirectWrite. It has no effect on Linux.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-no-hardware-updater": {
+  "what": "Steam UI flag: disable the hardware/firmware updater (controller and device firmware update prompts). `-hardware-updater` is the opposite.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "cli:-no-shared-textures": {
+  "what": "Overlay switch: don't share GPU texture handles between the overlay and the game process; the overlay uses a copy path instead. Can work around overlay glitches with some drivers.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-noassert": {
+  "what": "tier0 flag read by the bootstrapper, crashhandler and helpers: don't break or show dialogs on (non-fatal) asserts. Similar in purpose to the `DONT_BREAK_ON_ASSERT` setting.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "cli:-nobigpicture": {
+  "what": "Force the normal desktop UI at startup, overriding a saved Big Picture or gamepad UI startup mode. The client logs \"forcing desktopui via -nobigpicture\".",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-nobootstrapperupdate": {
+  "what": "Bootstrapper flag: don't update the bootstrapper binary itself during the update step.",
+  "basis": "script",
+  "confidence": "medium"
+ },
+ "cli:-noconsole": {
+  "what": "Steam UI flag: hide or disable the developer console. It is the opposite of `-console`.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "cli:-nocrashdialog": {
+  "what": "tier0/crash-handler flag: don't show a crash dialog when a Steam process crashes.",
+  "basis": "script",
+  "confidence": "medium"
+ },
+ "cli:-nocrashmonitor": {
+  "what": "steamclient.so flag: don't start the crash-monitor process that watches the client.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "cli:-nodircheck": {
+  "what": "Bootstrapper flag: skip the install-directory checks, e.g. non-ASCII path and writability (`.writable`).",
+  "basis": "script",
+  "confidence": "medium"
+ },
+ "cli:-nodpiscale": {
+  "what": "VGUI flag: disable DPI scaling of the legacy VGUI UI, overriding the `DPIScaling` registry setting.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "cli:-nofriendsui": {
+  "what": "Don't load the friends UI module (friendsui.so). The friends list and chat are then unavailable.",
+  "basis": "script",
+  "confidence": "medium"
+ },
+ "cli:-noipv6": {
+  "what": "steamclient.so flag: disable IPv6 networking and use only IPv4.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "cli:-nojoy": {
+  "what": "Disable controller support in steamclient and in the streaming client: no SDL/HID controller enumeration, no Steam Input.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-nojsreload": {
+  "what": "Steam UI flag: don't reload the Steam UI JavaScript when it changes, probably a developer hot-reload setting.",
+  "basis": "script",
+  "confidence": "low"
+ },
+ "cli:-nopcshutdown": {
+  "what": "Steam UI switch: skip real PC power operations (shutdown/restart/suspend) when they are triggered from the UI, so testing Big Picture power menus doesn't power off the machine.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-norepairfiles": {
+  "what": "Bootstrapper flag: skip repairing files that fail verification (\"Skipping file repair\").",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "cli:-noshaders": {
+  "what": "Disable the shader pre-caching manager (no shader cache downloads/uploads or Fossilize background processing).",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-noverifyfiles": {
+  "what": "Bootstrapper flag: skip verifying client files at startup (\"Verification skipped\").",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "cli:-offlinemode": {
+  "what": "Always try to start Steam in offline mode, using cached credentials.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-openalldevtools": {
+  "what": "Open a Chrome DevTools window at launch for every HTML window: Steam UI, overlay (gamepad/desktop overlay) and friends.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-opendevtools": {
+  "what": "Open Chrome DevTools at launch for the shared JS context, the offscreen SharedJSContext browser that hosts most Steam UI logic.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-opengl": {
+  "what": "Legacy VGUI switch: use the OpenGL renderer for the UI.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "cli:-openoverlaydevtools": {
+  "what": "Open Chrome DevTools automatically whenever an in-game overlay browser is created.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-out-file": {
+  "what": "steamsysinfo option `-out-file <path>`: write the query response to a file instead of stdout.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-overlay-gpu-pri-delay": {
+  "what": "`-overlay-gpu-pri-delay <ms>`: delay in milliseconds between changes of the webhelper GPU priority as the overlay is shown or hidden.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-overlaylogging": {
+  "what": "Enable logging from the in-game overlay renderer, probably into gameprocess/overlay logs.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-overlaytestmode": {
+  "what": "Force the overlay into its test mode for debugging.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "cli:-overrideminos": {
+  "what": "Bootstrapper flag: bypass the minimum-OS-version check. Valve's bootstrapper message documents it: \"You may override this check by passing -overrideminos\".",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "cli:-pid": {
+  "what": "Internal switch for overlay and HTML helper processes: `-pid <pid>` is the process they watch, i.e. the game the overlay is attached to. The client passes it.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-pipewire": {
+  "what": "Enable PipeWire-based desktop capture, used by Remote Play and recording on Linux.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-pipewire-dmabuf": {
+  "what": "Enable PipeWire desktop capture with DMA-BUF zero-copy buffers.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-pipewire-fresh-start": {
+  "what": "Clear all saved PipeWire capture tokens, so the user is asked again what to capture (the portal screen-share prompt).",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-pipewire-record-deck-ui": {
+  "what": "Include Steam UI elements in PipeWire captures/recordings on Steam Deck.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-pretendeol": {
+  "what": "Steam UI test flag: pretend this OS/platform has reached end of life, to show the EOL warning UI.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "cli:-pretendeol32": {
+  "what": "Steam UI test flag: pretend 32-bit support has reached end of life, to show the corresponding warning UI.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "cli:-preventsteamdiscovery": {
+  "what": "steamclient.so flag: stop this client from broadcasting or being discovered by other Steam clients on the LAN (Remote Play / In-Home Streaming discovery).",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "cli:-private_ip_override": {
+  "what": "steamclient.so switch that probably takes an IP address to report as the machine's private/LAN IP, e.g. for streaming or P2P testing. Evidence is only the name.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "cli:-profilestartup": {
+  "what": "Profile client startup: record and log startup timing for steamui, steamclient and CEF (e.g. \"STARTUP SteamUI browser requested at +%.0fms\").",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "cli:-pyrowavestats": {
+  "what": "Log performance of the pyrowave video encoder (used for Remote Play streaming) to `streaming_log.txt`.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-query": {
+  "what": "steamsysinfo option `-query <command>`: picks which EChildProcessQueryCommand system-info query to run. Steam spawns steamsysinfo as a helper child process.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-query-arg": {
+  "what": "steamsysinfo option `-query-arg <value>`: the argument for the `-query` command; its meaning depends on the query.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-quicklogin": {
+  "what": "`-quicklogin <base>`: sets the base URL used to build quick-login URLs. A Valve dev option used with `-devsites`.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "cli:-rememberpassword": {
+  "what": "With `-login <user> <pass>`, act as if 'Remember my password' was ticked, so a refresh token is saved.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-set_locale_disable": {
+  "what": "Bootstrapper flag: skip the `setlocale()` call at startup (normally en_US.UTF-8 or the user locale).",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "cli:-setbeta": {
+  "what": "`-setbeta <branch>`: permanently switch the client to a beta branch by writing it to `package/beta`. The log says \"Changing client beta ... (changebeta flag)\".",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-showallbetas": {
+  "what": "Show all client beta branches in the beta selection UI, not only the filtered list.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-shutdown": {
+  "what": "Tell a running Steam instance to shut down. The command line is forwarded to it and handled by CSteamDoc::ExecCommandLine.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "cli:-silent": {
+  "what": "Start Steam silently, minimized to the system tray with no main window. The bootstrapper also respects it to keep its update UI quiet.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-simulatedownloaderrors": {
+  "what": "Bootstrapper test hook: simulate package download failures.",
+  "basis": "script",
+  "confidence": "medium"
+ },
+ "cli:-simulatefatalerror": {
+  "what": "Bootstrapper test hook: trigger a fatal error on purpose (\"Forcing a fatal error\").",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "cli:-single_core": {
+  "what": "Restrict Steam (steamclient and steamservice) to the primary CPU core.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-singleapp": {
+  "what": "Single-app mode (`-singleapp <appid>` is likely): the bootstrapper and UI run Steam as a launcher for one app, reading `launcher\\appid` from config/config.vdf and erroring if it is missing. Used for branded launchers, e.g. with `-steamchina`.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "cli:-sitelicense": {
+  "what": "steamclient.so flag: run this client as a site-license provider (internet cafe / site license host). It logs \"Running as site license provider\"; a convar can enable the same.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "cli:-skipinitialbootstrap": {
+  "what": "Bootstrapper flag: skip the first-run bootstrap step.",
+  "basis": "script",
+  "confidence": "medium"
+ },
+ "cli:-skipstreamingdrivers": {
+  "what": "Remote Play switch: skip the streaming driver checks (virtual audio/input drivers) before starting a stream.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-skipsystemcheck": {
+  "what": "Bootstrapper flag: skip system-compatibility checks, e.g. the steam-runtime requirements check and GL renderer checks such as the VirtualBox 3D-acceleration warning.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "cli:-sls-skip-version-check": {
+  "what": "Steam UI switch: don't validate the SLS version before starting. SLS is probably Steam Link Service or a similar component; exact meaning unknown.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "cli:-srt-logger-opened": {
+  "what": "Internal flag added by steam.sh / the bootstrapper after it opens the srt-logger (writing `logs/console-linux.txt`), so the logger isn't opened twice, including after an exit-code-42 restart.",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "cli:-stack=": {
+  "what": "tier0 switch, probably `-stack=<size>`, setting the stack size for the main/worker threads. No usage strings.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "cli:steam://open/bigpicture": {
+  "what": "Passing the URL `steam://open/bigpicture` on the command line makes the startup-mode logic (ComputeStartupMode) start in the gamepad UI / Big Picture, like `-gamepadui`.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "cli:steambeta://open/bigpicture": {
+  "what": "Beta-protocol form of `steam://open/bigpicture`: on the command line it forces startup in the gamepad UI / Big Picture.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "cli:-steamchina": {
+  "what": "Bootstrapper flag: run as the Steam China (Perfect World) client, with China-specific packages and universe; often used with `-singleapp`.",
+  "basis": "script",
+  "confidence": "medium"
+ },
+ "cli:-steamconsole": {
+  "what": "Steam UI flag, probably loading `steamconsole.so` or a standalone console mode. It appears next to the survey/`-hometest` code, so the exact effect is unclear.",
+  "basis": "script",
+  "confidence": "low"
+ },
+ "cli:-steamdeck": {
+  "what": "tier0 platform flag: run the client as if on a Steam Deck (enables Deck-specific UI and behavior). Commonly used with `-gamepadui` to emulate a Deck on desktop.",
+  "basis": "script",
+  "confidence": "medium"
+ },
+ "cli:-steamdeckdisplay": {
+  "what": "Make the client (UI, CEF, overlay) assume a Steam Deck display/panel profile. It is read by almost every component and is probably used for Deck emulation.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "cli:-steamframe": {
+  "what": "tier0 platform flag for the Steam Frame hardware (related to the `-deckard` codename). It makes the client behave as on that device.",
+  "basis": "script",
+  "confidence": "low"
+ },
+ "cli:-steamid": {
+  "what": "steamsysinfo option `-steamid <id>`: the Steam user identifier attached to reports.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-steaminstaller": {
+  "what": "Steam UI command-line verb, probably used by the Steam installer to hand off to the client after installation. Exact behavior unknown.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "cli:-steammachinedisplay": {
+  "what": "Like `-steamdeckdisplay`, but makes the client assume a Steam Machine (TV/living-room) display profile.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "cli:-steamos": {
+  "what": "Bootstrapper and steam.sh flag: run as SteamOS. steam.sh sets `STEAMOS=1` and skips the 32-bit library check; the client enables SteamOS behavior.",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "cli:-steamos3": {
+  "what": "SteamOS 3 (holo/jupiter, i.e. Steam Deck OS) platform flag, read by steam.sh and tier0. Equivalent to `-holo`.",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "cli:-steampid": {
+  "what": "Internal gameoverlayui switch: `-steampid <pid>`, the PID of the Steam process that launched the overlay.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-system-composer": {
+  "what": "Steam UI switch: force the system browser composer (compositing path) for Big Picture rather than Steam's own composer.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "cli:-tenfoot": {
+  "what": "Start in Big Picture mode. This is the historical name and an alias of `-bigpicture`; the startup logic may promote it to the gamepad UI.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-tesla": {
+  "what": "tier0 platform flag named after hardware codename Tesla. Effect unknown.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "cli:-testled": {
+  "what": "Create a fake LED device to test the client's LED control features.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-testlongoobeupdater": {
+  "what": "steamclient system-manager test flag: use a slow dummy updater during the OOBE (\"applying dummy update\", progress posts), to test the long update flow.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "cli:-testoobe": {
+  "what": "Force the out-of-box experience flow (sets/reads `ForceOOBE`) in client, UI and CEF. Used for testing first-run setup.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "cli:-testoobestage2": {
+  "what": "Force OOBE stage 2 (registry `ForceOOBEStage2`) for testing.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "cli:-testoobeupdater": {
+  "what": "Use a dummy updater during the OOBE, so the system-update step can be tested without a real update.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-testssa": {
+  "what": "Force the Steam Subscriber Agreement (SSA) acceptance dialog to show.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-teststoragedata": {
+  "what": "Steam UI test switch: show fake ('test') storage data, probably in the Storage Manager / storage settings page, so the UI can be tested without real drives.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "cli:-testupdater": {
+  "what": "steamclient system-manager test flag: probably uses a test/dummy system updater (the SteamOS update path) instead of the real one. It sits near the battery/fan/suspend system-manager code.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "cli:-textclient": {
+  "what": "Bootstrapper flag: use the text/console update UI (CConsoleUpdateUI) instead of the graphical update window, e.g. for headless runs.",
+  "basis": "script",
+  "confidence": "medium"
+ },
+ "cli:-toggle-overlay-html-mode": {
+  "what": "Flip the default of the new, faster overlay HTML rendering path: it turns the path off where it is on by default, and on in branches where it isn't yet the default.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-uninstall": {
+  "what": "Steam UI command-line verb: uninstall an app, probably `-uninstall <appid>`. It is forwarded to the running client (CSteamDoc::ExecCommandLine).",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "cli:-use_xcomposite_workaround": {
+  "what": "steamwebhelper flag: capture window textures through the XComposite workaround path (\"using xcomposite workaround\"). Same as setting `STEAM_ENABLE_XCOMPOSITE_WORKAROUND`; the client sets it automatically for some drivers.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "cli:-usepipewireaudio": {
+  "what": "steamclient.so switch: use the PipeWire audio backend (e.g. for voice, Remote Play or recording audio) instead of the default backend.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-userchooser": {
+  "what": "Always show the account chooser at login, even with 0 or 1 saved accounts.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-verbose": {
+  "what": "steamclient.so flag found next to the site-license code. It probably makes site-license provider mode log more detail; any wider effect is unknown.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "cli:-verbose-computer-activity": {
+  "what": "Log verbosely how the client detects user/computer activity, i.e. idle vs. active (used for away status and idle-time features).",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-verbosejslogging": {
+  "what": "steamwebhelper switch: log JS console events verbosely. This is the webhelper-side form of `-cef-verbose-js-logging`.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-verifyfiles": {
+  "what": "Bootstrapper flag: verify the checksums of all client files at startup and repair mismatches (\"Verifying all file checksums\"). It is also read in steamclient.so. steam.sh tries to add it after a failed runtime unpack, but a script bug means the flag never reaches the client.",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "cli:-vguifocus": {
+  "what": "VGUI debug switch: print which panel has keyboard focus. Only affects legacy VGUI panels.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-vguimessages": {
+  "what": "VGUI debug switch: print debug output for vgui2 panel messages.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-voicerelay": {
+  "what": "Testing switch: allow voice chat only through relay connections, with no direct P2P.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-vrdisable": {
+  "what": "Disable SteamVR integration completely: Steam never loads the OpenVR libraries.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-vrforce": {
+  "what": "Always run the HMD (headset) status check at startup, even if it crashed last time. By default a crash disables the check.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-vrlinkforceenable": {
+  "what": "Testing switch: report VR Link (streaming VR to a headset) as available regardless of platform or video encoder.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-vronly": {
+  "what": "Legacy Steam UI switch, probably a VR-only startup mode with no desktop UI. It is registered next to the old `-opengl` UI renderer switches.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "cli:-vrskip": {
+  "what": "Skip VR initialization entirely, no matter which component asks for it.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-vrverbose": {
+  "what": "Write extra VR diagnostic logging.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-websocket": {
+  "what": "Connect to the Steam backend (CM servers) over WebSocket instead of TCP/UDP. Can help behind restrictive firewalls or proxies.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-websocketignorecertissues": {
+  "what": "With `-websocket`, ignore TLS certificate validation errors on the WebSocket CM connection. Valve marks it as for dev use only.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "cli:-windowed": {
+  "what": "Run Big Picture in a window instead of fullscreen. The bootstrapper also reads it to choose a windowed update UI.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:achievement_clear": {
+  "what": "Developer console: clear one achievement for the current user, probably `achievement_clear <appid> <achievement_api_name>`. The argument format is not in the help; `reset_all_stats` is the 'clear everything' variant.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "concommand:app_backup": {
+  "what": "Console: `app_backup <appId> <target folder> [max folder size MB]` writes a Steam backup of an installed app to a folder, split into files of the given size.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:app_change_compat_tool": {
+  "what": "Console: `app_change_compat_tool <appid> <name> [config=]` sets the Steam Play compatibility tool (e.g. a Proton version's internal name) for an app, with an optional tool config string.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:app_delay_update": {
+  "what": "Console: `app_delay_update <appid> <seconds>` holds back an app's pending update for the given number of seconds.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:app_dlc_status": {
+  "what": "Console: `app_dlc_status <appId> <dlcId>` prints the install/ownership status of one DLC of an app.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:app_download_enable": {
+  "what": "Console: `app_download_enable <0|1>` turns content downloads off or on globally.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "concommand:app_info_find": {
+  "what": "Console: `app_info_find <path> <value>` lists apps whose appinfo has the key set to the value, e.g. `app_info_find common/type media`; `*` matches any value.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:app_info_print": {
+  "what": "Console: `app_info_print <appid> [section]` dumps the cached appinfo (PICS) KeyValues of an app, optionally only one section such as `config` or `depots`.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:app_info_update": {
+  "what": "Console: `app_info_update [0|1]` refreshes appinfo from the PICS servers; with 1 it updates all apps.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:app_install": {
+  "what": "Console: `app_install <appId> [volumeindex]` starts installing an app, optionally into the library folder with that index (see `library_folder_list`).",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:app_installed_files": {
+  "what": "Console: `app_installed_files <AppID>` lists the files installed for an app.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "concommand:app_license_request": {
+  "what": "Console: `app_license_request <AppID>` asks for a free license for an app the account doesn't own yet (free-to-play/free apps).",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:app_mark_validation": {
+  "what": "Console: `app_mark_validation <appId> <0|1>` marks an app as needing file validation; 1 requests a full validation.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "concommand:app_move": {
+  "what": "Console: `app_move <appId> <volumeindex>` moves an installed app to another library folder, given by its volume index.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:app_set_config": {
+  "what": "Console: `app_set_config <AppID> <key> <value>` sets a per-app config value in the client's app config.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:app_start_validation": {
+  "what": "Console: `app_start_validation <appId>` starts verifying the integrity of an app's files, like 'Verify integrity of game files'.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:app_status": {
+  "what": "Console: `app_status <appId>` prints install state, size, update and download status for an app.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:app_stop": {
+  "what": "Console: `app_stop <appid> [force:0|1]` stops a running app; with `1` it forces termination.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:app_uninstall": {
+  "what": "Console: `app_uninstall <appId>` uninstalls an app.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:app_update_cancel": {
+  "what": "Console: `app_update_cancel <EAppUpdateError>` cancels the running app update, taking the EAppUpdateError code to report as the reason. Mainly a debug command.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "concommand:app_update_status": {
+  "what": "Console: `app_update_status [appId]` prints update/download progress for one app, or for all apps that are updating.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:apps_installed": {
+  "what": "Console: list all installed apps with their IDs and install status.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "concommand:apps_running": {
+  "what": "Console: show the running games Steam tracks (app IDs, processes).",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:async_disconnect": {
+  "what": "Console debug command: disconnect from the Steam CM server asynchronously, to test reconnect handling.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "concommand:build_installer": {
+  "what": "Console: `build_installer <project file> <target folder> [beta key] [beta pwd]` builds a retail/backup installer from a project file, optionally from a beta branch.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:cloud_file_exists": {
+  "what": "Console: `cloud_file_exists <appid> <root> <file>` checks whether a file exists in an app's Steam Cloud storage under the given root.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:cloud_get_file_info": {
+  "what": "Console: `cloud_get_file_info <appid> <index> [bExternalAPI=1]` prints info about the Nth Steam Cloud file of an app.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:cloud_get_num_files": {
+  "what": "Console: `cloud_get_num_files <appid> [bExternalAPI=1]` prints how many Steam Cloud files an app has.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:cloud_sync_app": {
+  "what": "Console: `cloud_sync_app <appid>` runs the background Steam Cloud sync for an app.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:cloud_sync_down": {
+  "what": "Console: `cloud_sync_down <appid>` runs the on-launch Steam Cloud sync for an app, which downloads newer cloud saves.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:cloud_sync_up": {
+  "what": "Console: `cloud_sync_up <appid>` runs the after-game Steam Cloud sync for an app, which uploads saves.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:cm_force_change": {
+  "what": "Console: drop the current Connection Manager and switch to another CM server from the list.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:compute_file_sha": {
+  "what": "Console: `compute_file_sha <path>` computes and prints the SHA-1 of a file on disk.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:config_refresh": {
+  "what": "Console: reload the client configuration (config/convars from the server/config store) without restarting.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "concommand:connect_remote": {
+  "what": "Console: `connect_remote <ip:port>` connects to a Remote Play / In-Home Streaming host at that address.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:controller_calibration_stage": {
+  "what": "Console: `controller_calibration_stage <stage> [controller index]` sends a calibration-stage message to the controller hardware (factory calibration/testing).",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:disable_license": {
+  "what": "Console (Steamworks developers): `disable_license <packageid>` temporarily disables a license granted through the Steamworks partner site, so you can test as a non-owner.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:download_chunk": {
+  "what": "Console: `download_chunk <appid> <depotid> <sha>` downloads one content chunk from a depot.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:download_depot": {
+  "what": "Console: `download_depot <appid> <depotid> [<target manifestid>] [<delta manifestid>]` downloads one depot, optionally a specific (older) manifest. Commonly used to fetch old game versions; output lands under `steamapps/content/app_<id>/depot_<id>`.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:download_item": {
+  "what": "Console: `download_item <appid> <PublishedFileId>` downloads a Workshop item.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:download_sources": {
+  "what": "Console: print the list of content download sources (CDN/cache servers) in use.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:dump_box_ips": {
+  "what": "Console: print the local IP addresses the client has detected on this machine.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:dump_offline_playtime": {
+  "what": "Console: print the playtime sessions recorded locally while offline, which are later reported to the server.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:dump_scheduled_functions": {
+  "what": "Console: list the client's internal scheduled function/callback timers.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:enable_license": {
+  "what": "Console (Steamworks developers): `enable_license <packageid>` re-enables a license that was turned off with `disable_license`.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:find": {
+  "what": "Console: `find <substring>` lists console commands and convars whose names or help contain the text.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:gamestream_debug": {
+  "what": "Console: `gamestream_debug <0|1>` turns verbose game-streaming (Remote Play) debug logging on or off.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:gamestream_fail": {
+  "what": "Console debug command: force the current game-stream session to fail, to test error handling.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:get_download_throttle": {
+  "what": "Console: print the current download bandwidth limit (see `set_download_throttle`).",
+  "basis": "name",
+  "confidence": "high"
+ },
+ "concommand:gr_enum_audio": {
+  "what": "Console (game recording): list the audio sessions/sources that game recording can capture.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:gr_write_json": {
+  "what": "Console (game recording): write the game-recording metadata JSON (clip timeline: time, duration).",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "concommand:http_cache_clearall": {
+  "what": "Console: delete all cached data from the client's internal HTTP client and the CEF browser cache.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:http_test": {
+  "what": "Console: `http_test [url]` tests HTTP connectivity with a request to the given URL (or a default one).",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:httpclients": {
+  "what": "Console: print statistics for the client's HTTP clients.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:jobs": {
+  "what": "Console: `jobs [group_by_attribute]` lists the active internal jobs (async tasks) in this process, optionally grouped.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:kv_stats": {
+  "what": "Console: print KeyValues memory/usage statistics.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:library_asset_cache_print": {
+  "what": "Console: `library_asset_cache_print <appid>` prints the cached library artwork (capsule, hero, logo with logo_position) for an app.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:library_asset_cache_recheck": {
+  "what": "Console: `library_asset_cache_recheck <appid>` checks an app's cached library artwork again and refetches it, e.g. to fix missing or stale capsule images.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:library_folder_add": {
+  "what": "Console: `library_folder_add <path>` adds a directory as a Steam library folder.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:library_folder_list": {
+  "what": "Console: list all mounted Steam library folders (volumes) with their indexes. These indexes are what `app_install`/`app_move` take as `volumeindex`.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:licenses_for_app": {
+  "what": "Console: `licenses_for_app <appid>` lists the account's active licenses (packages) that grant the app.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:licenses_print": {
+  "what": "Console: list all licenses (packages) owned by the logged-in account.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:log_callbacks": {
+  "what": "Console: `log_callbacks <first callbackID> [last callbackID]` logs Steam API callbacks with IDs in the range as they are posted.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:log_ipc": {
+  "what": "Console: `log_ipc [counts|verbose|#maxcount] <filter>` turns on logging of IPC calls between Steam processes and games, filtered by name. The default mode is `counts`.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:manifest_dump": {
+  "what": "Console: `manifest_dump <filename> [0|1]` prints the contents of a depot manifest file; with 1 it also lists the chunks.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:mem_stats": {
+  "what": "Console: print memory allocation statistics for the steamclient process.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:mem_validate": {
+  "what": "Console: `mem_validate <dump|leaks> <threshold>` runs a memory validation pass in the Steam UI process and dumps allocations or reports leaks above the threshold.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "concommand:mem_walk": {
+  "what": "Console: `mem_walk [full]` walks and validates the heap; `full` does a complete pass.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "concommand:@metricsDisabledCatalogs": {
+  "what": "Not an ordinary command: a server/config-driven setting (`@` prefix) holding a comma-separated list of metrics catalogs to disable. It is checked last, after the enabled/disabled operation lists.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:@metricsDisabledOperations": {
+  "what": "Config-driven setting (`@` prefix): a comma-separated list of metrics operations to disable. It has the highest priority over the other metrics settings, including `@bMetricsEnabled`.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:@metricsEnabledOperations": {
+  "what": "Config-driven setting (`@` prefix): a comma-separated list of metrics operations to enable even if their catalog is in `@metricsDisabledCatalogs`.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:minidump_assert": {
+  "what": "Console debug command: trigger an assert so the assert/minidump reporting path runs.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:minidump_crash": {
+  "what": "Console debug command: crash the Steam client on purpose, to test crash dumps and reporting.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:net_fake_state": {
+  "what": "Console: `net_fake_state <normal|NoLAN|CaptivePortal_Redirected|CaptivePortal_InPlace|NoInternet|NoSteam>` simulates network conditions to test offline and captive-portal UI. Use `normal` to restore. The `-net_fake_state` switch sets the startup value.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:net_msgdump": {
+  "what": "Console: print the list of network messages sent to the Steam backend.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:net_msgspew": {
+  "what": "Console: log every sent and received Steam network (CM) message as it happens.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:open": {
+  "what": "Console: `open <internal url>` opens a main Steam navigation page, like `steam://open/<page>` (e.g. `open games`, `open settings`). The argument format is assumed.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "concommand:p2p_info": {
+  "what": "Console: print the current state of the P2P networking subsystem (sessions, relays).",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:package_info_print": {
+  "what": "Console: `package_info_print <packageid>` prints the cached package info (apps, depots, license type) for a package (sub).",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:patch_dump": {
+  "what": "Console: `patch_dump <filename> <depotid>` prints the contents of a depot delta-patch file.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:peer_content_server_status": {
+  "what": "Console: print the status of the local peer content server, the LAN game-transfer server that listens on TCP port 27040 by default.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:print_sdr_ping": {
+  "what": "Console: print this client's Steam Datagram Relay (SDR) ping-location string, i.e. the measured relay latencies used for matchmaking.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:profile": {
+  "what": "Console: `profile <seconds>` runs the vprof profiler in the Steam UI process for N seconds.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:profile_dump": {
+  "what": "Console: dump the full vprof profile of all threads. If vprof is off, it uses the last collected data.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:profile_off": {
+  "what": "Console: stop vprof profiling.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:profile_on": {
+  "what": "Console: start vprof profiling.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:profile_on_dump_spikes": {
+  "what": "Console: `profile_on_dump_spikes <ms>` starts vprof and automatically dumps any frame that takes longer than the threshold in milliseconds. Stop with `profile_off`.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:profile_show_gui": {
+  "what": "Console: open a vprof profile window for each known thread. Data collection still needs `profile_on`/`profile_off`.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:protobuf_parse_stats": {
+  "what": "Console: `protobuf_parse_stats [reset]` prints a histogram of parsed protobuf message body sizes and how many were parsed on worker threads; `reset` clears the counters. Related settings: `@bProtobufParseTimeProfile`, `@bAssertOnProtoBufBodyMismatch`.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:quit": {
+  "what": "Console: `quit [force|now|system]` exits the Steam client. Without an argument it exits safely; `force`/`now` skip waiting; `system` is probably a system-initiated exit such as a shutdown.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:remote_client_dongle": {
+  "what": "Console: controls a Remote Play/Steam Link wireless dongle. Syntax: `remote_client_dongle [[connect] clientid ssid password] | disconnect | status | disable | enable | leddebug | lednodebug | verbose 0|1 | debugpdthresh <thres>` (default threshold -75).",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:remote_client_softapcmd": {
+  "what": "Console: `remote_client_softapcmd <args>` sends a raw command to the soft access point used for direct Remote Play / Steam Link connections.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "concommand:remote_clients": {
+  "what": "Console: print information about Remote Play / In-Home Streaming clients found on the LAN.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:render_ipc_connections": {
+  "what": "Console: list or draw the active IPC connections between Steam and connected processes.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "concommand:reset_all_stats": {
+  "what": "Console (developer): clear all stats and achievements for the current user, probably `reset_all_stats <appid>`.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "concommand:serverbrowser_debug_toggle": {
+  "what": "Console: turn debug logging for the game server browser (master server queries) on or off.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:serverbrowser_debug_verbose": {
+  "what": "Console: turn on verbose debug logging for the server browser. Valve's help string is the same as for `serverbrowser_debug_toggle`.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "concommand:service_repair": {
+  "what": "Console: repair the Steam Client Service. Windows only; no effect on Linux.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:service_restart": {
+  "what": "Console: restart the Steam Client Service. Windows only.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:service_test": {
+  "what": "Console: test that the Steam Client Service works. Windows only.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:set_display_state": {
+  "what": "Console: `set_display_state <eState>` forces the display into a given state (a numeric display-state enum, e.g. on/off/dimmed on SteamOS). Used to test display power handling.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "concommand:set_download_throttle": {
+  "what": "Console: `set_download_throttle <kbps> [bPersistent]` limits download bandwidth in kbps. 0 is probably unlimited; with a true second argument the limit is saved across sessions.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:set_spew": {
+  "what": "Console: `set_spew <group> <spewlevel> <loglevel>` sets the console-spew and log-file levels for one logging group.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:set_spew_level": {
+  "what": "Console: `set_spew_level <spewlevel> <loglevel>` sets the console-spew and log-file levels for all logging groups.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:set_var": {
+  "what": "Console: `set_var <name> <value>` sets the value of a console variable (convar).",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:shader_build": {
+  "what": "Console: `shader_build <appId> [threadCount]` compiles an app's pre-cached shaders (Fossilize replay) now, optionally with that many threads.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:shader_process": {
+  "what": "Console: `shader_process <appId> <bucketID> [overrideBasePath]` processes one shader-cache bucket for an app, optionally from a different base path.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "concommand:shader_prune": {
+  "what": "Console: delete stale or unneeded shader cache data.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "concommand:shader_scan": {
+  "what": "Console: `shader_scan <appId> [overridePath]` scans an app's shader cache, optionally from another path.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "concommand:stats_dump": {
+  "what": "Console: `stats_dump [filter]` prints the internal debug stats (counters) whose names match the filter.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:stats_monitor": {
+  "what": "Console: `stats_monitor <stat name>` keeps watching one debug stat and shows its value as it changes.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:stats_reset": {
+  "what": "Console: `stats_reset [filter]` sets matching debug stats back to 0.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:test_concurrent_textfilter_change": {
+  "what": "Console test command: queue several text-filter (chat profanity filter) setting changes for the UI at once, to test race handling.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:test_dropcon": {
+  "what": "Console test command: drop the current Steam backend connection, to test reconnect behavior.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:test_failnextconnect": {
+  "what": "Console test command: make the next connection attempt to the backend fail.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:test_opus_voice_encode": {
+  "what": "Console test command: encode voice data with the Opus codec as a test.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:test_os_suspend": {
+  "what": "Console test command (steamclient): simulate the OS announcing a system suspend.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:test_reconnect": {
+  "what": "Console test command: reconnect after `test_failnextconnect` or `test_dropcon`.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:test_resume": {
+  "what": "Console test command (steamclient): simulate resuming from a system suspend; pairs with `test_os_suspend`.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:test_resume_from_suspend": {
+  "what": "Console test command (Steam UI): run the UI's resume-from-suspend handling.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:test_suspend": {
+  "what": "Console test command (Steam UI): fake a system suspend event.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:test_voice_encode": {
+  "what": "Console test command: encode voice data with the default/legacy voice codec as a test.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:timed_trial_add_playtime": {
+  "what": "Console (developer only): `timed_trial_add_playtime <appId> <seconds>` adds playtime to a timed-trial app, to test trial expiry.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:timed_trial_reset_playtime": {
+  "what": "Console (developer only): `timed_trial_reset_playtime <appId>` resets the playtime used on a timed-trial app.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:timed_trial_status": {
+  "what": "Console: `timed_trial_status <appId>` shows the timed-trial status (time allowed and used) for an app.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:toggle_idle_suspend_inhibit": {
+  "what": "Console: `toggle_idle_suspend_inhibit <delay>` toggles inhibiting idle suspend after the given delay, to test SteamOS idle-suspend handling.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:user_friends": {
+  "what": "Console: print the logged-in user's friends list.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:user_info": {
+  "what": "Console: print various information about the Steam session and user (account, login state).",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:verify_chunk_store": {
+  "what": "Console: `verify_chunk_store <appid> <depotid> <datafile>` checks a depot chunk store / data file. Valve's help text ('run app depot build as specified in appbuildfile') looks copied from another command, so the exact behavior is uncertain.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "concommand:vgui_spewpanelstats": {
+  "what": "Console: print statistics about the active VGUI panels (counts per type), for the legacy VGUI UI.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:voice_game_usage": {
+  "what": "Console: show how the running game uses Steam Voice (ISteamUser voice APIs).",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:workshop_download_item": {
+  "what": "Console: `workshop_download_item <appid> <PublishedFileId>` downloads a Workshop item. Works like `download_item` and is commonly used to fetch mods manually.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "concommand:workshop_status": {
+  "what": "Console: `workshop_status <appId>` prints the Workshop subscription and download status for an app's items.",
+  "basis": "valve-help",
+  "confidence": "high"
+ }
+}

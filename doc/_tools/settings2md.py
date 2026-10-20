@@ -70,6 +70,16 @@ def main(binary, out):
         if cmin is not None or cmax is not None: flags.append(f'clamp [{cmin if cmin is not None else ""}..{cmax if cmax is not None else ""}]')
         rows.append((f.number, f.name, t, STORE_SHORT.get(g('setting_store'), ''), g('setting_name') or '', default, flags, g('setting_description') or ''))
 
+    import json, os
+    sdesc = json.load(open('desc/settings.json')) if os.path.exists('desc/settings.json') else {}
+
+    def what(name):
+        d = sdesc.get(name)
+        if not d:
+            return '', ''
+        tag = '' if d.get('confidence') == 'high' else f" *({d.get('confidence', '?')})*"
+        return esc(d['what']) + tag, esc(d.get('ui', ''))
+
     with open(out, 'w') as w:
         w.write('# Client settings (`CMsgClientSettings`)\n\n')
         w.write('This is the canonical list of user-facing *and* hidden client settings. It was recovered from the protobuf\n'
@@ -86,10 +96,15 @@ def main(binary, out):
                 'single backing key; the client computes them or forwards them to subsystems such as the voice, ping and\n'
                 'screenshot managers.\n\n')
         w.write('Flags: `pre-login` = available before a user signs in; `read-only` = cannot be set; `per-game`/`per-display` = stored per profile; `clamp` = value range enforced by the client.\n\n')
-        w.write('## All settings\n\n| # | Field | Type | Store | Key | Default | Flags | Description |\n|---|---|---|---|---|---|---|---|\n')
+        w.write('## All settings\n\n**What it does** and **Where in the UI** come from how the Steam UI and client use each field\n'
+                '(localized labels, the code that reads it). Descriptions tagged *(medium)* or *(low)* are inferences.\n'
+                '**Valve description** is the descriptor\'s own `setting_description`.\n\n'
+                '| # | Field | What it does | Where in the UI | Type | Store | Key | Default | Flags | Valve description |\n'
+                '|---|---|---|---|---|---|---|---|---|---|\n')
         for r in rows:
             num, name, t, store, key, d, flags, desc = r
-            w.write(f'| {num} | `{name}` | {esc(t)} | {store} | {"`" + esc(key) + "`" if key else ""} | {"`" + esc(d) + "`" if d is not None else ""} | {", ".join(flags)} | {esc(desc)} |\n')
+            wd, ui = what(name)
+            w.write(f'| {num} | `{name}` | {wd} | {ui} | {esc(t)} | {store} | {"`" + esc(key) + "`" if key else ""} | {"`" + esc(d) + "`" if d is not None else ""} | {", ".join(flags)} | {esc(desc)} |\n')
         # enums referenced
         enums = sorted({f.enum_type.full_name for f in msg.fields if f.enum_type})
         if enums:

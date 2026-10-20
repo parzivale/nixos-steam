@@ -57,15 +57,22 @@ doc/
      This includes the setter that builds the environment for game processes.
 3. **Scripts, runtimes and data files** (`steam.sh`, steam-runtime/pressure-vessel, `*.vdf`, `*.json`) were
    read directly.
-4. **steamui.** The minified bundles (`sp.js`, `library.js`, …) were searched for settings access,
+4. **Usage-based descriptions.** Most internal options ship without help text, so a second pass
+   ([_tools/usage.py](_tools/usage.py)) collects how each option is *used*. It finds function bounds from
+   `.eh_frame_hdr` and gathers the strings referenced near each read site: log messages, related options,
+   paths and URLs. For a ConVar it looks at every function that touches the ConVar object, not only where the
+   ConVar is registered. Client settings were matched to their UI labels and the JS code that reads them.
+   Descriptions were written from that evidence. Each carries a confidence tag: *(high)*, *(medium)* or *(low)*.
+   *Low* means the description rests mostly on the option's name. Valve's own help text is always kept in its own column.
+5. **steamui.** The minified bundles (`sp.js`, `library.js`, …) were searched for settings access,
    developer-page gating, storage keys, query-parameter handling, `steam://` handlers and `SteamClient.*` calls.
    English labels were joined in from the localization files.
 
 ## Caveats
 
-* **Descriptions.** Wording in a "help"/"description" column is Valve's own string from the binary. Text marked
-  *inferred* is our interpretation. Many internal options have no description at all, and we did not
-  invent any.
+* **Descriptions.** The "Valve help text" and "Valve description" columns are Valve's own strings from the binary.
+  "What it does" columns and text marked *inferred* are our interpretation of how the code uses the option.
+  Check the confidence tag before relying on one. A *(low)* description is an educated guess from the name.
 * **Static analysis limits.** Names built at runtime or read from server-delivered config cannot be seen. The
   `@`-prefixed convars can also be overridden server-side, so the defaults listed are compile-time defaults.
 * **Build-specific.** Valve ships client updates often, and options appear and disappear. Re-run

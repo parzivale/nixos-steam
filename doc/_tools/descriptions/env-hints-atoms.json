@@ -1,0 +1,1927 @@
+{
+ "env:_STEAM_SETENV_MANAGER": {
+  "what": "Internal handshake for Steam's CProcessEnvironmentManager, which preallocates environment slots (BREAKPAD_DUMP_LOCATION, STEAMVIDEOTOKEN, overlay layer switches, ...) in the main process so that loaded DLLs can update them safely. If it is set from outside, the manager disables itself (\"disabled by external environment setting\"); users should not set it.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:ALL_PROXY": {
+  "what": "Standard proxy variable. Steam reads it with the other *_proxy variables to auto-detect proxy settings for its HTTP downloads (logged as \"Auto-detected proxy settings: auto-detect, proxy, proxy-https, exclude\"). Format is a URL such as http://host:port.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:all_proxy": {
+  "what": "Lowercase spelling of ALL_PROXY. Steam checks both when auto-detecting the proxy for its HTTP traffic.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:BREAKPAD_DUMP_LOCATION": {
+  "what": "Directory where Breakpad writes crash minidumps. Steam preallocates it in its process-environment manager and sets it for the CEF/steamwebhelper crash reporter; users can set it to redirect where minidumps land.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:breakpad_testfile": {
+  "what": "Debug switch read by crashhandler.so while installing the Breakpad exception handler; probably makes it write a test minidump/file to verify crash reporting works. Value format unknown.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "env:breakpad_verbose": {
+  "what": "Debug switch for crashhandler.so. When set, the Breakpad handler prints verbose trace messages (\"Writing\", \"Skipping, no context\", filter-callback messages) while handling a crash.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:CEF_CRASH_REPORTER_PRODUCT_VERSION": {
+  "what": "Set by chromehtml.so before starting steamwebhelper so the CEF crash reporter tags its crash reports with the Steam client build/version.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:CEF_CRASH_REPORTER_SERVER_URL": {
+  "what": "Set by chromehtml.so for steamwebhelper to https://crash.steampowered.com/submit, the endpoint the CEF crash reporter uploads web-helper crash dumps to.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:CPU_MHZ": {
+  "what": "Fallback CPU clock speed in MHz, used by tier0 when it cannot read /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq (the bootstrapper says \"Try defining CPU_MHZ\"). Set it to a number such as 3600 on systems without cpufreq.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:DBG_PATHMATCH": {
+  "what": "Debug switch in the shared filesystem/path code. When set, the case-insensitive path-matching logic logs each step (\"Matched '%s' -> '%s'\", \"Unmatched\", \"Lowered\"), which helps diagnose files not found because of case differences.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:DEBUG_DRM": {
+  "what": "Debug switch read where Steam dynamically loads libdrm (drmGetDevices2, drmModeGetResources, ...), in steamui and streaming_client. Probably enables extra logging of DRM/KMS device enumeration.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "env:DISPLAY": {
+  "what": "Standard X11 display name. Steam's UI, webhelper and streaming client connect to this X server; with STEAM_MULTIPLE_XWAYLANDS (gamescope) Steam also builds other display names in the form :N.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:DONT_BREAK_ON_ASSERT": {
+  "what": "When set, failed asserts in Steam's tier0 code do not break into a debugger or show the assert dialog. steam.sh sets it to 1 for valgrind runs. Related to the -noassert command-line option.",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "env:DXVK_STATE_CACHE_PATH": {
+  "what": "DXVK's directory for its state cache. steamclient reads it when it prepares the per-app shader cache, and Steam points it at a DXVK_state_cache folder inside the app's shader-cache directory, creating the directory if needed.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:ENABLE_VULKAN_RENDERDOC_CAPTURE": {
+  "what": "RenderDoc's Vulkan layer enable switch (1 = load the capture layer). steam-launch-wrapper can set it for a game, probably from the per-app environment files under $XDG_RUNTIME_DIR/steam/env/.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:EnableConfiguratorSupport": {
+  "what": "Read by steamclient. The name matches the Steam Input setting that enables controller configuration support for each controller type (a bitmask). Probably an environment override for that setting.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "env:FOSSILIZE_APPLICATION_INFO_FILTER_PATH": {
+  "what": "Path to a Fossilize application-info filter file that the Steam Fossilize Vulkan layer reads to decide which applications/engines to record pipelines for. If the file cannot be parsed, recording goes ahead anyway.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:FOSSILIZE_DISABLE_RATE_LIMITER": {
+  "what": "Read by fossilize_replay. When set, it turns off the replayer's rate limiter, so background shader pre-compilation is not throttled (the same as --disable-rate-limiter).",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:FOSSILIZE_DUMP_SYNC": {
+  "what": "Read by the Steam Fossilize layer. When set, it probably writes recorded pipeline state to disk synchronously instead of from a background thread, which makes captures more reliable when a crash is expected.",
+  "basis": "external-docs",
+  "confidence": "medium"
+ },
+ "env:FOSSILIZE_REPLAY_WRAPPER": {
+  "what": "Read by fossilize_replay. It names a wrapper program (for example a debugger or tracer) that the replayer re-execs itself through when it starts replay processes.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "env:FOSSILIZE_REPLAY_WRAPPER_ORIGINAL_APP": {
+  "what": "Set by fossilize_replay when it re-launches itself through FOSSILIZE_REPLAY_WRAPPER, so the wrapped process knows the path of the original replayer binary. Internal.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:fs_debug": {
+  "what": "Debug switch for filesystem_stdio and the bootstrapper. When set, it probably logs file-system access or writes a batch-style debug script (the nearby strings are '@echo off ... set fs_target'). Mostly a Windows leftover.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "env:GAMESCOPE_DISPLAY_DISABLED": {
+  "what": "Read by streaming_client next to GAMESCOPE_WAYLAND_DISPLAY. When set, the streaming client does not use gamescope's Wayland display for video output and falls back to its normal SDL/X11 window.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:GAMESCOPE_MODE_SAVE_FILE": {
+  "what": "Listed as an environment read, but its strings sit among the gamescope X atoms, so it is probably really the gamescope root-window property of the same name. That property holds the path of the file where gamescope saves the user display-mode choices. Steam reads it in a gamescope session to manage saved resolution and refresh settings.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "env:GAMESCOPE_WAYLAND_DISPLAY": {
+  "what": "Name of gamescope's private Wayland socket (for example gamescope-0), which gamescope exports. Steam uses it to detect a gamescope session, and the overlay and streaming client connect to it for gamescope_xwayland/dmabuf integration. Without it, Wayland init is skipped.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:GDK_SCALE": {
+  "what": "GTK integer UI scale factor. The Steam vgui2 X11 surface reads it, together with the -display-scale= option, to choose the scale for legacy VGUI windows.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:GLIBCXX_TUNABLES": {
+  "what": "libstdc++ tunables string that every binary reads through the statically linked C++ runtime, for example glibcxx.eh_pool.obj_size and obj_count to size the exception emergency pool. It is not a Steam-specific setting.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:GLOVERLAYCOREPROFILE": {
+  "what": "Read by gameoverlayrenderer.so in its OpenGL path. When set, it probably forces the overlay to render with a shader/core-profile path instead of fixed-function. The overlay logs which mode it uses (\"OpenGL version ... overlay will use %s\").",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "env:HOME": {
+  "what": "User home directory. Steam uses it to find ~/.steam, ~/.local/share/applications (for desktop shortcuts) and, when XDG variables are unset, XDG user directories. Steam asserts if it cannot find a home directory.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:HOMETEST_DESKTOP_SESSION": {
+  "what": "Test override for the desktop session name (default plasma) that steamui legacy \"Switch to Desktop\" path selects through steamos-session-select or the display manager D-Bus API, when SteamOS Manager is unavailable.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:HOMETEST_DESKTOP_USER": {
+  "what": "Test override for the user account that steamui legacy \"Switch to Desktop\" path switches the session for (logged as \"Switching to session %s for user %s\"); used with HOMETEST_DESKTOP_SESSION when SteamOS Manager is unavailable.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:HTTP_PROXY": {
+  "what": "Standard HTTP proxy URL (http://host:port). Steam reads it during proxy auto-detection for its downloads and web requests.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:http_proxy": {
+  "what": "Lowercase spelling of HTTP_PROXY. Steam checks it during proxy auto-detection.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:HTTPS_PROXY": {
+  "what": "Standard HTTPS proxy URL. Steam reads it during proxy auto-detection and uses it as the proxy-https setting.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:https_proxy": {
+  "what": "Lowercase spelling of HTTPS_PROXY. Steam checks it during proxy auto-detection.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:IgnoreChildProcesses": {
+  "what": "Read by the game overlay. When set, the overlay probably does not inject into or attach to child processes of the game, and stays attached only to the original game process.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "env:JPEGMEM": {
+  "what": "libjpeg's limit on memory use (for example 50M; the value is parsed as number plus K/M suffix). It is read by the libjpeg linked into Steam binaries; Steam itself does not use it.",
+  "basis": "external-docs",
+  "confidence": "high"
+ },
+ "env:LANG": {
+  "what": "Standard locale variable. Steam reads it for X input-method setup in vgui2 (XOpenIM), as the fallback locale, and in the hardware survey. Steam may also reset it to C/host values for games.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:LC_ALL": {
+  "what": "Standard locale override. steamclient reads it when building a game's environment: the host value is kept as HOST_LC_ALL, and Proton/compat launches may get a Steam-chosen locale unless the app sets DisableLinuxLocaleOverride.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:MANGOHUD_CONFIGFILE": {
+  "what": "MangoHud config file path. On gamescope/Steam Deck, steamclient reads or sets it so that mangoapp (the performance overlay) uses Steam's generated config/mangohud.conf.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:NO_PROXY": {
+  "what": "Comma-separated list of hosts or domains that bypass the proxy. Steam reads it as the \"exclude\" list during proxy auto-detection (each entry is matched as *%s).",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:no_proxy": {
+  "what": "Lowercase spelling of NO_PROXY: the proxy bypass list Steam reads during proxy auto-detection.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:OBJCOPY": {
+  "what": "Path to the objcopy tool (default <prefix>objcopy). steamclient and steamservice use it to add or remove ELF sections in binaries (\"--add-section\", \"--remove-section\"), probably when stamping or stripping signature data. Developer-only.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:OPENSSL_ia32cap": {
+  "what": "OpenSSL's CPU-capability mask override. The OpenSSL statically linked into Steam reads it, so it can disable SIMD/AES-NI code paths when debugging crypto problems.",
+  "basis": "external-docs",
+  "confidence": "high"
+ },
+ "env:PATH": {
+  "what": "Executable search path. steam-launch-wrapper reads it and, when the game-bin option is on, prepends <dir>/game-bin to it before running the game (\"Unable to set new PATH\" on failure).",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:PRESSURE_VESSEL_SYSTEMD_SCOPE": {
+  "what": "steam-launch-wrapper sets it to 0 after it has placed the game in its own transient systemd scope, so pressure-vessel does not try to create another scope.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:RADV_DEBUG": {
+  "what": "Mesa RADV debug flags (comma-separated). steamclient reads it when building the shader-pre-compilation (Fossilize replay) environment and appends ,nomemorycache, so the replay fills the on-disk cache instead of RADV's in-memory cache.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:RADV_FORCE_VRS_CONFIG_FILE": {
+  "what": "Mesa RADV variable that names a file whose contents (1x1 or 2x2) set the forced variable-rate-shading rate. Steam (Deck dynamic VRS, STEAM_USE_DYNAMIC_VRS) writes 1x1 or 2x2 into that file at runtime to change the shading rate of running games.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:SDL_ENABLE_STEAM_CONTROLLER_MOUSE_MODE": {
+  "what": "Read by the SDL HIDAPI Steam Controller driver in streaming_client. When set, it leaves the Steam Controller's built-in mouse and keyboard emulation on instead of clearing the digital mappings.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:SDL_GAMECONTROLLER_IGNORE_DEVICES": {
+  "what": "SDL list of controller VID/PID pairs to ignore (0xVID/0xPID, comma-separated). The overlay renderer reads it, probably so that the virtual Steam Input devices are hidden from the game.",
+  "basis": "external-docs",
+  "confidence": "medium"
+ },
+ "env:SDR_CERT": {
+  "what": "Steam Datagram Relay certificate for a hosted dedicated server. It must be set together with SDR_PRIVATE_KEY; setting only one of them is an error. Used when running a server behind Valve's relay network without Steam login.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:SDR_CLIENT_PORT": {
+  "what": "Read by SteamNetworkingSockets (SDR client). Probably fixes the local UDP port that the client uses for relay traffic.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "env:SDR_DEVTICKET": {
+  "what": "Developer/debug SDR authorization ticket (base64). When set, the client uses it to connect to a gameserver through Steam Datagram Relay instead of getting a real ticket. The ticket must match the remote host and the local identity.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:SDR_IP": {
+  "what": "Public IPv4 address (or enable/auto) that a hosted dedicated server advertises for Steam Datagram Relay.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:SDR_IP6": {
+  "what": "IPv6 counterpart of SDR_IP for hosted dedicated server SDR routing (address, enable or auto).",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:SDR_LISTEN_PORT": {
+  "what": "UDP port on which a hosted dedicated server listens for relayed SDR traffic. Use a number or 'any' (the OS chooses). It is required when SDR_POPID is set; otherwise the POP ID becomes 'err'.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:SDR_NETWORK_CONFIG": {
+  "what": "Path to (or contents of) an SDR network config, the relay/POP list, for hosted dedicated servers. It lets the server start relay routing without downloading the config from Steam.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:SDR_POPID": {
+  "what": "Valve data-center POP code (for example 'iad') where a hosted dedicated server is located. It must exist in the SDR network config, otherwise relayed traffic cannot be received. Requires SDR_LISTEN_PORT.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:SDR_PRIVATE_KEY": {
+  "what": "Private key matching SDR_CERT for a hosted dedicated server on Steam Datagram Relay. Both must be set.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:SDR_PROBE_RELAY_INTERVAL": {
+  "what": "Interval at which a hosted SDR server sends ping probes to relays (parsed as a number; \"Failed to parse %s value\" if invalid). Requires a signed cert.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:SDR_PROBE_RELAY_INTERVAL_BUSY": {
+  "what": "Relay probe interval that a hosted SDR server uses while it is busy (has active traffic); the busy-state version of SDR_PROBE_RELAY_INTERVAL.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:SESSION_MANAGER": {
+  "what": "X Session Management (XSMP) address. vgui2 reads it to connect Steam's legacy UI to the desktop session manager (\"Could not connect to X session manager\").",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:SITE_SERVER_GUI": {
+  "what": "Read by steamclient. When set, it probably enables the built-in SiteServerUI web interface (/siteserver/, /login routes) used for Steam cafe/site-license server administration.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "env:SLEEP_BEFORE_ELEVATED_UPDATE": {
+  "what": "Debug switch for the bootstrapper. Before an elevated (admin) self-update it makes the process sleep (\"pid %u sleeping...\") so a debugger can attach. Mostly relevant on Windows.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:STEAM_ALLOW_DRIVE_ADOPT": {
+  "what": "Read by steamui's UDisks2 storage manager (SteamOS). It enables or disables \"adopting\" external drives as Steam library drives (logged as \"Allow drive adopt: %d\").",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:STEAM_ALLOW_DRIVE_UNMOUNT": {
+  "what": "Read by steamui's UDisks2 storage manager (SteamOS). It enables or disables unmounting drives from the Steam storage UI (logged as \"Allow drive unmount: %d\").",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:STEAM_BOOTSTRAP_LOG_VERBOSE": {
+  "what": "When set, the bootstrapper writes verbose update and unpack logging (each file deleted, folder created and package unzipped) to logs/bootstrap_log.txt.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:STEAM_BROWSER_RESIZE_WORKAROUND": {
+  "what": "Read by steamwebhelper. It probably turns on a workaround for window-resize rendering glitches in the CEF browser windows.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "env:STEAM_CEF_GPU_CMD_PREFIX": {
+  "what": "Developer switch. Its value is passed to steamwebhelper as --gpu-launcher='<value>', so the CEF GPU process starts under a wrapper or debugger (similar to the renderer gdb prefix used with STEAM_DEBUGCEF).",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:STEAM_CLIENT_CONFIG_FILE": {
+  "what": "Path to steam.cfg (bootstrapper inhibit settings, CMForce, ...). The bootstrapper and client read it to override the location, and Steam exports it to games as <steamroot>/steam.cfg.",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "env:STEAM_CLIENT_LOG_FOLDER": {
+  "what": "Name of the log directory under the Steam data dir (default logs). Client components, the webhelper and steamsysinfo write their log files there.",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "env:STEAM_CLOUD_GAMING_PLATFORM": {
+  "what": "Identifies the cloud-gaming host Steam is running on. Recognised values are Valve and NVIDIA (GeForce NOW); anything else logs \"Unknown cloud gaming platform\".",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:STEAM_COMPAT_LAUNCHER_SERVICE": {
+  "what": "Names a compat tool (for example proton or container-runtime) in which Steam starts steam-runtime-launcher-service, so developers can run commands inside the game's container or Proton environment. steamclient reads it and passes it on to the tool environment.",
+  "basis": "external-docs",
+  "confidence": "medium"
+ },
+ "env:STEAM_COMPAT_MOUNTS": {
+  "what": "Colon-separated extra host paths that the pressure-vessel container should share with the game. Steam reads any user value and appends its own (for example library and tool paths) when it builds the compat environment.",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "env:STEAM_COMPAT_PROTON": {
+  "what": "Set to 1 by Steam when the selected compat tool is Proton. steamclient also reads it, together with STEAM_COMPAT_PROTON_SUPPRESS, to decide Proton-specific behaviour.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:STEAM_COMPAT_PROTON_SUPPRESS": {
+  "what": "Read next to STEAM_COMPAT_PROTON. When set, it probably stops Steam from marking or treating the launch as Proton.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "env:STEAM_COMPAT_TOOL_MAPPINGS": {
+  "what": "Read by steamclient while it loads local compatibility tools (compatibilitytools.d). It probably lets developers override the app-to-compat-tool mapping (normally stored in the CompatToolMapping config) from the environment.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "env:STEAM_DEBUGCEF": {
+  "what": "Developer switch for the Steam web UI. It adds --remote-debugging-port, disables the hang monitor and seccomp sandbox, and can run the CEF renderer under gdb, making steamwebhelper debuggable.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:STEAM_DESKTOP_APP_AFFINITY_LIST": {
+  "what": "CPU-affinity list that tier0 and its helpers read for desktop (non-game) processes. Probably used on Steam Deck to keep Steam's own processes off the cores reserved for games.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "env:STEAM_DISABLE_BROWSER_SHUTDOWN_WORKAROUND": {
+  "what": "When set, steamwebhelper skips its \"safe browser shutdown workaround\" (the same as -disable_safe_shutdown_workaround).",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:STEAM_DISABLE_LIBNM_IPV6_WORKAROUND": {
+  "what": "SteamOS network manager switch. When set, steamclient does not apply its libnm IPv6 workaround, which sets the IPv6 addr-gen-mode when configuring connections through NetworkManager (logged as \"SetIPv6Config: IPv6 libnm workaround: %d\").",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:STEAM_DISABLE_MANGOAPP_ATOM_WORKAROUND": {
+  "what": "gamescope/Steam Deck switch. When set, Steam stops using an X atom workaround to control the mangoapp performance overlay (logged as \"Using mangoapp atom workaround: %d\"). gamescope-session sets it on newer gamescope versions.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:STEAM_DISPLAY_REFRESH_LIMITS": {
+  "what": "Minimum and maximum refresh rate as '<min>,<max>' in Hz (for example 40,60). gamescope-session sets it to tell Steam the range its refresh-rate slider and FPS limiter may use. Invalid values or min greater than max are rejected.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:STEAM_ENABLE_AMD_LAYER": {
+  "what": "Read by steamclient while it builds the game launch environment, next to the overlay and Vulkan-layer variables. Probably enables an AMD Vulkan layer for the launched game.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "env:STEAM_ENABLE_DYNAMIC_BACKLIGHT": {
+  "what": "Steam Deck/gamescope session switch that turns on dynamic backlight control in the client. gamescope-session sets it on supported hardware.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "env:STEAM_ENABLE_FAN_CONTROL": {
+  "what": "SteamOS switch that turns on Steam's fan-control feature: the System\\FanMode setting and the fan-mode selector. gamescope-session sets it on supported handhelds.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:STEAM_ENABLE_SHADER_CACHE_MANAGEMENT": {
+  "what": "Controls the shader cache manager (pre-caching, Fossilize background processing). steamclient checks it with the convar, command-line and registry switches; a disabling value logs \"Shader manager disabled by environment\".",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:STEAM_ENABLE_VOLUME_HANDLER": {
+  "what": "SteamOS session switch. When set, steamui's CSystemAudioController handles the hardware volume keys and system volume itself (logged as \"handle volume keys: %d\").",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:STEAM_ENABLE_XCOMPOSITE_WORKAROUND": {
+  "what": "steamwebhelper switch (0/1, logged as \"Setting xcomposite workaround enabled via env var\"). It makes the webhelper capture window textures through an XComposite workaround, like -use_xcomposite_workaround.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:STEAM_EXTRA_COMPAT_TOOLS_PATHS": {
+  "what": "Colon-separated list of extra directories that Steam scans for custom compatibility tools (Proton builds and so on), in addition to /usr/share/steam/compatibilitytools.d, /usr/local/share/steam/compatibilitytools.d and <steamroot>/compatibilitytools.d.",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "env:STEAM_FOSSILIZE_DUMP_PATH": {
+  "what": "Path prefix where the Steam Fossilize layer writes recorded Vulkan pipeline state (.foz) for the game. Steam sets it per app inside the shader cache, and the layer logs \"Overriding serialization path\".",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:STEAM_FOSSILIZE_DUMP_PATH_READ_ONLY": {
+  "what": "Path to an existing, read-only Fossilize database (for example Steam's downloaded pipeline cache). The layer reads it so pipelines that are already known are not recorded again.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:STEAM_FOSSILIZE_IDENTIFIER_DUMP_PATH": {
+  "what": "Path where the Steam Fossilize layer writes only pipeline identifiers/hashes, not full state, so Steam can track which pipelines a game uses.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:STEAM_FOSSILIZE_LAST_USE_TAG": {
+  "what": "Tag (a hex value) that the Steam Fossilize layer attaches to recorded pipeline usage so Steam can tell which pipelines were used most recently, probably for cache pruning.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "env:STEAM_FOSSILIZE_PIPELINE_USE_DUMP_PATH": {
+  "what": "Path where the Steam Fossilize layer writes pipeline-usage records, meaning which pipelines were actually bound at runtime, as opposed to full pipeline state.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:STEAM_FOSSILIZE_PRECOMPILE_QA": {
+  "what": "QA switch for the Steam Fossilize layer, read next to FOSSILIZE_DUMP_SYNC. Probably used to check that a game's pipelines were already pre-compiled by Steam's shader pre-caching.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "env:STEAM_FOSSILIZE_REPLAY_WRAP": {
+  "what": "Developer override read by steamclient's shader-compile job. Its value probably prefixes or wraps the fossilize_replay command line, for example with a debugger or profiler, when Steam pre-compiles pipelines in the background.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "env:STEAM_GAME_LAUNCH_SHELL": {
+  "what": "Shell that runs game launch command lines, including user launch options with %command% (default /bin/sh).",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "env:STEAM_GAMESCOPE_DYNAMIC_FPSLIMITER": {
+  "what": "gamescope-session switch that tells Steam gamescope supports the dynamic FPS limiter, so Steam uses it for the frame-limit slider (logged as \"Dynamic FPS limiter: %d\").",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:STEAM_GAMESCOPE_DYNAMIC_REFRESH_IN_STEAM_SUPPORTED": {
+  "what": "gamescope-session capability flag. It tells Steam that gamescope supports changing the display refresh rate dynamically while the Steam UI is focused (see the GAMESCOPE_DYNAMIC_REFRESH_IN_STEAM atom).",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "env:STEAM_GAMESCOPE_NIS_SUPPORTED": {
+  "what": "gamescope-session capability flag. It tells Steam that gamescope supports NVIDIA Image Scaling, so the NIS scaling filter appears in the Quick Access scaling options.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:STEAM_GAMESCOPE_VRR_SUPPORTED": {
+  "what": "gamescope-session capability flag. It tells Steam that gamescope supports variable refresh rate (adaptive sync), so the VRR toggle can be shown.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "env:STEAM_GAMESERVER_A2S_INFO_STRICT_LEGACY_PROTOCOL": {
+  "what": "Game-server switch. When set, steamclient's master-server updater answers A2S_INFO (\"Source Engine Query\") with the strict legacy protocol, probably without the newer challenge or extended fields.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:STEAM_GAMESERVER_ADVERTISE_SDR_LOCATION": {
+  "what": "Game-server switch. When set, the server's heartbeat to the Steam master server also reports its SDR ping location, so matchmaking can estimate ping.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:STEAM_GAMESERVER_PACKET_HANDLER_NO_IPC": {
+  "what": "Game-server switch. When set, the client game-server packet handler is probably used in-process instead of through the steamclient IPC pipe.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "env:STEAM_GAMESERVER_RATE_LIMIT_200MS": {
+  "what": "Game-server switch. When set, it probably applies a rate limit of one reply per 200 ms per source to game-server query replies, to protect against floods.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "env:STEAM_GLCOMPOSER_USE_MAKECURRENT_LEGACY": {
+  "what": "steamwebhelper GL composer switch (0/1, default false, logged as \"GLComposer: makecurrent legacy mode: env: %d\"). It makes the composer use the older glXMakeCurrent behaviour, to work around driver issues.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:STEAM_IGNORE_INDIRECT_RENDERING": {
+  "what": "When set, Steam's legacy VGUI surface no longer shows the warning \"OpenGL GLX context is not using direct rendering\" (useful with remote X or software GL).",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:STEAM_LAUNCH_WRAPPER_DEBUG": {
+  "what": "Boolean (default 0). It turns on steam-launch-wrapper debug output, like --debug.",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "env:STEAM_LAUNCH_WRAPPER_GAME_BIN": {
+  "what": "Boolean (default 1). When true, steam-launch-wrapper prepends <dir>/game-bin to PATH for the game; --no-game-bin turns this off.",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "env:STEAM_LAUNCH_WRAPPER_JOURNAL": {
+  "what": "Boolean (default 0). When true, steam-launch-wrapper sends the game's stdout and stderr to the systemd Journal under the identifier steam-app<ID>, like --journal.",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "env:STEAM_LAUNCH_WRAPPER_SCOPE": {
+  "what": "Boolean (default 0). When true, steam-launch-wrapper puts the game in a transient systemd user scope app-steam-app<ID>-<pid>.scope, like --scope. Steam's launch environment may set it.",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "env:STEAM_MANGOAPP_HORIZONTAL_SUPPORTED": {
+  "what": "gamescope-session capability flag. It tells Steam that mangoapp supports the horizontal (single-line) performance overlay layout (logged as \"Using mangoapp horizontal: %d\").",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:STEAM_MANGOAPP_PRESETS_SUPPORTED": {
+  "what": "gamescope-session capability flag. It tells Steam that mangoapp supports preset-based performance overlay levels (logged as \"Using mangoapp presets: %d\").",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:steam_master_ipc_name_override": {
+  "what": "Overrides the name of the Steam master IPC pipe (default Steam3Master) that steamui and steamclient use to connect to the running Steam instance. It is read and set internally, so a second client or test harness can use a separate IPC namespace.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:STEAM_MULTIPLE_XWAYLANDS": {
+  "what": "Set by gamescope-session when gamescope runs more than one Xwayland server. Steam then connects to the extra X displays (:N) as well as $DISPLAY, so it can manage games on other Xwaylands.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:STEAM_NO_FAST_PPT": {
+  "what": "Steam Deck/amdgpu power switch read in the TDP-limit code. When set, Steam probably sets only the sustained power cap (power1_cap) and not the fast/boost PPT limit (power2_cap).",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:STEAM_OPENAL_SKIP_CAPTURE": {
+  "what": "When set, steamclient probably skips opening OpenAL capture (microphone) devices, which avoids audio-device probing problems.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "env:STEAM_OVERLAY_DISABLE_WAIT_FOR_CEF_FRAME": {
+  "what": "Read by gameoverlayrenderer.so. When set, the game overlay probably stops waiting for a new frame from the CEF overlay UI before presenting, which cuts latency but may show stale overlay frames.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "env:STEAM_OVERLAY_FRAME_TIME_LOGGING": {
+  "what": "When set, the game overlay renderer writes per-frame timing to its log, /tmp/gameoverlayrenderer.<pid>.log.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:STEAM_OVERLAY_LOGGING": {
+  "what": "When set, the game overlay renderer, injected into games, writes a debug log to /tmp/gameoverlayrenderer.<pid>.log.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:STEAM_OVERLAY_LOGGING_FLUSH": {
+  "what": "When set, the overlay renderer flushes /tmp/gameoverlayrenderer.<pid>.log after every write, so no lines are lost if the game crashes.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:STEAM_OVERLAY_VULKAN_LAYER_FORCE_COMPUTE": {
+  "what": "Read by the Steam overlay Vulkan layer around swapchain creation and present. When set, the layer probably draws the overlay with its compute-shader path instead of the graphics path.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "env:STEAM_OVERLAY_WINDOW_BLACKLIST": {
+  "what": "Read by gameoverlayrenderer.so at startup with the game IDs. It probably lists executables or windows the overlay must not attach to, similar to the built-in vrmonitor exclusion.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "env:STEAM_RUNTIME": {
+  "what": "Path of the Steam Runtime in use, or empty/0. The bootstrapper uses it when re-executing between scout and steamrt3, the hardware survey reports \"<Runtime disabled>\" when it is off, and steam-launch-wrapper logs \"STEAM_RUNTIME not in use\". steam.sh unsets it on the steamrt3 path.",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "env:STEAM_RUNTIME_LIBRARY_PATH": {
+  "what": "The Steam Runtime's library search path. steamclient reads it to build the game's LD_LIBRARY_PATH and LD_PRELOAD (adding gameoverlayrenderer.so) unless the overlay is suppressed.",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "env:STEAM_RUNTIME_LOGGER": {
+  "what": "Controls srt-logger capture of the client's output into logs/console-linux.txt. 0 disables it, which helps when attaching debuggers; the bootstrapper logs \"enable configured via STEAM_RUNTIME_LOGGER\".",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "env:STEAM_RUNTIME_STEAMRT": {
+  "what": "Developer override for the steamrt3c (sniper-based) runtime directory, default <steamroot>/steamrt64/pv-runtime/steam-runtime-steamrt. The client, webhelper and helpers read it to locate the runtime.",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "env:STEAM_SPEW_LEVELS": {
+  "what": "Debug switch for per-group log verbosity. Comma-separated 'group=consolelevel,loglevel' pairs (parsed as %[^=]=%d,%d); invalid specs and unknown groups are ignored with a warning.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:STEAM_UPDATEUI_PNG_BACKGROUND": {
+  "what": "Path to a custom image for the bootstrapper's update/progress window, replacing the default tenfoot/resource/images/bootstrapper.jpg.",
+  "basis": "script",
+  "confidence": "medium"
+ },
+ "env:STEAM_USE_DYNAMIC_VRS": {
+  "what": "Steam Deck/gamescope session switch that enables dynamic variable-rate shading. Steam writes 1x1 or 2x2 into the file named by RADV_FORCE_VRS_CONFIG_FILE to change the shading rate of running games.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:STEAM_USE_MANGOAPP": {
+  "what": "gamescope-session switch. It tells Steam to use mangoapp (MangoHud running as a gamescope overlay app) for the Quick Access performance overlay, driven by config/mangohud.conf (logged as \"Using mangoapp: %d\").",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:STEAM_USE_WPASUPPLICANT": {
+  "what": "SteamOS session switch read by steamui. It probably makes Steam's Wi-Fi management talk to wpa_supplicant directly instead of going through NetworkManager.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "env:STEAM_VKOVERLAY_FORCE_YCBCR_SUPPORT": {
+  "what": "Read by the Steam overlay Vulkan layer. It forces the layer to treat VK_KHR_sampler_ycbcr_conversion as supported (and enables its dependencies), probably so overlay video and streaming frames in YCbCr formats can be sampled.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:SteamAppId": {
+  "what": "AppID of the game Steam is running. steamclient reads it (for example when writing steam_appid.txt for Steamworks), and steam-launch-wrapper uses it to name the systemd scope and journal identifier steam-app<ID>.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:SteamDeck": {
+  "what": "Set to 1 when running on a Steam Deck/SteamOS session. Games can check it, and the overlay and steamclient read it to change behaviour on the Deck.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:SteamDisableOverlayDPIScaling": {
+  "what": "When set, the in-game overlay does not scale its UI by display DPI (SetScaleFactors).",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:SteamEnv": {
+  "what": "Set to 1 in processes started by Steam. steamclient reads it when connecting to the global user, to know the process was launched from inside a Steam environment.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:SteamGameId": {
+  "what": "Game ID (64-bit; for plain Steam apps it equals the AppID, and non-Steam shortcuts have larger IDs) of the running game. Steam sets it, and the overlay reads it to identify which game it is attached to. gamescope also uses it to map windows to apps.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:SteamGamepadUI": {
+  "what": "Set to 1 when the game was launched from the Big Picture/Gamepad UI. The overlay renderer reads it to use the gamepad-UI overlay behaviour.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:STEAMNETWORKINGSOCKETS_LOG_FILE": {
+  "what": "Path of a debug log for SteamNetworkingSockets in steamclient and streaming_client (default name steamnetworkingsockets.log). Use with STEAMNETWORKINGSOCKETS_LOG_LEVEL.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:STEAMNETWORKINGSOCKETS_LOG_LEVEL": {
+  "what": "Numeric verbosity of the SteamNetworkingSockets debug log written to STEAMNETWORKINGSOCKETS_LOG_FILE.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:SteamNoOverlayUIDrawing": {
+  "what": "When set, the overlay renderer stays loaded but does not draw the overlay UI (logged as \"SteamNoOverlayUIDrawing was set\"), so hooks such as screenshots and FPS keep working without overlay rendering.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:SteamOS": {
+  "what": "Set to 1 on SteamOS. steamclient reads it around the overlay-enabled checks to adjust overlay and platform behaviour.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:STEAMOS_STEAM_REBOOT_SENTINEL": {
+  "what": "Path of a sentinel file set by the SteamOS session. When Steam is asked to reboot, it writes this file and exits so the session wrapper performs the reboot (\"Enabling SteamOS reboot workaround\").",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:STEAMOS_STEAM_SHUTDOWN_SENTINEL": {
+  "what": "Path of a sentinel file set by the SteamOS session. On shutdown, Steam writes it and exits so the session wrapper powers off the machine (\"Enabling SteamOS shutdown workaround\").",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:SteamOverlayGameId": {
+  "what": "The game ID the overlay should present as. It is usually the same as SteamGameId, but differs for things like non-Steam shortcuts or tools. Steam sets it, and the overlay renderer reads it.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:SteamOverlayUseXFilterEvent": {
+  "what": "When set, the overlay passes X key events through XFilterEvent (input-method filtering) before translating them to characters, which helps IME/compose-key input in the overlay.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:SteamRealm": {
+  "what": "Steam realm, either the global Steam or Steam China. Steam sets it for child processes, and the overlay UI and launcher read it to choose realm-specific config file names and paths (for example local_<realm>.vdf).",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:SteamStreamingAllowGameVsync": {
+  "what": "Read by the overlay renderer while the game is being streamed (Remote Play). When set, the game's vsync is left on instead of being disabled for streaming.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:SteamStreamingVideo": {
+  "what": "Set by Steam for games launched during a Remote Play/streaming session. The overlay renderer reads it to turn on frame capture for video streaming.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:SteamStreamingVideoDisableVSync": {
+  "what": "Set during Remote Play streaming. The overlay renderer reads it to force the game's vsync off so captured frames are not limited by the host display.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:SteamTenfoot": {
+  "what": "Set to 1 when the game was launched from Big Picture (\"tenfoot\") mode. steamclient reads it, probably so that nested launches inherit Big Picture behaviour.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "env:SteamUniverse": {
+  "what": "Steam universe of the running client (Public, Beta, ...). Steam sets it for child processes, and the bootstrapper, overlay UI and client read it to choose universe-specific paths (for example ~/.steam/steambeta, local_<x>.vdf).",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:STEAMVIDEOTOKEN": {
+  "what": "Token that steamwebhelper sets (through the process environment manager) to unlock licensed H.264/HEVC video decoding in CEF (\"h264_unlock\", steam_video_token). Internal; users should not set it.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:STEAMVIDEOTOKEN2": {
+  "what": "Second video-unlock token that steamwebhelper sets to a fixed constant (7b7fe2a66d548a0daf01c44056f5) alongside STEAMVIDEOTOKEN, so the bundled CEF/ffmpeg allows proprietary codecs. Internal.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:StreamForOpenVR": {
+  "what": "Read by the overlay renderer with the SteamStreaming* variables. When set, the game's frames are streamed for OpenVR/SteamVR (for example to a VR headset streaming session) and not for normal Remote Play.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "env:SUPPRESS_STEAM_OVERLAY": {
+  "what": "If it is set in the environment when Steam builds a launch, steamclient leaves gameoverlayrenderer.so out of LD_PRELOAD, which disables the in-game overlay for that launch.",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "env:SYSTEM_LD_LIBRARY_PATH": {
+  "what": "The host LD_LIBRARY_PATH that steam.sh saved before adding the runtime. steamclient reads it to restore the host library path for processes that must run outside the Steam Runtime.",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "env:SYSTEM_PATH": {
+  "what": "The host PATH that steam.sh saved before adding the runtime. steamclient reads it to build the PATH for launched games and shell commands.",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "env:TMPDIR": {
+  "what": "Standard temporary directory (default /tmp). Steam uses it for steamXXXXXX temp files, the webhelper's scoped_dir_steam* directories and GL composer debug frame dumps.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:TZDIR": {
+  "what": "Standard timezone database directory. steamui reads it with /etc/localtime and /etc/timezone to work out the system timezone, probably for the SteamOS time zone settings.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:USER": {
+  "what": "Current user name. tier0 and others read it, for example for per-user names of temp files, IPC objects or locks.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "env:VR_CONFIG_PATH": {
+  "what": "OpenVR override for the directory that holds SteamVR config (instead of ~/.config/openvr). Steam reads it with VR_OVERRIDE and VR_LOG_PATH to find the active VR runtime.",
+  "basis": "external-docs",
+  "confidence": "medium"
+ },
+ "env:VR_LOG_PATH": {
+  "what": "OpenVR override for the SteamVR log directory. Steam reads it with VR_OVERRIDE and VR_CONFIG_PATH.",
+  "basis": "external-docs",
+  "confidence": "medium"
+ },
+ "env:VR_OVERRIDE": {
+  "what": "OpenVR override that names the VR runtime directory to use instead of the one registered in openvrpaths.vrpath. Steam reads it when it locates SteamVR.",
+  "basis": "external-docs",
+  "confidence": "medium"
+ },
+ "env:WAYLAND_DISPLAY": {
+  "what": "Standard Wayland socket name. steamui and streaming_client check it, together with XDG_SESSION_TYPE=wayland, to detect a Wayland session; this affects things such as using DRM directly versus going through the compositor for game streaming and recording.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:WSL_DISTRO_NAME": {
+  "what": "Set by Windows Subsystem for Linux. tier0 and others read it to detect that Steam is running under WSL.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "env:XDG_CONFIG_HOME": {
+  "what": "XDG config directory (default ~/.config). Steam reads it to resolve XDG user directories (user-dirs.dirs) and other per-user config paths.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:XDG_DATA_HOME": {
+  "what": "XDG data directory (default ~/.local/share). Steam writes game .desktop shortcuts and steam_icon_<appid> icons under it, in icons/hicolor/<size>/apps.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "env:XDG_RUNTIME_DIR": {
+  "what": "Per-user runtime directory (/run/user/<uid>). steam-launch-wrapper uses it to reach the systemd user manager's private socket for scopes, and to read per-app environment files under steam/env/.",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "env:XDG_SESSION_TYPE": {
+  "what": "Session type (x11 or wayland). steamui and the overlay renderer check for 'wayland' to adjust behaviour in Wayland sessions.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:__GL_SHADER_DISK_CACHE_APP_NAME": {
+  "what": "NVIDIA driver setting for the name of the writable shader cache. Steam sets it to steamapp_shader_cache so the game's compiled shaders go into Steam's per-app shader cache.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:__GL_SHADER_DISK_CACHE_PATH": {
+  "what": "NVIDIA driver setting for the shader cache directory. Steam points it at the game's folder in the Steam shader cache (shadercache/<appid>) so the cache can be managed and shared.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:__GL_SHADER_DISK_CACHE_READ_ONLY_APP_NAME": {
+  "what": "NVIDIA driver setting for extra read-only shader caches. Steam sets it to 'steam_shader_cache;steamapp_merged_shader_cache' so the driver also loads shaders that Steam downloaded or merged.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:__GL_SHADER_DISK_CACHE_SKIP_CLEANUP": {
+  "what": "Steam sets it to 1 so the NVIDIA driver does not clean up or size-limit the shader cache; Steam manages the cache itself.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:AMD_VK_PIPELINE_CACHE_FILENAME": {
+  "what": "AMD proprietary/AMDVLK Vulkan driver setting for the pipeline cache file name. Steam sets it to steamapp_shader_cache.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:AMD_VK_PIPELINE_CACHE_PATH": {
+  "what": "AMD Vulkan driver setting for the pipeline cache directory. Steam points it at the game's Steam shader-cache folder.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:AMD_VK_USE_PIPELINE_CACHE": {
+  "what": "Steam sets it to 1 to turn on the AMD Vulkan driver's on-disk pipeline cache (stored in Steam's shader cache).",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:BREAKPAD_DUMP_LOCATION": {
+  "what": "Minidump directory that Steam puts in the environment of processes it launches (including steamwebhelper), so Breakpad-enabled children write crash dumps where Steam collects them.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "game-env:CEF_CRASH_REPORTER_PRODUCT_VERSION": {
+  "what": "Set in the environment of the steamwebhelper (CEF) process that Steam starts, so its crash reports carry the Steam client version.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "game-env:CEF_CRASH_REPORTER_SERVER_URL": {
+  "what": "Set to https://crash.steampowered.com/submit in the environment of the steamwebhelper process, so CEF crash reports go to Valve's crash server.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:DISABLE_LAYER_AMD_SWITCHABLE_GRAPHICS_1": {
+  "what": "Steam sets it to 1 to disable AMD's VK_LAYER_AMD_switchable_graphics implicit Vulkan layer in games. That layer can hide GPUs or break device selection, and the overlay layer conflicts with it.",
+  "basis": "external-docs",
+  "confidence": "high"
+ },
+ "game-env:DISPLAY": {
+  "what": "X display that Steam sets for launched games and install scripts. On gamescope or with multiple Xwaylands, Steam chooses which Xwayland display the game uses.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "game-env:ENABLE_VK_LAYER_VALVE_steam_fossilize_1": {
+  "what": "Steam sets it to 1 to turn on its implicit Fossilize Vulkan layer in the game. The layer records pipeline state into STEAM_FOSSILIZE_DUMP_PATH for shader pre-caching.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:ENABLE_VK_LAYER_VALVE_steam_overlay_1": {
+  "what": "Steam sets it to 1 to turn on the implicit Steam overlay Vulkan layer (steamoverlayvulkanlayer.so) for Vulkan games, including those running under Proton.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:EnableConfiguratorSupport": {
+  "what": "Steam Input setting passed to the game, probably the bitmask of controller types for which Steam Input configuration is enabled. The game's SDL and Steam Input integration use it to decide which controllers Steam remaps.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "game-env:FOSSILIZE_APPLICATION_INFO_FILTER_PATH": {
+  "what": "Steam sets it to the path of the Fossilize application-info filter file. The Fossilize layer uses the file to decide whether to record pipelines for this game or engine.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:GameOverlay_BlockOculusSDK": {
+  "what": "Per-app setting passed to the overlay. It probably tells the overlay to block or ignore the Oculus SDK in the game, to avoid conflicts with OpenVR/SteamVR.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "game-env:GameOverlay_CompatMode": {
+  "what": "Per-app overlay compatibility mode, taken from the app's config (config/GameOverlay_CompatMode) or registry key. The overlay renderer uses it to change its hooking for games that need special handling.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "game-env:GameOverlay_TestMode": {
+  "what": "Set to 1 when the app config enables overlay test mode (config/GameOverlay_TestMode). It puts the overlay renderer into a testing/debug mode.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "game-env:HOST_LC_ALL": {
+  "what": "Holds the user's original LC_ALL when Steam overrides LC_ALL for a game (for example a Proton launch), so the game or Proton can restore the host locale.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:http_proxy": {
+  "what": "When a proxy is set in Steam's settings, Steam exports it to launched games as http_proxy (URL form).",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:https_proxy": {
+  "what": "Steam exports its configured HTTPS proxy to launched games as https_proxy.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:IgnoreChildProcesses": {
+  "what": "Steam sets it to 1 for some launches so the overlay renderer injected through LD_PRELOAD does not hook child processes started by the game. Only the main game gets the overlay.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "game-env:LC_ALL": {
+  "what": "Steam sets it to C for Proton/compat launches, after saving the user's value in HOST_LC_ALL, unless the app has DisableLinuxLocaleOverride. This avoids locale-dependent parsing bugs, such as decimal commas, in Windows games.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:MESA_DISK_CACHE_READ_ONLY_FOZ_DBS": {
+  "what": "Mesa setting for read-only Fossilize databases. Steam sets it to the steam_precompiled[_<x>] databases so Mesa drivers use shaders Steam pre-compiled (logged as \"Setting MESA_GLSL_CACHE_DIR=... MESA_DISK_CACHE_READ_ONLY_FOZ_DBS=...\").",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:MESA_DISK_CACHE_SINGLE_FILE": {
+  "what": "Steam sets it to 1 so Mesa uses a single-file disk cache instead of many small files in the per-app shader cache directory.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:MESA_GLSL_CACHE_DIR": {
+  "what": "Older Mesa name for the shader cache directory. Steam sets it to the game's Steam shader-cache folder, together with MESA_SHADER_CACHE_DIR.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:MESA_GLSL_CACHE_MAX_SIZE": {
+  "what": "Older Mesa name for the shader cache size limit. Steam sets it to 5G.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:MESA_SHADER_CACHE_DIR": {
+  "what": "Mesa shader cache directory. Steam points it at the game's folder in the Steam shader cache (steamapps/shadercache/<appid>).",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:MESA_SHADER_CACHE_MAX_SIZE": {
+  "what": "Mesa shader cache size limit. Steam sets it to 5G for games.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:MESA_VK_TRACE": {
+  "what": "Mesa Vulkan tracing mode. Steam sets it to rgp (Radeon GPU Profiler captures) when SteamOS system tracing is enabled (SteamOS/SystemTracingEnabled).",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:MESA_VK_TRACE_TRIGGER": {
+  "what": "Mesa trigger file for tracing. Steam sets it to /tmp/rgp.trigger with MESA_VK_TRACE=rgp; touching that file makes RADV capture an RGP trace.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:no_proxy": {
+  "what": "When Steam exports its proxy to games, it also sets no_proxy=localhost,127.0.0.0/8 so local connections bypass the proxy.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:PATH": {
+  "what": "PATH for launched games, built from SYSTEM_PATH (the host PATH) plus Steam/runtime entries, so games and launch options find host tools.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:PRESSURE_VESSEL_BATCH": {
+  "what": "Steam sets it to 1 when it runs pressure-vessel helper commands, for example gathering container runtime info into logs/container-runtime-info.txt. It turns off interactive pressure-vessel features.",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "game-env:PROTON_CRASH_REPORT_DIR": {
+  "what": "Steam sets it to /tmp/proton_crashreports so Proton/Wine write crash reports there, where Steam can collect them.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:PROTON_HIDE_PROCESS_WINDOW": {
+  "what": "Steam sets it to 1 for helper processes it runs through Proton (for example the DRM-download job), so Proton hides their console or process window.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "game-env:PROTON_REMOTE_DEBUG_CMD": {
+  "what": "Set when the app's steam_play_debug setting is enabled. It holds a command (msvsmon.exe from Visual Studio <version>, run with /noauth /anyuser /silent ...) that Proton starts next to the game so a Windows developer can attach the Visual Studio remote debugger.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:PROTON_WAIT_ATTACH": {
+  "what": "Set from a per-app setting (registry key Software\\Valve\\Steam\\Apps\\<appid>). It tells Proton to pause the game at startup until a debugger attaches, and is used together with steam_play_debug and PROTON_REMOTE_DEBUG_CMD.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "game-env:RADV_DEBUG": {
+  "what": "Steam sets RADV_DEBUG for its background fossilize_replay shader pre-compilation, adding ',nomemorycache' to any existing value, so RADV writes compiled pipelines to the disk cache instead of keeping them in memory.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:SDL_ENABLE_STEAM_SCREEN_KEYBOARD": {
+  "what": "Set to 1, in Big Picture or Gamepad UI launches, so SDL games show the Steam on-screen keyboard when they start text input.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:SDL_GAMECONTROLLER_ALLOW_STEAM_VIRTUAL_GAMEPAD": {
+  "what": "Set to 1 so that SDL in the game uses the Steam Input virtual gamepads. SDL normally ignores them, but here Steam Input is remapping the physical controllers.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:SDL_GAMECONTROLLER_IGNORE_DEVICES": {
+  "what": "Steam fills it with a comma-separated list of 0xVID/0xPID entries for the physical controllers that Steam Input has taken over. The game's SDL then ignores those devices and sees only the Steam virtual gamepad, which avoids double input.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:SDL_GAMECONTROLLER_USE_BUTTON_LABELS": {
+  "what": "Steam sets it (0 or 1, depending on the user's Steam Input button-layout setting) to tell SDL whether to map face buttons by printed label or by position, for example Nintendo-style controllers.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "game-env:SDL_JOYSTICK_HIDAPI_STEAMXBOX": {
+  "what": "Steam sets it to 0 so the game's SDL does not use its HIDAPI driver for Steam's virtual Xbox-style controllers, which avoids conflicts with Steam Input.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "game-env:STEAM_CLIENT_CONFIG_FILE": {
+  "what": "Steam sets it to <steamroot>/steam.cfg for launched processes, so tools and runtimes can find the client's steam.cfg overrides.",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "game-env:STEAM_COMPAT_APP_ID": {
+  "what": "AppID of the game that a compatibility tool such as Proton or the Steam Linux Runtime is running (0 when not applicable). Proton uses it, for example, to apply per-game fixes.",
+  "basis": "external-docs",
+  "confidence": "high"
+ },
+ "game-env:STEAM_COMPAT_CLIENT_INSTALL_PATH": {
+  "what": "Steam's install directory (for example ~/.steam/steam). Steam passes it to compat tools so Proton can find Steam's files, such as steamclient.so and the lsteamclient bridge.",
+  "basis": "external-docs",
+  "confidence": "high"
+ },
+ "game-env:STEAM_COMPAT_CONFIG": {
+  "what": "Comma-separated per-app compatibility config options from the app's Steam Play settings (for example 'gamedrive' or 'noesync'). Proton reads them as option flags, similar to PROTON_* variables.",
+  "basis": "external-docs",
+  "confidence": "high"
+ },
+ "game-env:STEAM_COMPAT_DATA_PATH": {
+  "what": "Per-game compatibility data directory, steamapps/compatdata/<appid>. Proton keeps the Wine prefix in it (the pfx/ subdirectory).",
+  "basis": "external-docs",
+  "confidence": "high"
+ },
+ "game-env:STEAM_COMPAT_FLAGS": {
+  "what": "Comma-separated flags for the Steam Runtime/compat layer. Steam sets search-cwd so the game's working directory is added to the library search path, a behaviour that LD_LIBRARY_PATH-based runtimes need.",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "game-env:STEAM_COMPAT_INSTALL_PATH": {
+  "what": "The game's install directory, for example steamapps/common/<game>. Steam passes it to compat tools, and pressure-vessel shares it into the container.",
+  "basis": "external-docs",
+  "confidence": "high"
+ },
+ "game-env:STEAM_COMPAT_LAUNCHER_SERVICE": {
+  "what": "Name of the compat tool layer (for example proton or container-runtime) in which Steam asks steam-runtime-launcher-service to run. Developers can then run commands inside the game's environment; this follows the CompatTool_LauncherService setting.",
+  "basis": "external-docs",
+  "confidence": "medium"
+ },
+ "game-env:STEAM_COMPAT_LIBRARY_PATHS": {
+  "what": "Colon-separated list of Steam library folders that the game and tools may need. pressure-vessel shares them into the container.",
+  "basis": "external-docs",
+  "confidence": "high"
+ },
+ "game-env:STEAM_COMPAT_MEDIA_PATH": {
+  "what": "Directory for Proton's media converter (fozmediav<N> databases of pre-transcoded audio and video). Proton's media foundation and gstreamer path uses it to find converted video and audio.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "game-env:STEAM_COMPAT_MOUNTS": {
+  "what": "Colon-separated extra paths that pressure-vessel should share into the game's container. Steam passes on any user value and adds its own paths.",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "game-env:STEAM_COMPAT_PROTON": {
+  "what": "Set to 1 when the selected compat tool is Proton, so layers and tools know the game runs under Wine/Proton.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:STEAM_COMPAT_SHADER_PATH": {
+  "what": "The game's shader cache directory, steamapps/shadercache/<appid>. Proton and DXVK/VKD3D use it for their caches, and pressure-vessel shares it into the container.",
+  "basis": "external-docs",
+  "confidence": "high"
+ },
+ "game-env:STEAM_COMPAT_TOOL_PATHS": {
+  "what": "Colon-separated directories of all the compat tools stacked for this launch (for example Proton plus the Steam Linux Runtime). pressure-vessel shares them into the container.",
+  "basis": "external-docs",
+  "confidence": "high"
+ },
+ "game-env:STEAM_COMPAT_TRACING": {
+  "what": "Set to 1 when SteamOS system tracing is enabled (SteamOS/SystemTracingEnabled), together with MESA_VK_TRACE=rgp. It tells compat tools such as Proton to turn on their tracing support.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "game-env:STEAM_COMPAT_TRANSCODED_MEDIA_PATH": {
+  "what": "Directory where Proton's media converter stores and finds transcoded video (the fozmediav<N> or swarm data). Steam sets it next to STEAM_COMPAT_MEDIA_PATH.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "game-env:STEAM_FOSSILIZE_DUMP_PATH": {
+  "what": "Steam sets it to the game's pipeline-recording path (shadercache/<appid>/fozpipelinesv<N>/steamapprun_pipeline_cache). The Steam Fossilize layer records the game's Vulkan pipelines there for later pre-compilation and upload.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:STEAM_FOSSILIZE_DUMP_PATH_READ_ONLY": {
+  "what": "Steam sets it to '$bucketdir/steam_pipeline_cache.foz;$bucketdir/steamapp_pipeline_cache.foz', the downloaded and merged pipeline databases. The Fossilize layer then skips pipelines that are already known.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:STEAM_GAME_PIDS": {
+  "what": "Set for the overlay UI helper process that Steam starts for a game (\"GameOverlay: started '%s' (pid %d) for game process %d\"). It lists the PIDs of the game processes the overlay serves.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "game-env:STEAM_LAUNCH_WRAPPER_SCOPE": {
+  "what": "Steam sets it to 1 so steam-launch-wrapper puts the game in its own transient systemd scope (app-steam-app<ID>-<pid>.scope).",
+  "basis": "script",
+  "confidence": "high"
+ },
+ "game-env:STEAM_OVERLAY_DISABLE_WAIT_FOR_CEF_FRAME": {
+  "what": "Steam sets it to 1 for some launches, probably on Steam Deck/SteamOS, so the in-game overlay does not wait for a fresh CEF UI frame before presenting.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "game-env:STEAM_OVERLAY_LOGGING_FLUSH": {
+  "what": "Steam sets it to 1 when overlay trace or test mode is enabled in the app config, so the overlay renderer flushes its /tmp/gameoverlayrenderer.<pid>.log after every line.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "game-env:STEAM_OVERLAY_WINDOW_BLACKLIST": {
+  "what": "Filled from the app's OverlayWindowBlacklist setting. It lists windows or executables the overlay renderer should not hook in this game.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "game-env:SteamAppId": {
+  "what": "AppID of the running game. Steamworks (SteamAPI_Init) reads it instead of steam_appid.txt, and steam-launch-wrapper uses it for scope and journal names.",
+  "basis": "external-docs",
+  "confidence": "high"
+ },
+ "game-env:SteamAppUser": {
+  "what": "Account name of the logged-in Steam user, passed to the game. Older games and Proton use it, for example to name the Wine user profile.",
+  "basis": "external-docs",
+  "confidence": "medium"
+ },
+ "game-env:SteamClientLaunch": {
+  "what": "Set to 1 so the game and Steamworks know they were started by the Steam client, not run directly.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:SteamDeck": {
+  "what": "Set to 1 when running on a Steam Deck, or when the app is configured to identify as one (ForceIdentAsSteamDeck). Games use it to choose Deck-appropriate defaults.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:SteamDisableOverlayDPIScaling": {
+  "what": "Set to 1 for some launches (for example in Gamepad UI) so the in-game overlay does not apply DPI scaling.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "game-env:SteamEnv": {
+  "what": "Set to 1 so the launched process knows it is running inside a Steam-provided environment.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "game-env:SteamGameId": {
+  "what": "Game ID of the launch (AppID, or a 64-bit ID for non-Steam shortcuts and mods). The overlay uses it to identify the game, and gamescope uses it (through the STEAM_GAME window atom) to associate windows with apps.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:SteamGamepadUI": {
+  "what": "Set to 1 when the game is launched from the Gamepad UI/Big Picture, so the overlay and games use controller-friendly behaviour.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:SteamGenericControllers": {
+  "what": "Set to describe which generic controllers Steam Input is handling for this game. It is part of the SDL and Steam Input controller environment, and the value format is not visible.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "game-env:SteamNoOverlayUI": {
+  "what": "Set to 1 for some launches (probably when the overlay UI is disabled or the session draws the overlay itself, such as SteamOS/gamescope), telling the overlay renderer not to draw its own UI.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "game-env:SteamOS": {
+  "what": "Set to 1 when Steam runs on SteamOS, so games and tools can detect it.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:SteamOverlayGameId": {
+  "what": "Game ID the overlay should use for this launch. It usually equals SteamGameId but can differ, for example for shortcuts or tools launched for another app.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:SteamRealm": {
+  "what": "Steam realm of the client (global Steam or Steam China), passed to launched processes so the overlay and Steamworks pick realm-specific behaviour.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:SteamStreaming": {
+  "what": "Set to 1 when the game is launched for, or during, a Remote Play streaming session.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "game-env:SteamStreamingAllowGameVsync": {
+  "what": "Set from the app's extended/StreamingAllowGameVsync setting. It lets the game keep vsync on while being streamed.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "game-env:SteamStreamingAudio": {
+  "what": "Set during Remote Play so the overlay or streaming hooks capture the game's audio for the stream.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "game-env:SteamStreamingForceWindowedD3D9": {
+  "what": "Set from the app's extended/StreamingForceWindowedD3D9 setting. When streaming, it forces D3D9 games into windowed mode so their frames can be captured; mostly relevant to Windows or Proton.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "game-env:SteamStreamingInput": {
+  "what": "Set during Remote Play so the game, overlay and Steam Input know input is coming from a remote streaming client.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "game-env:SteamStreamingMaximumResolution": {
+  "what": "Maximum resolution the streaming client wants, in WxH format (0x0 means no limit). Streaming-aware hooks may use it to cap the game's resolution.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "game-env:SteamStreamingVideo": {
+  "what": "Set to 1 when the game's video should be captured for Remote Play streaming.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "game-env:SteamStreamingVideoDisableVSync": {
+  "what": "Set during streaming to tell the overlay or hooks to disable the game's vsync, unless SteamStreamingAllowGameVsync allows it.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "game-env:SteamStreamingVRPairedInvite": {
+  "what": "Set for launches that come from a Steam Link/VR streaming pairing invite. It probably carries the invite or session identifier so the game or VR runtime can complete the pairing.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "game-env:SteamStreamingVRTransitionInvite": {
+  "what": "Set for launches that move a streaming session into VR. It probably carries an invite token used during the VR transition.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "game-env:SteamTenfoot": {
+  "what": "Set to 1 when the game is launched from Big Picture (\"tenfoot\") mode.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:SteamTraceEnter": {
+  "what": "Set from the app's config/SteamTraceEnter setting. Together with SteamTraceModule and SteamTraceExit, it configures the overlay renderer's function-tracing debug feature, probably the entry symbol to trace.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "game-env:SteamTraceExit": {
+  "what": "Set from the app's config/SteamTraceExit setting, as part of the overlay tracing debug feature; probably the exit symbol to trace.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "game-env:SteamTraceModule": {
+  "what": "Set from the app's config/SteamTraceModule setting, as part of the overlay tracing debug feature; probably the module to trace.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "game-env:SteamUniverse": {
+  "what": "Steam universe of the client (Public, Beta, ...), passed to launched processes. Steamworks and the overlay use it to connect to the matching universe.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "game-env:SteamUserDataFolder": {
+  "what": "Path of the logged-in user's userdata folder (userdata/<accountid>). Passed to games and Proton, for example for cloud saves or screenshots.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "game-env:STEAMVIDEOTOKEN": {
+  "what": "Video-unlock token that Steam passes to child processes, especially steamwebhelper, so the bundled media stack enables licensed codecs. Internal.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "game-env:SteamVirtualGamepadInfo": {
+  "what": "Describes the Steam Input virtual gamepads for this launch, probably the index or slot of each virtual controller and the real device behind it. SDL in the game reads it so virtual pads report correct types and order.",
+  "basis": "external-docs",
+  "confidence": "medium"
+ },
+ "game-env:SteamVirtualGamepadInfo_Proton": {
+  "what": "Proton-specific version of SteamVirtualGamepadInfo. It probably points to the virtual gamepad info in a form usable inside the Wine/Proton container.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "game-env:StreamForOpenVR": {
+  "what": "Set from an app setting when the game is streamed to an OpenVR/SteamVR client. It tells the overlay to capture frames for VR streaming.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "game-env:StreamingTargetAudioChannels": {
+  "what": "Number of audio channels the Remote Play client wants (for example 2 or 6). Streaming audio capture uses it to match the client's speaker setup.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "game-env:XR_RUNTIME_JSON": {
+  "what": "OpenXR loader override that names the active runtime's manifest JSON. Steam sets it for games, probably from a per-app setting or the SteamVR install, so OpenXR games load SteamVR's OpenXR runtime.",
+  "basis": "external-docs",
+  "confidence": "medium"
+ },
+ "sdl-hint:SDL_APP_NAME": {
+  "what": "Steam sets it to 'Steam' (or the streaming client's name). SDL uses it as the application name that the audio server (PulseAudio/PipeWire) and the screensaver inhibitor show.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_AUDIO_DEVICE_SAMPLE_FRAMES": {
+  "what": "The streaming client sets this hint to request an audio buffer size in sample frames, to keep Remote Play audio latency low.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "sdl-hint:SDL_AUDIO_DEVICE_STREAM_NAME": {
+  "what": "Name given to each audio stream in the sound server's mixer: 'Game streaming client (playback)' and '(microphone)' in the streaming client, and 'Audio recorder' for the recording or voice capture in steamui.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_AUDIO_DEVICE_STREAM_ROLE": {
+  "what": "Media role given to Steam's audio streams. 'Game' is used for streamed game audio and 'GameChat' for microphone/voice, so PipeWire/PulseAudio policies can route or duck them.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_ENABLE_GTK": {
+  "what": "steamui sets it to 0 before SDL_Init so SDL3 does not load or initialize GTK (used for tray/menu integration) inside the Steam process.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_GAMECONTROLLERCONFIG": {
+  "what": "SDL controller mapping database string. steamui reads and sets it to add Steam's own mappings (entries with crc and sdl://<index> identifiers) for controllers it hands to SDL.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "sdl-hint:SDL_JOYSTICK_GAMEINPUT": {
+  "what": "The streaming client sets it to 0, disabling SDL's Windows GameInput joystick backend. This only matters on Windows builds.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_JOYSTICK_HIDAPI": {
+  "what": "The streaming client sets it to 1 so SDL uses its HIDAPI drivers to read controllers directly for Remote Play input.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_JOYSTICK_HIDAPI_COMBINE_JOY_CONS": {
+  "what": "steamui sets it from the user's controller setting controller_combine_nintendo_joycons, to choose whether a left and right Joy-Con pair act as one controller.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_JOYSTICK_HIDAPI_GAMECUBE": {
+  "what": "The streaming client sets it to 0 when streaming support for GameCube adapters is turned off (\"Turning off streaming support for GameCube controllers\"); the device is then shared over USB instead.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_JOYSTICK_HIDAPI_JOYCON_HOME_LED": {
+  "what": "The streaming client sets it to 0 so SDL does not turn on the Joy-Con Home-button LED.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_JOYSTICK_HIDAPI_PS4": {
+  "what": "The streaming client sets it to 0 when HIDAPI support for PS4 controllers is turned off for streaming, for example when the device is passed through via USB sharing instead.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_JOYSTICK_HIDAPI_PS5": {
+  "what": "The streaming client sets it to 0 when HIDAPI support for PS5 controllers is turned off for streaming, for example when the controller is shared over USB instead.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_JOYSTICK_HIDAPI_STEAM": {
+  "what": "The streaming client sets it to 0 so SDL's HIDAPI Steam Controller driver is not used. Steam itself owns Steam Controllers.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_JOYSTICK_HIDAPI_STEAMXBOX": {
+  "what": "The streaming client sets it to 1, enabling SDL's HIDAPI driver for Steam's virtual Xbox-style controllers in the streaming client.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "sdl-hint:SDL_JOYSTICK_HIDAPI_SWITCH": {
+  "what": "The streaming client sets it to 0 when HIDAPI support for Nintendo Switch controllers is turned off for streaming, for example when they are shared over USB instead.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_JOYSTICK_HIDAPI_XBOX": {
+  "what": "The streaming client sets it to 0 when HIDAPI support for Xbox controllers is turned off for streaming, for example when they are shared over USB instead.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_KMSDRM_REQUIRE_DRM_MASTER": {
+  "what": "The streaming client sets it to 0 so SDL's KMSDRM video backend can start without DRM master. This lets it run on a console/VT, for example a Steam Link-style device, while another process owns the display.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_MAC_REGISTER_ACTIVATION_HANDLERS": {
+  "what": "steamwebhelper sets it to 0 so SDL does not register macOS app-activation handlers. This has no effect on Linux; the code is shared with macOS.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_MOUSE_AUTO_CAPTURE": {
+  "what": "steamwebhelper sets it to 0 so SDL does not grab the mouse automatically while a button is held over a browser window, which avoids stuck pointer grabs in Steam UI windows and context menus.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_MOUSE_NORMAL_SPEED_SCALE": {
+  "what": "The streaming client sets it, as a float formatted %.2f, to scale absolute mouse motion according to the user's streaming mouse-speed setting.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "sdl-hint:SDL_MOUSE_RELATIVE_SPEED_SCALE": {
+  "what": "The streaming client sets it, as a float formatted %.2f, to scale relative (captured) mouse motion sent to the streamed game.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "sdl-hint:SDL_MOUSE_TOUCH_EVENTS": {
+  "what": "The streaming client sets it to 0 so SDL does not generate synthetic touch events from the mouse. Each input type is forwarded to the host as itself.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_NO_SIGNAL_HANDLERS": {
+  "what": "steamui sets it to 1 so SDL does not install SIGINT/SIGTERM handlers; Steam handles signals itself.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_OPENVR_CURSOR_WIDTH": {
+  "what": "The streaming client's OpenVR video mode sets it to 0.06, the size of the cursor drawn on the VR overlay panel.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "sdl-hint:SDL_OPENVR_INPUT_PROFILE": {
+  "what": "The streaming client's OpenVR mode sets it to its action manifest, resource/streaming_client/sdloverlay_actions.json, so VR controller input maps to the streaming overlay.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_OPENVR_LIBRARY": {
+  "what": "In --openvr mode the streaming client sets it to libopenvr_api.so, the OpenVR library that SDL's OpenVR video driver loads.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_OPENVR_OVERLAY_FLAGS": {
+  "what": "The streaming client's OpenVR mode sets it to the flags SDL applies to the VR overlay it creates for the stream. The value is not visible.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "sdl-hint:SDL_OPENVR_OVERLAY_NAME": {
+  "what": "The streaming client sets it to 'steamlink_openvr', the OpenVR overlay key/name for streaming a desktop or game into VR.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_OPENVR_OVERLAY_PANEL_WIDTH": {
+  "what": "The streaming client sets it to 2.75, the width in meters of the VR overlay panel that shows the stream.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_OPENVR_WINDOW_ICON_OVERRIDE": {
+  "what": "The streaming client sets it to false, so SDL's OpenVR driver keeps the default overlay thumbnail/icon instead of using the window icon.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "sdl-hint:SDL_PEN_MOUSE_EVENTS": {
+  "what": "The streaming client sets it to 0 so pen input does not also produce synthetic mouse events.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_PEN_TOUCH_EVENTS": {
+  "what": "The streaming client sets it to 0 so pen input does not also produce synthetic touch events.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_RENDER_DRIVER": {
+  "what": "The streaming client sets the SDL renderer from its options (--opengl, --opengles2, --d3d9 or --d3d11, defaulting to vulkan; opengles2 for OpenVR). Users can also set it to force a renderer. HDR output requires the Vulkan renderer.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_RENDER_OPENGL_NV12_RG_SHADER": {
+  "what": "The streaming client sets it to 1 or 0 to choose the SDL GL shader path for NV12 video textures: an RG-format UV plane versus separate textures, depending on the EGL/dmabuf frame import.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "sdl-hint:SDL_SCREENSAVER_INHIBIT_ACTIVITY_NAME": {
+  "what": "Reason string SDL passes when it inhibits the screensaver (D-Bus inhibit). Steam uses 'Downloading', 'Game streaming (server)' or 'Game streaming client', so desktop power or idle UIs show why Steam keeps the screen awake.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_TIMER_RESOLUTION": {
+  "what": "steamui and steamwebhelper set it to 0 so SDL does not raise the system timer resolution. This is Windows-only and has no effect on Linux.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_TOUCH_MOUSE_EVENTS": {
+  "what": "The streaming client sets it to 0 so touches do not also generate synthetic mouse events; touch is forwarded to the host as touch.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_TV_REMOTE_AS_JOYSTICK": {
+  "what": "The streaming client sets it to 0 so TV remotes (Android TV builds) are not exposed as joysticks.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_VIDEO_ALLOW_SCREENSAVER": {
+  "what": "steamui, steamwebhelper and gldriverquery set it to 1 so opening SDL windows does not disable the screensaver. Steam inhibits it explicitly only when needed, for example while downloading or streaming.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_VIDEO_DRIVER": {
+  "what": "The streaming client sets the SDL video backend to x11, wayland, or openvr in --openvr mode. Users can set it in the environment to force a backend; steam.sh rewrites a plain 'wayland' to 'wayland,x11'.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_VIDEO_FORCE_EGL": {
+  "what": "The streaming client sets it to 1 or 0, choosing EGL instead of GLX on X11 for its OpenGL renderers. EGL is needed for dmabuf/EGLImage zero-copy video frames.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS": {
+  "what": "steamwebhelper sets it to 0 so fullscreen Steam windows, such as Big Picture, are not minimized when they lose focus.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_VIDEO_X11_NET_WM_BYPASS_COMPOSITOR": {
+  "what": "steamui and steamwebhelper set it to 0 so SDL does not ask the X compositor to unredirect Steam windows (_NET_WM_BYPASS_COMPOSITOR), which keeps transparency and compositing working.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_VIDEO_X11_SCALING_FACTOR": {
+  "what": "Set to 1.0 by steamui and steamwebhelper so SDL itself does no X11 content scaling; Steam/CEF handle DPI scaling themselves.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_VIDEO_X11_WINDOW_VISUALID": {
+  "what": "Set to a specific X visual ID (%lu) before window creation, so SDL creates the webhelper composer or streaming window with a visual that matches the GL/EGL config, for example an ARGB visual for transparency.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_WINDOW_ACTIVATE_WHEN_SHOWN": {
+  "what": "steamwebhelper sets it to 0 so showing a Steam window does not steal focus. With multiple Xwaylands, Steam manages focus itself through XSetInputFocus.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_WINDOW_RETAIN_CONTENT": {
+  "what": "steamwebhelper sets it to 1, a hint to keep window contents across hide and show or resize. It is related to the composer mode (OpenGL/Gamescope).",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "sdl-hint:SDL_WINDOWS_DETECT_DEVICE_HOTPLUG": {
+  "what": "Set to 0 by steamui and steamwebhelper, which stops SDL's Windows device-hotplug window. This is Windows-only and has no effect on Linux.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "sdl-hint:SDL_WINDOWS_ERASE_BACKGROUND_MODE": {
+  "what": "steamwebhelper sets it to always or never, controlling whether SDL erases a new window's background on Windows. This is Windows-only and has no effect on Linux.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "x11-atom:GAMESCOPE_ALLOW_TEARING": {
+  "what": "gamescope root-window property that Steam sets from the per-game 'allow tearing' option (gamescope_allow_tearing). 1 lets gamescope flip immediately, with tearing, instead of waiting for vblank.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "x11-atom:GAMESCOPE_BLUR_FADE_DURATION": {
+  "what": "gamescope property for the length, in milliseconds, of the fade-in and fade-out of the background blur that gamescope applies behind the Steam overlay or menus.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "x11-atom:GAMESCOPE_BLUR_MODE": {
+  "what": "gamescope property Steam sets to choose the background blur mode used when Steam UI appears over a game (0 = off, 1 = blur when the overlay is up, 2 = always).",
+  "basis": "external-docs",
+  "confidence": "medium"
+ },
+ "x11-atom:GAMESCOPE_BLUR_RADIUS": {
+  "what": "gamescope property Steam sets for the blur radius, in pixels, of the background blur behind Steam UI.",
+  "basis": "external-docs",
+  "confidence": "medium"
+ },
+ "x11-atom:GAMESCOPE_COLOR_APP_WANTS_HDR_FEEDBACK": {
+  "what": "gamescope feedback property telling Steam whether the focused app is presenting HDR content. Steam uses it to show HDR status and adjust HDR settings.",
+  "basis": "external-docs",
+  "confidence": "medium"
+ },
+ "x11-atom:GAMESCOPE_COLOR_MANAGEMENT_DISABLE": {
+  "what": "gamescope property that turns gamescope's color management off (1) or on (0). Steam sets it from display or debug settings.",
+  "basis": "external-docs",
+  "confidence": "medium"
+ },
+ "x11-atom:GAMESCOPE_COLOR_MURA_CORRECTION_DISABLED": {
+  "what": "gamescope property Steam sets from the developer option gamescope_disable_mura_correction. It turns off per-panel mura (non-uniformity) correction on displays that support it, such as the Steam Deck OLED.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "x11-atom:GAMESCOPE_COLOR_NIGHT_MODE": {
+  "what": "gamescope property Steam sets for Night Mode. It holds float values for intensity, hue and saturation of the warm color tint applied to the display.",
+  "basis": "external-docs",
+  "confidence": "medium"
+ },
+ "x11-atom:GAMESCOPE_COLOR_SDR_GAMUT_WIDENESS": {
+  "what": "gamescope property for the Steam 'color vibrancy' slider. It controls how far SDR content is stretched toward the panel's native wider gamut (0 to 1).",
+  "basis": "external-docs",
+  "confidence": "medium"
+ },
+ "x11-atom:GAMESCOPE_COMPOSITE_DEBUG": {
+  "what": "gamescope debug property set from Steam's developer option gamescope_composite_debug. It makes gamescope draw composite debugging overlays, such as indicating when it composites or uses direct scanout.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "x11-atom:GAMESCOPE_COMPOSITE_FORCE": {
+  "what": "gamescope property set from Steam's developer option gamescope_force_composite. It forces gamescope to always composite with Vulkan instead of using direct plane scanout.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "x11-atom:GAMESCOPE_CURSOR_VISIBLE_FEEDBACK": {
+  "what": "gamescope feedback property telling Steam whether the mouse cursor is currently visible, so Steam can change input behaviour, for example trackpad mouse emulation.",
+  "basis": "external-docs",
+  "confidence": "medium"
+ },
+ "x11-atom:GAMESCOPE_DEBUG_HDR_HEATMAP": {
+  "what": "gamescope debug property Steam sets from the HDR visualization developer option (gamescope_hdr_visualization). gamescope then shows an HDR luminance heatmap instead of the image.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "x11-atom:GAMESCOPE_DISPLAY_DYNAMIC_REFRESH_BASED_ON_GAME_PRESENCE": {
+  "what": "gamescope property Steam sets so the display refresh rate changes depending on whether a game is running. It works with the option to use the game's refresh rate inside Steam.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "x11-atom:GAMESCOPE_DISPLAY_FORCE_INTERNAL": {
+  "what": "gamescope property Steam sets to force output to the internal panel even when an external display is connected.",
+  "basis": "external-docs",
+  "confidence": "medium"
+ },
+ "x11-atom:GAMESCOPE_DISPLAY_HDR_ENABLED": {
+  "what": "gamescope property Steam sets from its HDR toggle (gamescope_hdr_enabled) to turn HDR output on or off on HDR-capable displays.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "x11-atom:GAMESCOPE_DISPLAY_IS_EXTERNAL": {
+  "what": "gamescope feedback property: 1 when the active output is an external display rather than the built-in panel. Steam uses it to switch settings, for example native external resolution or refresh options.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "x11-atom:GAMESCOPE_DISPLAY_MODE_LIST_EXTERNAL": {
+  "what": "gamescope feedback property listing the modes (resolution and refresh) the external display supports. Steam's display settings use it to fill the resolution picker.",
+  "basis": "external-docs",
+  "confidence": "medium"
+ },
+ "x11-atom:GAMESCOPE_DISPLAY_MODE_NUDGE": {
+  "what": "Property Steam sets to make gamescope re-apply or re-pick the display mode, for example after the user changes the external resolution or refresh preference.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "x11-atom:GAMESCOPE_DISPLAY_SUPPORTS_HDR": {
+  "what": "gamescope feedback property: 1 when the connected display supports HDR. Steam uses it to show HDR settings.",
+  "basis": "external-docs",
+  "confidence": "high"
+ },
+ "x11-atom:GAMESCOPE_DISPLAY_VIRTUAL_WHITE": {
+  "what": "gamescope property for the display's virtual white point or brightness used in color/HDR mapping; Steam sets it from its display calibration.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "x11-atom:GAMESCOPE_DYNAMIC_REFRESH": {
+  "what": "gamescope property Steam sets to request a specific refresh rate (Hz) for the internal display, used by the per-game refresh-rate slider.",
+  "basis": "external-docs",
+  "confidence": "medium"
+ },
+ "x11-atom:GAMESCOPE_DYNAMIC_REFRESH_EXTERNAL": {
+  "what": "Like GAMESCOPE_DYNAMIC_REFRESH, but for the refresh rate requested for an external display.",
+  "basis": "external-docs",
+  "confidence": "medium"
+ },
+ "x11-atom:GAMESCOPE_DYNAMIC_REFRESH_IN_STEAM": {
+  "what": "gamescope property for the option to keep the game's refresh rate while the Steam UI is focused (gamescope_use_game_refresh_rate_in_steam), so the display does not change mode when the overlay opens.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "x11-atom:GAMESCOPE_FOCUSABLE_APPS": {
+  "what": "gamescope feedback property on the root window listing the app IDs (from the STEAM_GAME window property) that have focusable windows. Steam reads it to know which games are on screen.",
+  "basis": "external-docs",
+  "confidence": "high"
+ },
+ "x11-atom:GAMESCOPE_FOCUSABLE_WINDOWS": {
+  "what": "gamescope feedback property listing focusable X windows together with their app IDs. Steam reads it to manage window switching between game windows.",
+  "basis": "external-docs",
+  "confidence": "high"
+ },
+ "x11-atom:GAMESCOPE_FOCUSED_APP": {
+  "what": "gamescope property naming the app ID that gamescope should focus, or that it reports as focused. Steam sets it to bring a game to the front, or 769 for the Steam UI itself.",
+  "basis": "external-docs",
+  "confidence": "high"
+ },
+ "x11-atom:GAMESCOPE_FOCUSED_WINDOW": {
+  "what": "gamescope feedback property holding the X window ID that currently has focus in gamescope.",
+  "basis": "external-docs",
+  "confidence": "high"
+ },
+ "x11-atom:GAMESCOPE_FPS_LIMIT": {
+  "what": "gamescope property Steam sets to the frame-rate limit chosen in the Quick Access performance menu (0 = unlimited). gamescope enforces it on the game.",
+  "basis": "external-docs",
+  "confidence": "high"
+ },
+ "x11-atom:GAMESCOPE_FSR_SHARPNESS": {
+  "what": "gamescope property Steam sets from the FSR/NIS sharpness slider (0 to 20, where lower is sharper) used when upscaling games.",
+  "basis": "external-docs",
+  "confidence": "high"
+ },
+ "x11-atom:GAMESCOPE_HDR_INPUT_GAIN": {
+  "what": "gamescope property for a brightness gain applied to HDR content, set from Steam's HDR brightness calibration.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "x11-atom:GAMESCOPE_HDR_ON_SDR_TONEMAP_OPERATOR": {
+  "what": "gamescope property that chooses the tone-mapping operator used when showing HDR content on an SDR display. Steam sets it from display settings.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "x11-atom:GAMESCOPE_HDR_OUTPUT_FEEDBACK": {
+  "what": "gamescope feedback property: 1 when gamescope is currently scanning out in HDR. Steam reads it for HDR status.",
+  "basis": "external-docs",
+  "confidence": "medium"
+ },
+ "x11-atom:GAMESCOPE_INPUT_COUNTER": {
+  "what": "gamescope property that is incremented on user input. Steam uses it to detect activity, for example for idle dimming or suspend timers.",
+  "basis": "external-docs",
+  "confidence": "medium"
+ },
+ "x11-atom:GAMESCOPE_INTERNAL_DISPLAY_BRIGHTNESS": {
+  "what": "gamescope property for the internal panel's brightness in nits, used for HDR/SDR mapping on the built-in display. Steam sets it from its brightness slider.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "x11-atom:GAMESCOPE_NEW_SCALING_FILTER": {
+  "what": "gamescope property Steam sets for the upscaling filter (linear, nearest, FSR, NIS, pixel) chosen in the Quick Access scaling menu.",
+  "basis": "external-docs",
+  "confidence": "high"
+ },
+ "x11-atom:GAMESCOPE_NEW_SCALING_SCALER": {
+  "what": "gamescope property Steam sets for the scaling mode (auto, integer, fit, fill, stretch) chosen in the Quick Access scaling menu.",
+  "basis": "external-docs",
+  "confidence": "high"
+ },
+ "x11-atom:GAMESCOPE_PID": {
+  "what": "Root-window property holding gamescope's process ID. steamwebhelper reads it (\"Found gamescope pid: %u\") when it sets up VR overlays and forwarding inside gamescope.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "x11-atom:GAMESCOPE_RESHADE_EFFECT": {
+  "what": "gamescope property naming the ReShade effect file that gamescope should apply to the game. Steam sets it for features that use screen-space shaders.",
+  "basis": "external-docs",
+  "confidence": "medium"
+ },
+ "x11-atom:GAMESCOPE_RESHADE_TECHNIQUE_IDX": {
+  "what": "gamescope property for the index of the technique to use within the effect set by GAMESCOPE_RESHADE_EFFECT.",
+  "basis": "external-docs",
+  "confidence": "medium"
+ },
+ "x11-atom:GAMESCOPE_SDR_INPUT_GAIN": {
+  "what": "gamescope property for a brightness gain applied to SDR content (paired with GAMESCOPE_HDR_INPUT_GAIN), set from Steam's display calibration.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "x11-atom:GAMESCOPE_SDR_ON_HDR_CONTENT_BRIGHTNESS": {
+  "what": "gamescope property for how bright SDR content (including the Steam UI) appears, in nits, while the display runs in HDR mode. Steam sets it from the 'SDR content brightness' slider.",
+  "basis": "external-docs",
+  "confidence": "high"
+ },
+ "x11-atom:GAMESCOPE_VIEWPORT_SUPPORTED": {
+  "what": "gamescope property that steamui checks while initializing CEF. If present, gamescope supports viewport composition, and Steam can enable the gamescope composer (EnableGamescopeComposer) for its UI.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "x11-atom:GAMESCOPE_VROVERLAY_FORWARDING": {
+  "what": "gamescope property steamui checks while initializing CEF. If present, gamescope can forward VR overlays, so Steam can enable its VR gamescope composer (EnableGamescopeComposerVR).",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "x11-atom:GAMESCOPE_VRR_CAPABLE": {
+  "what": "gamescope feedback property: 1 when the connected display supports variable refresh rate. Steam uses it to show the VRR toggle.",
+  "basis": "external-docs",
+  "confidence": "high"
+ },
+ "x11-atom:GAMESCOPE_VRR_ENABLED": {
+  "what": "gamescope property Steam sets from its VRR (adaptive sync) toggle to ask gamescope to enable variable refresh.",
+  "basis": "external-docs",
+  "confidence": "high"
+ },
+ "x11-atom:GAMESCOPE_VRR_FEEDBACK": {
+  "what": "gamescope feedback property: 1 when VRR is actually active on the output.",
+  "basis": "external-docs",
+  "confidence": "high"
+ },
+ "x11-atom:GAMESCOPE_XWAYLAND_MODE_CONTROL": {
+  "what": "Property Steam sets to tell gamescope which resolution or mode a given Xwayland server should expose. It is used to set the game's resolution (gamescope_game_resolution_global) and native external resolution.",
+  "basis": "external-docs",
+  "confidence": "medium"
+ },
+ "x11-atom:GAMESCOPECTRL_REQUEST_SCREENSHOT": {
+  "what": "Control property Steam sets to make gamescope take a screenshot, written to /tmp/gamescope.png. The gamescope_include_steamui_in_screenshots option decides whether Steam UI layers are included.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "x11-atom:STEAM_GAME": {
+  "what": "Window property holding the app ID that a window belongs to. steamwebhelper and streaming_client set it on their own windows (769 marks the Steam UI), and gamescope uses it to map windows to apps for focus and overlays.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "x11-atom:STEAM_GAMES_RUNNING": {
+  "what": "Property listing the app IDs of games Steam is currently running. gamescope or other session components read it, for example to know when a game is active.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "x11-atom:STEAM_GAMESCOPE_VIEWPORT": {
+  "what": "Window property that steamwebhelper's gamescope composer sets on its output window, to describe the viewport or region of the Steam UI layer that gamescope should composite.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "x11-atom:STEAM_GAMESCOPE_VIEWPORT_TARGET": {
+  "what": "steamwebhelper property, probably marking the window or target that a gamescope viewport composites into; part of the gamescope composer protocol.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "x11-atom:STEAM_GAMESCOPE_VROVERLAY_TARGET": {
+  "what": "steamwebhelper property, probably marking a browser window as the target to forward to a VR overlay through gamescope (GAMESCOPE_VROVERLAY_FORWARDING).",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "x11-atom:STEAM_INPUT_FOCUS": {
+  "what": "Window property Steam sets on its overlay or keyboard windows. It tells gamescope that the window should get input focus while it is shown, for example for the on-screen keyboard or overlay. The value is a flag.",
+  "basis": "external-docs",
+  "confidence": "medium"
+ },
+ "x11-atom:STEAM_NOTIFICATION": {
+  "what": "Window property marking a steamwebhelper window as a Steam notification (toast). gamescope draws it in the notification layer above games without giving it focus.",
+  "basis": "external-docs",
+  "confidence": "high"
+ },
+ "x11-atom:STEAM_OVERLAY": {
+  "what": "Window property marking a Steam window (Quick Access, overlay or keyboard) as an overlay. gamescope composites it above the focused game instead of treating it as an app window.",
+  "basis": "external-docs",
+  "confidence": "high"
+ },
+ "x11-atom:STEAM_SCREEN_MAGNIFICATION": {
+  "what": "Property Steam sets for its accessibility screen-magnification (zoom) feature, probably the zoom factor that gamescope should apply.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "x11-atom:STEAM_SCREEN_SCALE": {
+  "what": "Property for the screen or UI scale factor that Steam publishes or reads in gamescope sessions, probably used together with magnification.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "x11-atom:STEAM_TOUCH_CLICK_MODE": {
+  "what": "Root property that Steam sets to tell gamescope how touchscreen touches become mouse events (for example hover, left click or right click), following the touch-mode selection in Steam.",
+  "basis": "external-docs",
+  "confidence": "medium"
+ }
+}

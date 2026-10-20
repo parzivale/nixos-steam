@@ -1,5 +1,9 @@
 # X11 atoms and gamescope properties
 
+> **What it does** is written from how the option is used in the code (strings and log messages near each
+> read site, related options, Valve help). The confidence tag *(high/medium/low)* follows each inferred description.
+> Untagged descriptions restate Valve's own help text.
+>
 > Generated from the Steam Linux client, bootstrap manifest version **1791918634**, by static analysis of the
 > 64-bit binaries in `steamrt64/` and `ubuntu12_64/`. See [../README.md](../README.md) for method and caveats.
 
@@ -7,65 +11,65 @@
 gamescope (Steam Deck / SteamOS game mode) and to the window manager: frame limits, VRR, HDR, blur,
 ReShade effects and so on. Values are set at runtime.
 
-| Atom / property | Binaries |
-|---|---|
-| `GAMESCOPE_ALLOW_TEARING` | steamui.so |
-| `GAMESCOPE_BLUR_FADE_DURATION` | steamui.so |
-| `GAMESCOPE_BLUR_MODE` | steamui.so |
-| `GAMESCOPE_BLUR_RADIUS` | steamui.so |
-| `GAMESCOPE_COLOR_APP_WANTS_HDR_FEEDBACK` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_COLOR_MANAGEMENT_DISABLE` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_COLOR_MURA_CORRECTION_DISABLED` | steamui.so |
-| `GAMESCOPE_COLOR_NIGHT_MODE` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_COLOR_SDR_GAMUT_WIDENESS` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_COMPOSITE_DEBUG` | steamui.so |
-| `GAMESCOPE_COMPOSITE_FORCE` | steamui.so |
-| `GAMESCOPE_CURSOR_VISIBLE_FEEDBACK` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_DEBUG_HDR_HEATMAP` | steamui.so |
-| `GAMESCOPE_DISPLAY_DYNAMIC_REFRESH_BASED_ON_GAME_PRESENCE` | steamui.so |
-| `GAMESCOPE_DISPLAY_FORCE_INTERNAL` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_DISPLAY_HDR_ENABLED` | steamui.so |
-| `GAMESCOPE_DISPLAY_IS_EXTERNAL` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_DISPLAY_MODE_LIST_EXTERNAL` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_DISPLAY_MODE_NUDGE` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_DISPLAY_SUPPORTS_HDR` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_DISPLAY_VIRTUAL_WHITE` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_DYNAMIC_REFRESH` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_DYNAMIC_REFRESH_EXTERNAL` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_DYNAMIC_REFRESH_IN_STEAM` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_FOCUSABLE_APPS` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_FOCUSABLE_WINDOWS` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_FOCUSED_APP` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_FOCUSED_WINDOW` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_FPS_LIMIT` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_FSR_SHARPNESS` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_HDR_INPUT_GAIN` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_HDR_ON_SDR_TONEMAP_OPERATOR` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_HDR_OUTPUT_FEEDBACK` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_INPUT_COUNTER` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_INTERNAL_DISPLAY_BRIGHTNESS` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_NEW_SCALING_FILTER` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_NEW_SCALING_SCALER` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_PID` | steamwebhelper |
-| `GAMESCOPE_RESHADE_EFFECT` | steamui.so |
-| `GAMESCOPE_RESHADE_TECHNIQUE_IDX` | steamui.so |
-| `GAMESCOPE_SDR_INPUT_GAIN` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_SDR_ON_HDR_CONTENT_BRIGHTNESS` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_VIEWPORT_SUPPORTED` | steamui.so |
-| `GAMESCOPE_VROVERLAY_FORWARDING` | steamui.so |
-| `GAMESCOPE_VRR_CAPABLE` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_VRR_ENABLED` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_VRR_FEEDBACK` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_XWAYLAND_MODE_CONTROL` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPECTRL_REQUEST_SCREENSHOT` | steamui.so |
-| `STEAM_GAME` | steamwebhelper, streaming_client |
-| `STEAM_GAMES_RUNNING` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `STEAM_GAMESCOPE_VIEWPORT` | steamwebhelper |
-| `STEAM_GAMESCOPE_VIEWPORT_TARGET` | steamwebhelper |
-| `STEAM_GAMESCOPE_VROVERLAY_TARGET` | steamwebhelper |
-| `STEAM_INPUT_FOCUS` | steamwebhelper, vgui2_s.so |
-| `STEAM_NOTIFICATION` | steamwebhelper |
-| `STEAM_OVERLAY` | steamwebhelper, vgui2_s.so |
-| `STEAM_SCREEN_MAGNIFICATION` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `STEAM_SCREEN_SCALE` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `STEAM_TOUCH_CLICK_MODE` | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| Atom / property | What it does | Binaries |
+|---|---|---|
+| `GAMESCOPE_ALLOW_TEARING` | gamescope root-window property that Steam sets from the per-game 'allow tearing' option (gamescope_allow_tearing). 1 lets gamescope flip immediately, with tearing, instead of waiting for vblank. *(high)* | steamui.so |
+| `GAMESCOPE_BLUR_FADE_DURATION` | gamescope property for the length, in milliseconds, of the fade-in and fade-out of the background blur that gamescope applies behind the Steam overlay or menus. *(medium)* | steamui.so |
+| `GAMESCOPE_BLUR_MODE` | gamescope property Steam sets to choose the background blur mode used when Steam UI appears over a game (0 = off, 1 = blur when the overlay is up, 2 = always). *(medium)* | steamui.so |
+| `GAMESCOPE_BLUR_RADIUS` | gamescope property Steam sets for the blur radius, in pixels, of the background blur behind Steam UI. *(medium)* | steamui.so |
+| `GAMESCOPE_COLOR_APP_WANTS_HDR_FEEDBACK` | gamescope feedback property telling Steam whether the focused app is presenting HDR content. Steam uses it to show HDR status and adjust HDR settings. *(medium)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_COLOR_MANAGEMENT_DISABLE` | gamescope property that turns gamescope's color management off (1) or on (0). Steam sets it from display or debug settings. *(medium)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_COLOR_MURA_CORRECTION_DISABLED` | gamescope property Steam sets from the developer option gamescope_disable_mura_correction. It turns off per-panel mura (non-uniformity) correction on displays that support it, such as the Steam Deck OLED. *(high)* | steamui.so |
+| `GAMESCOPE_COLOR_NIGHT_MODE` | gamescope property Steam sets for Night Mode. It holds float values for intensity, hue and saturation of the warm color tint applied to the display. *(medium)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_COLOR_SDR_GAMUT_WIDENESS` | gamescope property for the Steam 'color vibrancy' slider. It controls how far SDR content is stretched toward the panel's native wider gamut (0 to 1). *(medium)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_COMPOSITE_DEBUG` | gamescope debug property set from Steam's developer option gamescope_composite_debug. It makes gamescope draw composite debugging overlays, such as indicating when it composites or uses direct scanout. *(high)* | steamui.so |
+| `GAMESCOPE_COMPOSITE_FORCE` | gamescope property set from Steam's developer option gamescope_force_composite. It forces gamescope to always composite with Vulkan instead of using direct plane scanout. *(high)* | steamui.so |
+| `GAMESCOPE_CURSOR_VISIBLE_FEEDBACK` | gamescope feedback property telling Steam whether the mouse cursor is currently visible, so Steam can change input behaviour, for example trackpad mouse emulation. *(medium)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_DEBUG_HDR_HEATMAP` | gamescope debug property Steam sets from the HDR visualization developer option (gamescope_hdr_visualization). gamescope then shows an HDR luminance heatmap instead of the image. *(high)* | steamui.so |
+| `GAMESCOPE_DISPLAY_DYNAMIC_REFRESH_BASED_ON_GAME_PRESENCE` | gamescope property Steam sets so the display refresh rate changes depending on whether a game is running. It works with the option to use the game's refresh rate inside Steam. *(medium)* | steamui.so |
+| `GAMESCOPE_DISPLAY_FORCE_INTERNAL` | gamescope property Steam sets to force output to the internal panel even when an external display is connected. *(medium)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_DISPLAY_HDR_ENABLED` | gamescope property Steam sets from its HDR toggle (gamescope_hdr_enabled) to turn HDR output on or off on HDR-capable displays. *(high)* | steamui.so |
+| `GAMESCOPE_DISPLAY_IS_EXTERNAL` | gamescope feedback property: 1 when the active output is an external display rather than the built-in panel. Steam uses it to switch settings, for example native external resolution or refresh options. *(high)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_DISPLAY_MODE_LIST_EXTERNAL` | gamescope feedback property listing the modes (resolution and refresh) the external display supports. Steam's display settings use it to fill the resolution picker. *(medium)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_DISPLAY_MODE_NUDGE` | Property Steam sets to make gamescope re-apply or re-pick the display mode, for example after the user changes the external resolution or refresh preference. *(low)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_DISPLAY_SUPPORTS_HDR` | gamescope feedback property: 1 when the connected display supports HDR. Steam uses it to show HDR settings. *(high)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_DISPLAY_VIRTUAL_WHITE` | gamescope property for the display's virtual white point or brightness used in color/HDR mapping; Steam sets it from its display calibration. *(low)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_DYNAMIC_REFRESH` | gamescope property Steam sets to request a specific refresh rate (Hz) for the internal display, used by the per-game refresh-rate slider. *(medium)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_DYNAMIC_REFRESH_EXTERNAL` | Like GAMESCOPE_DYNAMIC_REFRESH, but for the refresh rate requested for an external display. *(medium)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_DYNAMIC_REFRESH_IN_STEAM` | gamescope property for the option to keep the game's refresh rate while the Steam UI is focused (gamescope_use_game_refresh_rate_in_steam), so the display does not change mode when the overlay opens. *(medium)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_FOCUSABLE_APPS` | gamescope feedback property on the root window listing the app IDs (from the STEAM_GAME window property) that have focusable windows. Steam reads it to know which games are on screen. *(high)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_FOCUSABLE_WINDOWS` | gamescope feedback property listing focusable X windows together with their app IDs. Steam reads it to manage window switching between game windows. *(high)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_FOCUSED_APP` | gamescope property naming the app ID that gamescope should focus, or that it reports as focused. Steam sets it to bring a game to the front, or 769 for the Steam UI itself. *(high)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_FOCUSED_WINDOW` | gamescope feedback property holding the X window ID that currently has focus in gamescope. *(high)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_FPS_LIMIT` | gamescope property Steam sets to the frame-rate limit chosen in the Quick Access performance menu (0 = unlimited). gamescope enforces it on the game. *(high)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_FSR_SHARPNESS` | gamescope property Steam sets from the FSR/NIS sharpness slider (0 to 20, where lower is sharper) used when upscaling games. *(high)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_HDR_INPUT_GAIN` | gamescope property for a brightness gain applied to HDR content, set from Steam's HDR brightness calibration. *(medium)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_HDR_ON_SDR_TONEMAP_OPERATOR` | gamescope property that chooses the tone-mapping operator used when showing HDR content on an SDR display. Steam sets it from display settings. *(medium)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_HDR_OUTPUT_FEEDBACK` | gamescope feedback property: 1 when gamescope is currently scanning out in HDR. Steam reads it for HDR status. *(medium)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_INPUT_COUNTER` | gamescope property that is incremented on user input. Steam uses it to detect activity, for example for idle dimming or suspend timers. *(medium)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_INTERNAL_DISPLAY_BRIGHTNESS` | gamescope property for the internal panel's brightness in nits, used for HDR/SDR mapping on the built-in display. Steam sets it from its brightness slider. *(medium)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_NEW_SCALING_FILTER` | gamescope property Steam sets for the upscaling filter (linear, nearest, FSR, NIS, pixel) chosen in the Quick Access scaling menu. *(high)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_NEW_SCALING_SCALER` | gamescope property Steam sets for the scaling mode (auto, integer, fit, fill, stretch) chosen in the Quick Access scaling menu. *(high)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_PID` | Root-window property holding gamescope's process ID. steamwebhelper reads it ("Found gamescope pid: %u") when it sets up VR overlays and forwarding inside gamescope. *(high)* | steamwebhelper |
+| `GAMESCOPE_RESHADE_EFFECT` | gamescope property naming the ReShade effect file that gamescope should apply to the game. Steam sets it for features that use screen-space shaders. *(medium)* | steamui.so |
+| `GAMESCOPE_RESHADE_TECHNIQUE_IDX` | gamescope property for the index of the technique to use within the effect set by GAMESCOPE_RESHADE_EFFECT. *(medium)* | steamui.so |
+| `GAMESCOPE_SDR_INPUT_GAIN` | gamescope property for a brightness gain applied to SDR content (paired with GAMESCOPE_HDR_INPUT_GAIN), set from Steam's display calibration. *(medium)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_SDR_ON_HDR_CONTENT_BRIGHTNESS` | gamescope property for how bright SDR content (including the Steam UI) appears, in nits, while the display runs in HDR mode. Steam sets it from the 'SDR content brightness' slider. *(high)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_VIEWPORT_SUPPORTED` | gamescope property that steamui checks while initializing CEF. If present, gamescope supports viewport composition, and Steam can enable the gamescope composer (EnableGamescopeComposer) for its UI. *(medium)* | steamui.so |
+| `GAMESCOPE_VROVERLAY_FORWARDING` | gamescope property steamui checks while initializing CEF. If present, gamescope can forward VR overlays, so Steam can enable its VR gamescope composer (EnableGamescopeComposerVR). *(medium)* | steamui.so |
+| `GAMESCOPE_VRR_CAPABLE` | gamescope feedback property: 1 when the connected display supports variable refresh rate. Steam uses it to show the VRR toggle. *(high)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_VRR_ENABLED` | gamescope property Steam sets from its VRR (adaptive sync) toggle to ask gamescope to enable variable refresh. *(high)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_VRR_FEEDBACK` | gamescope feedback property: 1 when VRR is actually active on the output. *(high)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_XWAYLAND_MODE_CONTROL` | Property Steam sets to tell gamescope which resolution or mode a given Xwayland server should expose. It is used to set the game's resolution (gamescope_game_resolution_global) and native external resolution. *(medium)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPECTRL_REQUEST_SCREENSHOT` | Control property Steam sets to make gamescope take a screenshot, written to /tmp/gamescope.png. The gamescope_include_steamui_in_screenshots option decides whether Steam UI layers are included. *(high)* | steamui.so |
+| `STEAM_GAME` | Window property holding the app ID that a window belongs to. steamwebhelper and streaming_client set it on their own windows (769 marks the Steam UI), and gamescope uses it to map windows to apps for focus and overlays. *(high)* | steamwebhelper, streaming_client |
+| `STEAM_GAMES_RUNNING` | Property listing the app IDs of games Steam is currently running. gamescope or other session components read it, for example to know when a game is active. *(medium)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `STEAM_GAMESCOPE_VIEWPORT` | Window property that steamwebhelper's gamescope composer sets on its output window, to describe the viewport or region of the Steam UI layer that gamescope should composite. *(low)* | steamwebhelper |
+| `STEAM_GAMESCOPE_VIEWPORT_TARGET` | steamwebhelper property, probably marking the window or target that a gamescope viewport composites into; part of the gamescope composer protocol. *(low)* | steamwebhelper |
+| `STEAM_GAMESCOPE_VROVERLAY_TARGET` | steamwebhelper property, probably marking a browser window as the target to forward to a VR overlay through gamescope (GAMESCOPE_VROVERLAY_FORWARDING). *(low)* | steamwebhelper |
+| `STEAM_INPUT_FOCUS` | Window property Steam sets on its overlay or keyboard windows. It tells gamescope that the window should get input focus while it is shown, for example for the on-screen keyboard or overlay. The value is a flag. *(medium)* | steamwebhelper, vgui2_s.so |
+| `STEAM_NOTIFICATION` | Window property marking a steamwebhelper window as a Steam notification (toast). gamescope draws it in the notification layer above games without giving it focus. *(high)* | steamwebhelper |
+| `STEAM_OVERLAY` | Window property marking a Steam window (Quick Access, overlay or keyboard) as an overlay. gamescope composites it above the focused game instead of treating it as an app window. *(high)* | steamwebhelper, vgui2_s.so |
+| `STEAM_SCREEN_MAGNIFICATION` | Property Steam sets for its accessibility screen-magnification (zoom) feature, probably the zoom factor that gamescope should apply. *(low)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `STEAM_SCREEN_SCALE` | Property for the screen or UI scale factor that Steam publishes or reads in gamescope sessions, probably used together with magnification. *(low)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `STEAM_TOUCH_CLICK_MODE` | Root property that Steam sets to tell gamescope how touchscreen touches become mouse events (for example hover, left click or right click), following the touch-mode selection in Steam. *(medium)* | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |

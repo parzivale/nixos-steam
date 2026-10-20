@@ -1,9 +1,13 @@
 # Command-line switches
 
+> **What it does** is written from how the option is used in the code (strings and log messages near each
+> read site, related options, Valve help). The confidence tag *(high/medium/low)* follows each inferred description.
+> Untagged descriptions restate Valve's own help text.
+>
 > Generated from the Steam Linux client, bootstrap manifest version **1791918634**, by static analysis of the
 > 64-bit binaries in `steamrt64/` and `ubuntu12_64/`. See [../README.md](../README.md) for method and caveats.
 
-Every command-line switch the client binaries test for: **253** switches, **148** of which carry a
+Every command-line switch the client binaries test for: **252** switches, **148** of which carry a
 help string that Valve registered through `SteamStdLib::CCommandLineParam(name, help)`.
 
 You pass these to the `steam` launcher (e.g. `steam -dev -console`). `steam.sh` and the bootstrapper forward
@@ -18,258 +22,257 @@ unrecognised arguments to the client. Read-method legend:
 The analysis also found these protocol URLs used as launch arguments: `steam://open/bigpicture`, `steambeta://open/bigpicture`.
 
 
-| Switch | Description (Valve help text) | How it is read | Binaries |
-|---|---|---|---|
-| `-accesscode` |  | registered (CCommandLineParam) | steamui.so |
-| `-all_languages` |  | exists | vgui2_s.so |
-| `-allosarches` |  | internal parser | gamelauncher, steam |
-| `-allosvers` |  | internal parser | gamelauncher, steam |
-| `-allowbrowserviewunderlays` | Allow browser view underlays | registered (CCommandLineParam) | steamwebhelper |
-| `-allowremotediscovery` |  | exists | steamclient.so |
-| `-alwaysrelaunch` |  | internal parser | gamelauncher, steam |
-| `-applaunch` |  | compared against argv (V_strnicmp, inferred) | steamui.so |
-| `-arch` |  | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-batterytestmode` | rapidly cycle battery percentages for testing | registered (CCommandLineParam) | steamclient.so |
-| `-bigpicture` | Start in Steam Big Picture mode | registered (CCommandLineParam) | steamui.so |
-| `-bootreserve` |  | registered (CCommandLineParam) | steamclient.so |
-| `-bootreservesizemb` |  | registered (CCommandLineParam) | steamclient.so |
-| `-bootstrapperproxy` |  | internal parser | gamelauncher, steam |
-| `-buildid` | Build identifier for crash reporting | internal parser | steamsysinfo |
-| `-cafeapplaunch` | Launch apps in a cyber cafe context | registered (CCommandLineParam) | steamclient.so |
-| `-candidates` | Show libjingle candidates for local connection as they are processed | registered (CCommandLineParam) | steamclient.so |
-| `-ccsyntax` | Spew details about the localized strings we load | registered (CCommandLineParam) | vgui2_s.so |
-| `-cef-allow-browser-underlays` | Allow webhelper to create BrowserView underlays | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-disable-breakpad` | disables breakpad in crash dumps | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-disable-browser-underlays` | Disables support for BrowserView underlays | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-disable-gpu` | Disable GPU usage in CEF (force software rendering/compositing) | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-disable-gpu-compositing` | Disable GPU accelerated compositing in browsers | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-disable-gpu-sandbox` | disables CEF gpu-process sandbox | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-disable-hang-timeouts` | disables GPU and renderer hang timeouts | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-disable-hevc` | Disables hevc support | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-disable-js-logging` | disables console and log file logging of JS console events | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-disable-logging` | disables logging from CEF | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-disable-occlusion` | disables Chromium window occlusion testing | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-disable-renderer-restart` | Disable auto-restart of renderer process for existing browsers | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-disable-safe-shutdown-workaround` | Disable the usage of the safe browser shutdown workaround for Linux+NV | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-disable-sandbox` | disables sandboxing in CEF | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-disable-seccomp-sandbox` | disables CEF seccomp-bpf sandbox on Linux | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-disable-site-isolation` | disables per-process site-isolation | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-disable-touch-focus-workaround` | Disable touch input browser focus workaround | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-disable-xcomposite-workaround` | Disable the glcomposer workaround applied to some video drivers | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-enable-debugging` | enables Chromium remote debugging, defaulting to localhost:8080 | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-enable-gpu-debugging` | Enable GPU debugging in Chromium, costs a glGetError() call after every command | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-enable-low-delay-live-stream` | Reduce buffering requirements for live video playback | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-enable-vaapi` | Enable VA-API video decoding on Linux | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-force-accessibility` | Force enable CEF accessibility features | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-force-browser-underlays` | Force support for BrowserView underlays | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-force-gpu` | Force enable GPU acceleration | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-force-gpu-blocklist` | Force enable GPU blocklist | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-force-hw-video-decode` | Force enable HW accelerated video decoding | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-force-occlusion` | force enable Chromium window occlusion testing | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-force-opaque-backgrounds` | Force the usage of opaque backgrounds for CEF | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-force-sandbox` | force sandboxing in CEF | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-full-memory-crash-report` | enables full crash dumps | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-log-sandbox` | Enable sandbox logging in CEF | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-use-vulkan` | Use vulkan ANGLE backend | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-verbose-js-logging` | enables verbose logging of JS console events | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-verbose-logging` | enables verbose logging from CEF | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-cef-verbose-modules` | enables verbose logging for specific CEF modules | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-child-update-ui` |  | internal parser | gamelauncher, steam |
-| `-child-update-ui-socket` |  | internal parser | gamelauncher, steam |
-| `-chromeos` |  | exists | libtier0_s.so |
-| `-chromeosverbose` |  | exists; internal parser | chromehtml.so, crashhandler.so, filesystem_stdio.so, friendsui.so, gamelauncher, gameoverlayui.so, libvideo.so, libvstdlib_s.so, steam, steamclient.so, steamservice.so, steamsysinfo, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `-clearbeta` |  | internal parser | gamelauncher, steam |
-| `-clientbeta` | Overrides Steam client beta for single session | exists; internal parser | chromehtml.so, crashhandler.so, filesystem_stdio.so, friendsui.so, gamelauncher, gameoverlayui.so, libvideo.so, libvstdlib_s.so, steam, steamclient.so, steamservice.so, steamsysinfo, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `-compat` |  | exists | vgui2_s.so |
-| `-compat-disable-filtering` | Disable filtering of normally unlisted runtimes. | registered (CCommandLineParam) | steamclient.so |
-| `-compat-force-slr` | Force enable/disable using SLR 1.0 by default over legacy LD_* setup. | registered (CCommandLineParam) | steamclient.so |
-| `-complete_install_via_http` | Run installation completion over HTTP by default | registered (CCommandLineParam) | steamclient.so |
-| `-console` |  | registered (CCommandLineParam) | steamui.so |
-| `-controllertypeoverride` |  | registered (CCommandLineParam) | steamclient.so |
-| `-debug_steamapi` | enables logging of Steam API functions | registered (CCommandLineParam) | steamclient.so |
-| `-debugamf` | Enable AMF video encoding debug log | registered (CCommandLineParam) | steamui.so |
-| `-debugbreak` |  | exists; internal parser | crashhandler.so, gamelauncher, libtier0_s.so, libvideo.so, steam, steam_monitor, steamservice.so, steamsysinfo, streaming_client |
-| `-debugoutputlogs` |  | internal parser; registered (CCommandLineParam) | chromehtml.so, gamelauncher, gameoverlayui.so, steam, steamclient.so, steamsysinfo, steamui.so, steamwebhelper |
-| `-deckard` |  | exists | libtier0_s.so |
-| `-delaypageload` |  | registered (CCommandLineParam) | steamwebhelper |
-| `-dev` | enables developer spew | exists; internal parser; registered (CCommandLineParam) | chromehtml.so, friendsui.so, gamelauncher, gameoverlayui.so, steam, steamclient.so, steamui.so |
-| `-devsites` | Use local dev websites | internal parser; registered (CCommandLineParam) | friendsui.so, gameoverlayui.so, steamclient.so, steamui.so, steamwebhelper, streaming_client |
-| `-devsiteshost` | Pass the hostname, will generate dev site domains like store.{hostname}.steam.dev | internal parser; registered (CCommandLineParam) | friendsui.so, gameoverlayui.so, steamclient.so, steamui.so, steamwebhelper, streaming_client |
-| `-devtools-port` |  | value | chromehtml.so, steamclient.so |
-| `-disable-libusb` | Disable support for controllers requiring exclusive USB access | registered (CCommandLineParam) | steamclient.so |
-| `-disable-overlay-gpu-pri` | Disables setting webhelper GPU pri high when overlay visible | registered (CCommandLineParam) | steamclient.so |
-| `-disable-overlay-wait-for-cef-frame` | Disables waiting for pending CEF frame render when overlay visible. | registered (CCommandLineParam) | steamclient.so |
-| `-disable-winh264` | disables loading winh264.dll | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-disable_broadcast_webrtc` |  | exists | steamclient.so |
-| `-disable_safe_shutdown_workaround` |  | exists | steamwebhelper |
-| `-disablehighdpi` | disables high-DPI support in CEF | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-disablejslogging` | disable file and console logging of JS console events | registered (CCommandLineParam) | steamwebhelper |
-| `-disablelauncherservice` | Disable steam-runtime-launcher-service process. | registered (CCommandLineParam) | steamclient.so |
-| `-disablepartnerlicenses` | disable automatically granted partner licenses - impacts all web and client sessions, don't try to use with multiple active steam clients! | registered (CCommandLineParam) | steamclient.so |
-| `-disablerendererrestart` | disable auto-restarting a renderer for an existing browser | registered (CCommandLineParam) | steamwebhelper |
-| `-disabletouchfocusworkaround` | disable touch input browser focus workaround | registered (CCommandLineParam) | steamwebhelper |
-| `-disablevulkanlayer` | Prevents loading of Vulkan layer if overlay disabled | registered (CCommandLineParam) | steamclient.so |
-| `-display-scale=` |  | value | vgui2_s.so |
-| `-download` |  | internal parser | gamelauncher, steam |
-| `-drop` |  | compared against argv (V_strnicmp, inferred) | steamui.so |
-| `-dumpvideostream` | Dump the game stream as an elementary video file | registered (CCommandLineParam) | steamui.so |
-| `-enable-desktop-gl-fallback` |  | registered (CCommandLineParam) | steamui.so |
-| `-enable-devkit` | Enable devkit functionality | registered (CCommandLineParam) | steamui.so |
-| `-enable-keyring` | enables CEF usage of the Chromium keyring | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-enable-libusb` | Enable support for controllers requiring exclusive USB access | registered (CCommandLineParam) | steamclient.so |
-| `-enable-libusb-gamecube` | Enable support for Nintendo GameCube adapters in Wii-U mode | registered (CCommandLineParam) | steamclient.so |
-| `-exitsteam` |  | compared against argv (V_strnicmp, inferred); internal parser | gamelauncher, steam, steamui.so |
-| `-failsystemcheck` |  | internal parser | gamelauncher, steam |
-| `-flushconfig` |  | registered (CCommandLineParam) | steamui.so |
-| `-force-no-dbus-simulate-user-activity` |  | registered (CCommandLineParam) | steamclient.so, steamui.so |
-| `-force-oobe-stage1` | Force show stage1 oobe | registered (CCommandLineParam) | steamui.so |
-| `-force-oobe-stage2` | Force show stage2 oobe | registered (CCommandLineParam) | steamui.so |
-| `-forcebrowserviewunderlays` | Force enable browser view underlays | registered (CCommandLineParam) | steamwebhelper |
-| `-forcecontrollerappid` | Force a Specific AppID for Steam Controller Config - Prevents context/app switching from changing configuration | registered (CCommandLineParam) | steamui.so |
-| `-forcedeckcontroller` |  | exists; registered (CCommandLineParam) | steamclient.so |
-| `-forceguiupdater` |  | internal parser | gamelauncher, steam |
-| `-forcemanifestsuffix` |  | internal parser | gamelauncher, steam |
-| `-forcepackagedownload` |  | internal parser | gamelauncher, steam |
-| `-forcesteamupdate` |  | internal parser | gamelauncher, steam |
-| `-forceunsupportedos` |  | internal parser | gamelauncher, steam |
-| `-foreground` |  | compared against argv (V_strnicmp, inferred) | steamui.so |
-| `-friendsui` |  | registered (CCommandLineParam) | friendsui.so, gameoverlayui.so, steamclient.so, steamui.so |
-| `-fs_log` | Log file system accesses | internal parser; registered (CCommandLineParam) | filesystem_stdio.so, gamelauncher, steam |
-| `-fs_logbins` | Log the binaries we load during operation | internal parser; registered (CCommandLineParam) | filesystem_stdio.so, gamelauncher, steam |
-| `-fs_target` | Set target syntax | internal parser; registered (CCommandLineParam) | filesystem_stdio.so, gamelauncher, steam |
-| `-full_memory_dump` |  | internal parser | gamelauncher, steam |
-| `-fullscreen` | Set BPM to fullscreen | registered (CCommandLineParam) | steamui.so |
-| `-fullscreenopengl` | Use the full screen OpenGL render for the UI | registered (CCommandLineParam) | steamui.so |
-| `-gameid` |  | exists | gameoverlayui.so |
-| `-gameidlaunch` |  | compared against argv (V_strnicmp, inferred) | steamui.so |
-| `-gameinput` | Use Microsoft GameInput for controller support | registered (CCommandLineParam) | steamclient.so |
-| `-gamepadui` | Start in gamepadui mode | registered (CCommandLineParam) | steamui.so |
-| `-hardware-updater` |  | registered (CCommandLineParam) | steamui.so |
-| `-holo` |  | exists | libtier0_s.so |
-| `-hometest` |  | exists | steamui.so |
-| `-html-enable-tooltips` | Show browser tooltips | registered (CCommandLineParam) | friendsui.so, gameoverlayui.so, steamui.so |
-| `-html-perf-monitor` | Draws html perf data | registered (CCommandLineParam) | chromehtml.so, friendsui.so, gameoverlayui.so, steamclient.so, steamui.so |
-| `-ifrunning` |  | compared against argv (V_strnicmp, inferred); internal parser | gamelauncher, steam, steamui.so |
-| `-inf` |  | internal parser | chromehtml.so, friendsui.so, gameoverlayui.so, steamclient.so, steamui.so, steamwebhelper |
-| `-inhibitbootstrap` |  | internal parser | gamelauncher, steam |
-| `-init_universe` |  | registered (CCommandLineParam) | steamclient.so |
-| `-install` |  | compared against argv (V_strnicmp, inferred); exists | steamui.so |
-| `-installupdate` |  | internal parser | gamelauncher, steam |
-| `-language` | Set Steam client UI language | compared against argv (V_strnicmp, inferred); registered (CCommandLineParam) | steamui.so, vgui2_s.so |
-| `-led-enumerate-sysfs-all` | Enumerate all sysfs LED devices | registered (CCommandLineParam) | steamui.so |
-| `-log_voice` | writes voice chat data to the logs/voice_log.txt file | registered (CCommandLineParam) | steamclient.so |
-| `-logdir` | Directory to store logs | internal parser | steamsysinfo |
-| `-login` | Automatically logs in user | registered (CCommandLineParam) | steamui.so |
-| `-lognetapi` | logs all P2P networking info to log/netapi_log.txt | registered (CCommandLineParam) | steamclient.so |
-| `-longestloc` | Use longest string for each localization token | registered (CCommandLineParam) | steamui.so |
-| `-ltp` | use legacy token persistence scheme | registered (CCommandLineParam) | steamclient.so |
-| `-manuallyclearframes` | Should the overlay be manually clearing frames to black (because the game doesn't clear the entire screen?) | registered (CCommandLineParam) | gameoverlayui.so |
-| `-master_ipc_name_override` |  | internal parser; registered (CCommandLineParam) | gamelauncher, steam, steamui.so |
-| `-net_fake_state` | Set initial value for net_fake_state | registered (CCommandLineParam) | steamclient.so |
-| `-net_start_wifi_disabled` | Set the initial value for wifi enabled to false.  (Useful when emulating SteamDeck) | registered (CCommandLineParam) | steamclient.so |
-| `-no-cef-sandbox` | disables sandboxing in CEF | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
-| `-no-child-update-ui` |  | internal parser | gamelauncher, steam |
-| `-no-dwrite` | forces vgui to use GDI text even if DWrite support is available | registered (CCommandLineParam) | steamclient.so |
-| `-no-hardware-updater` |  | registered (CCommandLineParam) | steamui.so |
-| `-no-shared-textures` | forces overlay to avoid sharing texture handles with game process | registered (CCommandLineParam) | steamclient.so |
-| `-noassert` |  | exists; internal parser | crashhandler.so, gamelauncher, libtier0_s.so, libvideo.so, steam, steam_monitor, steamservice.so, steamsysinfo, streaming_client |
-| `-nobigpicture` | Start in regular mode (force Big Picture mode off) | registered (CCommandLineParam) | steamui.so |
-| `-nobootstrapperupdate` |  | internal parser | gamelauncher, steam |
-| `-noconsole` |  | registered (CCommandLineParam) | steamui.so |
-| `-nocrashdialog` |  | exists; internal parser | crashhandler.so, gamelauncher, libtier0_s.so, libvideo.so, steam, steam_monitor, steamservice.so, steamsysinfo, streaming_client |
-| `-nocrashmonitor` |  | registered (CCommandLineParam) | steamclient.so |
-| `-nodircheck` |  | internal parser | gamelauncher, steam |
-| `-nodpiscale` |  | exists | vgui2_s.so |
-| `-nofriendsui` |  | registered (CCommandLineParam) | friendsui.so, gameoverlayui.so, steamclient.so, steamui.so |
-| `-noipv6` |  | exists | steamclient.so |
-| `-nojoy` | Disable controller support | internal parser; registered (CCommandLineParam) | steamclient.so, streaming_client |
-| `-nojsreload` |  | registered (CCommandLineParam) | steamui.so |
-| `-nopcshutdown` | Skip PC power operations | registered (CCommandLineParam) | steamui.so |
-| `-norepairfiles` |  | internal parser | gamelauncher, steam |
-| `-noshaders` | Disable the shader manager | registered (CCommandLineParam) | steamclient.so |
-| `-noverifyfiles` |  | internal parser | gamelauncher, steam |
-| `-offlinemode` | Always attempt to start in offline mode | registered (CCommandLineParam) | steamui.so |
-| `-openalldevtools` | Open Chrome devtools on launch for every HTML window | exists; registered (CCommandLineParam) | friendsui.so, gameoverlayui.so, steamui.so |
-| `-opendevtools` | Open Chrome devtools for shared JS context (offscreen window) on launch | registered (CCommandLineParam) | friendsui.so, steamclient.so, steamui.so |
-| `-opengl` | Use the OpenGL render for the UI | registered (CCommandLineParam) | steamui.so |
-| `-openoverlaydevtools` | Open Chrome devtools on creation of any overlay browsers | registered (CCommandLineParam) | friendsui.so, steamui.so |
-| `-out-file` | Store the response in a file | internal parser | steamsysinfo |
-| `-overlay-gpu-pri-delay` | Set ms delay between overlay GPU priority changes | registered (CCommandLineParam) | steamclient.so |
-| `-overlaylogging` | Enables logging from overlay renderer | registered (CCommandLineParam) | steamclient.so |
-| `-overlaytestmode` | Forces overlay testmode mode for debugging | registered (CCommandLineParam) | steamclient.so |
-| `-overrideminos` |  | internal parser | gamelauncher, steam |
-| `-pid` | Pid that we should be watching for | registered (CCommandLineParam) | chromehtml.so, gameoverlayui.so, vgui2_s.so |
-| `-pipewire` | Enable PipeWire desktop capture | registered (CCommandLineParam) | steamui.so |
-| `-pipewire-dmabuf` | Enable PipeWire desktop capture using DMA-BUF | registered (CCommandLineParam) | steamui.so |
-| `-pipewire-fresh-start` | Clear all Pipewire capture tokens and re-prompt user for what to capture | registered (CCommandLineParam) | steamui.so |
-| `-pipewire-record-deck-ui` | Record Steam UI elements on SteamDeck | registered (CCommandLineParam) | steamui.so |
-| `-pretendeol` |  | registered (CCommandLineParam) | steamui.so |
-| `-pretendeol32` |  | registered (CCommandLineParam) | steamui.so |
-| `-preventsteamdiscovery` |  | exists | steamclient.so |
-| `-private_ip_override` |  | registered (CCommandLineParam) | steamclient.so |
-| `-profilestartup` |  | compared against argv (V_strnicmp, inferred); registered (CCommandLineParam) | chromehtml.so, steamclient.so, steamui.so |
-| `-pyrowavestats` | Log pyrowave encoding performance to streaming_log.txt | registered (CCommandLineParam) | steamui.so |
-| `-query` | Value is one of EChildProcessQueryCommand | internal parser | steamsysinfo |
-| `-query-arg` | Argument for the query, the meaning depends on the query | internal parser | steamsysinfo |
-| `-quicklogin` | Set the base used to construct quick login URLs | internal parser; registered (CCommandLineParam) | friendsui.so, gameoverlayui.so, steamclient.so, steamui.so, steamwebhelper, streaming_client |
-| `-rememberpassword` | If logging in user with credentials specified on the command line, proceed as if 'remember my password' had been enabled | registered (CCommandLineParam) | steamui.so |
-| `-set_locale_disable` |  | internal parser | gamelauncher, steam |
-| `-setbeta` | Sets Steam client beta branch | internal parser | gamelauncher, steam |
-| `-showallbetas` | Disable client beta filtering | registered (CCommandLineParam) | steamui.so |
-| `-shutdown` |  | compared against argv (V_strnicmp, inferred) | steamui.so |
-| `-silent` | Silent startup mode (tray mode only) | internal parser; registered (CCommandLineParam) | friendsui.so, gamelauncher, steam, steamui.so |
-| `-simulatedownloaderrors` |  | internal parser | gamelauncher, steam |
-| `-simulatefatalerror` |  | internal parser | gamelauncher, steam |
-| `-single_core` | Force Steam to run on your primary CPU only | internal parser; registered (CCommandLineParam) | steamclient.so, steamservice.so |
-| `-singleapp` |  | internal parser; value | steam, steamui.so |
-| `-sitelicense` |  | exists | steamclient.so |
-| `-skipinitialbootstrap` |  | internal parser | gamelauncher, steam |
-| `-skipstreamingdrivers` | Skip streaming driver checks | registered (CCommandLineParam) | steamclient.so |
-| `-skipsystemcheck` |  | internal parser | gamelauncher, steam |
-| `-sls-skip-version-check` | Don't validate the SLS version before starting | registered (CCommandLineParam) | steamui.so |
-| `-srt-logger-opened` |  | internal parser | gamelauncher, steam |
-| `-stack=` |  | value | libtier0_s.so |
-| `-steamchina` |  | internal parser | steam |
-| `-steamconsole` |  | exists | steamui.so |
-| `-steamdeck` |  | exists | libtier0_s.so |
-| `-steamdeckdisplay` |  | internal parser; registered (CCommandLineParam) | chromehtml.so, gamelauncher, gameoverlayui.so, steam, steamclient.so, steamservice.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `-steamframe` |  | exists | libtier0_s.so |
-| `-steamid` | Steam user identifier | internal parser | steamsysinfo |
-| `-steaminstaller` |  | compared against argv (V_strnicmp, inferred) | steamui.so |
-| `-steammachinedisplay` |  | internal parser; registered (CCommandLineParam) | chromehtml.so, gamelauncher, gameoverlayui.so, steam, steamclient.so, steamservice.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `-steamos` |  | internal parser | gamelauncher, steam |
-| `-steamos3` |  | exists | libtier0_s.so |
-| `-steampid` | Steam pid that launched us | registered (CCommandLineParam) | gameoverlayui.so |
-| `-system-composer` | Force the use of the system browser composer | registered (CCommandLineParam) | steamui.so |
-| `-tenfoot` | Start in Steam Big Picture mode | registered (CCommandLineParam) | steamui.so |
-| `-tesla` |  | exists | libtier0_s.so |
-| `-testled` | Create a test LED device | registered (CCommandLineParam) | steamui.so |
-| `-testlongoobeupdater` |  | exists | steamclient.so |
-| `-testoobe` |  | exists | chromehtml.so, steamclient.so, steamui.so |
-| `-testoobestage2` |  | exists | steamui.so |
-| `-testoobeupdater` | Use a dummy updater during oobe | registered (CCommandLineParam) | steamclient.so |
-| `-testssa` | force display of SSA | registered (CCommandLineParam) | steamui.so |
-| `-teststoragedata` | Enable test storage data | registered (CCommandLineParam) | steamui.so |
-| `-testupdater` |  | exists | steamclient.so |
-| `-textclient` |  | internal parser | gamelauncher, steam |
-| `-toggle-overlay-html-mode` | Disables new faster overlay HTML path (or enables if on a branch it's not on by default for) / Disables new faster overlay HTML path (or enables if on a branch it's not on by default) / Disables new faster overlay HTML path (or enables in branches it's not yet on by default for) | registered (CCommandLineParam) | chromehtml.so, friendsui.so, gameoverlayui.so, steamclient.so, steamui.so |
-| `-uninstall` |  | compared against argv (V_strnicmp, inferred) | steamui.so |
-| `-use_xcomposite_workaround` |  | exists | steamwebhelper |
-| `-usepipewireaudio` | Enabled the pipewire audio backend | registered (CCommandLineParam) | steamclient.so |
-| `-userchooser` | Sends the user to the User Chooser even if they have 0 or 1 accounts | registered (CCommandLineParam) | steamui.so |
-| `-verbose` |  | exists | steamclient.so |
-| `-verbose-computer-activity` | Verbose computer activity detection. | registered (CCommandLineParam) | steamclient.so |
-| `-verbosejslogging` | enable verbose logging of JS console events | registered (CCommandLineParam) | steamwebhelper |
-| `-verifyfiles` |  | exists; internal parser | gamelauncher, steam, steamclient.so |
-| `-vguifocus` | Print out details of which panel has keyboard focus | registered (CCommandLineParam) | vgui2_s.so |
-| `-vguimessages` | set to see debug vgiui2 messages | registered (CCommandLineParam) | friendsui.so, gameoverlayui.so, steamui.so, vgui2_s.so |
-| `-voicerelay` | Only allow 'relay' connections for voice (testing). | registered (CCommandLineParam) | steamclient.so |
-| `-vrdisable` | Disable VR - never even try to load OpenVR DLLs | registered (CCommandLineParam) | steamclient.so |
-| `-vrforce` | Always perform Hmd status check even if we crashed the last time we tried | registered (CCommandLineParam) | steamclient.so |
-| `-vrlinkforceenable` | Force-enable VR Link capability for testing regardless of platform/encoder | registered (CCommandLineParam) | steamclient.so |
-| `-vronly` |  | registered (CCommandLineParam) | steamui.so |
-| `-vrskip` | Skip VR initialization entirely no matter who asks for it | registered (CCommandLineParam) | steamclient.so |
-| `-vrverbose` | Output additional logging for diagnostics | registered (CCommandLineParam) | steamclient.so |
-| `-websocket` | forces connection to Steam backend to be via WebSocket | registered (CCommandLineParam) | steamclient.so |
-| `-websocketignorecertissues` | says it's ok to ignore cert validation issues if using WebSocket connections, for dev use only | registered (CCommandLineParam) | steamclient.so |
-| `-windowed` | Set BPM to windowed | internal parser; registered (CCommandLineParam) | gamelauncher, steam, steamui.so |
+| Switch | What it does | Valve help text | How it is read | Binaries |
+|---|---|---|---|---|
+| `-accesscode` | Steam UI (steamui.so) switch, probably supplying an access/activation code at startup; the related `-accesscode=` form is forwarded by the client's command-line handler alongside `-login`/`-applaunch`, so it likely takes `-accesscode=<code>`. Purpose not confirmed. *(low)* |  | registered (CCommandLineParam) | steamui.so |
+| `-all_languages` | VGUI localization (vgui2_s.so) flag: load localization files for all languages instead of only the current `%language%` one, probably for translation testing. Presence flag. *(medium)* |  | exists | vgui2_s.so |
+| `-allosarches` | Bootstrapper flag: request client packages for every OS architecture rather than only the running one, typically for mirroring or testing the package manifest. Presence flag. *(medium)* |  | internal parser | gamelauncher, steam |
+| `-allosvers` | Bootstrapper flag: request client packages for every OS version in the manifest, not just the current one. Presence flag; pairs with `-allosarches`. *(medium)* |  | internal parser | gamelauncher, steam |
+| `-allowbrowserviewunderlays` | steamwebhelper flag (Valve: allow browser view underlays). It is the webhelper-side counterpart of `-cef-allow-browser-underlays`, which steamclient passes through when launching the webhelper. | Allow browser view underlays | registered (CCommandLineParam) | steamwebhelper |
+| `-allowremotediscovery` | steamclient.so flag for the Remote Play / In-Home Streaming client manager: probably allows this client to be discovered by, or to discover, remote Steam clients. It sits next to the opposite switch `-preventsteamdiscovery`. *(low)* |  | exists | steamclient.so |
+| `-alwaysrelaunch` | Bootstrapper flag: always re-exec the client after the update step, even when nothing changed. Presence flag. *(medium)* |  | internal parser | gamelauncher, steam |
+| `-applaunch` | Launch a game when Steam starts: `steam -applaunch <appid> [game args...]`. It is handled by the Steam UI command-line dispatcher (CSteamDoc::ExecCommandLine) and also forwarded to an already running instance. *(high)* |  | compared against argv (V_strnicmp, inferred) | steamui.so |
+| `-arch` | Registered in steamclient/chromehtml next to the CEF switches, and the bootstrapper uses it to request packages for a given architecture. Probably takes an architecture value such as `-arch x64`; the client also appends `&ARCH=%s` to the Steam UI URL. *(low)* |  | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-batterytestmode` | Test hook in the steamclient system manager. It makes the reported battery percentage cycle rapidly instead of reading SDL_GetPowerInfo, so the battery UI can be exercised on Deck-style devices. | rapidly cycle battery percentages for testing | registered (CCommandLineParam) | steamclient.so |
+| `-bigpicture` | Start the client directly in Big Picture mode (steamui.so). Related switches: `-tenfoot` (alias), `-gamepadui` and `-nobigpicture` (force off). | Start in Steam Big Picture mode | registered (CCommandLineParam) | steamui.so |
+| `-bootreserve` | steamclient.so flag, probably reserving a block of disk space at boot as a safety buffer (sized by `-bootreservesizemb`). Evidence is only adjacent strings. *(low)* |  | registered (CCommandLineParam) | steamclient.so |
+| `-bootreservesizemb` | steamclient.so switch that probably takes a size in MB for the `-bootreserve` reservation (`-bootreservesizemb <MB>`). Evidence is only the name. *(low)* |  | registered (CCommandLineParam) | steamclient.so |
+| `-bootstrapperproxy` | Bootstrapper switch that takes an argument: an HTTP proxy used for the bootstrapper's own package downloads. *(medium)* |  | internal parser | gamelauncher, steam |
+| `-buildid` | steamsysinfo option: `-buildid <id>`, the build identifier attached to crash reports. It is used together with `-steamid`, `-logdir`, `-query` and `-out-file`. | Build identifier for crash reporting | internal parser | steamsysinfo |
+| `-cafeapplaunch` | steamclient.so switch: launch apps in a cyber-cafe (internet cafe licensing) context. Presence flag. | Launch apps in a cyber cafe context | registered (CCommandLineParam) | steamclient.so |
+| `-candidates` | steamclient.so debug flag: log the libjingle ICE candidates for local P2P/streaming connections as they are processed. | Show libjingle candidates for local connection as they are processed | registered (CCommandLineParam) | steamclient.so |
+| `-ccsyntax` | VGUI localization debug flag: log details about each localized string file and token that is loaded. Useful together with `-language`. | Spew details about the localized strings we load | registered (CCommandLineParam) | vgui2_s.so |
+| `-cef-allow-browser-underlays` | CEF switch: allow steamwebhelper to create BrowserView underlays. steamclient forwards it to the webhelper as `-allowbrowserviewunderlays`. | Allow webhelper to create BrowserView underlays | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-disable-breakpad` | CEF switch: disable Breakpad crash reporting in steamwebhelper. | disables breakpad in crash dumps | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-disable-browser-underlays` | CEF switch: turn off BrowserView underlay support in steamwebhelper. It is the opposite of `-cef-force-browser-underlays`. | Disables support for BrowserView underlays | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-disable-gpu` | CEF switch: disable GPU use in steamwebhelper, forcing software rendering and compositing. This is a common workaround for black or flickering Steam windows caused by driver problems. | Disable GPU usage in CEF (force software rendering/compositing) | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-disable-gpu-compositing` | CEF switch: disable GPU-accelerated compositing in steamwebhelper while other GPU use stays enabled. | Disable GPU accelerated compositing in browsers | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-disable-gpu-sandbox` | CEF switch: disable the Chromium GPU-process sandbox in steamwebhelper. | disables CEF gpu-process sandbox | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-disable-hang-timeouts` | CEF switch: disable Chromium's GPU and renderer hang watchdogs, so a stalled webhelper process isn't killed. Useful when debugging the webhelper. | disables GPU and renderer hang timeouts | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-disable-hevc` | CEF switch: disable HEVC (H.265) video support in steamwebhelper. | Disables hevc support | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-disable-js-logging` | CEF switch: stop logging Steam UI JavaScript console messages to the console and to the webhelper log file. | disables console and log file logging of JS console events | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-disable-logging` | CEF switch: disable CEF/Chromium logging from steamwebhelper. | disables logging from CEF | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-disable-occlusion` | CEF switch: disable Chromium's window-occlusion detection, so hidden or covered Steam windows keep rendering. | disables Chromium window occlusion testing | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-disable-renderer-restart` | CEF switch: don't automatically restart a crashed renderer process for an existing browser. | Disable auto-restart of renderer process for existing browsers | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-disable-safe-shutdown-workaround` | CEF switch: turn off the safe browser shutdown workaround that is otherwise applied on Linux with NVIDIA drivers. It is forwarded to the webhelper as `-disable_safe_shutdown_workaround`; the env var `STEAM_DISABLE_BROWSER_SHUTDOWN_WORKAROUND` has the same effect. | Disable the usage of the safe browser shutdown workaround for Linux+NV | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-disable-sandbox` | CEF switch: disable Chromium sandboxing in steamwebhelper. `-no-cef-sandbox` is registered next to it as an equivalent. | disables sandboxing in CEF | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-disable-seccomp-sandbox` | CEF switch: disable only the Linux seccomp-bpf layer of the Chromium sandbox. | disables CEF seccomp-bpf sandbox on Linux | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-disable-site-isolation` | CEF switch: disable Chromium per-site process isolation, which reduces the number of renderer processes. | disables per-process site-isolation | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-disable-touch-focus-workaround` | CEF switch: turn off the touch-input browser-focus workaround. It is forwarded to the webhelper as `-disabletouchfocusworkaround`. | Disable touch input browser focus workaround | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-disable-xcomposite-workaround` | CEF switch: turn off the glcomposer/XComposite workaround that is applied automatically for some video drivers. | Disable the glcomposer workaround applied to some video drivers | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-enable-debugging` | CEF switch: enable Chromium remote debugging (DevTools protocol) on localhost:8080 by default; the port can be changed with `-devtools-port`. Afterwards you can attach Chrome DevTools to the Steam UI. | enables Chromium remote debugging, defaulting to localhost:8080 | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-enable-gpu-debugging` | CEF switch: enable Chromium GPU debugging, which runs glGetError() after every GL command. It is very slow. | Enable GPU debugging in Chromium, costs a glGetError() call after every command | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-enable-low-delay-live-stream` | CEF switch: reduce buffering for live video playback (e.g. Steam Broadcasts) in the webhelper. | Reduce buffering requirements for live video playback | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-enable-vaapi` | CEF switch: enable VA-API hardware video decoding in steamwebhelper on Linux. | Enable VA-API video decoding on Linux | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-force-accessibility` | CEF switch: force-enable Chromium accessibility. The webhelper is then started with `--force-renderer-accessibility`, for screen readers. | Force enable CEF accessibility features | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-force-browser-underlays` | CEF switch: force BrowserView underlays on even where they are off by default. It is forwarded to the webhelper as `-forcebrowserviewunderlays`. | Force support for BrowserView underlays | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-force-gpu` | CEF switch: force GPU acceleration in steamwebhelper even where it would be disabled (e.g. by the blocklist). | Force enable GPU acceleration | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-force-gpu-blocklist` | CEF switch: force Chromium's GPU driver blocklist on, so blocklisted GPUs fall back to software. | Force enable GPU blocklist | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-force-hw-video-decode` | CEF switch: force hardware-accelerated video decoding in steamwebhelper. | Force enable HW accelerated video decoding | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-force-occlusion` | CEF switch: force Chromium window-occlusion detection on. It is the opposite of `-cef-disable-occlusion`. | force enable Chromium window occlusion testing | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-force-opaque-backgrounds` | CEF switch: force opaque, non-transparent backgrounds for CEF browsers. Possibly a workaround for compositors that render transparency badly. | Force the usage of opaque backgrounds for CEF | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-force-sandbox` | CEF switch: force the Chromium sandbox on even where Steam would disable it. | force sandboxing in CEF | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-full-memory-crash-report` | CEF switch: write full-memory crash dumps for steamwebhelper crashes instead of minidumps. | enables full crash dumps | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-log-sandbox` | CEF switch: enable logging of Chromium sandbox decisions in steamwebhelper. | Enable sandbox logging in CEF | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-use-vulkan` | CEF switch: run Chromium's ANGLE graphics layer on its Vulkan backend instead of the default GL backend. | Use vulkan ANGLE backend | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-verbose-js-logging` | CEF switch: log Steam UI JavaScript console events verbosely. It is forwarded to the webhelper as `-verbosejslogging`. | enables verbose logging of JS console events | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-verbose-logging` | CEF switch: enable verbose Chromium/CEF logging in steamwebhelper. | enables verbose logging from CEF | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-cef-verbose-modules` | CEF switch: enable verbose logging for selected CEF modules. It probably takes a module list in Chromium `--vmodule` style; the format is not confirmed. *(medium)* | enables verbose logging for specific CEF modules | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-child-update-ui` | Internal bootstrapper flag: marks a process as the forked child that draws the update/progress UI. It is not meant to be passed by hand. *(high)* |  | internal parser | gamelauncher, steam |
+| `-child-update-ui-socket` | Internal bootstrapper switch: `-child-update-ui-socket <fd>` gives the update-UI child the IPC socket for talking to the parent bootstrapper. *(high)* |  | internal parser | gamelauncher, steam |
+| `-chromeos` | ChromeOS (Borealis) integration flag read by tier0 platform detection. It makes Steam behave as the ChromeOS build. *(medium)* |  | exists | libtier0_s.so |
+| `-chromeosverbose` | ChromeOS (Borealis) verbose flag: more logging for ChromeOS-specific paths, such as the disk-space management that calls `/usr/bin/crosdisk` (BEnsureDiskSpaceAvailable / BReleaseExcessDiskSpace). *(medium)* |  | exists; internal parser | chromehtml.so, crashhandler.so, filesystem_stdio.so, friendsui.so, gamelauncher, gameoverlayui.so, libvideo.so, libvstdlib_s.so, steam, steamclient.so, steamservice.so, steamsysinfo, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `-clearbeta` | Bootstrapper flag: leave the client beta and return to the stable branch by removing `package/beta`. Platform-specific branch prefixes (`steamdeck_`, `steampal_`, `chromeos_`) are handled near it. *(medium)* |  | internal parser | gamelauncher, steam |
+| `-clientbeta` | `-clientbeta <branch>`: run a different client beta branch for this session only, without changing the saved `package/beta`. The log says "Overriding client beta for this session ... (clientbeta flag)". | Overrides Steam client beta for single session | exists; internal parser | chromehtml.so, crashhandler.so, filesystem_stdio.so, friendsui.so, gamelauncher, gameoverlayui.so, libvideo.so, libvstdlib_s.so, steam, steamclient.so, steamservice.so, steamsysinfo, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `-compat` | VGUI flag, probably a compatibility mode for UI DPI scaling (it sits next to the `DPIScaling` registry value and `-nodpiscale`). *(low)* |  | exists | vgui2_s.so |
+| `-compat-disable-filtering` | Steam Play/compat tools switch: show compatibility tools/runtimes that are normally hidden (unlisted) in the selection UI. | Disable filtering of normally unlisted runtimes. | registered (CCommandLineParam) | steamclient.so |
+| `-compat-force-slr` | Steam Play switch: force the Steam Linux Runtime 1.0 (scout) container on or off by default for native Linux games, instead of the legacy LD_* library-path setup. Probably takes a 0/1 value. *(medium)* | Force enable/disable using SLR 1.0 by default over legacy LD_* setup. | registered (CCommandLineParam) | steamclient.so |
+| `-complete_install_via_http` | steamclient.so switch: run install-completion steps over HTTP by default instead of the CM connection. Presence flag. *(medium)* | Run installation completion over HTTP by default | registered (CCommandLineParam) | steamclient.so |
+| `-console` | Steam UI flag: enable the developer console in the client (Console tab / `steam://open/console`), where the concommands documented here are typed. `-noconsole` is the opposite. *(high)* |  | registered (CCommandLineParam) | steamui.so |
+| `-controllertypeoverride` | steamclient.so controller switch that probably takes a controller type value and overrides the detected controller type. It sits next to `-forcedeckcontroller` and haptic convars. *(low)* |  | registered (CCommandLineParam) | steamclient.so |
+| `-debug_steamapi` | steamclient.so switch: log Steam API (steamworks interface) calls made by games. Output probably goes to the `apiwarning_log`/steam_api log. | enables logging of Steam API functions | registered (CCommandLineParam) | steamclient.so |
+| `-debugamf` | Steam UI switch: enable AMD AMF video-encoder debug logging. This affects Remote Play and game recording encode paths. | Enable AMF video encoding debug log | registered (CCommandLineParam) | steamui.so |
+| `-debugbreak` | Low-level (tier0) debug flag read by the bootstrapper, crashhandler, steamservice and others: trigger a debugger break at startup so a debugger can attach. Presence flag. *(medium)* |  | exists; internal parser | crashhandler.so, gamelauncher, libtier0_s.so, libvideo.so, steam, steam_monitor, steamservice.so, steamsysinfo, streaming_client |
+| `-debugoutputlogs` | Mirror log output to the debug output/console as well as the log files. It is read by the bootstrapper, client, overlay and webhelper; `log_files_always_flush` and `STEAM_CLIENT_LOG_FOLDER` sit next to it. *(medium)* |  | internal parser; registered (CCommandLineParam) | chromehtml.so, gamelauncher, gameoverlayui.so, steam, steamclient.so, steamsysinfo, steamui.so, steamwebhelper |
+| `-deckard` | tier0 platform flag named after the hardware codename Deckard (related to `-steamframe`). It makes the client behave as that device. Exact effect unknown. *(low)* |  | exists | libtier0_s.so |
+| `-delaypageload` | steamwebhelper switch, probably delaying the initial page load in the webhelper (e.g. to give time to attach a debugger). Evidence is only the name. *(low)* |  | registered (CCommandLineParam) | steamwebhelper |
+| `-dev` | Developer mode: enables developer log output and dev features across the bootstrapper, client, UI and overlay. Examples are extra HTML context-menu items (View Source, Open DevTools, Inspect Element), the WebUI transport server-status endpoint, and devkit controller hooks. | enables developer spew | exists; internal parser; registered (CCommandLineParam) | chromehtml.so, friendsui.so, gamelauncher, gameoverlayui.so, steam, steamclient.so, steamui.so |
+| `-devsites` | Point the client's web pages (store, community, etc.) at Valve's local development websites instead of production. Used together with `-devsiteshost`. | Use local dev websites | internal parser; registered (CCommandLineParam) | friendsui.so, gameoverlayui.so, steamclient.so, steamui.so, steamwebhelper, streaming_client |
+| `-devsiteshost` | `-devsiteshost <hostname>`: build dev site domains such as `store.<hostname>.steam.dev` for `-devsites`. This is Valve-internal. | Pass the hostname, will generate dev site domains like store.{hostname}.steam.dev | internal parser; registered (CCommandLineParam) | friendsui.so, gameoverlayui.so, steamclient.so, steamui.so, steamwebhelper, streaming_client |
+| `-devtools-port` | `-devtools-port <port>`: sets the Chromium remote-debugging port of steamwebhelper (passed as `--remote-debugging-port=%s`, bound to 127.0.0.1 with `--remote-allow-origins=*`). The default is 8080. Use it with `-cef-enable-debugging`. *(high)* |  | value | chromehtml.so, steamclient.so |
+| `-disable-libusb` | Disable the steamclient controller support for devices that need exclusive USB (libusb) access. It is the opposite of `-enable-libusb`. | Disable support for controllers requiring exclusive USB access | registered (CCommandLineParam) | steamclient.so |
+| `-disable-overlay-gpu-pri` | Overlay switch: don't raise steamwebhelper's GPU scheduling priority while the in-game overlay is visible. The delay between priority changes is set by `-overlay-gpu-pri-delay`. | Disables setting webhelper GPU pri high when overlay visible | registered (CCommandLineParam) | steamclient.so |
+| `-disable-overlay-wait-for-cef-frame` | Overlay switch: don't wait for a pending CEF frame to finish rendering before presenting while the overlay is visible. Possibly reduces stalls at the cost of stale or partial overlay frames. | Disables waiting for pending CEF frame render when overlay visible. | registered (CCommandLineParam) | steamclient.so |
+| `-disable-winh264` | Windows-only CEF switch: don't load winh264.dll for H.264 decoding. It has no effect on Linux. | disables loading winh264.dll | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-disable_broadcast_webrtc` | steamclient.so flag: disable the WebRTC transport for Steam Broadcasting sessions (`Broadcast.BeginBroadcastSession`). Presence flag. *(medium)* |  | exists | steamclient.so |
+| `-disable_safe_shutdown_workaround` | steamwebhelper flag: skip the safe browser shutdown workaround (logs "Skipping safe browser shutdown workaround: disabled"). Same as setting `STEAM_DISABLE_BROWSER_SHUTDOWN_WORKAROUND`; the client sets it from `-cef-disable-safe-shutdown-workaround`. *(high)* |  | exists | steamwebhelper |
+| `-disablehighdpi` | CEF switch: disable high-DPI scaling support in steamwebhelper. | disables high-DPI support in CEF | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-disablejslogging` | steamwebhelper switch: disable file and console logging of JS console events. This is the webhelper-side form of `-cef-disable-js-logging`. | disable file and console logging of JS console events | registered (CCommandLineParam) | steamwebhelper |
+| `-disablelauncherservice` | steamclient.so switch: don't start the `steam-runtime-launcher-service` helper process. That process lets commands be run inside a game's pressure-vessel container for debugging. | Disable steam-runtime-launcher-service process. | registered (CCommandLineParam) | steamclient.so |
+| `-disablepartnerlicenses` | Valve/partner dev switch: disable automatically granted partner licenses. Valve warns that this affects all web and client sessions of the account, so don't use it with several active clients. | disable automatically granted partner licenses - impacts all web and client sessions, don't try to use with multiple active steam clients! | registered (CCommandLineParam) | steamclient.so |
+| `-disablerendererrestart` | steamwebhelper switch: don't auto-restart a crashed renderer for an existing browser. This is the webhelper-side form of `-cef-disable-renderer-restart`. | disable auto-restarting a renderer for an existing browser | registered (CCommandLineParam) | steamwebhelper |
+| `-disabletouchfocusworkaround` | steamwebhelper switch: disable the touch-input focus workaround. This is the webhelper-side form of `-cef-disable-touch-focus-workaround`. | disable touch input browser focus workaround | registered (CCommandLineParam) | steamwebhelper |
+| `-disablevulkanlayer` | Overlay switch: when the overlay is disabled, also stop loading Steam's Vulkan overlay layer into games. | Prevents loading of Vulkan layer if overlay disabled | registered (CCommandLineParam) | steamclient.so |
+| `-display-scale=` | VGUI (legacy UI) switch `-display-scale=<factor>`: overrides the X11 display scale factor, which otherwise comes from things like `GDK_SCALE`. The format is assumed numeric. *(medium)* |  | value | vgui2_s.so |
+| `-download` | Bootstrapper flag: download the client package set only, probably without installing or launching. The related strings are about package download and metrics caching. *(low)* |  | internal parser | gamelauncher, steam |
+| `-drop` | Steam UI command-line verb handled by CSteamDoc::ExecCommandLine together with `-applaunch`/`-install`. It probably means drag-and-drop or dropped-file handling; the meaning is unclear. *(low)* |  | compared against argv (V_strnicmp, inferred) | steamui.so |
+| `-dumpvideostream` | Remote Play debug switch: write the received game stream to disk as an elementary (raw H.264/HEVC) video file. | Dump the game stream as an elementary video file | registered (CCommandLineParam) | steamui.so |
+| `-enable-desktop-gl-fallback` | Steam UI switch, probably allowing a fallback to desktop OpenGL for UI rendering when the preferred path fails. It sits next to `-opengl`/`-fullscreenopengl`. *(low)* |  | registered (CCommandLineParam) | steamui.so |
+| `-enable-devkit` | Enable Steam devkit features in the client: the devkit service used for SteamOS/Deck game development, and app-management console commands such as `app_install`. | Enable devkit functionality | registered (CCommandLineParam) | steamui.so |
+| `-enable-keyring` | CEF switch: let steamwebhelper use the Chromium/OS keyring (e.g. GNOME Keyring/KWallet) for stored secrets instead of basic storage. | enables CEF usage of the Chromium keyring | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-enable-libusb` | Enable steamclient controller support for devices that need exclusive USB (libusb) access, instead of the kernel/hidraw path. | Enable support for controllers requiring exclusive USB access | registered (CCommandLineParam) | steamclient.so |
+| `-enable-libusb-gamecube` | Enable support for the Nintendo GameCube controller adapter in Wii U mode through libusb. | Enable support for Nintendo GameCube adapters in Wii-U mode | registered (CCommandLineParam) | steamclient.so |
+| `-exitsteam` | Ask an already running Steam to exit. The bootstrapper forwards the command line to the running instance and the Steam UI handles it in CSteamDoc::ExecCommandLine. Comparable to `-shutdown`. *(high)* |  | compared against argv (V_strnicmp, inferred); internal parser | gamelauncher, steam, steamui.so |
+| `-failsystemcheck` | Bootstrapper test hook: make the system requirements check fail on purpose, to test the failure dialog. *(medium)* |  | internal parser | gamelauncher, steam |
+| `-flushconfig` | Steam UI flag, probably resetting or flushing local client configuration (for example cached UI/dialog config) at startup, much like Steam's old `steam://flushconfig`. Exact scope unconfirmed. *(low)* |  | registered (CCommandLineParam) | steamui.so |
+| `-force-no-dbus-simulate-user-activity` | Client/UI flag: never call the D-Bus 'simulate user activity' (screensaver inhibit / wake) method, probably for desktops where it misbehaves. *(medium)* |  | registered (CCommandLineParam) | steamclient.so, steamui.so |
+| `-force-oobe-stage1` | Force the first stage of the out-of-box experience (first-boot setup on Steam Deck/SteamOS) to show. | Force show stage1 oobe | registered (CCommandLineParam) | steamui.so |
+| `-force-oobe-stage2` | Force the second stage of the out-of-box experience (post-login setup on SteamOS/Deck) to show. | Force show stage2 oobe | registered (CCommandLineParam) | steamui.so |
+| `-forcebrowserviewunderlays` | steamwebhelper switch: force browser view underlays on. This is the webhelper-side form of `-cef-force-browser-underlays`. | Force enable browser view underlays | registered (CCommandLineParam) | steamwebhelper |
+| `-forcecontrollerappid` | `-forcecontrollerappid <appid>`: lock Steam Input to the controller configuration of the given app, so switching apps or context doesn't change the active config. Used for testing controller configs. | Force a Specific AppID for Steam Controller Config - Prevents context/app switching from changing configuration | registered (CCommandLineParam) | steamui.so |
+| `-forcedeckcontroller` | steamclient.so flag: treat the built-in controller as a Steam Deck controller, as when running on a Deck (registry markers `IsSteamDeck`). Mainly for emulating Deck input. *(medium)* |  | exists; registered (CCommandLineParam) | steamclient.so |
+| `-forceguiupdater` | Bootstrapper flag: always use the graphical update/progress window rather than the text UI. *(medium)* |  | internal parser | gamelauncher, steam |
+| `-forcemanifestsuffix` | Bootstrapper switch that takes an argument: override the client manifest filename suffix (`steam_client_<suffix>`) to fetch a different manifest. *(medium)* |  | internal parser | gamelauncher, steam |
+| `-forcepackagedownload` | Bootstrapper flag: re-download the client package zips even if the cached ones look valid. *(medium)* |  | internal parser | gamelauncher, steam |
+| `-forcesteamupdate` | Bootstrapper flag: force a client update check and apply the result at startup. *(medium)* |  | internal parser | gamelauncher, steam |
+| `-forceunsupportedos` | Bootstrapper flag: keep running on an OS that the manifest marks as unsupported. *(medium)* |  | internal parser | gamelauncher, steam |
+| `-foreground` | Steam UI command-line verb: bring the existing Steam window to the foreground. It is usually forwarded to the running instance. *(medium)* |  | compared against argv (V_strnicmp, inferred) | steamui.so |
+| `-friendsui` | Force-load the friends UI module (friendsui.so) in the client, UI and overlay. `-nofriendsui` is the opposite. *(medium)* |  | registered (CCommandLineParam) | friendsui.so, gameoverlayui.so, steamclient.so, steamui.so |
+| `-fs_log` | Filesystem (filesystem_stdio) switch: log file-system accesses made by the client. | Log file system accesses | internal parser; registered (CCommandLineParam) | filesystem_stdio.so, gamelauncher, steam |
+| `-fs_logbins` | Filesystem switch: log every binary/shared library loaded while running. | Log the binaries we load during operation | internal parser; registered (CCommandLineParam) | filesystem_stdio.so, gamelauncher, steam |
+| `-fs_target` | Filesystem switch (Valve: "Set target syntax"): probably takes a value selecting the path/target syntax used by `-fs_log` output. Format unknown. *(low)* | Set target syntax | internal parser; registered (CCommandLineParam) | filesystem_stdio.so, gamelauncher, steam |
+| `-full_memory_dump` | Bootstrapper/crash-handler flag: write full memory dumps instead of minidumps on a crash. The related env var is `BREAKPAD_DUMP_LOCATION`. *(medium)* |  | internal parser | gamelauncher, steam |
+| `-fullscreen` | Start Big Picture mode fullscreen. `-windowed` is the windowed counterpart. | Set BPM to fullscreen | registered (CCommandLineParam) | steamui.so |
+| `-fullscreenopengl` | Legacy VGUI switch: use the full-screen OpenGL renderer for the UI. Probably a leftover from the old Big Picture. *(medium)* | Use the full screen OpenGL render for the UI | registered (CCommandLineParam) | steamui.so |
+| `-gameid` | Overlay (gameoverlayui) flag, probably `-gameid <gameid>`, telling the overlay process which game it is attached to. It is set by the client, not by users. *(low)* |  | exists | gameoverlayui.so |
+| `-gameidlaunch` | Steam UI command-line verb: launch a game by its 64-bit game ID (which covers mods and shortcuts), e.g. `-gameidlaunch <gameid>`. Compare `-applaunch`, which takes an app ID. *(medium)* |  | compared against argv (V_strnicmp, inferred) | steamui.so |
+| `-gameinput` | Use Microsoft GameInput for controller input. This is Windows-only and does nothing on Linux. | Use Microsoft GameInput for controller support | registered (CCommandLineParam) | steamclient.so |
+| `-gamepadui` | Start in the gamepad UI (the Steam Deck / new Big Picture interface). On SteamOS it is used together with `-steamdeck`/`-steamos3`. | Start in gamepadui mode | registered (CCommandLineParam) | steamui.so |
+| `-hardware-updater` | Steam UI flag: force-enable the hardware (controller/device firmware) updater. `-no-hardware-updater` is the opposite. *(medium)* |  | registered (CCommandLineParam) | steamui.so |
+| `-holo` | tier0 platform flag for SteamOS 3 (codename holo). It is treated the same as `-steamos3`. *(medium)* |  | exists | libtier0_s.so |
+| `-hometest` | Steam UI flag that exercises the hardware survey scheduling (SurveyDate, SurveyDateVersion, SurveyDateSteamDeckDelay) next to `-steamconsole`. Probably forces or tests the survey prompt; the effect is unclear. *(low)* |  | exists | steamui.so |
+| `-html-enable-tooltips` | Show native browser tooltips (HTML `title` attributes) in the client's HTML surfaces. | Show browser tooltips | registered (CCommandLineParam) | friendsui.so, gameoverlayui.so, steamui.so |
+| `-html-perf-monitor` | Draw an HTML performance overlay (frame timing data) on webhelper-rendered surfaces in the client and overlay. | Draws html perf data | registered (CCommandLineParam) | chromehtml.so, friendsui.so, gameoverlayui.so, steamclient.so, steamui.so |
+| `-ifrunning` | Bootstrapper/UI flag: only act (forward the command line, e.g. a `steam://` URL) if Steam is already running; don't start a new client otherwise. *(medium)* |  | compared against argv (V_strnicmp, inferred); internal parser | gamelauncher, steam, steamui.so |
+| `-inhibitbootstrap` | Bootstrapper flag: skip the bootstrap/update step and start whatever client is installed. Same effect as `BootStrapperInhibitAll` in steam.cfg. *(high)* |  | internal parser | gamelauncher, steam |
+| `-init_universe` | steamclient.so switch, probably `-init_universe <universe>`, which picks the Steam universe (public/beta/dev) at startup. Valve-internal. *(low)* |  | registered (CCommandLineParam) | steamclient.so |
+| `-install` | Steam UI command-line verb: start installing an app, probably `-install <appid>` (compare `-uninstall`). It is forwarded to the running instance. *(medium)* |  | compared against argv (V_strnicmp, inferred); exists | steamui.so |
+| `-installupdate` | Bootstrapper flag: apply a pending client update that was already downloaded ("Found pending update", "Applying update..."). *(medium)* |  | internal parser | gamelauncher, steam |
+| `-language` | `-language <name>`: sets the client UI language for this run, e.g. `-language german` or `schinese`. It also chooses the bootstrapper's `steambootstrapper_<lang>.txt` strings. | Set Steam client UI language | compared against argv (V_strnicmp, inferred); registered (CCommandLineParam) | steamui.so, vgui2_s.so |
+| `-led-enumerate-sysfs-all` | Steam UI (device LED control) switch: list all LED devices under sysfs, not only the ones Steam recognises. `-testled` creates a fake LED for testing. | Enumerate all sysfs LED devices | registered (CCommandLineParam) | steamui.so |
+| `-log_voice` | Write voice chat data to `logs/voice_log.txt` for debugging. | writes voice chat data to the logs/voice_log.txt file | registered (CCommandLineParam) | steamclient.so |
+| `-logdir` | steamsysinfo option `-logdir <dir>`: the directory where the system-info tool writes its logs. | Directory to store logs | internal parser | steamsysinfo |
+| `-login` | Automatically log in a user: `-login <username> [password]`. With credentials on the command line, `-rememberpassword` acts as if 'remember my password' was ticked. | Automatically logs in user | registered (CCommandLineParam) | steamui.so |
+| `-lognetapi` | Log all P2P networking (ISteamNetworking) activity to `logs/netapi_log.txt`. | logs all P2P networking info to log/netapi_log.txt | registered (CCommandLineParam) | steamclient.so |
+| `-longestloc` | Localization test switch: for each token, use the longest translation across all languages, so UI layouts can be checked for text overflow. | Use longest string for each localization token | registered (CCommandLineParam) | steamui.so |
+| `-ltp` | steamclient.so switch: use the legacy scheme for storing the login refresh token (JWT) on disk, e.g. under `Software\Valve\Steam\ConnectCache` in registry.vdf. | use legacy token persistence scheme | registered (CCommandLineParam) | steamclient.so |
+| `-manuallyclearframes` | gameoverlayui switch: make the overlay clear its frames to black itself, for games that don't clear the whole screen and would otherwise leave artifacts. | Should the overlay be manually clearing frames to black (because the game doesn't clear the entire screen?) | registered (CCommandLineParam) | gameoverlayui.so |
+| `-master_ipc_name_override` | `-master_ipc_name_override <name>`: overrides the name of the master IPC/shared-memory channel used between the bootstrapper, client and UI. With a different name, a second, separate Steam instance can run (developer use). *(medium)* |  | internal parser; registered (CCommandLineParam) | gamelauncher, steam, steamui.so |
+| `-net_fake_state` | `-net_fake_state <state>`: sets the initial value of the `net_fake_state` convar, which simulates network conditions. Valid states: normal, NoLAN, CaptivePortal_Redirected, CaptivePortal_InPlace, NoInternet, NoSteam. | Set initial value for net_fake_state | registered (CCommandLineParam) | steamclient.so |
+| `-net_start_wifi_disabled` | Start with Wi-Fi reported as disabled. Valve says this is useful when emulating a Steam Deck on a desktop. | Set the initial value for wifi enabled to false.  (Useful when emulating SteamDeck) | registered (CCommandLineParam) | steamclient.so |
+| `-no-cef-sandbox` | Disable the Chromium sandbox in steamwebhelper; same effect as `-cef-disable-sandbox`. Useful on systems without unprivileged user namespaces. | disables sandboxing in CEF | registered (CCommandLineParam) | chromehtml.so, steamclient.so |
+| `-no-child-update-ui` | Bootstrapper flag: draw the update UI in the bootstrapper process itself instead of a forked `-child-update-ui` process. *(medium)* |  | internal parser | gamelauncher, steam |
+| `-no-dwrite` | Windows-only: make VGUI use GDI text instead of DirectWrite. It has no effect on Linux. | forces vgui to use GDI text even if DWrite support is available | registered (CCommandLineParam) | steamclient.so |
+| `-no-hardware-updater` | Steam UI flag: disable the hardware/firmware updater (controller and device firmware update prompts). `-hardware-updater` is the opposite. *(medium)* |  | registered (CCommandLineParam) | steamui.so |
+| `-no-shared-textures` | Overlay switch: don't share GPU texture handles between the overlay and the game process; the overlay uses a copy path instead. Can work around overlay glitches with some drivers. | forces overlay to avoid sharing texture handles with game process | registered (CCommandLineParam) | steamclient.so |
+| `-noassert` | tier0 flag read by the bootstrapper, crashhandler and helpers: don't break or show dialogs on (non-fatal) asserts. Similar in purpose to the `DONT_BREAK_ON_ASSERT` setting. *(medium)* |  | exists; internal parser | crashhandler.so, gamelauncher, libtier0_s.so, libvideo.so, steam, steam_monitor, steamservice.so, steamsysinfo, streaming_client |
+| `-nobigpicture` | Force the normal desktop UI at startup, overriding a saved Big Picture or gamepad UI startup mode. The client logs "forcing desktopui via -nobigpicture". | Start in regular mode (force Big Picture mode off) | registered (CCommandLineParam) | steamui.so |
+| `-nobootstrapperupdate` | Bootstrapper flag: don't update the bootstrapper binary itself during the update step. *(medium)* |  | internal parser | gamelauncher, steam |
+| `-noconsole` | Steam UI flag: hide or disable the developer console. It is the opposite of `-console`. *(medium)* |  | registered (CCommandLineParam) | steamui.so |
+| `-nocrashdialog` | tier0/crash-handler flag: don't show a crash dialog when a Steam process crashes. *(medium)* |  | exists; internal parser | crashhandler.so, gamelauncher, libtier0_s.so, libvideo.so, steam, steam_monitor, steamservice.so, steamsysinfo, streaming_client |
+| `-nocrashmonitor` | steamclient.so flag: don't start the crash-monitor process that watches the client. *(medium)* |  | registered (CCommandLineParam) | steamclient.so |
+| `-nodircheck` | Bootstrapper flag: skip the install-directory checks, e.g. non-ASCII path and writability (`.writable`). *(medium)* |  | internal parser | gamelauncher, steam |
+| `-nodpiscale` | VGUI flag: disable DPI scaling of the legacy VGUI UI, overriding the `DPIScaling` registry setting. *(medium)* |  | exists | vgui2_s.so |
+| `-nofriendsui` | Don't load the friends UI module (friendsui.so). The friends list and chat are then unavailable. *(medium)* |  | registered (CCommandLineParam) | friendsui.so, gameoverlayui.so, steamclient.so, steamui.so |
+| `-noipv6` | steamclient.so flag: disable IPv6 networking and use only IPv4. *(medium)* |  | exists | steamclient.so |
+| `-nojoy` | Disable controller support in steamclient and in the streaming client: no SDL/HID controller enumeration, no Steam Input. | Disable controller support | internal parser; registered (CCommandLineParam) | steamclient.so, streaming_client |
+| `-nojsreload` | Steam UI flag: don't reload the Steam UI JavaScript when it changes, probably a developer hot-reload setting. *(low)* |  | registered (CCommandLineParam) | steamui.so |
+| `-nopcshutdown` | Steam UI switch: skip real PC power operations (shutdown/restart/suspend) when they are triggered from the UI, so testing Big Picture power menus doesn't power off the machine. | Skip PC power operations | registered (CCommandLineParam) | steamui.so |
+| `-norepairfiles` | Bootstrapper flag: skip repairing files that fail verification ("Skipping file repair"). *(high)* |  | internal parser | gamelauncher, steam |
+| `-noshaders` | Disable the shader pre-caching manager (no shader cache downloads/uploads or Fossilize background processing). | Disable the shader manager | registered (CCommandLineParam) | steamclient.so |
+| `-noverifyfiles` | Bootstrapper flag: skip verifying client files at startup ("Verification skipped"). *(high)* |  | internal parser | gamelauncher, steam |
+| `-offlinemode` | Always try to start Steam in offline mode, using cached credentials. | Always attempt to start in offline mode | registered (CCommandLineParam) | steamui.so |
+| `-openalldevtools` | Open a Chrome DevTools window at launch for every HTML window: Steam UI, overlay (gamepad/desktop overlay) and friends. | Open Chrome devtools on launch for every HTML window | exists; registered (CCommandLineParam) | friendsui.so, gameoverlayui.so, steamui.so |
+| `-opendevtools` | Open Chrome DevTools at launch for the shared JS context, the offscreen SharedJSContext browser that hosts most Steam UI logic. | Open Chrome devtools for shared JS context (offscreen window) on launch | registered (CCommandLineParam) | friendsui.so, steamclient.so, steamui.so |
+| `-opengl` | Legacy VGUI switch: use the OpenGL renderer for the UI. *(medium)* | Use the OpenGL render for the UI | registered (CCommandLineParam) | steamui.so |
+| `-openoverlaydevtools` | Open Chrome DevTools automatically whenever an in-game overlay browser is created. | Open Chrome devtools on creation of any overlay browsers | registered (CCommandLineParam) | friendsui.so, steamui.so |
+| `-out-file` | steamsysinfo option `-out-file <path>`: write the query response to a file instead of stdout. | Store the response in a file | internal parser | steamsysinfo |
+| `-overlay-gpu-pri-delay` | `-overlay-gpu-pri-delay <ms>`: delay in milliseconds between changes of the webhelper GPU priority as the overlay is shown or hidden. | Set ms delay between overlay GPU priority changes | registered (CCommandLineParam) | steamclient.so |
+| `-overlaylogging` | Enable logging from the in-game overlay renderer, probably into gameprocess/overlay logs. | Enables logging from overlay renderer | registered (CCommandLineParam) | steamclient.so |
+| `-overlaytestmode` | Force the overlay into its test mode for debugging. *(medium)* | Forces overlay testmode mode for debugging | registered (CCommandLineParam) | steamclient.so |
+| `-overrideminos` | Bootstrapper flag: bypass the minimum-OS-version check. Valve's bootstrapper message documents it: "You may override this check by passing -overrideminos". *(high)* |  | internal parser | gamelauncher, steam |
+| `-pid` | Internal switch for overlay and HTML helper processes: `-pid <pid>` is the process they watch, i.e. the game the overlay is attached to. The client passes it. | Pid that we should be watching for | registered (CCommandLineParam) | chromehtml.so, gameoverlayui.so, vgui2_s.so |
+| `-pipewire` | Enable PipeWire-based desktop capture, used by Remote Play and recording on Linux. | Enable PipeWire desktop capture | registered (CCommandLineParam) | steamui.so |
+| `-pipewire-dmabuf` | Enable PipeWire desktop capture with DMA-BUF zero-copy buffers. | Enable PipeWire desktop capture using DMA-BUF | registered (CCommandLineParam) | steamui.so |
+| `-pipewire-fresh-start` | Clear all saved PipeWire capture tokens, so the user is asked again what to capture (the portal screen-share prompt). | Clear all Pipewire capture tokens and re-prompt user for what to capture | registered (CCommandLineParam) | steamui.so |
+| `-pipewire-record-deck-ui` | Include Steam UI elements in PipeWire captures/recordings on Steam Deck. | Record Steam UI elements on SteamDeck | registered (CCommandLineParam) | steamui.so |
+| `-pretendeol` | Steam UI test flag: pretend this OS/platform has reached end of life, to show the EOL warning UI. *(low)* |  | registered (CCommandLineParam) | steamui.so |
+| `-pretendeol32` | Steam UI test flag: pretend 32-bit support has reached end of life, to show the corresponding warning UI. *(low)* |  | registered (CCommandLineParam) | steamui.so |
+| `-preventsteamdiscovery` | steamclient.so flag: stop this client from broadcasting or being discovered by other Steam clients on the LAN (Remote Play / In-Home Streaming discovery). *(medium)* |  | exists | steamclient.so |
+| `-private_ip_override` | steamclient.so switch that probably takes an IP address to report as the machine's private/LAN IP, e.g. for streaming or P2P testing. Evidence is only the name. *(low)* |  | registered (CCommandLineParam) | steamclient.so |
+| `-profilestartup` | Profile client startup: record and log startup timing for steamui, steamclient and CEF (e.g. "STARTUP SteamUI browser requested at +%.0fms"). *(medium)* |  | compared against argv (V_strnicmp, inferred); registered (CCommandLineParam) | chromehtml.so, steamclient.so, steamui.so |
+| `-pyrowavestats` | Log performance of the pyrowave video encoder (used for Remote Play streaming) to `streaming_log.txt`. | Log pyrowave encoding performance to streaming_log.txt | registered (CCommandLineParam) | steamui.so |
+| `-query` | steamsysinfo option `-query <command>`: picks which EChildProcessQueryCommand system-info query to run. Steam spawns steamsysinfo as a helper child process. | Value is one of EChildProcessQueryCommand | internal parser | steamsysinfo |
+| `-query-arg` | steamsysinfo option `-query-arg <value>`: the argument for the `-query` command; its meaning depends on the query. | Argument for the query, the meaning depends on the query | internal parser | steamsysinfo |
+| `-quicklogin` | `-quicklogin <base>`: sets the base URL used to build quick-login URLs. A Valve dev option used with `-devsites`. *(medium)* | Set the base used to construct quick login URLs | internal parser; registered (CCommandLineParam) | friendsui.so, gameoverlayui.so, steamclient.so, steamui.so, steamwebhelper, streaming_client |
+| `-rememberpassword` | With `-login <user> <pass>`, act as if 'Remember my password' was ticked, so a refresh token is saved. | If logging in user with credentials specified on the command line, proceed as if 'remember my password' had been enabled | registered (CCommandLineParam) | steamui.so |
+| `-set_locale_disable` | Bootstrapper flag: skip the `setlocale()` call at startup (normally en_US.UTF-8 or the user locale). *(medium)* |  | internal parser | gamelauncher, steam |
+| `-setbeta` | `-setbeta <branch>`: permanently switch the client to a beta branch by writing it to `package/beta`. The log says "Changing client beta ... (changebeta flag)". | Sets Steam client beta branch | internal parser | gamelauncher, steam |
+| `-showallbetas` | Show all client beta branches in the beta selection UI, not only the filtered list. | Disable client beta filtering | registered (CCommandLineParam) | steamui.so |
+| `-shutdown` | Tell a running Steam instance to shut down. The command line is forwarded to it and handled by CSteamDoc::ExecCommandLine. *(high)* |  | compared against argv (V_strnicmp, inferred) | steamui.so |
+| `-silent` | Start Steam silently, minimized to the system tray with no main window. The bootstrapper also respects it to keep its update UI quiet. | Silent startup mode (tray mode only) | internal parser; registered (CCommandLineParam) | friendsui.so, gamelauncher, steam, steamui.so |
+| `-simulatedownloaderrors` | Bootstrapper test hook: simulate package download failures. *(medium)* |  | internal parser | gamelauncher, steam |
+| `-simulatefatalerror` | Bootstrapper test hook: trigger a fatal error on purpose ("Forcing a fatal error"). *(high)* |  | internal parser | gamelauncher, steam |
+| `-single_core` | Restrict Steam (steamclient and steamservice) to the primary CPU core. | Force Steam to run on your primary CPU only | internal parser; registered (CCommandLineParam) | steamclient.so, steamservice.so |
+| `-singleapp` | Single-app mode (`-singleapp <appid>` is likely): the bootstrapper and UI run Steam as a launcher for one app, reading `launcher\appid` from config/config.vdf and erroring if it is missing. Used for branded launchers, e.g. with `-steamchina`. *(medium)* |  | internal parser; value | steam, steamui.so |
+| `-sitelicense` | steamclient.so flag: run this client as a site-license provider (internet cafe / site license host). It logs "Running as site license provider"; a convar can enable the same. *(high)* |  | exists | steamclient.so |
+| `-skipinitialbootstrap` | Bootstrapper flag: skip the first-run bootstrap step. *(medium)* |  | internal parser | gamelauncher, steam |
+| `-skipstreamingdrivers` | Remote Play switch: skip the streaming driver checks (virtual audio/input drivers) before starting a stream. | Skip streaming driver checks | registered (CCommandLineParam) | steamclient.so |
+| `-skipsystemcheck` | Bootstrapper flag: skip system-compatibility checks, e.g. the steam-runtime requirements check and GL renderer checks such as the VirtualBox 3D-acceleration warning. *(medium)* |  | internal parser | gamelauncher, steam |
+| `-sls-skip-version-check` | Steam UI switch: don't validate the SLS version before starting. SLS is probably Steam Link Service or a similar component; exact meaning unknown. *(medium)* | Don't validate the SLS version before starting | registered (CCommandLineParam) | steamui.so |
+| `-srt-logger-opened` | Internal flag added by steam.sh / the bootstrapper after it opens the srt-logger (writing `logs/console-linux.txt`), so the logger isn't opened twice, including after an exit-code-42 restart. *(high)* |  | internal parser | gamelauncher, steam |
+| `-stack=` | tier0 switch, probably `-stack=<size>`, setting the stack size for the main/worker threads. No usage strings. *(low)* |  | value | libtier0_s.so |
+| `-steamchina` | Bootstrapper flag: run as the Steam China (Perfect World) client, with China-specific packages and universe; often used with `-singleapp`. *(medium)* |  | internal parser | steam |
+| `-steamconsole` | Steam UI flag, probably loading `steamconsole.so` or a standalone console mode. It appears next to the survey/`-hometest` code, so the exact effect is unclear. *(low)* |  | exists | steamui.so |
+| `-steamdeck` | tier0 platform flag: run the client as if on a Steam Deck (enables Deck-specific UI and behavior). Commonly used with `-gamepadui` to emulate a Deck on desktop. *(medium)* |  | exists | libtier0_s.so |
+| `-steamdeckdisplay` | Make the client (UI, CEF, overlay) assume a Steam Deck display/panel profile. It is read by almost every component and is probably used for Deck emulation. *(medium)* |  | internal parser; registered (CCommandLineParam) | chromehtml.so, gamelauncher, gameoverlayui.so, steam, steamclient.so, steamservice.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `-steamframe` | tier0 platform flag for the Steam Frame hardware (related to the `-deckard` codename). It makes the client behave as on that device. *(low)* |  | exists | libtier0_s.so |
+| `-steamid` | steamsysinfo option `-steamid <id>`: the Steam user identifier attached to reports. | Steam user identifier | internal parser | steamsysinfo |
+| `-steaminstaller` | Steam UI command-line verb, probably used by the Steam installer to hand off to the client after installation. Exact behavior unknown. *(low)* |  | compared against argv (V_strnicmp, inferred) | steamui.so |
+| `-steammachinedisplay` | Like `-steamdeckdisplay`, but makes the client assume a Steam Machine (TV/living-room) display profile. *(low)* |  | internal parser; registered (CCommandLineParam) | chromehtml.so, gamelauncher, gameoverlayui.so, steam, steamclient.so, steamservice.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `-steamos` | Bootstrapper and steam.sh flag: run as SteamOS. steam.sh sets `STEAMOS=1` and skips the 32-bit library check; the client enables SteamOS behavior. *(high)* |  | internal parser | gamelauncher, steam |
+| `-steamos3` | SteamOS 3 (holo/jupiter, i.e. Steam Deck OS) platform flag, read by steam.sh and tier0. Equivalent to `-holo`. *(high)* |  | exists | libtier0_s.so |
+| `-steampid` | Internal gameoverlayui switch: `-steampid <pid>`, the PID of the Steam process that launched the overlay. | Steam pid that launched us | registered (CCommandLineParam) | gameoverlayui.so |
+| `-system-composer` | Steam UI switch: force the system browser composer (compositing path) for Big Picture rather than Steam's own composer. *(medium)* | Force the use of the system browser composer | registered (CCommandLineParam) | steamui.so |
+| `-tenfoot` | Start in Big Picture mode. This is the historical name and an alias of `-bigpicture`; the startup logic may promote it to the gamepad UI. | Start in Steam Big Picture mode | registered (CCommandLineParam) | steamui.so |
+| `-tesla` | tier0 platform flag named after hardware codename Tesla. Effect unknown. *(low)* |  | exists | libtier0_s.so |
+| `-testled` | Create a fake LED device to test the client's LED control features. | Create a test LED device | registered (CCommandLineParam) | steamui.so |
+| `-testlongoobeupdater` | steamclient system-manager test flag: use a slow dummy updater during the OOBE ("applying dummy update", progress posts), to test the long update flow. *(medium)* |  | exists | steamclient.so |
+| `-testoobe` | Force the out-of-box experience flow (sets/reads `ForceOOBE`) in client, UI and CEF. Used for testing first-run setup. *(medium)* |  | exists | chromehtml.so, steamclient.so, steamui.so |
+| `-testoobestage2` | Force OOBE stage 2 (registry `ForceOOBEStage2`) for testing. *(medium)* |  | exists | steamui.so |
+| `-testoobeupdater` | Use a dummy updater during the OOBE, so the system-update step can be tested without a real update. | Use a dummy updater during oobe | registered (CCommandLineParam) | steamclient.so |
+| `-testssa` | Force the Steam Subscriber Agreement (SSA) acceptance dialog to show. | force display of SSA | registered (CCommandLineParam) | steamui.so |
+| `-teststoragedata` | Steam UI test switch: show fake ('test') storage data, probably in the Storage Manager / storage settings page, so the UI can be tested without real drives. *(medium)* | Enable test storage data | registered (CCommandLineParam) | steamui.so |
+| `-testupdater` | steamclient system-manager test flag: probably uses a test/dummy system updater (the SteamOS update path) instead of the real one. It sits near the battery/fan/suspend system-manager code. *(low)* |  | exists | steamclient.so |
+| `-textclient` | Bootstrapper flag: use the text/console update UI (CConsoleUpdateUI) instead of the graphical update window, e.g. for headless runs. *(medium)* |  | internal parser | gamelauncher, steam |
+| `-toggle-overlay-html-mode` | Flip the default of the new, faster overlay HTML rendering path: it turns the path off where it is on by default, and on in branches where it isn't yet the default. | Disables new faster overlay HTML path (or enables if on a branch it's not on by default for) / Disables new faster overlay HTML path (or enables if on a branch it's not on by default) / Disables new faster overlay HTML path (or enables in branches it's not yet on by default for) | registered (CCommandLineParam) | chromehtml.so, friendsui.so, gameoverlayui.so, steamclient.so, steamui.so |
+| `-uninstall` | Steam UI command-line verb: uninstall an app, probably `-uninstall <appid>`. It is forwarded to the running client (CSteamDoc::ExecCommandLine). *(medium)* |  | compared against argv (V_strnicmp, inferred) | steamui.so |
+| `-use_xcomposite_workaround` | steamwebhelper flag: capture window textures through the XComposite workaround path ("using xcomposite workaround"). Same as setting `STEAM_ENABLE_XCOMPOSITE_WORKAROUND`; the client sets it automatically for some drivers. *(high)* |  | exists | steamwebhelper |
+| `-usepipewireaudio` | steamclient.so switch: use the PipeWire audio backend (e.g. for voice, Remote Play or recording audio) instead of the default backend. | Enabled the pipewire audio backend | registered (CCommandLineParam) | steamclient.so |
+| `-userchooser` | Always show the account chooser at login, even with 0 or 1 saved accounts. | Sends the user to the User Chooser even if they have 0 or 1 accounts | registered (CCommandLineParam) | steamui.so |
+| `-verbose` | steamclient.so flag found next to the site-license code. It probably makes site-license provider mode log more detail; any wider effect is unknown. *(low)* |  | exists | steamclient.so |
+| `-verbose-computer-activity` | Log verbosely how the client detects user/computer activity, i.e. idle vs. active (used for away status and idle-time features). | Verbose computer activity detection. | registered (CCommandLineParam) | steamclient.so |
+| `-verbosejslogging` | steamwebhelper switch: log JS console events verbosely. This is the webhelper-side form of `-cef-verbose-js-logging`. | enable verbose logging of JS console events | registered (CCommandLineParam) | steamwebhelper |
+| `-verifyfiles` | Bootstrapper flag: verify the checksums of all client files at startup and repair mismatches ("Verifying all file checksums"). It is also read in steamclient.so. steam.sh tries to add it after a failed runtime unpack, but a script bug means the flag never reaches the client. *(high)* |  | exists; internal parser | gamelauncher, steam, steamclient.so |
+| `-vguifocus` | VGUI debug switch: print which panel has keyboard focus. Only affects legacy VGUI panels. | Print out details of which panel has keyboard focus | registered (CCommandLineParam) | vgui2_s.so |
+| `-vguimessages` | VGUI debug switch: print debug output for vgui2 panel messages. | set to see debug vgiui2 messages | registered (CCommandLineParam) | friendsui.so, gameoverlayui.so, steamui.so, vgui2_s.so |
+| `-voicerelay` | Testing switch: allow voice chat only through relay connections, with no direct P2P. | Only allow 'relay' connections for voice (testing). | registered (CCommandLineParam) | steamclient.so |
+| `-vrdisable` | Disable SteamVR integration completely: Steam never loads the OpenVR libraries. | Disable VR - never even try to load OpenVR DLLs | registered (CCommandLineParam) | steamclient.so |
+| `-vrforce` | Always run the HMD (headset) status check at startup, even if it crashed last time. By default a crash disables the check. | Always perform Hmd status check even if we crashed the last time we tried | registered (CCommandLineParam) | steamclient.so |
+| `-vrlinkforceenable` | Testing switch: report VR Link (streaming VR to a headset) as available regardless of platform or video encoder. | Force-enable VR Link capability for testing regardless of platform/encoder | registered (CCommandLineParam) | steamclient.so |
+| `-vronly` | Legacy Steam UI switch, probably a VR-only startup mode with no desktop UI. It is registered next to the old `-opengl` UI renderer switches. *(low)* |  | registered (CCommandLineParam) | steamui.so |
+| `-vrskip` | Skip VR initialization entirely, no matter which component asks for it. | Skip VR initialization entirely no matter who asks for it | registered (CCommandLineParam) | steamclient.so |
+| `-vrverbose` | Write extra VR diagnostic logging. | Output additional logging for diagnostics | registered (CCommandLineParam) | steamclient.so |
+| `-websocket` | Connect to the Steam backend (CM servers) over WebSocket instead of TCP/UDP. Can help behind restrictive firewalls or proxies. | forces connection to Steam backend to be via WebSocket | registered (CCommandLineParam) | steamclient.so |
+| `-websocketignorecertissues` | With `-websocket`, ignore TLS certificate validation errors on the WebSocket CM connection. Valve marks it as for dev use only. | says it's ok to ignore cert validation issues if using WebSocket connections, for dev use only | registered (CCommandLineParam) | steamclient.so |
+| `-windowed` | Run Big Picture in a window instead of fullscreen. The bootstrapper also reads it to choose a windowed update UI. | Set BPM to windowed | internal parser; registered (CCommandLineParam) | gamelauncher, steam, steamui.so |

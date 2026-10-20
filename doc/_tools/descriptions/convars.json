@@ -1,0 +1,2322 @@
+{
+ "convar:AlwaysCustomizeOnBadExit": {
+  "what": "Bool (0/1). Probably makes Steam open a customization/recovery prompt after the client exited abnormally. No usage strings found, so this is inferred from the name only.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:app_force_preload": {
+  "what": "App ID (0 = off). Forces the given app into preload mode, where content downloads before release. It is read next to the ownership checks (CheckAppOwnership, FreeWeekend, TimedTrialMinutes), so it is mainly a testing override for app ownership and licensing.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "convar:app_info_http_min": {
+  "what": "Int, default 0. Probably the minimum number of app/package info requests before the client fetches app info over HTTP instead of the CM connection. It is used by the app-info cache (appdatacache.cpp), next to the handling for 'Server changenumber out of sync'.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "convar:app_info_http_num_sockets": {
+  "what": "Int, default 8. Number of HTTP sockets in the 'App Info' HTTP client, which downloads app and package info (PICS) data.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:appcloudsessions": {
+  "what": "String, default 'all'. Selects which apps take part in Steam Cloud session tracking ('all' is the only value seen). This is probably a debugging or rollout filter for cloud sync sessions.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "convar:@AppMRUSize": {
+  "what": "Int, default 20. Size of the list of most recently played games, which the update manager keeps in RecentLocalPlayedGameIDs (UpdateTimePlayedMRU / UpdateLocallyPlayedMRU). Recently played apps can get update priority.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:apps_per_overview_chunk": {
+  "what": "Int, default 5000. Number of apps per chunk when the UI app controller sends app overview data to the library UI. Larger values mean fewer, bigger batches.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:AsyncFileIOAlternateReadWrite": {
+  "what": "Bool (0/1), default 1. Async file I/O (asyncfileiohandler.cpp): probably alternates between servicing read and write work on the separate read and write I/O threads so neither starves the other.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "convar:AsyncFileIODisableWrite": {
+  "what": "Bool (0/1), default 0. Debug switch in async file I/O. When set, write commands are skipped or not performed, which is useful to benchmark download and disk throughput without writing to disk. Do not enable it for normal use.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:AsyncFileIOExpectOutstandingIO": {
+  "what": "Int, default 6. Expected number of outstanding async I/O operations. It is used to size the async file I/O handle caches and thread queues, and it counts toward the clamp that keeps the read/write handle caches under the process's max open file-descriptor limit.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:AsyncFileIOMaxPendingWin32": {
+  "what": "Int, default 256. Maximum pending async I/O requests on the Windows (Win32 overlapped I/O) path. It probably has no effect on Linux.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:AsyncFileIOReadHandleCache": {
+  "what": "Int, default 64. Number of open file handles the async file I/O read thread keeps cached. It is clamped automatically so that read and write caches together stay under the max open-descriptor limit.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:AsyncFileIOWriteHandleCache": {
+  "what": "Int, default 64. Number of open file handles the async file I/O write thread keeps cached, used during content installs and updates. It is clamped along with the read cache to stay under the open-descriptor limit.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@bAssertOnProtoBufBodyMismatch": {
+  "what": "Bool (0/1), default 1. Message-parsing diagnostics. When a protobuf body that was pre-parsed off the main thread has a different type than the handler expects, the client asserts and logs 'Pre-parsed body type disagrees with the handler'. Mismatch counts appear in the 'protobuf_parse_stats' command.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:batterycharging": {
+  "what": "Bool (0/1), default 0. Probably a debug override that reports the battery as charging, for testing the low-battery handling.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:batterypercent": {
+  "what": "Int percent, default -1 (= use the real value). Probably overrides the reported battery percentage for testing; CSteamEngine::CheckForLowBattery uses it to decide whether to raise low-battery notifications.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:batterytime": {
+  "what": "Int, default -1 (= use the real value). Probably overrides the reported remaining battery time, which CSteamEngine::CheckForLowBattery uses to trigger low-battery callbacks. Useful for testing low-battery warnings.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:bBroadcastAlwaysUploadThumbnails": {
+  "what": "Bool (0/1), default 1. Steam Broadcasting: always upload thumbnail images for a broadcast session (set up around Broadcast.BeginBroadcastSession), rather than only when someone is watching.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@bCallerDeadlineAbortJobDisableWhenHTTPReqStart": {
+  "what": "Bool (0/1), default 1. Job system and HTTP: once a job's HTTP request has started, the caller's deadline no longer aborts the job, so requests already in flight are not cut off.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:bCheckUGCIntegrity": {
+  "what": "Bool (0/1), default 1. Workshop/UGC downloads: checks the length and hash of downloaded UGC files and deletes corrupt ones ('[UGC] File corrupted during download'). Failures are reported through Cloud.CDNReport.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:bClientConvar601DEACE": {
+  "what": "Bool (0/1), default 1. Feature flag with an opaque, hash-like name. The nearby strings are from the IClientUser interface-map serialization ('Fencepost deserialize mismatch'), so it probably toggles some IPC interface behavior. Its exact purpose is unknown.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "convar:@bClientDownloadUseHTTPS": {
+  "what": "Bool (0/1), default 0. Content downloads use HTTPS on content servers that support it, instead of plain HTTP. Can be overridden server-side.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@bClientOpenCacheStickyRedirects": {
+  "what": "Bool (0/1), default 1. Content downloads through a caching proxy (for example a LAN cache): when the proxy redirects the client, the client remembers the redirect ('memorizing that'). If the redirect points at the origin server itself, the client forgets the proxy.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:bClientPingCSesForCellID": {
+  "what": "Bool (0/1), default 0. Probably makes the client ping content servers to choose its download region (cell ID) instead of using the server-assigned one.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:@bClientTryRequestManifestWithoutCode": {
+  "what": "Bool (0/1), default 0. Content downloads: tries to fetch a depot manifest even when it has no manifest request code (normally obtained from the backend first). Useful for diagnostics.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:bCloudAcceptUnexpectedAutoCloudFileChanges": {
+  "what": "Bool (0/1), default 1. Steam Cloud (Auto-Cloud) cache validation: when a file on disk has a different SHA or timestamp than the cached record, or has gone missing, the client accepts that as a local change and syncs it, rather than treating it as an error.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@bCloudSyncFailDownloadIfGameOutOfDate": {
+  "what": "Bool (0/1), default 0. Steam Cloud: makes the cloud download sync fail when the game itself needs an update, so old game builds don't load newer saves.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:@bCSForceNoCache": {
+  "what": "Bool (0/1), default 0. Content-server downloads: sends 'Cache-Control' no-cache and appends a cache-busting query string ('?%u') to chunk requests, so CDN and proxy caches are bypassed.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:bDelayGameUpdatesOnBeta": {
+  "what": "Bool (0/1), default 0. Auto-update scheduling: when on, clients on the Steam Beta also get scheduled (delayed) game updates. When off, beta clients update games as soon as possible.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@bDepotBuilderReadBufferSizeKB": {
+  "what": "Int KB, default 8192 (8 MB). Despite the 'b' prefix this is a size: the read buffer that the depot builder's file reader thread uses when chunking files for content builds and uploads (chunkfinder.cpp).",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@bDepotBuilderUnbufferedReads": {
+  "what": "Bool (0/1), default 1. Depot builder / content chunking: reads source files unbuffered (bypassing the OS cache, e.g. O_DIRECT), which needs the chunk size to align with the disk sector size ('Default chunk and disk sector size don't align').",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:bDepotDeltaPatchUseAPI": {
+  "what": "Bool (0/1), default 1. Content updates: applies downloaded depot delta patches (depot_<id>_<from>_<to>.delta in DepotDeltaPatches) with the patching API, instead of the older method.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "convar:bDepotUseSparseFiles": {
+  "what": "Bool (0/1), default 1. Content updates: creates installed and staged files as sparse files, so they don't take up their full size on disk until written.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:@bDisableDualStackDownloads": {
+  "what": "Bool (0/1), default 0. Content downloads: forces an IPv4-only HTTP client for depot downloads instead of the default dual-stack IPv4/IPv6 client. Try it if IPv6 downloads are broken.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:bDisableTenFootOverlay": {
+  "what": "Bool (0/1), default 0. Disables the Big Picture (ten-foot) version of the in-game overlay. No usage strings.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:@bDownloadThrottleDuringCloudSync": {
+  "what": "Bool (0/1), default 0. Applies the download bandwidth limit (DownloadThrottleKbps) while Steam Cloud syncs run, too.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@bEnableFrameFuncOverageWarnings": {
+  "what": "Bool (0/1), default 0. Logs a warning when a frame function goes over its time budget (CFrameFunctionMgr 'OverageWarning'). Output goes to SPEW_MISC at level 4, so you also need to raise spew levels to see it.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@bEnableHTTP2OnAllCHTTPClients": {
+  "what": "Bool (0/1), default 0. Turns on HTTP/2 automatically for every internal CHTTPClient pool on SSL connections.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:bEnableLoginUsersErrorUpload": {
+  "what": "Bool (0/1), default 0. Login UI: uploads log files when the client fails to load login user info (loginusers), to help diagnose problems.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@bEnableLogTearOff": {
+  "what": "Bool (0/1), default 1. Logging subsystem (logger.cpp, present in all binaries): probably lets the logger hand writes off from the main thread, or 'tear off' log output to a separate stream.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "convar:bEnableMHRCAsyncFileReadLog": {
+  "what": "Bool (0/1), default 0. Turns on logging of async file reads in some 'MHRC' component; what that component is is unknown.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:@bEnableNetworkJobsOwnStartList": {
+  "what": "Bool (0/1), default 1. Job manager: network-started jobs get their own start/yield list (CJobMgr JobYielding_t linked list), separate from other jobs. This is an internal scheduling tweak.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "convar:@bEnableOfflineLogonTicket": {
+  "what": "Bool (0/1), default 1. Login: asks the server for an offline logon ticket during login if none is cached, so Offline Mode works later.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@bEnableSiteLicenseConnect": {
+  "what": "Bool (0/1), default 1. Lets the client connect to a site-license (cafe/LAN center) server when one is present.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:@bEnableSiteLicenseConsoleLogging": {
+  "what": "Bool (0/1), default 0. Site-license provider (steamcmd -sitelicense): writes verbose site-license logs to the console, including authentication and local content cache status.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@bEnableSpewThrottle": {
+  "what": "Bool (0/1), default 1. Logging: rate-limits repeated debug spew and log messages in all Steam binaries.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:bEnableSubscribedFileListCache": {
+  "what": "Bool (0/1), default 1. Workshop: caches the user's subscribed-file list (from PublishedFile.GetUserFiles) so it isn't fetched again every time.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@bEnforceValidEmailDomains": {
+  "what": "Bool (0/1), default 1. When validating an email address (BIsValidEmailAddress), the domain must be valid too.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:betaalwaysrebuild": {
+  "what": "Bool (0/1), default 0. Game launch flow (gameactionlaunchapp.cpp): probably forces a rebuild/re-verify step on every launch for beta branches. The evidence is weak.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "convar:bExternalProcessForVOD": {
+  "what": "Bool (0/1), default 0. Video playback (steam://video/watch/<appid>): plays the video in a separate external process instead of inside the client.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:bFinishStagedDepotVersions": {
+  "what": "Bool (0/1), default 1. Content updates: if an earlier update was interrupted, finishes downloading the staged manifest version first ('resuming download of previous manifest') instead of switching to the newest one.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@bForceAbsoluteMouseCoordinates": {
+  "what": "Bool (0/1), default 0. Forces absolute mouse coordinates (the per-app extended/AbsoluteMouseCoordinates setting) for every app. Probably affects Remote Play and Steam Input mouse injection.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@bForceLaunchEula": {
+  "what": "Bool (0/1), default 0. Shows an app's launch EULA every time, ignoring the 'ViewedLaunchEULA' flag stored in the app's registry/config.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@bForceOverlayAudioRecorder": {
+  "what": "Bool (0/1), default 0. Game recording/broadcast: forces the overlay-based audio capture path and disables the Media Foundation path, which only exists on Windows.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@bForceStreamUnsupportedApp": {
+  "what": "Bool (0/1), default 0. Remote Play: allows streaming an app even if it is marked as unsupported (extended/DisableStreaming).",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@bHttpClientRecordHostnameDimension": {
+  "what": "Bool (0/1), default 0. HTTP metrics: adds the hostname as a dimension, alongside method, status and response latency. This can create many distinct metric keys and use a lot of memory.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@bHTTPServerHTTP2Enabled": {
+  "what": "Bool (0/1), default 0. Built-in HTTPS server (uses a self-signed certificate): the global default for advertising HTTP/2 over TLS via ALPN. A server that calls SetHTTP2Enabled() explicitly ignores it.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:bInstallscriptReports": {
+  "what": "Bool (0/1), default 1. Sends reports to Valve when an app's install script (installscript.vdf) fails.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@bLANPeerConnectionTimeoutSec": {
+  "what": "Int seconds, default 5. Despite the 'b' prefix this is a timeout: how long to wait when connecting to a LAN peer for peer-to-peer content transfer (ContentServerDirectory.RequestPeerContentServer) before 'Timed out connecting'.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@bLogMessageToProtobufClass": {
+  "what": "Bool (0/1), default 1. Message diagnostics: the first time the client sees a message type (EMsg), it logs which protobuf class that message uses ('MessageToProtobufClass: ...').",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@bMeasureSSLLatencyStats": {
+  "what": "Bool (0/1), default 1. Collects latency statistics for SSL/TLS connections (handshake and round trip) for networking metrics.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:@bMetricsEnabled": {
+  "what": "Bool (0/1), default 1. Master switch for job metrics collected and reported through IMetricsReporters. Individual operations can still be turned off or on by a blacklist or whitelist.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@bMsgErrorDump": {
+  "what": "Bool (0/1), default 0. When a network message fails to parse, dumps it in hex (header, struct and var data) to the log for debugging.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:bPrefetchDownloadDetails": {
+  "what": "Bool (0/1), default 1. Content updates: works out the download size of a pending update ahead of time, so the size is known before the update runs.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@bProfileYieldsInTestSuiteJobs": {
+  "what": "Bool (0/1), default 0. Profiles job yields when running internal test-suite jobs. Developer-only.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:@bProtoBufNetPacketDropRawBytes": {
+  "what": "Bool (0/1), default 1. CM message handling: frees an inbound packet's raw bytes once its header and body have been pre-parsed (the SSL thread also avoids copying them), and rebuilds them only if a caller asks. This saves memory; see 'protobuf_parse_stats'.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@bProtobufParseSizeProfile": {
+  "what": "Bool (0/1), default 1. Keeps a histogram of protobuf message body sizes as they are parsed, shown by the 'protobuf_parse_stats' console command.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@bProtobufParseTimeProfile": {
+  "what": "Bool (0/1), default 0. Also times each protobuf body parse, so 'protobuf_parse_stats' can show ms/us per size bucket and how much parsing moved off the job thread. It adds two clock reads per parse.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@bRefreshDownloadSourcesFrequently": {
+  "what": "Bool (0/1), default 0. Content downloads: refreshes the list of download sources (content servers, caches, peers) more often, while connection counts are adjusted based on the current download rate (Mbps).",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@bRequireOfflineLogonTicket": {
+  "what": "Bool (0/1), default 1. Login: you need a valid cached offline logon ticket to log in in Offline Mode or with no connection.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:broadcast_adjust_bitrate": {
+  "what": "Int, default 200. Steam Broadcasting: probably the step (likely kbps) by which the encoder bitrate is raised or lowered when upload conditions change.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:broadcast_upload_drop_sec": {
+  "what": "Int seconds, default 6. Steam Broadcasting upload: when the upload queue falls this many seconds behind, video frames are dropped ('Upload job : dropped %u video frames').",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:broadcast_upload_update_sec": {
+  "what": "Int seconds, default 3. Steam Broadcasting: how often the BroadcastUploadStatus_t callback is posted (bytes sent, dropped and pending, processing time).",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@bScreenshotsLegacyCloudUpload": {
+  "what": "Bool (0/1), default 0. Screenshots: uploads screenshots through the legacy Steam Cloud upload path instead of the current one.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:bShaderAllowReplay": {
+  "what": "Bool (0/1), default 1. Shader cache manager (Linux/Vulkan): allows replaying Fossilize pipeline caches in the background to precompile shaders for an app.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:bShaderAllowReplayOnNVIDIA": {
+  "what": "Bool (0/1), default 1. Shader cache manager: allows background Fossilize replay on NVIDIA GPUs. If 0, the client logs 'Replay currently disabled on NVIDIA'.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:bShaderAlwaysProcessWhenRunningGame": {
+  "what": "Bool (0/1), default 0. Shader cache manager: keeps doing background shader processing (Fossilize replay) while a game is running, instead of pausing it.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:bShaderCacheDownloads": {
+  "what": "Bool (0/1), default 1. Shader pre-caching: allows downloading pre-compiled shader cache depots (type 'shadercachedepot').",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@bShaderClientGetBucketManifestUseWebAPI": {
+  "what": "Bool (0/1), default 1. Shader pre-caching: fetches shader bucket manifests through the web API (IShaderService/GetBucketManifestUsingKeyHash) instead of over the CM connection.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:bShaderDepotNative": {
+  "what": "Bool (0/1), default 1. Shader pre-caching: converts downloaded shader depots into the native driver cache format (e.g. VulkanPipelinesV<n>, steam_shader_cache folders), rather than using them only through Fossilize/swarm archives.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:bShaderEnableCacheManagement": {
+  "what": "Bool (0/1), default 1. Master switch for the shader cache manager (shader pre-caching, background processing, cache folders). It can also be turned off by the STEAM_ENABLE_SHADER_CACHE_MANAGEMENT environment variable, the command line or the registry; it is always off under steamcmd.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:bShaderEnableFossilizeLayer": {
+  "what": "Bool (0/1), default 1. Shader pre-caching: injects the Vulkan Fossilize layer (ENABLE_VK_LAYER_VALVE_steam_fossilize_1, STEAM_FOSSILIZE_DUMP_PATH) into games to record pipelines into .foz caches.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:bShaderEnableUpload": {
+  "what": "Bool (0/1), default 1. Shader pre-caching: uploads the client's recorded shaders and pipelines to Valve when the server asks for them ('Server requested %u shaders; uploading is enabled/disabled').",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:bShaderFossilizeFastMerge": {
+  "what": "Bool (0/1), default 1. Shader cache: uses a fast merge when combining Fossilize (.foz) pipeline cache files (steam_pipeline_cache, replay_cache, video/audio media caches) into one archive.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:bShaderPrecompiledCache": {
+  "what": "Bool (0/1), default 1. Shader pre-caching: uses precompiled shader buckets from Valve and points Mesa at them as read-only Fossilize databases (MESA_DISK_CACHE_READ_ONLY_FOZ_DBS=steam_precompiled_*).",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:bShaderVerboseLogs": {
+  "what": "Bool (0/1), default 0. Shader cache manager: writes detailed logs about bucket and depot manifest requests, compat-tool buckets and precompiled cache lookups.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@bShowUninstalledDemosInLibrary": {
+  "what": "Bool (0/1), default 0. Library: shows demos that are not installed in the games list (IsVisibleInGamesList).",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:bSingleFileUpdateMode": {
+  "what": "Bool (0/1), default 1. Content updates: when free disk space is too low for normal staging, updates one file at a time ('switching to single file update mode (%u MB needed, %u MB available)').",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@bSiteLicenseAllowCachedClientCredentials": {
+  "what": "Bool (0/1), default 0. Site license (cafe/LAN center): lets clients associated with the site save their username and login credentials on the machine.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@bSiteLicenseProxyCacheIsExternalProcess": {
+  "what": "Bool (0/1), default 0. Site-license provider: the local content caching proxy runs in a separate external process instead of inside steamcmd ('Local content cache ENABLED for an EXTERNAL process at ip:port'). Usually you also set @sSiteLicenseProxyExplicitIP.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@bSiteLicenseProxyEnableIPv6": {
+  "what": "Bool (0/1), default 0. Site-license (SLS) proxy: allows IPv6 connections to the Steam servers.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@bSiteLicenseServer": {
+  "what": "Bool (0/1), default 0. Makes this instance run as a site-license provider, the same as the '-sitelicense' command-line flag ('Enabling use as site license provider via convar').",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@bSSLThreadedMsgParse": {
+  "what": "Bool (0/1), default 1. CM connection: parses Steam3 message headers and bodies on the SSL work thread, not only framing them there, to take work off the main thread. Takes effect immediately.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@bSSLThreadedMsgParseRelayedBodies": {
+  "what": "Bool (0/1), default 0. CM connection: also pre-parses the bodies of service methods that run on the client. Off by default because the servers that relay them (CM and UDS) never look at the body; check 'protobuf_parse_stats'.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@bSSLThreadedSendDelivery": {
+  "what": "Bool (0/1), default 1. TCP/SSL connections: delivers outgoing messages from the SSL work thread instead of the calling thread.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:bSteam3LimitedUserEnable": {
+  "what": "Bool (0/1), default 1. Probably turns on handling for limited user accounts (accounts that have not spent money and have restricted features).",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:bSteamLoaderEnable": {
+  "what": "Bool (0/1), default 1. Turns on the 'Steam loader' feature, probably the game launch/loader stub. The evidence is thin.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:bUseSystemBrowserFor2DVOD": {
+  "what": "Bool (0/1), default 1. Video playback: opens normal (2D) videos (steam://video/watch/<appid>) in the system web browser (steam://openurl_external) instead of inside Steam.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:bVerifyAllDownloads": {
+  "what": "Bool (0/1), default 0. Content updates: verifies every file after an update has downloaded (the VerifyUpdates behavior), not just the changed ones.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:bVerifyAllInstalled": {
+  "what": "Bool (0/1), default 0. Content updates: verifies all installed files before applying an update.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:cAppUpdateWorkingSetMB": {
+  "what": "Int MB, default 256. Content updates: probably the memory working-set budget used while downloading, decrypting and writing update chunks.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:@cbPartnerUploadChunkSize": {
+  "what": "Int bytes, default 1000000. Partner uploads: chunk size for POSTing content to partner.steamgames.com in pieces using Content-Range.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:cChunkValidationMaxLog": {
+  "what": "Int, default 100. Content validation: maximum number of bad-chunk messages to log during one validation, to keep logs from flooding.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:@cCSClientMaxNumSocketsPerHost": {
+  "what": "Int, default 4. Content downloads: maximum number of simultaneous HTTP connections to each content server host in the 'Depot Download' HTTP client.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@cCSClientMaxNumSocketsPerHostForCachingProxy": {
+  "what": "Int, default 32. Content downloads: maximum number of simultaneous HTTP connections to a caching proxy or LAN cache host. It is higher than for normal content servers.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@cDefaultInitialDownloadSources": {
+  "what": "Int, default 4. Content downloads: number of download sources (content servers, caches, peers) to connect to at the start of a download, before adjusting based on throughput.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@cDepotBuilderFileChunkingThreads": {
+  "what": "Int, default 0 (= automatic). Depot builder: number of threads used to chunk files during content builds.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:@cFileChunkingCRCFalseAlarmBytesToSkip": {
+  "what": "Int bytes, default 128. Depot builder chunk finder: when a rolling-CRC chunk match turns out to be wrong after the SHA check, skips this many bytes before trying again.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@cFileChunkingCRCFalseAlarmThreshold": {
+  "what": "Int, default 0. Depot builder chunk finder: number of false CRC matches allowed before skipping ahead (see @cFileChunkingCRCFalseAlarmBytesToSkip). 0 probably turns the heuristic off.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "convar:@cFileChunkingSupersectionSizeMB": {
+  "what": "Int MB, default 1024. Depot builder: size of the file 'supersections' that the file-section chunker threads work on in parallel.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:cFileValidationMaxLog": {
+  "what": "Int, default 100. Content validation: maximum number of bad-file messages to log during one verify.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:ClickPanel": {
+  "what": "String, default 'index'. Valve's help text is just 'code', and 'code' and 'index' are the only values seen. This is a VGUI debug option that controls what is shown or logged when you click a panel (probably its code location or index). Developer-only.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "convar:ClientConnectTokenBucketEnable": {
+  "what": "Bool (0/1), default 1. CM connection: rate-limits reconnect attempts to Steam servers with a token bucket. When throttled, the client posts SteamServersConnectionAttemptThottled_t with a cooldown expiry time.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:clientui_overlay_fps": {
+  "what": "Int FPS, default 60. Probably the frame rate cap for the client UI when it is drawn as the in-game overlay.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:clientuistats_batchsize": {
+  "what": "Int, default 0. Client UI usage stats (ClientUIComponentDisplay events): number of events to queue before writing a batch. 0 writes each row immediately.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@cloud_testdynamicsyncapp": {
+  "what": "App ID, default 0. Steam Cloud testing: treats the given app as using dynamic sync, including 'sync_while_suspended'. Developer-only.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "convar:@cMaxContentServersToRequest": {
+  "what": "Int, default 20. Content downloads: maximum number of content servers to ask the directory for when building the download server list.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:cMaxDecryptThreadsOverride": {
+  "what": "Int, default 0 (= automatic). Content updates: overrides the number of CPU threads that decrypt and decompress chunks (CContentUpdateContext CPU thread pool).",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@cMaxInitialDownloadSources": {
+  "what": "Int, default -1 (no limit). Content downloads (CDepotDownloadMgr): caps how many download sources the client starts with, across source priority classes. Sources are still filtered by app, and some are skipped as Steam China-only.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@cMinimumJobTimeoutsToCheckPerFrame": {
+  "what": "Int, default 100. Job manager: the minimum number of jobs whose timeouts are checked each frame in CJobMgr::BCheckForJobTimeouts.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@cNetEncryptionHandshakeWorkMax_HighPri": {
+  "what": "Int, default 8000. Networking: the work budget (probably handshakes per period) for high-priority encrypted connection handshakes. The low- and medium-priority versions have budgets of 2000 and 4000.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:@cNetEncryptionHandshakeWorkMax_LowPri": {
+  "what": "Int, default 2000. Networking: the work budget for low-priority encrypted connection handshakes; see the HighPri/MedPri versions.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:@cNetEncryptionHandshakeWorkMax_MedPri": {
+  "what": "Int, default 4000. Networking: the work budget for medium-priority encrypted connection handshakes; see the HighPri/LowPri versions.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:com.steampowered.Atomupd1": {
+  "what": "Probably not a real setting. It looks like a D-Bus object path ('/com/steampowered/Atomupd1') caught by the extractor, with the method names DisableHttpProxy/EnableHttpProxy as 'help'. It is used to pass the client's HTTP proxy settings to the SteamOS atomic updater (atomupd) over D-Bus.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:controller_base_rotation_angle": {
+  "what": "Number, default 0. Steam Input: probably a base rotation angle applied to controller stick or trackpad input. Its usage is near the 'Ignoring initial input' connection handling.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:controller_debug_triton_wireless": {
+  "what": "Bool (0/1), default 0. Steam Input debugging for the 'Triton' controller (Valve's internal codename, believed to be the new Steam Controller) over a wireless connection. Probably adds wireless/serial-number debug handling in controller.cpp.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:controller_edge_cutoff": {
+  "what": "Number, default 0. Steam Input: probably an edge cutoff or deadzone at the outer edge of a trackpad or stick. Its exact units are unknown.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:controller_gyro_x_scale": {
+  "what": "Int, default 16000. Steam Input: the scale factor used to convert gyro X-axis input into 2D (mouse or stick) output.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:controller_idle_poll_interval": {
+  "what": "Int microseconds, default 50000 (20 Hz). Steam Input: how often idle controllers are polled.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:controller_jerk_low_pass_filter_rate": {
+  "what": "Float, default 4. Steam Input (Steam Deck): how quickly the low-pass filter follows the raw gyro 'jerk' value used for jerk/shake detection.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:controller_jerk_threshold": {
+  "what": "Float, default 500. Steam Input: the gyro jerk (change in gyro per second) needed to count one 'controller jerk' event. Steam Deck only (Neptune/Galileo).",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:controller_jerk_threshold_debug": {
+  "what": "Bool (0/1), default 0. Steam Input: logs the gyro noise, raw jerk value, low-pass jerk value, threshold and jerk count, for tuning controller_jerk_threshold.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:controller_jerk_throttle": {
+  "what": "Float Hz, default 2. Steam Input: the maximum rate at which controller jerk event callbacks are sent.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:controller_min_activation_time": {
+  "what": "Float seconds, default 0.0333 (about one frame at 30 Hz). Steam Input: probably the minimum time an action stays active once triggered, so very short presses still register.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:controller_momentum_min_vel": {
+  "what": "Float, default 0. Steam Input trackpad momentum (trackball mode): probably the minimum swipe speed needed to start momentum.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "convar:controller_momentum_num_excluded_samples": {
+  "what": "Int, default 1. Steam Input trackpad momentum: the number of most recent touch samples left out when estimating release speed (trackpad_weightedfilter).",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:controller_momentum_num_included_samples": {
+  "what": "Int, default 5. Steam Input trackpad momentum: the number of touch samples averaged by the weighted filter to estimate release speed.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:controller_poll_state": {
+  "what": "Int, default -1 (automatic). Steam Input: forces the controller polling state used by the HID I/O thread ('Controller PollState Changed from %d to %d'). This is a debugging override.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:controller_rate": {
+  "what": "Int microseconds, default 2000 (500 Hz). Steam Input: how often active controllers are polled. It is probably linked to the SteamController_Poll_Rate setting.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:controller_simulate_trackpad": {
+  "what": "Bool (0/1), default 0. Steam Input debug: when the left trackpad is touched, simulates a swipe on the right trackpad.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:controller_spew_level": {
+  "what": "Int log level, default 3. Steam Input: how verbose controller logging is (config load/save, SDL mappings, controller info reads). Higher means more output.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:countrycode": {
+  "what": "String, no default. CM login (cminterface.cpp): probably overrides the country code the client reports for the account or IP at logon. Mainly for testing.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "convar:cPreallocateMinimumSizeKB": {
+  "what": "Int KB, default 256. Content installs: only files at least this large have their disk space allocated up front (AllocateDiskSpace).",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@csecAudioSignalLevelInterval": {
+  "what": "Float seconds, default 60. Game recording audio capture: how often the signal levels (dB) of each audio source are written to the log.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@csecCSJobSuccessfulRequestTimeWindow": {
+  "what": "Int seconds, default 60. Content downloads: the time window used to judge whether a content-server connection has made successful requests recently, which decides things like turning off dual-stack for that connection.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "convar:@csecCSRequestProcessorTimeOut": {
+  "what": "Int seconds, default 300. Content downloads: a content-server request processor that is idle or making no progress for this long closes its connection ('Timed out waiting for progress after %d seconds').",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@csecDurationControlPeriod": {
+  "what": "Int seconds. Duration control (China anti-indulgence playtime limits): overrides the first playtime threshold for testing. Nonzero sets the threshold to this many seconds; 0 uses the normal one.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@csecDurationControlPeriodToday": {
+  "what": "Int seconds. Duration control: overrides the per-day playtime threshold for testing. Nonzero sets the limit to this many seconds.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@csecDurationControlSimulated": {
+  "what": "Int seconds. Duration control testing: pretends the user has already played this many seconds recently. Setting it makes the client ask the backend (Player.GetDurationControl) with the overridden state.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@csecDurationControlSimulatedNonRecent": {
+  "what": "Int seconds. Duration control testing: pretends the user has already played this many seconds today, but not recently.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@csecFavoriteGameAccountCacheTime": {
+  "what": "Int seconds, default 86400 (1 day). Server browser: how often the game-server account IDs in the favorites list are refreshed (GameServers.GetServerSteamIDsByIP / GetServerIPsBySteamID).",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@csecIncomingDataRatePeriod": {
+  "what": "Int seconds, default 1. Content downloads: the sampling period for measuring the incoming download rate (Mbps), which decides whether to add more download connections.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:csecManifestDownloadTimeout": {
+  "what": "Int seconds, default 120. Content updates: timeout for downloading a depot manifest before it counts as failed ('failed to downloading manifest').",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@csecSiteLicenseProxyStatsLog": {
+  "what": "Int seconds, default 60. Site-license content proxy: how often connection, request, byte and cached-byte statistics are written to the log.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@csecSiteLicenseProxyStatsUpdate": {
+  "what": "Int seconds, default 1. Site-license content proxy: how often the internal statistics are updated.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@csecUpdateTargetNumConnectionsEpoch": {
+  "what": "Int seconds, default 10. Content downloads: how often the client reconsiders the target number of download connections based on the measured rate.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@cSecUploadDownloadRates": {
+  "what": "Int seconds, default 300. Content downloads: how often recorded download-rate statistics per source are reported to Steam (CJobUploadDownloadRates; also saved as RecentDownloadRate).",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@CSInterfaceProxyPassword": {
+  "what": "String. Content downloads: the password for an HTTP proxy used to reach content servers, sent with Basic auth as 'user:pass'. Use it together with @CSInterfaceProxyUsername.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@CSInterfaceProxyUsername": {
+  "what": "String. Content downloads: the username for an HTTP proxy used to reach content servers (Basic auth). Use it together with @CSInterfaceProxyPassword.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@cUDPSendRetries": {
+  "what": "Int, default 8. Legacy UDP connection layer (udpconnection.cpp): how many times an unacknowledged packet is resent before giving up.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:CursorMoved": {
+  "what": "Probably not a real setting: a VGUI/HTML panel message name ('CursorMoved' with xpos/ypos) caught by the extractor. It carries cursor-position events for HTML panels, and there is nothing to set.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@CustomBinaryRequestRetryTimes": {
+  "what": "Int, default 20. DRM: how many times to retry a custom DRM binary request (RequestCustomBinary / CClientDRMDownloadJob).",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:debugLaunchAppDelaySecs": {
+  "what": "Int seconds, default 0. Game launch debugging: adds an artificial delay to the launch steps (license check, cloud sync, Steam Input config sync), for testing the launch progress UI.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:deck_mouse_haptic_tick_dist": {
+  "what": "Int, default 9000. Steam Deck trackpad-as-mouse: the distance moved (in raw trackpad units) between haptic 'ticks'.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:deck_mouse_leftside_filter": {
+  "what": "Int, default 30500. Steam Deck: probably a raw-coordinate threshold that filters touches on the left side or edge of a trackpad when it is used as a mouse.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:@DepotBuilderDeltaMaxChunks": {
+  "what": "Int, default 20000. Depot builder: the maximum number of chunks to consider when building delta patches between builds.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:@DepotBuilderEnableVZd": {
+  "what": "Bool (0/1), default 1. Depot builder: allows chunks to be compressed with Valve's 'VZd' format (probably the Zstd-based variant).",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:@DepotBuilderMaxParallelUploadChunks": {
+  "what": "Int, default 24. Depot builder: the maximum number of chunks uploaded or written at once, including writing depots to a local content server (LCS).",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@DepotBuilderNumHTTPSocketsToMDS": {
+  "what": "Int, default 12. Depot builder: number of HTTP sockets in the 'Depot Build' client that talks to the manifest/depot upload server (MDS).",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@DepotBuilderParallelUploadChunks": {
+  "what": "Int, default 6. Depot builder: number of chunks uploaded or verified in parallel (chunk verify worker pool).",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@DepotBuilderProgressTimeout": {
+  "what": "Int, default 1000 (probably seconds). Depot builder: if a build makes no upload progress for this long, it fails ('No progress while uploading chunks', 'Timeout uploading manifest').",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@DepotBuilderVZdMinRatio": {
+  "what": "Float, default 0.4. Depot builder: the VZd-compressed size must be at most this fraction of the original before VZd is used. Otherwise another compression is used.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:@DepotBuilderXORMatchPercent": {
+  "what": "Int percent, default 95. Depot builder delta/patch generation: the similarity a chunk needs to an older chunk before it is stored as an XOR delta.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:DepotDeltaPatches": {
+  "what": "Bool (0/1), default 1. Content updates: allows downloading and applying depot delta patches (depot_<id>_<from>_<to>.delta) instead of whole changed chunks.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:DepotDownloadProgressTimeout": {
+  "what": "Int seconds, default 120. Content updates: how long depot reconstruction waits for download progress before it treats the update as stalled.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:DepotMinWriteGapSizeMB": {
+  "what": "Int MB, default 64. Content updates (depotreconstruct): the minimum gap between write regions when grouping chunk writes. It relates to the extra downloads in single-file mode.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "convar:DepotReconstructionBadChunk": {
+  "what": "Int, default 0. Content updates debug: probably deliberately corrupts or marks a chunk as bad, to test bad-chunk handling.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:DepotReconstructionForceGenericIO": {
+  "what": "Content updates (depot reconstruction): forces the generic file I/O path instead of the optimized/async one. 'all' was seen as a possible value, perhaps a per-depot selector.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "convar:DepotReconstructionLowPrio": {
+  "what": "Bool (0/1), default 1. Content updates: runs depot reconstruction (decrypt, decompress, write) at low thread/IO priority so it doesn't slow down the system.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:DepotReconstructionNumIOThreads": {
+  "what": "Int, default 32. Content updates: number of disk I/O threads used during depot reconstruction.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:DepotUseAlternatingReadWrite": {
+  "what": "Bool (0/1), default 1. Content updates: when using chunks from a staged chunk store, alternates between read and write phases instead of doing both at once.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "convar:developer": {
+  "what": "Int, default 0. General developer mode for the client UI. When set, extra developer commands and features are available, such as profiling commands, the devtools file links and debug menu tasks.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@durationControlNightCheck": {
+  "what": "Int enum, default 1. Duration control (China anti-indulgence): the time-of-day check. 1 = normal, 2 = force night-time, 0 = no check (only allowed for age-verified accounts).",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@EnableUDPHistory": {
+  "what": "Bool (0/1), default 0. Keeps a history of UDP connection packets or events for debugging the legacy UDP transport.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:@fDownloadRateImprovementToAddAnotherConnection": {
+  "what": "Float ratio, default 1.2. Content downloads: adding a connection must raise the download rate by at least this factor (20%) before the client keeps adding more.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@fMinDataRateToAttemptTwoConnectionsMbps": {
+  "what": "Float Mbps, default 1.5. Content downloads: the minimum measured download rate before the client tries a second download connection.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:force_software_gyro_drift_correction": {
+  "what": "Int, default 0. Steam Input gyro: 0 = use software drift calibration only when the controller needs it, 1 = force the standard software drift calibration on every controller with an IMU.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@ForceContentServer": {
+  "what": "String hostname or IP (empty = off). Content downloads: always use this content server instead of the list from ContentServerDirectory.GetServersForSteamPipe ('Forcing content server %s for download!'). Useful for testing a particular CDN node or a LAN cache.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@ForceContentServerHTTPS": {
+  "what": "Bool (0/1), default 0. Content downloads: connect to the server set in @ForceContentServer over HTTPS.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@ForceContentServerType": {
+  "what": "String. Content downloads: only use content servers of this type (e.g. CDN, SteamCache, OpenCache), probably with 'local' as a special value. It filters the server list from ContentServerDirectory.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "convar:g_RumbleRepeatAfterDelaySeconds": {
+  "what": "Float seconds, default 0.050. Steam Input rumble: the delay before a rumble command is sent again to keep it going.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:g_RumbleSustainTimeSeconds": {
+  "what": "Float seconds, default 10. Steam Input rumble: the longest a rumble effect is kept going without new commands before it stops.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:@GCNameOverride": {
+  "what": "String. Game Coordinator (ISteamGameCoordinator): overrides which Game Coordinator name or instance messages are sent to. Developer testing.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "convar:grip_sense_haptic_test": {
+  "what": "Bool (0/1), default 0. Steam Input debug: plays a test haptic pulse when grip sense (capacitive grip) is triggered.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:grip_sense_haptic_test_repeats": {
+  "what": "Int, default 1. Number of pulses for the grip-sense haptic test (see grip_sense_haptic_test).",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:grip_sense_haptic_test_strength": {
+  "what": "Int, default 125. Strength of the grip-sense haptic test pulse (see grip_sense_haptic_test).",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:gyro_auto_detect_polling_rate": {
+  "what": "Int enum, default 1 (wired controllers only). Steam Input gyro: how the IMU polling rate is worked out. 0 = legacy (buggy with controllers at 1000 Hz or more), 1 = use SDL3 sensor timing but fall back to estimating from the packet rate when it looks wrong, 2 = always estimate from the packet rate.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_calibration_duration_automatic": {
+  "what": "Float seconds, default 5.0. Steam Input gyro: how long a controller must stay still to calibrate drift automatically. Shorter times are more likely to produce wrong corrections.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_calibration_duration_manual": {
+  "what": "Float seconds, default 5.0. Steam Input gyro: how long manual drift calibration runs. Longer is more accurate.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_calibration_duration_manual_timeout": {
+  "what": "Float seconds, default 30. Steam Input gyro: if manual drift calibration hasn't succeeded within this time, it goes back to calibrating noise tolerance.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_calibration_duration_stationary": {
+  "what": "Float seconds, default 5.0. Steam Input gyro: how long to sample while still to measure gyro and accelerometer noise tolerance.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_debug_gyro_speed_vs_quaternion_speed": {
+  "what": "Bool (0/1), default 0. Steam Input gyro debug: logs the raw gyro speed next to the rotation speed taken from the quaternion, per hardware frame.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_debug_hardware_vs_mode_time": {
+  "what": "Bool (0/1), default 0. Steam Input gyro debug: logs the hardware delta time next to the platform/mode delta time and prediction timing.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_debug_sensor_timings": {
+  "what": "Bool (0/1), default 0. Steam Input gyro debug: logs IMU sensor timing, including expected and measured delta-µs, rate changes and fallbacks to estimated polling rates.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:gyro_drift_calibration_debug": {
+  "what": "Bool (0/1), default 0. Steam Input gyro debug: shows which sensor (accelerometer or gyro) is restarting drift calibration because of noise, and logs candidate and applied drift values. Drift values are saved per controller in <serial>_gyro.vdf.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_drift_correction_enabled": {
+  "what": "Bool (0/1), default 1. Steam Input: turns software gyro drift correction on or off.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_drift_detection_debug": {
+  "what": "Bool (0/1), default 0. Steam Input gyro debug: logs how far the gyro has turned over time ('Detected Gyro Deflection').",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_drift_detection_duration": {
+  "what": "Float seconds, default 30. Steam Input gyro: how long the client samples before raising a 'gyro needs calibration' warning.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_drift_detection_min_deflection": {
+  "what": "Float degrees, default 270. Steam Input gyro: how many degrees the gyro must turn before it counts as drift. This is deliberately more than normal use would produce.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_drift_detection_min_drift_rate": {
+  "what": "Float degrees/second, default 0.1. Steam Input gyro: the lowest steady rotation rate that counts as noticeable drift.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_filter_enabled": {
+  "what": "Bool (0/1), default 1. Steam Input gyro: applies a pseudo One-Euro smoothing filter to the gyro rotation (quaternion) to reduce sensor noise and hand shake.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_filter_max_speed": {
+  "what": "Float degrees/second, default 16. Steam Input gyro filter: above this rotation speed, no smoothing is applied.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_filter_min_speed": {
+  "what": "Float degrees/second, default 2. Steam Input gyro filter: below this rotation speed, maximum smoothing (low-pass) is applied.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_filter_smoothness": {
+  "what": "Int 1-100, default 75. Steam Input gyro filter: how strong the low-pass smoothing is. 1 is heavily smoothed (barely responds), 100 is barely smoothed.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_force_handheld_orientation": {
+  "what": "Int enum, default 0. Steam Input gyro orientation: 0 = auto, 1 = handheld like the Steam Deck (pitched 90°, yaw goes through the screen), 2 = standalone controller like the Steam Controller (yaw goes through the sticks).",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_force_sensor_rate": {
+  "what": "Int Hz, default 0. Steam Input gyro: 0 = use the IMU's timing and drop suspicious samples; nonzero = ignore sensor timing and assume this fixed rate (e.g. 250 for PS4/PS5, 200 for Switch).",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_handheld_pitch_offset": {
+  "what": "Float degrees, default 90. Steam Input gyro: in handheld mode, how far the gyro rotation is tilted before processing. This only affects the Yaw/Roll/Laser-pointer styles of Gyro to Mouse and Gyro to Joystick Camera.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_haptic_probe_enabled": {
+  "what": "Bool (0/1), default 0. Steam Input: turns on the experimental 'haptic probe' gyro mode, which gives haptic feedback as the gyro moves. The config's haptic level must not be 'off'.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_haptic_probe_max_pulse": {
+  "what": "Int, default 100. Steam Input haptic probe: pulse strength at the highest gyro speed.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_haptic_probe_max_speed": {
+  "what": "Float degrees/second, default 360. Steam Input haptic probe: the gyro speed at which the strongest pulse is used.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_haptic_probe_min_pulse": {
+  "what": "Int, default 20. Steam Input haptic probe: pulse strength at the lowest gyro speed. Valve's help text was copied from max_pulse, but the name and default show this is the minimum.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "convar:gyro_haptic_probe_min_speed": {
+  "what": "Float degrees/second, default 0.125. Steam Input haptic probe: the lowest gyro speed that produces haptic feedback.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_haptic_probe_offset_scale": {
+  "what": "Float degrees, default 0.65. Steam Input haptic probe: how far apart the set of probes is spread (0 = all in one place, 1 = 1° apart).",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_haptic_probe_types": {
+  "what": "Int enum, default 3. Steam Input haptic probe output: 0 = none, 1 = trackpad haptics only, 2 = rumble only, 3 = both.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_precision_speed": {
+  "what": "Float, default 0.75. Steam Input gyro: the multiplier or threshold for the precision-speed response; see gyro_precision_speed_enabled.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:gyro_precision_speed_enabled": {
+  "what": "Bool (0/1), default 1. Steam Input gyro: applies a linear response multiplier to speeds below the precision speed set in 'Gyro To...' modes, after the speed deadzone, for finer slow aiming.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_prediction_correction_speed_max": {
+  "what": "Float degrees/second, default 180. Steam Input gyro prediction: above this speed, the predicted rotation is fully corrected toward the measured value. The correction is still gradual.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_prediction_correction_speed_min": {
+  "what": "Float degrees/second, default 30. Steam Input gyro prediction: below this speed, the predicted rotation is not corrected toward the measured value.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_prediction_enabled": {
+  "what": "Bool (0/1), default 1. Steam Input gyro: predicts rotation from the last known gyro speed. This smooths uneven Bluetooth delivery and gyros slower than 500 Hz.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_raw_deadzone": {
+  "what": "Float, default 6.0. Steam Input: the legacy deadzone on the raw gyro signal. Only affects 'As Mouse' and modes based on it.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_sensor_margin_of_error_pct": {
+  "what": "Int percent, default 25. Steam Input gyro: how far (+/-) sensor timing may differ from the expected value before the client falls back to estimating the polling rate from packets. Valve's help says it applies when gyro_auto_detect_polling_rate is 2, though mode 1's description suggests it is used there too.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_speed_deadzone": {
+  "what": "Float, default 0.5 (probably degrees/second). Steam Input gyro: the minimum rotation speed before the gyro response updates; see gyro_speed_deadzone_enabled.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:gyro_speed_deadzone_enabled": {
+  "what": "Bool (0/1), default 1. Steam Input gyro: turns on the minimum-speed deadzone (gyro_speed_deadzone).",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_stationary_calibration_debug": {
+  "what": "Bool (0/1), default 0. Steam Input gyro debug: shows which sensor (gyro or accelerometer) is restarting noise-tolerance calibration because its noise is too high, and logs the resulting tolerances.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_to_joystick_camera_raw": {
+  "what": "Bool (0/1), default 1. Steam Input: A/B test switch between two Gyro to Joystick Camera pipelines (1 vs 0). Valve's help calls both 'old', so it is unclear which is newer.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "convar:gyro_to_joystick_camera_relax": {
+  "what": "Float, default 0. Steam Input Gyro to Joystick Camera: an experimental low-pass filter on the output, meant to help games with low frame rates. Valve marks it 'needs more thought'.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:gyro_use_polling_time_for_prediction": {
+  "what": "Bool (0/1), default 1. Steam Input gyro prediction: uses the main loop's cached time instead of reading the clock again. Only for A/B testing.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:haptic_click_gain_modifier": {
+  "what": "Number, default 0. Steam Input haptics: a gain adjustment applied to trackpad 'click' haptic pulses.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:haptic_intensity": {
+  "what": "Int, default 8000. Steam Input haptics: the base intensity (amplitude) of trackpad haptic pulses in the newer haptic code. Compare haptic_intensity_old (2500).",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:haptic_intensity_old": {
+  "what": "Int, default 2500. Steam Input haptics: the base pulse intensity used by the legacy haptic code (when haptic_new = 0).",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:haptic_new": {
+  "what": "Bool (0/1), default 0. Steam Input: switches to the newer controller haptics code. Testing toggle.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:haptic_off_divisor": {
+  "what": "Float, default 5.0. Steam Input haptics: probably a divisor that sets the 'off' part of a pulse relative to the 'on' part (duty cycle).",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:haptic_tick_gain_modifier": {
+  "what": "Number, default 0. Steam Input haptics: a gain adjustment applied to trackpad 'tick' (detent) haptic pulses.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:ibex_mouse_leftside_filter": {
+  "what": "Int, default 32500. Steam Input: like deck_mouse_leftside_filter, but for the 'Ibex' device (a Valve internal codename for a controller). Probably a raw trackpad coordinate threshold used when the trackpad acts as a mouse.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:ibex_rumble_deadzone": {
+  "what": "Int, default 635. Steam Input: rumble values below this are ignored on the 'Ibex' device (a Valve internal codename).",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:installmanagertimeout": {
+  "what": "Int, default 15 (probably seconds). Install manager UI: a timeout used while the install/backup restore manager is working.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:ItemsChecked": {
+  "what": "Probably not a real setting: a VGUI ListPanel message name (ItemsChecked with itemid/count) caught by the extractor. There is nothing to set.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:KeyCodeTyped": {
+  "what": "Probably not a real setting: the VGUI key event message name (KeyCodeTyped with code/modifiers) caught by the extractor.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:lenovo_hook_filter": {
+  "what": "Int, default 31500. Steam Input: probably a raw trackpad/touch coordinate threshold for a Lenovo handheld (e.g. Legion Go) in mouse mode, like deck_mouse_leftside_filter.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:library_asset_cache_asset_file_min_sec": {
+  "what": "Int seconds, default 120. Library artwork cache (libraryassetcache.cpp): asset files younger than this are skipped when the cache is cleaned up.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "convar:library_asset_cache_conversion_rtime": {
+  "what": "Unix time, default 1724792014 (2024-08-27). Library artwork cache: apps whose cache is older than this need converting to the new cache layout ('App %u requires conversion').",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:library_asset_cache_full_check_threshold": {
+  "what": "Int, default 25. Library artwork cache: probably the number of changed apps (or a percentage) above which the whole cache is checked instead of just some apps.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:library_asset_cache_full_recheck_min_hours": {
+  "what": "Int hours, default 1. Library artwork cache: the minimum time between full rechecks of the asset cache.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:library_asset_cache_kvfile_name": {
+  "what": "String, default 'assetcache.vdf'. Library artwork cache: the file name of the cache index (KeyValues file) in the library cache folder.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:library_asset_cache_kvfile_version": {
+  "what": "Int, default 2. Library artwork cache: the format version of the index file. If the version changes, the index is rebuilt.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:library_asset_cache_max_notify": {
+  "what": "Int, default 200. Library artwork cache: the maximum number of asset-changed notifications sent to the library UI in one batch.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:library_asset_cache_max_requests": {
+  "what": "Int, default 20. Library artwork cache: the maximum number of artwork downloads at once.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:library_asset_cache_notify_debounce_sec": {
+  "what": "Int seconds, default 60. Library artwork cache: groups asset-change notifications to the UI so they are sent at most once per this interval.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:library_asset_cache_version": {
+  "what": "Int, default 3. Library artwork cache: the version number added to artwork URLs ('cv=%u'), so changing it makes the client fetch fresh images from the CDN.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:library_sharing_account_max": {
+  "what": "Int, default 5. Steam Family / Library Sharing: the maximum number of accounts that can share a library on this machine.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:@LocalContentServer": {
+  "what": "String. Content downloads: the address of a partner Local Content Server (LCS). It is used for branches marked 'lcsrequired' ('no local content server for beta %s, falling back to public').",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:log_files_always_flush": {
+  "what": "Bool (0/1), default 0. Logging: flushes each line to the log files (logs/<name>.txt) right away. Useful when debugging crashes; slightly slower.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:log_matchmaking_callbacks": {
+  "what": "Bool (0/1), default 0. Matchmaking: logs lobby and matchmaking callbacks sent to games.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:@MatchmakingCreatePingWaitTime": {
+  "what": "Int (probably ms), default 0. Lobby matchmaking: how long lobby creation waits for ping/location data before it continues (LobbyCreated_t).",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "convar:@MatchmakingJoinPingWaitTime": {
+  "what": "Int (probably ms), default 0. Lobby matchmaking: how long a lobby join waits for ping data before it continues (LobbyEnter_t).",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "convar:@MatchmakingSearchPingWaitTime": {
+  "what": "Int (probably ms), default 0. Lobby matchmaking: how long a lobby search waits for ping data before it returns results (LobbyMatchList_t).",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "convar:@MatchmakingTotalPingWaitTime": {
+  "what": "Int (probably ms), default 0. Lobby matchmaking: the total ping-wait budget across create, join and search operations.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "convar:@MaxOutstandingSendThreadItemFatalAssert": {
+  "what": "Int, default 30000. TCP/SSL send thread: if more items than this are queued for longer than @MaxOutstandingSendThreadItemFatalAssertSecondsAtLimit, the process is killed on purpose ('killing process').",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@MaxOutstandingSendThreadItemFatalAssertSecondsAtLimit": {
+  "what": "Int seconds, default 30. TCP send thread: how long the queue may stay above the fatal limit before the process is killed.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@MaxOutstandingSendThreadItemSleep": {
+  "what": "Int, default 10000. TCP send thread: when this many items are queued, the sender pauses (back-pressure) before adding more.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:MergeCapReprocess_minutes": {
+  "what": "Int minutes, default 480 (8 hours). Probably the minimum time before merged capture/cache data (likely shader cache merges) is processed again.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:@metricsDisabledCatalogs": {
+  "what": "Comma-separated list. Metrics: whole metrics catalogs to turn off. This is checked last; @metricsEnabledOperations overrides it.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@metricsDisabledOperations": {
+  "what": "Comma-separated list. Metrics: operations to turn off. This setting takes priority over everything else ('Metrics disabled by operation blacklist').",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@metricsEnabledOperations": {
+  "what": "Comma-separated list. Metrics: operations to turn on even if their catalog is disabled ('Metrics enabled by operation whitelist').",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:mic_autogain": {
+  "what": "Int, default 16000. Voice chat: the target level for automatic gain control on microphone input, probably as a peak sample amplitude.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:mic_inputfile": {
+  "what": "File path. Voice chat testing: reads voice data from this WAV file (played in a loop) instead of the microphone.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:mic_outputfile": {
+  "what": "File path. Voice chat debugging: writes the microphone data to this file as a RIFF/WAVE file. Close Steam before using the file.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:MouseDoublePressed": {
+  "what": "Probably not a real setting: the VGUI mouse event message name (MouseDoublePressed with code/modifiers) caught by the extractor.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:MousePressed": {
+  "what": "Probably not a real setting: the VGUI mouse event message name (MousePressed with code/modifiers) caught by the extractor.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:musiclogging": {
+  "what": "Bool (0/1), default 0. Turns on logging for the client's music player (CClientMusic).",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@nBootReserveRetryPeriodSec": {
+  "what": "Int seconds, default 30 (should be a multiple of 10). Disk space: how long to wait before retrying after creating the 'boot reserve' file fails. That file keeps space free so Steam can still start on a nearly full disk.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:nBroadcastSessionMaxDropFrames": {
+  "what": "Int, default 100. Steam Broadcasting: probably the maximum number of dropped frames allowed in a session before it is ended or reset.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:@nCallerDeadlineHopLatencyMS": {
+  "what": "Int ms, default 10. Job/message system: when a job with a deadline sends a request, the reply timeout is set to the job's remaining time minus this many ms. A negative value stops deadlines being passed on.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:nClientBackgroundAutoUpdateLessRecentlyPlayedThresholdHours": {
+  "what": "Int hours, default 168 (1 week). Scheduled background updates: games played within this time are updated sooner than games not played for longer. This is the 'less recent' tier.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:nClientBackgroundAutoUpdateNotPlayedTimeSpreadDays": {
+  "what": "Int days, default 14. Scheduled background updates: a game not played for a while is updated on a morning chosen within this many days.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:nClientBackgroundAutoUpdateRecentlyPlayedThresholdHours": {
+  "what": "Int hours, default 72. Scheduled background updates: games played within this time are treated as recently played and updated soonest.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:nClientBackgroundAutoUpdateTargetHour": {
+  "what": "Int hour 0-23 (local time), default 6. Scheduled background updates: the target hour for automatic app updates. Updates are spread around it (see nClientBackgroundAutoUpdateTimeSpreadMinutes).",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:nClientBackgroundAutoUpdateTimeSpreadMinutes": {
+  "what": "Int minutes, default 360. Scheduled background updates: the window around the target hour (a ±2-sigma window, so half on each side) over which updates are randomly spread.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nClientCloudMaxMBParallelDownloads": {
+  "what": "Int MB, default 64. Steam Cloud sync: the maximum total size of files downloaded at once.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@nClientCloudMaxMBParallelUploads": {
+  "what": "Int MB, default 64. Steam Cloud sync: the maximum total size of files uploaded at once within an upload batch.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@nClientCloudMaxNumParallelDeletes": {
+  "what": "Int, default 10. Steam Cloud sync: the maximum number of cloud file deletes or forgets at once.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@nClientCloudMaxNumParallelDownloads": {
+  "what": "Int, default 10. Steam Cloud sync: the maximum number of file downloads at once.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@nClientCloudMaxNumParallelUploads": {
+  "what": "Int, default 10. Steam Cloud sync: the maximum number of file uploads at once.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@nClientCloudMaxNumUploadsPerBatch": {
+  "what": "Int, default 100. Steam Cloud: the maximum number of files in one app upload batch (Cloud.BeginAppUploadBatch). Bigger syncs are split into several batches.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@nClientCMDirectoryResultLoadPercentDither": {
+  "what": "Int percent, default 10. CM connection: random variation added to the CM server load values from the CMDirectory query, so clients don't all choose the same server.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nClientCMUDPPingTimeGoodEnoughThresholdMS": {
+  "what": "Int ms, default 50. CM connection over UDP: while looking for the best server, a CM that answers within this time is good enough and the search stops.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@nClientCMUDPPingTimeoutUseGoodEnoughMS": {
+  "what": "Int ms, default 250. CM connection over UDP: after this long searching for the best server, the client takes a good-enough server instead of waiting for all ping replies.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@nClientDownloadEnableHTTP2PlatformLinux": {
+  "what": "Bool (0/1), default 1. Content downloads: allows HTTP/2 connections to content servers on Linux clients.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nClientDownloadEnableHTTP2PlatformWindows": {
+  "what": "Bool (0/1), default 1. Content downloads: allows HTTP/2 to content servers on Windows clients. Not used on Linux.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nClientDownloadEnableHTTP2RelBranch": {
+  "what": "Bool (0/1), default 0. Content downloads: on stable (non-beta) clients, HTTP/2 is used on the enabled platforms only if this is set.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nClientDownloadInitWindowSizeHTTP2Connection": {
+  "what": "Int bytes, default 10000000 (~10 MB). Content downloads: the initial HTTP/2 flow-control window for each connection.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nClientDownloadInitWindowSizeHTTP2Stream": {
+  "what": "Int bytes, default 2000000 (~2 MB). Content downloads: the initial HTTP/2 flow-control window for each stream.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nClientDownloadProbUseHTTP2IfAvailable": {
+  "what": "Int percent 0-100, default 50. Content downloads: the chance of using HTTP/2 for a download source that supports it. This is a rollout or A/B setting.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nClientEnableHTTP2PlatformLinux": {
+  "what": "Bool (0/1), default 1. General client HTTP (the 'App Info' / Steam Engine HTTP client, not depot downloads): allows HTTP/2 on Linux.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nClientEnableHTTP2PlatformWindows": {
+  "what": "Bool (0/1), default 1. General client HTTP: allows HTTP/2 on Windows clients. Not used on Linux.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nClientEnableIPv6ForHTTPPlatformLinux": {
+  "what": "Bool (0/1), default 0. General client HTTP (Steam Engine / App Info client): uses IPv6 for HTTP connections by default on Linux.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nClientEnableIPv6ForHTTPPlatformWindows": {
+  "what": "Bool (0/1), default 0. General client HTTP: uses IPv6 by default on Windows clients. Not used on Linux.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nClientFrameRateReportBatchSize": {
+  "what": "Int, default 60. Game performance metrics: number of frame-rate reports collected locally before they are sent to Valve.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nClientFrameRateReportSecs": {
+  "what": "Int seconds, default 60. Game performance metrics: the time between individual frame-rate samples taken while a game runs.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nClientInitWindowSizeHTTP2Connection": {
+  "what": "Int bytes, default 10000000. General client HTTP ('App Info' client): the initial HTTP/2 flow-control window for each connection.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nClientInitWindowSizeHTTP2Stream": {
+  "what": "Int bytes, default 2000000. General client HTTP ('App Info' client): the initial HTTP/2 flow-control window for each stream.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nClientQueryCMDirectoryBeforeConnect": {
+  "what": "Int enum, default 1. CM connection: fetches a fresh CM server list from the CMDirectory web API before connecting. 0 = off, 1 = on, 2 = only main/dev/beta clients. The result also decides WebSockets vs UDP (Netfilter) CMs by a percentage roll.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nClientServiceMethodForDownloadListPercent": {
+  "what": "Int percent, default 100. Content downloads: the share of clients that get the download-source list through the service method (ContentServerDirectory.GetServersForSteamPipe) instead of the legacy path. A rollout dial.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:nCloudFileCompressionMinFileSizeKB": {
+  "what": "Int KB, default 16. Steam Cloud: files smaller than this are uploaded without compression.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:nCloudFileCompressionMinFileSizeKBSharedFile": {
+  "what": "Int KB, default 128. Steam Cloud: the minimum size before shared (UGC) files are compressed for upload.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:nCloudFileCompressionPercentageMin": {
+  "what": "Int percent, default 10. Steam Cloud: compression must save at least this much before the compressed version is uploaded.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:nCloudFileCompressionPercentageMinSharedFile": {
+  "what": "Int percent, default 50. Steam Cloud: the minimum saving from compression before a shared (UGC) file is uploaded compressed.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:nCloudUploadMinIntervalSec": {
+  "what": "Int seconds, default 1800 (30 min). Roaming Config cloud sync (cloud-synced client/user settings): the minimum time between uploads of local changes.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:nCloudUploadNetworkTimeoutSeconds": {
+  "what": "Int seconds, default 400. Steam Cloud: the network timeout for one HTTP file upload to cloud storage before it counts as 'timed out'.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@nContentDeltaChunkAppendChunksAfterProtobufSizeThresholdMB": {
+  "what": "Int MB, default 33. Content updates with delta chunks: when the delta data in a protobuf message goes over this size, the remaining chunks are appended outside the protobuf, probably to stay under message size limits.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:nContentDownloadsToOtherDrive": {
+  "what": "Bool (0/1), default 1. Content updates: allows staging an update on a different drive from the install folder when space is short ('switched staging folder to ...').",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:nContentStatsReportInterval": {
+  "what": "Int hours, default 72. Content subsystem: how often content and download statistics are reported to Valve.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "convar:@nContentUpdateAutoVerifyCleanBytesThresholdMB": {
+  "what": "Int MB, default 2048. Content updates auto-verify: once this many MB have been verified clean, automatic verification backs off. The tally resets when the last verify is old.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nContentUpdateAutoVerifyEnable": {
+  "what": "Int, default 1. Content updates: automatically verifies installed files after game updates. 0 = off, 1 = on for all clients.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nContentUpdateAutoVerifyIntervalDays": {
+  "what": "Int days, default 15. Content updates: auto-verify a library folder during game updates every N days.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nCSClientRateLimitKbps": {
+  "what": "Int kbps, default 0 (= no limit). Content downloads: a download bandwidth limit that works alongside the user's DownloadThrottleKbps setting.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@nCSJob404ResponseLimit": {
+  "what": "Int, default 25. Content downloads: after this many HTTP 404 responses from one content server, the client stops using it for the download.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@nCSJob5xyResponseLimit": {
+  "what": "Int, default 10. Content downloads: after this many HTTP 5xx responses from one content server, the client stops using it.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:nDepotSaveCorruptChunks": {
+  "what": "Int/bool, default 0. Content updates debug: keeps corrupt downloaded chunks on disk for later analysis instead of throwing them away.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:@nDownloadLANChunkCacheSizeMB": {
+  "what": "Int MB, default 128. LAN peer-to-peer content transfer: the size of the in-memory chunk cache used when serving content to other Steam clients on the LAN.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:@nDownloadLANPeerGroup": {
+  "what": "Int, default 0. LAN peer content transfer: the peer-to-peer download group ID this client joins (site-license servers can set it: 'Joining P2P download group %u'). 0 = no group.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@net_backlog_bytes_allowed": {
+  "what": "Int bytes, default 60000000 (60 MB). TCP connections: if unsent data goes above this (together with net_backlog_time_allowed_sec), the connection closes itself.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@net_backlog_time_allowed_sec": {
+  "what": "Int seconds, default 8. TCP connections: how long a connection may stay over the send backlog limit before it closes itself.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:net_incomingcheck": {
+  "what": "Bool (0/1), default 1. Legacy P2P networking (ISteamNetworking sockets): probably checks or validates incoming connections and packets on P2P sockets.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "convar:@net_loopback": {
+  "what": "Bool (0/1), default 1. Networking: allows the in-process loopback transport for connections to local endpoints.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:net_maxresendsperframe": {
+  "what": "Int, default 32. Legacy P2P networking: the maximum number of dropped packets resent per frame.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@NetConnectionBufferMsgLimit": {
+  "what": "Int, default 1000. CM connection: the maximum number of messages batched into one compressed (zipped) multi-packet.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@NetConnectionBufferThreaded": {
+  "what": "Bool (0/1), default 1. CM connection: buffers and flushes outgoing messages on a worker thread.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "convar:@nGameRecordingTextureGPU": {
+  "what": "Int, default 0. Game recording / Remote Play encoder: picks which GPU (adapter index) to capture and encode on ('Changing adapter').",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@nHTTPServerHTTP2InitWindowSizePerConnection": {
+  "what": "Int bytes, default 3145728 (3 MB). Built-in HTTP server: the default HTTP/2 flow-control window for each connection. A server can set its own.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nHTTPServerHTTP2InitWindowSizePerStream": {
+  "what": "Int bytes, default 1048576 (1 MB). Built-in HTTP server: the default HTTP/2 flow-control window for each stream. A server can set its own.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nHTTPServerHTTP2MaxConcurrentStreams": {
+  "what": "Int, default 25. Built-in HTTP server: the default maximum number of HTTP/2 streams per connection. A server can set its own.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nHTTPServerLogLevelAccessLine200": {
+  "what": "Int log level, default 3. Built-in HTTP server: the log level for the one-line access log entry of requests that return 200.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nHTTPServerLogLevelAccessLineNon200": {
+  "what": "Int log level, default 2. Built-in HTTP server: the log level for the one-line access log entry of requests that don't return 200.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nHTTPServerLogLevelDetails200": {
+  "what": "Int log level, default 4. Built-in HTTP server: the log level for full details of requests that return 200. If turned on, it will fill the log quickly.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nHTTPServerLogLevelDetailsNon200": {
+  "what": "Int log level, default 4. Built-in HTTP server: the log level for full details of requests that don't return 200.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nHTTPServerMaxPipelinedReqsPerConnection": {
+  "what": "Int, default 8. Built-in HTTP server: the maximum number of pipelined HTTP/1.1 requests waiting on each connection.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nHTTPServerYieldOn100ContinueSendSecs": {
+  "what": "Int seconds, default 300. Built-in HTTP server: after sending '100 Continue', how long to wait for the client to send the request body.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nIOCPThreadCount": {
+  "what": "Int, default 1. Networking: the number of I/O completion port threads. This is a Windows IOCP setting and probably does nothing on Linux.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:@nJobInteryieldMillisecondsAlertThreshold": {
+  "what": "Int ms, default 120. Job system: a job that runs longer than this without yielding raises an alert-level 'Long interyield runtime' report.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@nJobInteryieldMillisecondsLogThreshold": {
+  "what": "Int ms, default 80. Job system: a job that runs longer than this without yielding is logged ('Long interyield runtime'). These messages are rate-limited.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@nJobInteryieldMillisecondsSpewThreshold": {
+  "what": "Int ms, default 500. Job system: a job that runs longer than this without yielding gets the most detailed 'Long interyield runtime' report (with job details). It is the highest of the log/alert/spew thresholds.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@nJobNetSendsInsaneThreshold": {
+  "what": "Int, default 15000. Job system: a job that sends more than this many network messages is reported as 'Insane net sends' (rate-limited). This catches runaway jobs.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@nJWTVerifiedTokenCacheSize": {
+  "what": "Int, default 0 (cache off). Auth tokens: how many verified JWTs to remember, so a token presented again doesn't need its signature checked again.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nLANPeerGroupRateLimitKbps": {
+  "what": "Int kbps, default 0 (= no limit). LAN peer-to-peer content transfer: a bandwidth limit for transfers within the LAN peer download group.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:@nLANPeerMaxConnections": {
+  "what": "Int, default 24. LAN peer content transfer: the maximum number of connections to LAN peers used as download sources.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@nLANPeerRateLimitKbps": {
+  "what": "Int kbps, default 0 (= no limit). LAN peer content transfer: a bandwidth limit for each LAN peer connection.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:@nLegalDictionaryUpdateRateInSeconds": {
+  "what": "Int seconds, default 600. Steam engine main loop: how often the 'legal dictionary' (probably the list of allowed words or names used for text filtering) is refreshed.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:@nNetConnectionBufferZipLevel": {
+  "what": "Int compression level, default 1. CM connection: the zlib level used when batching buffered outgoing messages into one compressed packet.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:@nParentalSettingsLogLevel": {
+  "what": "Int log level, default 4. Family View / parental controls: how much is written to the parental log file (lock/unlock with PIN, settings changes).",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nPartnerUploadFinalizeTimeoutSecs": {
+  "what": "Int seconds, default 600. Partner uploads: the timeout for the DRM finalize step, which can be slow because it copies the file to cloud storage.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:nPeerContentDefaultMode": {
+  "what": "Int enum, default 1. Local network game transfers (peer content): the default for who this client shares with or downloads from. 0 = off, 1 = only my own devices, 2 = friends only, 3 = anyone. It is stored as PeerContent ClientMode/ServerMode.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:nProductInfoUpdateInterval": {
+  "what": "Int seconds, default 900 (15 min). Steam engine: how often app and package product info (PICS) is checked for changes.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:@nProtobufArenaInitialBlockSize": {
+  "what": "Int bytes, default 65536. Protobuf message handling: the size of the first memory block each protobuf arena allocates.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nProtobufArenaMaxBlockSize": {
+  "what": "Int bytes, default 524288. Protobuf message handling: the largest memory block a protobuf arena allocates.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nProtobufArenaNumberOfHeadersToShare": {
+  "what": "Int, default 128. Protobuf message handling: how many message headers share one protobuf arena before a new arena is created. Valve's help text is copied from the Jobs version.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "convar:@nProtobufArenaNumberOfJobsToShare": {
+  "what": "Int, default 128. Protobuf message handling: how many jobs share one protobuf arena before a new one is created.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:nRichPresenceUploadThrottleSecs": {
+  "what": "Int seconds, default 5. Rich presence: game changes (SetRichPresence, including session-share links) are sent to Steam at most once per this interval.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@nRoamingConfigReconnectCloudSyncWindowSec": {
+  "what": "Int seconds, default 7200 (2 h). Roaming Config cloud sync: after reconnecting to Steam, the cloud is re-synced if the last sync was longer ago than this.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "convar:@nScreenshotSaveMaxWidth": {
+  "what": "Int pixels, default 9999. Screenshots: the maximum width of saved overlay screenshots (also applies to uncompressed/AVIF saves); wider ones are scaled down.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@nServerRefreshRateLimitAdditional": {
+  "what": "Int, default 1. Server browser: the token-bucket refill amount for game-server list refreshes (GMS master server) per app. Valve's help text is shared by all three RateLimit settings.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "convar:@nServerRefreshRateLimitBurst": {
+  "what": "Int, default 100. Server browser: the burst size, i.e. the maximum number of game-server list refreshes allowed at once per app.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nServerRefreshRateLimitInterval": {
+  "what": "Int, default 20 (probably seconds). Server browser: the refill interval of the rate limiter for game-server list refreshes per app.",
+  "basis": "valve-help",
+  "confidence": "medium"
+ },
+ "convar:@nSiteLicenseProxyCacheMaxGB": {
+  "what": "Int GB, default 100. Site-license provider: the maximum disk space used by the local content cache.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nSiteLicenseProxyEnableP2P": {
+  "what": "Bool (0/1), default 0. Site-license provider: puts all connected clients in one LAN peer-to-peer download group.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nSiteLicenseProxyPort": {
+  "what": "Int port, default 0 (= off). Site-license provider: a value above 0 turns on the local content cache, which listens on this port for /depot/ HTTP requests from site clients.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nSpewThrottleNagFrequencyMs": {
+  "what": "Int ms, default 5000. Log throttling (@bEnableSpewThrottle): how often to log a reminder that messages are being suppressed.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:@nSpewThrottlePeriodMs": {
+  "what": "Int ms, default 1000. Log throttling: the time window over which repeated messages are counted.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:@nSpewThrottleResumeThreshold": {
+  "what": "Int, default 3. Log throttling: once a throttled message drops to this many per period, normal logging resumes.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:@nSpewThrottleTriggerThreshold": {
+  "what": "Int, default 10. Log throttling: a message repeated this many times in one period starts being throttled.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:@nSpewThrottleUnconditionalResumeMs": {
+  "what": "Int ms, default 5000. Log throttling: normal logging always resumes after this long, regardless of the message rate.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:@nSpewThrottleUnconditionalTriggerCount": {
+  "what": "Int, default 50. Log throttling: this many messages always triggers throttling, whatever the rate.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:@nThreadedProtobufParseMinBytes": {
+  "what": "Int bytes, default 128. CM message handling: protobuf bodies at least this big are parsed on a worker thread instead of the job thread. 0 turns threaded parsing off. Run 'protobuf_parse_stats reset' after changing it.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nThreadedProtobufParseThreads": {
+  "what": "Int, default 2. CM message handling: the maximum number of worker threads that parse protobuf bodies (see @nThreadedProtobufParseMinBytes). Takes effect immediately.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nVoicePostActivityXmitMS": {
+  "what": "Int ms, default 250. Voice chat: keeps transmitting this long after voice activity stops, even if it's silent, so word endings aren't cut off.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@nWatchdogSteamUIPercentReport": {
+  "what": "Int percent, default 1. Steam UI watchdog: the share of clients that report a stall when RunSteamPlatform goes without a watchdog signal for too long ('appears to have stalled').",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:OnCursorMoved": {
+  "what": "Probably not a real setting: the VGUI OnCursorMoved message name (x/y parameters) caught by the extractor.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:OnScreenSizeChanged": {
+  "what": "Probably not a real setting: the VGUI OnScreenSizeChanged message name (oldwide/oldtall parameters) caught by the extractor.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:org.freedesktop.DBus": {
+  "what": "Probably not a real setting: the D-Bus bus object path ('/org/freedesktop/DBus') and method names (GetConnectionUnixProcessID, AddMatch) caught by the extractor. The client uses them for the BlueZ Bluetooth manager and to identify D-Bus callers. One copy of the path has a typo, '/org/freedeskop/DBus'.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@OSJumpListMRUSize": {
+  "what": "Int, default 5. The number of recently played games (steam://rungameid links) shown in the taskbar jump list or tray menu.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:p2p_connecttimeout": {
+  "what": "Int seconds, default 15. Legacy P2P networking (ISteamNetworking): a P2P connection request with no answer after this long times out.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:p2p_unusedtimeout": {
+  "what": "Int seconds, default 120. Legacy P2P networking: a P2P session with no traffic for this long is closed.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@PeerContentClientMaxJobs": {
+  "what": "Int, default 1. Local network game transfers: the number of LAN peers downloaded from at the same time.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@PeerContentServerMaxClients": {
+  "what": "Int, default 8. Local network game transfers: the maximum number of peers that can download from this machine at once.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@PeerContentServerPort": {
+  "what": "Int TCP port, default 27040. Local network game transfers: the port this client listens on to serve game content to LAN peers ('port %u unavailable' if it is in use).",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@PeerContentServerRetryDelay": {
+  "what": "Int seconds, default 60. Local network game transfers: how long to wait before trying a failed peer content server again.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@PyrowaveHeightFactor": {
+  "what": "Number, default 2. Game recording / Remote Play with the 'Pyrowave' video codec: a factor in the base bitrate calculation from resolution (Mbit/s for width x height at 60 FPS, then scaled by quality and frame rate).",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "convar:@PyrowavePSNR": {
+  "what": "Number dB, default 35. Pyrowave video encoder: the target PSNR (quality) used to work out the base bitrate.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@sBroadcastPreset": {
+  "what": "String x264 preset (e.g. ultrafast, superfast, veryfast). Steam Broadcasting / game recording with the libx264 encoder: overrides the encoder preset. Empty uses the built-in choice.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@sBroadcastTune": {
+  "what": "String x264 tune, default 'film' ('zerolatency' also appears). Steam Broadcasting / recording with libx264: the encoder tune setting.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:sc_kalman_a_vel": {
+  "what": "Float, default 1.0. Steam Input trackpad smoothing: the 'A' (state transition) value for velocity in the trackpad Kalman filter. For tuning.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:sc_kalman_fastq": {
+  "what": "Float, default 0. Steam Input trackpad Kalman filter: the process noise (Q) used for fast movement. 0 probably means the built-in value.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:sc_kalman_h_vel": {
+  "what": "Float, default 1.0. Steam Input trackpad Kalman filter: the 'H' (observation) value for velocity.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:sc_kalman_q_vel": {
+  "what": "Float, default 2.0. Steam Input trackpad Kalman filter: the process noise (Q) for velocity.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:sc_kalman_r_vel": {
+  "what": "Float, default 2.0. Steam Input trackpad Kalman filter: the measurement noise (R) for velocity. Higher values smooth more.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:sc_kalman_repeated_sample": {
+  "what": "Bool (0/1), default 0. Steam Input trackpad Kalman filter: how repeated (cloned) samples are handled, e.g. 'Clone Triton Packet' on the Triton controller.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "convar:sc_kalman_slowq": {
+  "what": "Float, default 0. Steam Input trackpad Kalman filter: the process noise (Q) used for slow movement. 0 probably means the built-in value.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:@sCSDSVirtualHostHeader": {
+  "what": "String. Content downloads: probably overrides the HTTP Host (virtual host) header sent to the content server directory service (CSDS) or to content servers.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:sDepotDownloadFileFilter": {
+  "what": "String of wildcards separated by ';' (e.g. '*.exe;*.dll'). Content updates: only files matching the filter are downloaded. Useful in steamcmd for partial downloads.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@sForceLocalContentCache": {
+  "what": "String host[:port]. Content downloads: always use this LAN content cache ('Enabling local content cache at %s as directed'). Without it, the client looks up lancache.steamcontent.com or uses the cache a site-license server provides.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@sHardwareUpdateForceRequiredPriorityTS": {
+  "what": "String (timestamp). Valve hardware firmware updates (hardwareupdatecontroller): marks firmware updates up to this timestamp as required (must_update), for testing the required-update flow.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "convar:spew_controller_loss": {
+  "what": "Bool (0/1), default 0. Steam Input: logs controller packet loss or disconnects.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:@sSiteLicenseProxyCacheDirectory": {
+  "what": "String path, default 'appcache/slscache'. Site-license provider: where the local content cache is stored on disk.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@sSiteLicenseProxyExplicitIP": {
+  "what": "String IP. Site-license provider: if set, clients are told to use this IP for the content cache instead of the address they discover. Needed when the cache runs as an external process.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@sSteamCmdForcePlatformBitness": {
+  "what": "'32' or '64'. steamcmd: pretend to be this platform bitness when picking depots (osarch), so you can download builds for another architecture.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@sSteamCmdForcePlatformCPU": {
+  "what": "'x86' or 'arm64'. steamcmd: pretend to be this CPU type when picking depots (oscpu).",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@sSteamCmdForcePlatformType": {
+  "what": "'windows', 'macos', 'linux' or 'android'. steamcmd: pretend to be this OS when picking depots (oslist), e.g. to download Windows game servers on Linux.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:steam_controller_force_oobe": {
+  "what": "Bool (0/1), default 0. Steam Controller: forces the first-time setup (out-of-box experience) and registration flow, even if the controller is already registered.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@strCSNoCacheHeader": {
+  "what": "String, default 'no-cache'. Content downloads: the Cache-Control header value sent when cache bypass is on (see @bCSForceNoCache).",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@StreamClientArgs": {
+  "what": "String. Remote Play: extra command-line arguments for the Remote Play client process, added to the generated '--universe ... --server ... --transport ...' arguments.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:streaming_log_spikes": {
+  "what": "Bool (0/1), default 0. Remote Play / game streaming: logs frame-time or latency spikes.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:@StreamTransportICEPenalty": {
+  "what": "Int ms, default 0. Remote Play: an extra penalty added to ICE (direct P2P) when choosing the streaming transport. Raise it to prefer SDR relays.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@StreamTransportSDRPenalty": {
+  "what": "Int ms, default 0. Remote Play: an extra penalty added to SDR (Steam Datagram Relay) when choosing the streaming transport. Raise it to prefer direct ICE.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@sTrustedLocalContentCacheName": {
+  "what": "String machine name. Content downloads: the host of a trusted local Steam download cache, used when available. Non-trusted caches found by lookup are ignored ('Ignoring non-trusted local content cache').",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@test_bCloudForceSyncConflict": {
+  "what": "Bool (0/1), default 0. Steam Cloud testing: together with @test_nCloudForceSyncFailureAppID, the forced failure is a file conflict instead of a generic error.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@test_nCloudForceSyncFailureAppID": {
+  "what": "App ID, default 0. Steam Cloud testing: the next cloud sync for this app fails, to test the sync-failure UI.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:testappcloudpaths": {
+  "what": "App ID, default 0. Steam Cloud: turns on Auto-Cloud for this app locally, for developers testing their Auto-Cloud path configuration ('Run testappcloudpaths <appid> in the console to enable it').",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:triton_imu_sensortime_log": {
+  "what": "Bool (0/1), default 0. Steam Input: logs IMU sensor timings (delta-µs and sensor time) for the 'Triton' controller (Valve's internal codename, believed to be the new Steam Controller).",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@uDownloadLANPeerPort": {
+  "what": "Int TCP port, default 27038. LAN peer-to-peer downloads: the port used to accept connections from peers in the download group. Every member of the group must use the same port.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:ugc_query_default_cache_time": {
+  "what": "Int seconds, default 600. Workshop (ISteamUGC queries): how long query results stay cached when a game allows cached responses.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:ugc_query_max_get_details": {
+  "what": "Int, default 2000. Workshop: the maximum number of items per PublishedFile.GetDetails batch when fetching item details not in the cache.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:UGCCDNReportPct": {
+  "what": "Int percent, default 100. Workshop/UGC downloads: the share of downloads that send a Cloud.CDNReport (success/failure telemetry) to Valve.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@unMinimumShaderDownloadSizeInUI": {
+  "what": "Int bytes, default 33554432 (32 MB). Shader pre-caching: shader downloads smaller than this are not shown in the downloads UI.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:unShaderBackgroundProcessingThreads": {
+  "what": "Int, default 0 (= automatic). Shader cache manager: the number of threads for background Fossilize shader processing (replay).",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:unShaderHighPriorityProcessingThreads": {
+  "what": "Int, default 0 (= automatic). Shader cache manager: the number of threads for high-priority shader processing, e.g. when you launch a game whose shaders aren't processed yet.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:unShaderHitCacheGeneration": {
+  "what": "Int, default 0. Shader cache manager: the local 'hit cache' generation number. When Valve's server raises its generation, local hit caches are thrown away ('dropping caches').",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:unShaderMaxHeadersPerMessage": {
+  "what": "Int, default 1024. Shader pre-caching: the maximum number of shader headers per message when reporting the local shader inventory to Valve.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:unShaderMaxUploadMessageSizeKb": {
+  "what": "Int KB, default 256. Shader pre-caching: the maximum size of one Shader.SendShader upload message. A single larger shader is sent on its own.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@unUserStatsTest": {
+  "what": "Int, default 0. User stats and achievements (RequestUserStats): a test or debug switch. What it does is unclear.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "convar:@uRemoteDiscoveryPortOverride": {
+  "what": "Int UDP port, default 0 (= the default broadcast port). LAN discovery for Remote Play and site license: listen for discovery broadcasts on this port instead.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:@uRemoteDiscoveryPortTransmit": {
+  "what": "Int UDP port, default 0 (= the listen port). LAN discovery: send outgoing discovery broadcasts on this port.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:verifySignaturesBeforeLaunch": {
+  "what": "Bool (0/1), default 1. Game launch: checks executable or binary signatures before launching.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:vgui_autocomplete_new_style": {
+  "what": "Bool (0/1), default 1. Legacy VGUI: uses the newer style for autocomplete dropdowns, probably in the developer console.",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "convar:VK_LAYER_VALVE_steam_fossilize_32": {
+  "what": "Probably not a real setting: the 32-bit Vulkan layer name and library path ('ubuntu12_32/libVkLayer_steam_fossilize.so') of the Steam Pipeline Caching (Fossilize) layer. Steam registers it in steamfossilize_i386.json at startup.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:VK_LAYER_VALVE_steam_fossilize_64": {
+  "what": "Probably not a real setting: the 64-bit Fossilize pipeline-caching Vulkan layer name and library path ('ubuntu12_64/libVkLayer_steam_fossilize.so'), registered in steamfossilize_x86_64.json at startup.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:VK_LAYER_VALVE_steam_overlay_32": {
+  "what": "Probably not a real setting: the 32-bit Steam Overlay Vulkan layer name and library path ('ubuntu12_32/steamoverlayvulkanlayer.so'), registered in steamoverlay_i386.json at startup.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:VK_LAYER_VALVE_steam_overlay_64": {
+  "what": "Probably not a real setting: the 64-bit Steam Overlay Vulkan layer name and library path ('ubuntu12_64/steamoverlayvulkanlayer.so'), registered in steamoverlay_x86_64.json at startup.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:voice_api_optimalrate": {
+  "what": "Int Hz, default 24000. Voice API (ISteamUser voice): the optimal sample rate reported to games for decompressed voice (GetVoiceOptimalSampleRate).",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:voice_autogain": {
+  "what": "Bool (0/1), default 0. Voice chat: applies automatic gain to incoming (decoded) voice.",
+  "basis": "usage",
+  "confidence": "low"
+ },
+ "convar:voice_fakeloss": {
+  "what": "Int (probably percent), default 0. Voice chat testing: drops some voice packets on purpose to simulate packet loss.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:@voice_minabs": {
+  "what": "Float, default 0.15. Voice activity detection: the minimum absolute (peak) sample level counted as speech.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:@voice_minavg": {
+  "what": "Float, default 1.0. Voice activity detection: the minimum average sample level counted as speech.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:voice_outputdevice": {
+  "what": "Int enum, default 0. Voice chat playback backend: 0 = Miles, 1 = XAudio2. Windows backends, so probably unused on Linux.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:voice_outputfile": {
+  "what": "File path. Voice chat debugging: writes the voice system's mixed output to this file as a WAV file. Close Steam before using the file.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:voice_preprocess": {
+  "what": "Bool (0/1), default 0. Voice chat: cleans up microphone input (noise suppression etc.) with the Speex preprocessor.",
+  "basis": "valve-help",
+  "confidence": "high"
+ },
+ "convar:voice_quality": {
+  "what": "Int, default 4. Voice chat: the encoder quality level for the voice codec (Opus/SILK). Higher means better quality and more bandwidth.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:voice_resample_quality": {
+  "what": "Int, default 1. Voice: the quality setting for resampling voice audio between sample rates.",
+  "basis": "name",
+  "confidence": "medium"
+ },
+ "convar:voice_silk_bitrate": {
+  "what": "Int bits/s, default 30000. Voice chat: the target bitrate for the SILK voice encoder.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@voice_spew_activity_check": {
+  "what": "Bool (0/1), default 0. Voice activity detection debugging: logs each frame's average sample, maximum and high-sample count.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:@WatchdogThreadPercentReport": {
+  "what": "Int percent, default 5. Steam engine watchdog: the share of clients that report a stall when the CSteamEngine main loop stops signalling for too long.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:workshop_items_cache_days": {
+  "what": "Int days, default 14. Workshop: how long unused or unsubscribed workshop items stay on disk before they are removed ('removing unused item', 'keeping unsubscribed item').",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:workshop_items_full_check_interval": {
+  "what": "Int seconds, default 86400 (1 day). Workshop: how often the full list of an app's workshop items is checked against the server.",
+  "basis": "usage",
+  "confidence": "high"
+ },
+ "convar:workshop_items_update_interval": {
+  "what": "Int seconds, default 2700 (45 min). Workshop: how often installed workshop items are checked for updates.",
+  "basis": "usage",
+  "confidence": "medium"
+ },
+ "convar:WrapPanelItemVisibility": {
+  "what": "Probably not a real setting: the VGUI WrapPanel message name (item/visible parameters) caught by the extractor.",
+  "basis": "usage",
+  "confidence": "medium"
+ }
+}

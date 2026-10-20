@@ -27,278 +27,282 @@ Flags: `pre-login` = available before a user signs in; `read-only` = cannot be s
 
 ## All settings
 
-| # | Field | Type | Store | Key | Default | Flags | Description |
-|---|---|---|---|---|---|---|---|
-| 1 | `no_save_personal_info` | bool | Install | `Software\Valve\Steam\NoSavePersonalInfo` |  |  |  |
-| 5 | `preferred_monitor` | string | Install | `BigPicture/Monitor` |  |  |  |
-| 6 | `steam_cef_gpu_blocklist_disabled` | bool | Registry | `HKEY_CURRENT_USER\Software\Valve\Steam\CEFGPUBlocklistDisabled` |  |  |  |
-| 7 | `bigpicture_windowed` | bool | Install | `BigPicture/Windowed` |  | pre-login |  |
-| 8 | `display_name` | string | Install | `UI/Display/Current/Name` |  |  |  |
-| 9 | `is_external_display` | bool | Install | `UI/Display/Current/IsExternalDisplay` |  |  |  |
-| 10 | `steam_os_underscan_level` | float | Install | `SteamOSScreenUnderscanLevel` |  |  |  |
-| 11 | `steam_os_underscan_enabled` | bool | Install | `SteamOSScreenUnderscanEnabled` |  |  |  |
-| 12 | `min_scale_factor` | float | Install | `UI/Display/Current/MinScaleFactor` |  |  |  |
-| 13 | `max_scale_factor` | float | Install | `UI/Display/Current/MaxScaleFactor` |  |  |  |
-| 14 | `auto_scale_factor` | float | Install | `UI/Display/Current/AutoScaleFactor` |  |  |  |
-| 16 | `small_mode` | bool | UserLocal | `Software\Valve\Steam\SmallMode` |  |  |  |
-| 19 | `skip_steamvr_install_dialog` | bool | UserLocal | `system\SteamVRHMDVGUIWarning` |  |  |  |
-| 20 | `always_show_user_chooser` | bool | Install | `WebStorage\Auth\AlwaysShowUserChooser` |  |  |  |
-| 21 | `os_version_unsupported` | bool | Registry | `HKEY_CURRENT_USER\Software\Valve\Steam\OSVersionUnsupported` |  |  |  |
-| 3000 | `show_family_sharing_notifications` | bool | CustomFunc |  |  |  |  |
-| 3001 | `show_copy_count_in_library` | bool | UserLocal | `ShowCopyCountInLibrary` | `true` |  |  |
-| 4000 | `overlay_fps_counter_corner` | int32 | UserLocal | `system\InGameOverlayShowFPSCorner` |  |  |  |
-| 4001 | `overlay_fps_counter_high_contrast` | bool | UserLocal | `system\InGameOverlayShowFPSContrast` |  |  |  |
-| 4002 | `overlay_key` | CMsgHotkey | UserLocal | `system\InGameOverlayShortcutKey` | `'Shift\tKEY_TAB'` |  |  |
-| 4003 | `screenshot_key` | CMsgHotkey | UserLocal | `system\InGameOverlayScreenshotHotKey` | `'KEY_F12'` |  |  |
-| 4004 | `enable_overlay` | bool | UserLocal | `system\EnableGameOverlay` | `true` |  |  |
-| 4006 | `enable_screenshot_notification` | bool | UserLocal | `system\InGameOverlayScreenshotNotification` | `true` |  |  |
-| 4007 | `enable_screenshot_sound` | bool | UserLocal | `system\InGameOverlayScreenshotPlaySound` | `true` |  |  |
-| 4008 | `save_uncompressed_screenshots` | bool | UserLocal | `system\InGameOverlayScreenshotSaveUncompressed` |  |  |  |
-| 4009 | `screenshots_path` | string | CustomFunc |  |  |  |  |
-| 4010 | `default_ping_rate` | int32 | CustomFunc |  |  | read-only | Computed default (automatic) server ping rate based on network speed |
-| 4011 | `server_ping_rate` | int32 | CustomFunc |  |  |  |  |
-| 4012 | `steam_networking_share_ip` | int32 | CustomFunc |  |  |  |  |
-| 4013 | `web_browser_home` | string | CustomFunc |  |  |  |  |
-| 4014 | `voice_mic_device_name` | string | CustomFunc |  |  |  |  |
-| 4015 | `voice_mic_input_gain` | float | CustomFunc |  |  |  |  |
-| 4016 | `voice_speaker_output_gain` | float | CustomFunc |  |  |  |  |
-| 4017 | `voice_push_to_talk_setting` | int32 | CustomFunc |  |  |  |  |
-| 4018 | `voice_push_to_talk_key` | CMsgHotkey | CustomFunc |  |  |  |  |
-| 4019 | `overlay_toolbar_list_view` | bool | UserLocal | `OverlayToolBarListView` |  |  |  |
-| 4020 | `always_use_gamepadui_overlay` | bool | UserLocal | `system\EnableSCTenFootOverlayCheckNew` |  |  |  |
-| 4021 | `overlay_tabs` | string | UserRoaming | `OverlayTabs` |  |  |  |
-| 4022 | `overlay_scale_interface` | bool | Registry | `HKEY_CURRENT_USER\Software\Valve\Steam\OverlayScaleInterface` | `true` |  |  |
-| 4023 | `overlay_restore_browser_tabs` | bool | UserLocal | `system\InGameOverlayRestoreBrowserTabs` | `true` |  |  |
-| 4024 | `enable_avif_screenshots` | bool | UserLocal | `system\InGameOverlayScreenshotEnableAVIF` |  |  |  |
-| 4025 | `overlay_fps_counter_detail_level` | int32 | UserLocal | `system\InGameOverlayShowFPSDetailLevel` | `1` |  |  |
-| 4026 | `overlay_fps_counter_saturation_factor` | float | UserLocal | `system\InGameOverlayShowFPSSaturation` | `1` |  |  |
-| 4027 | `overlay_fps_counter_bgopacity` | float | UserLocal | `system\InGameOverlayShowFPSBGOpacity` | `0.8` |  |  |
-| 4028 | `overlay_fps_counter_scale_factor` | float | UserLocal | `system\InGameOverlayShowFPSScaling` | `0.7` |  |  |
-| 4029 | `overlay_fps_counter_key` | CMsgHotkey | UserLocal | `system\InGameOverlayShowFPSHotKey` | `'Default'` |  |  |
-| 4030 | `overlay_fps_counter_fps_graph` | bool | UserLocal | `system\InGameOverlayShowFPSGraphFPS` | `true` |  |  |
-| 4031 | `overlay_fps_counter_cpu_graph` | bool | UserLocal | `system\InGameOverlayShowFPSGraphCPU` | `true` |  |  |
-| 4032 | `overlay_fps_counter_allow_km_driver` | bool | UserLocal | `system\InGameOverlayAllowKMDriveOnWindows` | `true` |  |  |
-| 4033 | `achievement_notification_toast` | bool | UserLocal | `system\AchievementNotificationToast` | `true` |  |  |
-| 4034 | `achievement_notification_sound` | bool | UserLocal | `system\AchievementNotificationSound` | `true` |  |  |
-| 4035 | `controllerconnect_notification_toast` | bool | UserLocal | `system\ControllerConnectNotificationToast` | `true` |  |  |
-| 4036 | `controllerconnect_notification_sound` | bool | UserLocal | `system\ControllerConnectNotificationSound` | `false` |  |  |
-| 4037 | `controller_low_battery_notification_toast` | bool | UserLocal | `system\ControllerLowBatteryNotificationToast` | `true` |  |  |
-| 4038 | `controller_low_battery_notification_sound` | bool | UserLocal | `system\ControllerLowBatteryNotificationSound` | `false` |  |  |
-| 4039 | `logged_in_as_user_notification_toast` | bool | UserLocal | `system\LoggedInAsUserNotificationToast` | `true` |  |  |
-| 4040 | `logged_in_as_user_notification_sound` | bool | UserLocal | `system\LoggedInAsUserNotificationSound` | `false` |  |  |
-| 5000 | `smooth_scroll_webviews` | bool | CustomFunc |  |  |  |  |
-| 5001 | `enable_gpu_accelerated_webviews` | bool | CustomFunc |  |  |  |  |
-| 5003 | `enable_hardware_video_decoding` | bool | CustomFunc |  |  |  |  |
-| 5004 | `run_at_startup` | bool | CustomFunc |  |  |  |  |
-| 5005 | `enable_dpi_scaling` | bool | CustomFunc |  |  |  |  |
-| 5006 | `enable_marketing_messages` | bool | UserLocal | `news\NotifyAvailableGames` | `true` |  |  |
-| 5007 | `start_in_big_picture_mode` | bool | CustomFunc |  |  |  |  |
-| 5008 | `jumplist_flags` | uint32 | UserLocal | `system\JumplistSettings` | `77680` |  |  |
-| 5009 | `enable_ui_sounds` | bool | UserLocal | `system\EnableUISounds` | `true` |  |  |
-| 5010 | `enable_gamescope_composer` | bool | Registry | `HKEY_CURRENT_USER\Software\Valve\Steam\EnableGamescopeComposer` | `false` |  |  |
-| 5011 | `enable_gamescope_composer_vr` | bool | Registry | `HKEY_CURRENT_USER\Software\Valve\Steam\EnableGamescopeComposerVR` | `true` |  |  |
-| 5012 | `show_switch_to_desktop_at_login` | bool | Install | `system\ShowSwitchToDesktopAtLogin` |  | pre-login |  |
-| 5013 | `enable_steamrt64_client` | bool | CustomFunc |  |  |  |  |
-| 6000 | `disable_all_toasts` | bool | UserRoaming | `DisableAllToasts` |  |  |  |
-| 6001 | `disable_toasts_in_game` | bool | UserRoaming | `DisableToastsInGame` |  |  |  |
-| 6002 | `play_sound_on_toast` | bool | UserRoaming | `PlaySoundOnToast` | `true` |  |  |
-| 7000 | `library_display_size` | int32 | UserLocal | `LibraryDisplaySize` |  |  |  |
-| 7001 | `library_whats_new_show_only_product_updates` | bool | UserRoaming | `LibraryWhatsNewShowOnlyProductUpdates` |  |  |  |
-| 7002 | `show_store_content_on_home` | bool | UserRoaming | `ShowStoreContentOnHome` | `true` |  |  |
-| 7003 | `start_page` | string | CustomFunc |  |  |  |  |
-| 7004 | `library_low_bandwidth_mode` | bool | UserLocal | `LibraryLowBandwidthMode` |  |  |  |
-| 7005 | `library_low_perf_mode` | bool | UserLocal | `LibraryLowPerfMode` |  |  |  |
-| 7006 | `library_disable_community_content` | bool | UserLocal | `LibraryDisableCommunityContent` |  |  |  |
-| 7007 | `library_display_icon_in_game_list` | bool | UserLocal | `LibraryDisplayIconInGameList` | `true` |  |  |
-| 7008 | `ready_to_play_includes_streaming` | bool | CustomFunc | `ReadyToPlayIncludesStreaming` |  |  |  |
-| 7009 | `show_steam_deck_info` | bool | UserLocal | `ShowSteamDeckInfoInLibrary` |  |  |  |
-| 7010 | `library_home_big_art` | bool | UserLocal | `LibraryHomeBigArt` |  |  |  |
-| 8000 | `enable_shader_precache` | bool | CustomFunc |  |  |  |  |
-| 8001 | `enable_shader_background_processing` | bool | CustomFunc |  |  |  |  |
-| 8002 | `shader_precached_size` | uint64 | CustomFunc |  |  | read-only |  |
-| 8003 | `needs_steam_service_repair` | bool | CustomFunc |  |  | read-only |  |
-| 8004 | `download_peer_content` | int32 | CustomFunc |  |  |  |  |
-| 8005 | `download_rate_bits_per_s` | bool | CustomFunc |  |  |  |  |
-| 8006 | `restrict_auto_updates` | bool | CustomFunc |  |  |  |  |
-| 8007 | `restrict_auto_updates_start` | int32 | CustomFunc |  |  |  |  |
-| 8008 | `restrict_auto_updates_end` | int32 | CustomFunc |  |  |  |  |
-| 8009 | `download_region` | int32 | CustomFunc |  |  |  |  |
-| 8010 | `download_while_app_running` | bool | CustomFunc |  |  |  |  |
-| 8011 | `download_throttle_while_streaming` | bool | CustomFunc |  |  |  |  |
-| 8012 | `download_throttle_rate` | int32 | CustomFunc |  |  |  |  |
-| 8013 | `default_app_update_behavior` | int32 | CustomFunc |  |  |  |  |
-| 10000 | `cloud_enabled` | bool | UserRoaming | `Software\Valve\Steam\CloudEnabled` | `true` |  |  |
-| 10001 | `show_screenshot_manager` | bool | UserRoaming | `Software\Valve\Steam\ShowScreenshotManager` |  |  |  |
-| 11000 | `music_volume` | int32 | CustomFunc |  |  |  |  |
-| 11001 | `music_pause_on_app_start` | bool | Install | `Music\PauseOnAppStartedProcess` |  |  |  |
-| 11002 | `music_pause_on_voice_chat` | bool | Install | `Music\PauseOnVoiceChat` |  |  |  |
-| 11003 | `music_download_high_quality` | bool | Install | `Music\DownloadHighQualityAudioSoundtracks` |  |  |  |
-| 12000 | `broadcast_permissions` | EBroadcastPermission | UserLocal | `Broadcast\Permissions` | `1` |  |  |
-| 12001 | `broadcast_output_width` | int32 | UserLocal | `Broadcast\OutputWidth` |  |  |  |
-| 12002 | `broadcast_output_height` | int32 | UserLocal | `Broadcast\OutputHeight` | `720` |  |  |
-| 12003 | `broadcast_bitrate` | int32 | UserLocal | `Broadcast\MaxKbps` | `2500` |  |  |
-| 12004 | `broadcast_encoding_option` | EBroadcastEncoderSetting | UserLocal | `Broadcast\EncoderSetting` |  |  |  |
-| 12005 | `broadcast_record_all_video` | bool | UserLocal | `Broadcast\IncludeDesktop` |  |  |  |
-| 12006 | `broadcast_record_all_audio` | bool | UserLocal | `Broadcast\RecordSystemAudio` |  |  |  |
-| 12007 | `broadcast_record_microphone` | bool | UserLocal | `Broadcast\RecordMic` |  |  |  |
-| 12008 | `broadcast_show_upload_stats` | bool | UserLocal | `Broadcast\ShowDebugInfo` |  |  |  |
-| 12009 | `broadcast_show_live_reminder` | bool | UserLocal | `Broadcast\ShowReminder` | `true` |  |  |
-| 12010 | `broadcast_chat_corner` | int32 | UserLocal | `Broadcast\ShowChat` | `1` |  |  |
-| 13000 | `gamestream_hardware_video_encode` | bool | UserLocal | `GameStream\HardwareVideoEncode` | `true` |  |  |
-| 13001 | `gamestream_enable_video_h265` | bool | UserLocal | `GameStream\EnableVideoH265` | `true` |  |  |
-| 14001 | `steam_input_configurator_error_msg_enable` | bool | Install | `SteamInput/Configurator/ErrorMsgEnabled` |  |  |  |
-| 14002 | `controller_guide_button_focus_steam` | bool | UserLocal | `Controller_CheckGuideButton` | `true` |  |  |
-| 14003 | `controller_ps_support` | int32 | UserLocal | `SteamController_PSSupport` | `1` |  |  |
-| 14004 | `controller_xbox_support` | bool | UserLocal | `SteamController_XBoxSupport` |  |  |  |
-| 14005 | `controller_xbox_driver` | bool | UserLocal | `SteamController_XBoxDriver` |  |  |  |
-| 14006 | `controller_switch_support` | bool | UserLocal | `SteamController_SwitchSupport` |  |  |  |
-| 14007 | `controller_generic_support` | bool | UserLocal | `SteamController_GenericGamepadSupport` |  |  |  |
-| 14008 | `controller_power_off_timeout` | int32 | UserLocal | `CSettingsPanelGameController.Timeout` | `15` |  |  |
-| 14009 | `turn_off_controller_on_exit` | bool | UserLocal | `CSettingsPanelGameController.TurnOff` |  |  |  |
-| 14010 | `controller_combine_nintendo_joycons` | bool | Install | `SteamInput/Configurator/CombinedJoycons` |  |  |  |
-| 140011 | `controller_enable_chord` | bool | UserLocal | `SteamController_Enable_Chord` | `true` |  |  |
-| 140012 | `controller_poll_rate` | bool | UserLocal | `SteamController_Poll_Rate` | `2` |  |  |
-| 140013 | `controller_siapi_config_author_mode` | bool | UserLocal | `SteamInput/Configurator/SIAPIAuhtorMode` | `false` |  |  |
-| 140014 | `controller_show_ibex_tour` | bool | UserRoaming | `ShowIbexWelcomeTour` | `true` |  |  |
-| 140030 | `controller_chat_radial_menu_option_0` | string | UserLocal | `SteamInput/ChatRadialMenu/0` |  |  |  |
-| 140031 | `controller_chat_radial_menu_option_1` | string | UserLocal | `SteamInput/ChatRadialMenu/1` |  |  |  |
-| 140032 | `controller_chat_radial_menu_option_2` | string | UserLocal | `SteamInput/ChatRadialMenu/2` |  |  |  |
-| 140033 | `controller_chat_radial_menu_option_3` | string | UserLocal | `SteamInput/ChatRadialMenu/3` |  |  |  |
-| 140034 | `controller_chat_radial_menu_option_4` | string | UserLocal | `SteamInput/ChatRadialMenu/4` |  |  |  |
-| 140035 | `controller_chat_radial_menu_option_5` | string | UserLocal | `SteamInput/ChatRadialMenu/5` |  |  |  |
-| 140036 | `controller_chat_radial_menu_option_6` | string | UserLocal | `SteamInput/ChatRadialMenu/6` |  |  |  |
-| 140037 | `controller_chat_radial_menu_option_7` | string | UserLocal | `SteamInput/ChatRadialMenu/7` |  |  |  |
-| 16000 | `startup_movie_id` | uint64 | Install | `Customization/StartupMovie/MovieID` |  | pre-login |  |
-| 16001 | `startup_movie_local_path` | string | Install | `Customization/StartupMovie/LocalPath` |  | pre-login |  |
-| 16002 | `startup_movie_shuffle` | bool | Install | `Customization/StartupMovie/Shuffle` |  | pre-login |  |
-| 16003 | `startup_movie_used_for_resume` | bool | UserLocal | `Customization/StartupMovie/UsedForResume` |  |  |  |
-| 16004 | `screensaver_current_id` | string | Install | `Customization/Screensaver/CurrentScreensaver` |  |  |  |
-| 16005 | `screensaver_settings` | string | Install | `Customization/Screensaver/Settings` |  |  |  |
-| 16006 | `screensaver_while_ingame` | bool | Install | `Customization/Screensaver/WhileInGame` | `true` |  |  |
-| 17001 | `game_notes_enable_spellcheck` | bool | UserRoaming | `GameNotesEnableSpellcheck` | `true` |  |  |
-| 18000 | `screenshot_items_per_row` | int32 | UserRoaming | `ScreenshotViewItemsPerRow` | `1` |  |  |
-| 18201 | `gamerecording_background_path` | string | CustomFunc |  |  |  |  |
-| 18202 | `gamerecording_background_max_keep` | string | UserLocal | `GameRecording\BackgroundMaxKeep` | `'120min'` |  |  |
-| 18203 | `gamerecording_background_time_resolution` | int32 | UserLocal | `GameRecording\BackgroundTimeResolution` | `6e+04` |  |  |
-| 18207 | `gamerecording_background_mk` | CMsgHotkey | UserLocal | `GameRecording\MarkerKey` | `'Ctrl\tKEY_F12'` |  |  |
-| 18208 | `gamerecording_background_tg` | CMsgHotkey | UserLocal | `GameRecording\ToggleKey` | `'Ctrl\tKEY_F11'` |  |  |
-| 18209 | `gamerecording_background_a_m` | bool | UserLocal | `GameRecording\Audio_Mic` | `false` |  |  |
-| 18210 | `gamerecording_video_bitrate` | string | UserLocal | `GameRecording\VideoBitRate` | `'preset_default'` |  |  |
-| 18212 | `gamerecording_background_mode` | EGRMode | UserLocal | `GameRecording\BackgroundRecordMode` | `0` |  |  |
-| 18213 | `gamerecording_background_audio` | EGRAudio | UserLocal | `GameRecording\Recording_Audio_Option` | `0` |  |  |
-| 18214 | `gamerecording_max_fps` | int32 | UserLocal | `GameRecording\MaxFPS` | `60` | clamp [24..120] |  |
-| 18215 | `gamerecording_hotkey_ic` | CMsgHotkey | UserLocal | `GameRecording\InstantClipKey` | `'None'` |  |  |
-| 18216 | `gamerecording_ic_seconds` | float | UserLocal | `GameRecording\InstantClipDuration` | `3e+01` |  |  |
-| 18217 | `gamerecording_export_limit_type` | EGRExportLimitType | UserLocal | `GameRecording\ExportLimitType` |  |  |  |
-| 18218 | `gamerecording_export_limit_size_mb` | int32 | UserLocal | `GameRecording\ExportLimitSize` | `100` |  |  |
-| 18219 | `gamerecording_export_limit_bitrate` | int32 | UserLocal | `GameRecording\ExportLimitBitrate` | `1` |  |  |
-| 18220 | `gamerecording_export_limit_width` | int32 | UserLocal | `GameRecording\ExportLimitWidth` | `3840` |  |  |
-| 18221 | `gamerecording_export_limit_height` | int32 | UserLocal | `GameRecording\ExportLimitHeight` | `2160` |  |  |
-| 18222 | `gamerecording_export_limit_frame_rate` | int32 | UserLocal | `GameRecording\ExportLimitFrameRate` | `60` |  |  |
-| 18223 | `gamerecording_export_directory` | string | CustomFunc | `GameRecording\ExportDirectory` |  |  |  |
-| 18224 | `gamerecording_export_codec` | EExportCodec | UserLocal | `GameRecording\ExportCodec` |  |  |  |
-| 18225 | `gamerecording_video_maxheight` | int32 | UserLocal | `GameRecording\VideoMaxHeight` | `0` | clamp [0..2160] |  |
-| 18226 | `gamerecording_force_mic_mono` | bool | UserLocal | `GameRecording\ForceMicMono` | `false` |  |  |
-| 18227 | `gamerecording_automatic_gain_control` | bool | UserLocal | `GameRecording\AutomaticGainControl` | `true` |  |  |
-| 20000 | `show_timestamps_in_console` | bool | UserLocal | `Developer\ShowTimestampsInConsole` |  |  |  |
-| 20002 | `override_browser_composer_mode` | int32 | CustomFunc |  |  |  |  |
-| 20003 | `cef_remote_debugging_enabled` | bool | CustomFunc |  |  |  |  |
-| 20004 | `force_deck_perf_tab` | bool | Install | `Developer/ForceDeckPerfTab` |  |  |  |
-| 20005 | `force_fake_mandatory_update` | bool | Install | `Developer/FakeMandatoryUpdate` |  |  |  |
-| 20006 | `hdr_compat_testing` | bool | Install | `Developer/HDRCompatTesting` |  |  |  |
-| 20007 | `developer_mode_enabled` | bool | Install | `Developer/DevModeEnabled` |  |  |  |
-| 20008 | `show_advanced_update_channels` | bool | Install | `Developer/ShowAdvancedUpdateChannels` |  |  |  |
-| 20009 | `browserview_underlays_allowed` | bool | CustomFunc |  |  |  |  |
-| 21001 | `gamescope_hdr_visualization` | EHDRVisualization | UserLocal | `Gamescope/HDRVisualization2` |  |  |  |
-| 21002 | `gamescope_app_target_framerate` | int32 | UserLocal | `Gamescope/AppTargetFrameRate` | `0` | per-game+display |  |
-| 21003 | `gamescope_enable_app_target_framerate` | bool | Registry | `HKEY_CURRENT_USER\Software\Valve\Steam\GamescopeEnableAppTargetRefreshRate2` | `true` |  |  |
-| 21004 | `gamescope_disable_framelimit` | bool | UserLocal | `Gamescope/DisableFrameLimit` | `false` | per-game+display |  |
-| 21005 | `gamescope_display_refresh_rate` | int32 | UserLocal | `Gamescope/RefreshRate` | `0` | per-game+display |  |
-| 21006 | `gamescope_use_game_refresh_rate_in_steam` | bool | UserLocal | `Developer/DynamicRefreshRateInSteam` | `true` |  |  |
-| 21007 | `gamescope_disable_mura_correction` | bool | UserLocal | `Gamescope/MuraCorrectionDisabled` | `false` |  |  |
-| 21008 | `gamescope_include_steamui_in_screenshots` | bool | UserLocal | `Gamescope/IncludeSteamUIInScreenshots` | `false` |  |  |
-| 21009 | `gamescope_allow_tearing` | bool | UserLocal | `Gamescope/AllowTearing` | `false` | per-game |  |
-| 21010 | `gamescope_composite_debug` | bool | UserLocal | `Gamescope/CompositeDebug` | `false` |  |  |
-| 21011 | `gamescope_force_composite` | bool | UserLocal | `Gamescope/ForceComposite` | `false` |  |  |
-| 21012 | `gamescope_game_resolution_global` | string | UserLocal | `Gamescope/GameResolutionGlobal` | `'Default'` |  |  |
-| 21013 | `gamescope_guide_hotkey` | CMsgHotkey | UserLocal | `Gamescope/GuideKeyboardHotkey` | `'Shift\tKEY_TAB'` |  |  |
-| 21014 | `gamescope_qam_hotkey` | CMsgHotkey | UserLocal | `Gamescope/QAMKeyboardHotkey` | `'CTRL\tShift\tKEY_TAB'` |  |  |
-| 21015 | `gamescope_hdr_enabled` | bool | Install | `Gamescope/HDREnabled` | `true` | per-display |  |
-| 21016 | `gamescope_native_external_res_in_steam` | bool | Install | `Gamescope/EnableSteamNativeExternalResolution` |  |  |  |
-| 22000 | `steamos_status_led_brightness` | int32 | UserLocal | `SteamOS/StatusLEDBrightness` | `100` |  |  |
-| 22001 | `steamos_tdp_limit_enabled` | bool | Install | `SteamOS/TDPLimitEnabled` | `false` | per-game |  |
-| 22002 | `steamos_tdp_limit` | int32 | Install | `SteamOS/TDPLimit` | `0` | per-game |  |
-| 22003 | `steamos_cec_enabled` | bool | Install | `SteamOS/CECEnabled` | `true` |  |  |
-| 22004 | `steamos_cec_wake_on_resume` | bool | Install | `SteamOS/WakeOnResume` | `true` |  |  |
-| 22005 | `steamos_wifi_debug` | bool | Install | `SteamOS/WifiDebug` | `false` |  |  |
-| 22006 | `steamos_wifi_force_wpa_supplicant` | bool | Install | `SteamOS/WifiForceWPASupplicant` | `false` |  |  |
-| 22007 | `steamos_magnifier_scale` | int32 | UserLocal | `SteamOS/MagnifierScale` | `150` |  |  |
-| 22008 | `steamos_manual_gpu_clock_enabled` | bool | Install | `SteamOS/ManualGPUClockEnabled` | `false` | per-game |  |
-| 22009 | `steamos_manual_gpu_clock_hz` | int32 | Install | `SteamOS/ManualGPUClockHz` | `1000` | per-game |  |
-| 22010 | `steamos_platform_performance_profile` | string | Install | `SteamOS/PerformanceProfile` |  | per-game |  |
-| 22011 | `steamos_charge_limit_enabled` | bool | Install | `SteamOS/ChargeLimitEnabled` | `false` |  |  |
-| 22012 | `steamos_charge_limit` | int32 | Install | `SteamOS/ChargeLimit` | `80` |  |  |
-| 22013 | `steamos_charge_limit_devmode` | bool | Install | `SteamOS/ChargeLimitDevMode` | `false` |  |  |
-| 22014 | `steamos_system_tracing_enabled` | bool | UserLocal | `SteamOS/SystemTracingEnabled` | `false` | per-game |  |
-| 22015 | `steamos_vrs_enabled` | bool | UserLocal | `SteamOS/VRSEnabled` | `false` | per-game |  |
-| 22016 | `steamos_separate_led_colors` | bool | UserLocal | `SteamOS/SeparaeLEDColors` | `false` |  |  |
-| 22017 | `steamos_wifi_reload_wifi_driver_on_sleep` | bool | Install | `SteamOS/WifiReloadDriverOnSleep` | `false` |  |  |
-| 220018 | `steamos_wifi_power_management_enabled` | bool | Install | `SteamOS/WifiPowerManagement` | `true` |  |  |
-| 22019 | `steamos_cec_control` | bool | Install | `SteamOS/CECControl` | `true` |  |  |
-| 22020 | `steamos_cec_suspend_tv` | bool | Install | `SteamOS/CECSuspendTV` | `true` |  |  |
-| 22021 | `steamos_cec_suspend_device` | bool | Install | `SteamOS/CECSuspendDevice` | `true` |  |  |
-| 22022 | `steamos_cec_wake_tv` | bool | Install | `SteamOS/CECWakeTV` | `true` |  |  |
-| 22023 | `steamos_cec_wake_device` | bool | Install | `SteamOS/CECWakeDevice` | `true` |  |  |
-| 22024 | `steamos_ec_logging_enabled` | bool | Install | `SteamOS/ECLoggingEnabled` | `false` |  |  |
-| 23001 | `setting_validation_bool` | bool | Install | `SettingValidation/DummyBool` |  |  |  |
-| 23002 | `setting_validation_enum` | EHDRVisualization | Install | `SettingValidation/DummyEnum` |  |  |  |
-| 23003 | `setting_validation_int32` | int32 | Install | `SettingValidation/DummyInt32` |  |  |  |
-| 23004 | `setting_validation_uint32` | uint32 | Install | `SettingValidation/DummyUInt32` |  |  |  |
-| 23005 | `setting_validation_uint64` | uint64 | Install | `SettingValidation/DummyUInt64` |  |  |  |
-| 23006 | `setting_validation_float` | float | Install | `SettingValidation/DummyFloat` |  |  |  |
-| 23007 | `setting_validation_string` | string | Install | `SettingValidation/DummyString` |  |  |  |
-| 23008 | `setting_validation_hotkey` | CMsgHotkey | Install | `SettingValidation/DummyHotkey` |  |  |  |
-| 24000 | `system_bluetooth_enabled` | bool | Install | `System/Bluetooth/Enabled` | `false` |  |  |
-| 24001 | `hardware_updater_enabled` | bool | Install | `System/HardwareUpdater/Enabled` | `false` |  |  |
-| 24003 | `system_idle_suspend_battery_sec` | int32 | Install | `Software\Valve\Steam\System\IdleSuspendBatterySeconds` | `900` |  |  |
-| 24004 | `system_idle_suspend_ac_sec` | int32 | Install | `Software\Valve\Steam\System\IdleSuspendACSeconds` | `3600` |  |  |
-| 24005 | `system_enable_low_power_downloads` | bool | Install | `Software\Valve\Steam\System\EnableLowPowerDownloads` | `true` |  |  |
-| 24006 | `system_allow_battery_low_power_downloads` | bool | Install | `Software\Valve\Steam\System\AllowBatteryLowPowerDownloads` | `false` |  |  |
-| 24008 | `system_idle_screensaver_battery_sec` | int32 | Install | `Software\Valve\Steam\System\IdleScreensaverBatterySeconds` | `0` |  |  |
-| 24009 | `system_idle_screensaver_ac_sec` | int32 | Install | `Software\Valve\Steam\System\IdleScreensaverACSeconds` | `300` |  |  |
-| 25000 | `vr_show_perf_graph_in_hmd` | bool | UserLocal | `VR/ShowPerfGraphInHMD` | `false` |  |  |
-| 26000 | `accessibility_debug_visualizer` | bool | UserLocal | `Accessibility/DebugVisualizer` | `false` |  |  |
-| 26001 | `accessibility_screen_reader_enabled` | bool | Install | `Accessibility/ScreenReaderEnabled` | `false` |  |  |
-| 26002 | `accessibility_screen_reader_rate` | float | UserLocal | `Accessibility/ScreenReaderPitch` | `0.5` |  |  |
-| 26003 | `accessibility_screen_reader_pitch` | float | UserLocal | `Accessibility/ScreenReaderRate` | `0.5` |  |  |
-| 26004 | `accessibility_screen_reader_volume` | float | UserLocal | `Accessibility/ScreenReaderVolume` | `1` |  |  |
-| 26005 | `accessibility_high_contrast_mode` | bool | UserLocal | `Accessibility/HighContrastMode` | `false` |  |  |
-| 26006 | `accessibility_reduce_motion` | bool | UserLocal | `Accessibility/ReduceMotion` | `false` |  |  |
-| 26008 | `accessibility_minimum_font_size` | uint32 | UserLocal | `Accessibility/MinimumFontSize` | `0` |  |  |
-| 26009 | `accessibility_color_filter_name` | string | Install | `Accessibility/ColorFilterName` | `''` |  |  |
-| 26010 | `accessibility_desktop_ui_scale` | float | Install | `Accessibility/DesktopUIScale` | `1` |  |  |
-| 26011 | `accessibility_screen_reader_locale` | string | Install | `Accessibility/ScreenReaderLocale` | `'auto'` |  |  |
-| 26012 | `accessibility_mono_audio` | bool | Install | `Accessibility/MonoAudio` | `false` |  |  |
-| 27000 | `remote_play_wifi_ap_enabled` | bool | Install | `streaming_v2\WifiAPEnabled` | `true` |  |  |
-| 27001 | `remote_play_wifi_ap_channel_5ghz` | int32 | Install | `streaming_v2\WifiAPChannel5GHz` | `0` |  |  |
-| 27002 | `remote_play_wifi_ap_channel_6ghz` | int32 | Install | `streaming_v2\WifiAPChannel6GHz` | `0` |  |  |
-| 27003 | `remote_play_wifi_ap_channel_width` | int32 | Install | `streaming_v2\WifiAPChannelWidth` | `0` |  |  |
-| 27004 | `remote_play_wifi_ap_hotspot_mode` | bool | Install | `streaming_v2\WifiAPHotspotMode` | `false` |  |  |
-| 27005 | `remote_play_wifi_ap_hotspot_ssid` | string | Install | `streaming_v2\WifiAPHotspotSSID` | `''` |  |  |
-| 27006 | `remote_play_wifi_ap_hotspot_password` | string | Install | `streaming_v2\WifiAPHotspotPassword` | `''` |  |  |
-| 27007 | `remote_play_wifi_ap_hotspot_routing` | string | Install | `streaming_v2\WifiAPHotspotRouting` | `'noroute'` |  |  |
-| 27008 | `remote_play_wifi_ap_show_advanced` | bool | UserLocal | `streaming_v2/WifiAPShowAdvanced` | `false` |  |  |
-| 27009 | `remote_play_wifi_ap_paired_ssid` | string | Install | `streaming_v2\WifiAPPairedSSID` | `''` |  |  |
-| 27010 | `skip_steamframe_pairing_dialog` | bool | UserLocal | `system\SteamFrameWirelessAdapterPairingDialog` |  |  |  |
-| 27011 | `skip_steamframe_troubleshooting_dialog` | bool | UserLocal | `system\SteamFrameWirelessAdapterTroubleshootingDialogSkip` |  |  |  |
-| 27012 | `skip_steamframe_airplane_dialog` | bool | UserLocal | `system\SteamFrameWirelessAdapterAirplaneDialogSkip` |  |  |  |
-| 28001 | `oobe_completed` | bool | CustomFunc |  |  | pre-login | True if OOBE stage 1 has completed or we're on a platform where we don't do OOBE |
-| 28002 | `oobe_test_mode_enabled` | bool | CustomFunc |  |  | pre-login, read-only | OOBE test mode is enabled either by passing -testoobe on the command line or setting the force_oobe client setting |
-| 28003 | `force_oobe` | bool | Registry | `HKEY_CURRENT_USER\Software\Valve\Steam\ForceOOBE` |  | pre-login |  |
-| 28004 | `oobe_stage_2_completed` | bool | CustomFunc |  |  | pre-login | True if OOBE stage 2 has completed or we're on a platform where we don't do OOBE |
-| 28005 | `oobe_stage_2_test_mode_enabled` | bool | CustomFunc |  |  | pre-login, read-only | OOBE test mode is enabled for stage 2 either by passing -testoobe on the command line or setting the force_stage2_oobe client setting |
-| 28006 | `force_stage_2_oobe` | bool | Registry | `HKEY_CURRENT_USER\Software\Valve\Steam\ForceOOBEStage2` |  | pre-login |  |
-| 29000 | `compat_show_all_tools` | bool | UserLocal | `Compatibility/ShowAllTools` | `false` |  |  |
+**What it does** and **Where in the UI** come from how the Steam UI and client use each field
+(localized labels, the code that reads it). Descriptions tagged *(medium)* or *(low)* are inferences.
+**Valve description** is the descriptor's own `setting_description`.
+
+| # | Field | What it does | Where in the UI | Type | Store | Key | Default | Flags | Valve description |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | `no_save_personal_info` | Probably a legacy 'public computer' flag telling the client not to persist personal/account information on this machine; stored in config.vdf and read by steamclient, with no UI in this build. *(low)* | not shown in UI | bool | Install | `Software\Valve\Steam\NoSavePersonalInfo` |  |  |  |
+| 5 | `preferred_monitor` | Which monitor Big Picture Mode opens on (monitor identifier string). Written via the dedicated SteamClient.Settings.SetPreferredMonitor API, not the generic setter. *(medium)* | Big Picture Settings > Display (monitor selector), via dedicated API | string | Install | `BigPicture/Monitor` |  |  |  |
+| 6 | `steam_cef_gpu_blocklist_disabled` | When true, the Steam web views (CEF/Chromium) ignore Chromium's GPU driver blocklist so GPU acceleration is used even on blocklisted drivers. Takes effect after restarting Steam. | 'Disable GPU Blocklist' - Settings > Interface (advanced), requires restart | bool | Registry | `HKEY_CURRENT_USER\Software\Valve\Steam\CEFGPUBlocklistDisabled` |  |  |  |
+| 7 | `bigpicture_windowed` | Runs Big Picture Mode in a window instead of fullscreen. Available before login; set through SteamClient.Settings.SetWindowed. *(medium)* | Big Picture display options (dedicated API); not a generic settings control | bool | Install | `BigPicture/Windowed` |  | pre-login |  |
+| 8 | `display_name` | Read-only state: name of the display the Steam UI is currently on (used by the display/scaling UI). *(medium)* | not shown in UI (state used by the Display page) | string | Install | `UI/Display/Current/Name` |  |  |  |
+| 9 | `is_external_display` | Read-only state: whether the current display is an external monitor rather than the built-in panel (e.g. Steam Deck docked). *(medium)* | not shown in UI (state) | bool | Install | `UI/Display/Current/IsExternalDisplay` |  |  |  |
+| 10 | `steam_os_underscan_level` | SteamOS underscan amount (float) that shrinks the picture to compensate for TV overscan; only meaningful while underscan is enabled. *(medium)* | Big Picture/SteamOS Settings > Display > Underscan (read via legacy settings object) | float | Install | `SteamOSScreenUnderscanLevel` |  |  |  |
+| 11 | `steam_os_underscan_enabled` | Enables SteamOS display underscan (shrinking the image so its edges are not cut off on TVs that overscan). *(medium)* | Big Picture/SteamOS Settings > Display > Underscan (read via legacy settings object) | bool | Install | `SteamOSScreenUnderscanEnabled` |  |  |  |
+| 12 | `min_scale_factor` | Read-only state: smallest UI scale factor allowed for the current display; bounds the scaling slider. *(medium)* | not shown in UI (bounds the Display > Scaling slider) | float | Install | `UI/Display/Current/MinScaleFactor` |  |  |  |
+| 13 | `max_scale_factor` | Read-only state: largest UI scale factor allowed for the current display; bounds the scaling slider. *(medium)* | not shown in UI (bounds the Display > Scaling slider) | float | Install | `UI/Display/Current/MaxScaleFactor` |  |  |  |
+| 14 | `auto_scale_factor` | Read-only state: the scale factor Steam picks automatically for the current display when 'auto' scaling is used. *(medium)* | not shown in UI (used by Display > Scaling) | float | Install | `UI/Display/Current/AutoScaleFactor` |  |  |  |
+| 16 | `small_mode` | Desktop library 'Small Mode' (compact game list without the large library view). The client switches it off automatically when it needs to show a page in the main window. | Desktop client menu View > Small Mode | bool | UserLocal | `Software\Valve\Steam\SmallMode` |  |  |  |
+| 19 | `skip_steamvr_install_dialog` | Suppresses the 'install SteamVR' prompt shown when a VR headset is detected (stored as system\SteamVRHMDVGUIWarning). | 'Don't Show this dialog again' checkbox on the SteamVR install dialog | bool | UserLocal | `system\SteamVRHMDVGUIWarning` |  |  |  |
+| 20 | `always_show_user_chooser` | When enabled, Steam shows the account picker at every start instead of logging in the remembered account automatically. | 'Ask which account to use each time Steam starts' - Settings > Interface / account switcher | bool | Install | `WebStorage\Auth\AlwaysShowUserChooser` |  |  |  |
+| 21 | `os_version_unsupported` | Probably a flag the client sets when the running OS version is no longer supported, used to show an unsupported-OS warning. *(low)* | not shown in UI | bool | Registry | `HKEY_CURRENT_USER\Software\Valve\Steam\OSVersionUnsupported` |  |  |  |
+| 3000 | `show_family_sharing_notifications` | Probably controls notifications related to Steam Family / Family Sharing activity; computed by the client, no UI reference in this build. *(low)* | not shown in UI | bool | CustomFunc |  |  |  |  |
+| 3001 | `show_copy_count_in_library` | Shows how many copies of a game the Steam Family owns in the library (default on). | 'Show number of copies in Steam Family library' - Settings > Library | bool | UserLocal | `ShowCopyCountInLibrary` | `true` |  |  |
+| 4000 | `overlay_fps_counter_corner` | Position of the in-game performance monitor/FPS counter: Off, Top-left, Top-center, Top-right, Bottom-right, Bottom-center or Bottom-left (Off disables it; other perf-overlay options appear only when it is not Off). | 'Show performance monitor' dropdown - Settings > In Game; also Steam Deck QAM Performance | int32 | UserLocal | `system\InGameOverlayShowFPSCorner` |  |  |  |
+| 4001 | `overlay_fps_counter_high_contrast` | Draws the FPS counter in a high-contrast style for readability. *(medium)* | 'FPS High Contrast' - Big Picture/Steam Deck QAM > Performance | bool | UserLocal | `system\InGameOverlayShowFPSContrast` |  |  |  |
+| 4002 | `overlay_key` | Keyboard shortcut that opens the Steam Overlay in game (default Shift+Tab). | 'Overlay shortcut key(s)' - Settings > In Game | CMsgHotkey | UserLocal | `system\InGameOverlayShortcutKey` | `'Shift\tKEY_TAB'` |  |  |
+| 4003 | `screenshot_key` | Keyboard shortcut that takes a Steam screenshot in game (default F12). | 'Take a screenshot' shortcut - Settings > In Game > Screenshots | CMsgHotkey | UserLocal | `system\InGameOverlayScreenshotHotKey` | `'KEY_F12'` |  |  |
+| 4004 | `enable_overlay` | Master switch for the Steam Overlay in games (default on); when off, the overlay and features relying on it are unavailable in-game. | 'Enable the Steam Overlay while in-game' - Settings > In Game | bool | UserLocal | `system\EnableGameOverlay` | `true` |  |  |
+| 4006 | `enable_screenshot_notification` | Shows a notification toast when a screenshot is taken (default on). | 'When a screenshot is taken, display a notification' - Settings > In Game > Screenshots | bool | UserLocal | `system\InGameOverlayScreenshotNotification` | `true` |  |  |
+| 4007 | `enable_screenshot_sound` | Plays a sound when a screenshot is taken (default on). | 'When a screenshot is taken, play a sound' - Settings > In Game > Screenshots | bool | UserLocal | `system\InGameOverlayScreenshotPlaySound` | `true` |  |  |
+| 4008 | `save_uncompressed_screenshots` | Also saves an external (uncompressed/lossless) copy of each screenshot to the screenshot folder in addition to Steam's JPEG copy. | 'Save an external copy of my screenshots' - Settings > In Game > Screenshots | bool | UserLocal | `system\InGameOverlayScreenshotSaveUncompressed` |  |  |  |
+| 4009 | `screenshots_path` | Folder where external screenshot copies are saved; computed/forwarded to the screenshot manager. *(medium)* | Screenshot folder picker - Settings > In Game > Screenshots | string | CustomFunc |  |  |  |  |
+| 4010 | `default_ping_rate` | Read-only: the automatic server-browser ping rate the client computed from network speed; shown as 'Automatic (N)' in the ping-rate dropdown. | Shown as the 'Automatic (%s)' option of 'Server browser pings/minute' - Settings > In Game | int32 | CustomFunc |  |  | read-only | Computed default (automatic) server ping rate based on network speed |
+| 4011 | `server_ping_rate` | Server browser pings per minute: Automatic or a fixed 5000/3000/1500/1000/500/250. Lower it if browsing game servers causes connection problems. | 'Server browser pings/minute' - Settings > In Game | int32 | CustomFunc |  |  |  |  |
+| 4012 | `steam_networking_share_ip` | Whether games using Steam Networking may share your IP address for a faster (direct) connection: Default, Never, Friends Only, or Always. | 'Steam Networking' dropdown - Settings > In Game | int32 | CustomFunc |  |  |  |  |
+| 4013 | `web_browser_home` | Home page URL for the Steam Overlay web browser. | 'Web browser home page' - Settings > In Game | string | CustomFunc |  |  |  |  |
+| 4014 | `voice_mic_device_name` | Name of the microphone device Steam voice chat uses (forwarded to the voice subsystem). *(medium)* | 'Current Mic Name' - Settings > Voice | string | CustomFunc |  |  |  |  |
+| 4015 | `voice_mic_input_gain` | Microphone input volume/gain for Steam voice (float, forwarded to the voice subsystem). | 'Input volume/gain' slider - Settings > Voice | float | CustomFunc |  |  |  |  |
+| 4016 | `voice_speaker_output_gain` | Output volume/gain for incoming Steam voice audio (float). | 'Output volume/gain' slider - Settings > Voice | float | CustomFunc |  |  |  |  |
+| 4017 | `voice_push_to_talk_setting` | Probably the voice transmit mode (e.g. open mic vs. push-to-talk/mute) for in-game Steam voice; no JS reference in this build. *(low)* | not shown in UI (generic setting); voice UI uses friends settings | int32 | CustomFunc |  |  |  |  |
+| 4018 | `voice_push_to_talk_key` | Probably the push-to-talk hotkey for in-game Steam voice; no JS reference in this build. *(low)* | not shown in UI | CMsgHotkey | CustomFunc |  |  |  |  |
+| 4019 | `overlay_toolbar_list_view` | Shows the Steam Overlay toolbar as a list view instead of icons. | 'Show toolbar as list view' - Settings > In Game > Toolbar preferences | bool | UserLocal | `OverlayToolBarListView` |  |  |  |
+| 4020 | `always_use_gamepadui_overlay` | Uses the Big Picture (gamepad) overlay instead of the desktop overlay when playing with a controller. | 'Use the Big Picture Overlay when using a controller' - Settings > In Game | bool | UserLocal | `system\EnableSCTenFootOverlayCheckNew` |  |  |  |
+| 4021 | `overlay_tabs` | JSON array of {window, visible} entries that sets which overlay toolbar tabs (e.g. GameServers, Timeline) are shown and in what order; roams across machines. *(medium)* | Overlay toolbar preferences (Settings > In Game > Toolbar preferences / overlay toolbar) | string | UserRoaming | `OverlayTabs` |  |  |  |
+| 4022 | `overlay_scale_interface` | Scales Steam Overlay text and icons to match the monitor's DPI scaling (default on). | 'Scale Steam Overlay text and icons to match monitor settings' - Settings > In Game | bool | Registry | `HKEY_CURRENT_USER\Software\Valve\Steam\OverlayScaleInterface` | `true` |  |  |
+| 4023 | `overlay_restore_browser_tabs` | Reopens the overlay web browser's previous tabs when a game starts (default on). | 'Restore my previous browser tabs when starting a game' - Settings > In Game | bool | UserLocal | `system\InGameOverlayRestoreBrowserTabs` | `true` |  |  |
+| 4024 | `enable_avif_screenshots` | Saves external copies of HDR screenshots as AVIF files. | 'Save external HDR screenshots as AVIF' - Settings > In Game > Screenshots | bool | UserLocal | `system\InGameOverlayScreenshotEnableAVIF` |  |  |  |
+| 4025 | `overlay_fps_counter_detail_level` | Amount of detail in the performance monitor: FPS Single Value, FPS Details, FPS Details + CPU & GPU Utilization, or FPS/CPU/GPU/RAM Full Details (default 1 = simplest). Graph options appear only at higher levels. | 'Performance detail level' - Settings > In Game (shown when performance monitor is on) | int32 | UserLocal | `system\InGameOverlayShowFPSDetailLevel` | `1` |  |  |
+| 4026 | `overlay_fps_counter_saturation_factor` | Text contrast/saturation of the performance monitor (slider 0-1, step 0.1; default 1). | 'Text contrast/saturation' - Settings > In Game > Performance monitor | float | UserLocal | `system\InGameOverlayShowFPSSaturation` | `1` |  |  |
+| 4027 | `overlay_fps_counter_bgopacity` | Background opacity of the performance monitor (slider 0-1, step 0.1; default 0.8). | 'Background opacity' - Settings > In Game > Performance monitor | float | UserLocal | `system\InGameOverlayShowFPSBGOpacity` | `0.8` |  |  |
+| 4028 | `overlay_fps_counter_scale_factor` | Text size scaling of the performance monitor (slider 0.2-1.4, step 0.1; default 0.7). | 'Text size scaling' - Settings > In Game > Performance monitor | float | UserLocal | `system\InGameOverlayShowFPSScaling` | `0.7` |  |  |
+| 4029 | `overlay_fps_counter_key` | Hotkey that toggles the in-game performance monitor (default 'Default', i.e. unbound/built-in). | 'Toggle performance monitor key(s)' - Settings > In Game > Overlay Performance Monitor | CMsgHotkey | UserLocal | `system\InGameOverlayShowFPSHotKey` | `'Default'` |  |  |
+| 4030 | `overlay_fps_counter_fps_graph` | Shows the FPS average/minimum graph in the performance monitor (only offered at detail level above the simplest). | 'Show FPS Avg/Min Graph' - Settings > In Game > Performance monitor | bool | UserLocal | `system\InGameOverlayShowFPSGraphFPS` | `true` |  |  |
+| 4031 | `overlay_fps_counter_cpu_graph` | Shows the per-core CPU utilization graph in the performance monitor (offered only at the higher detail levels). | 'Show CPU Utilization Per-Core Graph' - Settings > In Game > Performance monitor | bool | UserLocal | `system\InGameOverlayShowFPSGraphCPU` | `true` |  |  |
+| 4032 | `overlay_fps_counter_allow_km_driver` | Allows the performance monitor to use a kernel-mode driver on Windows for extra metrics such as CPU temperature (default on). | 'Enable kernel driver based metrics (CPU Temperature)' - Settings > In Game (Windows) | bool | UserLocal | `system\InGameOverlayAllowKMDriveOnWindows` | `true` |  |  |
+| 4033 | `achievement_notification_toast` | Shows a toast when you unlock an achievement (default on). *(medium)* | Toast checkbox for the achievement-unlocked row - Settings > Notifications | bool | UserLocal | `system\AchievementNotificationToast` | `true` |  |  |
+| 4034 | `achievement_notification_sound` | Plays a sound when you unlock an achievement (default on). *(medium)* | Sound checkbox for the achievement-unlocked row - Settings > Notifications | bool | UserLocal | `system\AchievementNotificationSound` | `true` |  |  |
+| 4035 | `controllerconnect_notification_toast` | Shows a toast when a controller connects (default on). *(medium)* | Toast checkbox for the controller-connected row - Settings > Notifications | bool | UserLocal | `system\ControllerConnectNotificationToast` | `true` |  |  |
+| 4036 | `controllerconnect_notification_sound` | Plays a sound when a controller connects (default off). *(medium)* | Sound checkbox for the controller-connected row - Settings > Notifications | bool | UserLocal | `system\ControllerConnectNotificationSound` | `false` |  |  |
+| 4037 | `controller_low_battery_notification_toast` | Shows a toast when a controller's battery is low (default on). *(medium)* | Toast checkbox for the controller-low-battery row - Settings > Notifications | bool | UserLocal | `system\ControllerLowBatteryNotificationToast` | `true` |  |  |
+| 4038 | `controller_low_battery_notification_sound` | Plays a sound when a controller's battery is low (default off). *(medium)* | Sound checkbox for the controller-low-battery row - Settings > Notifications | bool | UserLocal | `system\ControllerLowBatteryNotificationSound` | `false` |  |  |
+| 4039 | `logged_in_as_user_notification_toast` | Shows a toast saying which account you are logged in as (default on). *(medium)* | Toast checkbox for the 'logged in as user' row - Settings > Notifications | bool | UserLocal | `system\LoggedInAsUserNotificationToast` | `true` |  |  |
+| 4040 | `logged_in_as_user_notification_sound` | Plays a sound with the 'logged in as user' notification (default off). *(medium)* | Sound checkbox for the 'logged in as user' row - Settings > Notifications | bool | UserLocal | `system\LoggedInAsUserNotificationSound` | `false` |  |  |
+| 5000 | `smooth_scroll_webviews` | Enables smooth scrolling in Steam's web views; requires a Steam restart. | 'Enable smooth scrolling in web views (requires restart)' - Settings > Interface | bool | CustomFunc |  |  |  |  |
+| 5001 | `enable_gpu_accelerated_webviews` | Enables GPU-accelerated rendering for Steam's web views (CEF); requires restart. Game Recording reports it as required ('Requires Steam Client GPU Acceleration'). | 'Enable GPU accelerated rendering in web views (requires restart)' - Settings > Interface | bool | CustomFunc |  |  |  |  |
+| 5003 | `enable_hardware_video_decoding` | Uses hardware video decoding in Steam web views/video when supported; requires restart. | 'Enable hardware video decoding, if supported (requires restart)' - Settings > Interface | bool | CustomFunc |  |  |  |  |
+| 5004 | `run_at_startup` | Starts Steam automatically when you log in to the computer (computed from the OS autostart entry). | 'Run Steam when my computer starts' - Settings > Interface | bool | CustomFunc |  |  |  |  |
+| 5005 | `enable_dpi_scaling` | Scales Steam's text and icons to match the OS monitor scaling; requires restart. | 'Scale text and icons to match monitor settings (requires restart)' - Settings > Interface | bool | CustomFunc |  |  |  |  |
+| 5006 | `enable_marketing_messages` | Allows notifications about additions/changes to your games, new releases and upcoming releases (default on). | 'Notify me about additions or changes to my games, new releases, and upcoming releases' - Settings > Interface | bool | UserLocal | `news\NotifyAvailableGames` | `true` |  |  |
+| 5007 | `start_in_big_picture_mode` | Starts Steam directly in Big Picture Mode (on SteamOS: when in Desktop Mode). | 'Start Steam in Big Picture Mode' (SteamOS: '...when in Desktop Mode') - Settings > Interface | bool | CustomFunc |  |  |  |  |
+| 5008 | `jumplist_flags` | Bitmask of entries shown in the Windows taskbar jump list / tray menu (status Online/Away/Invisible/Offline plus Store, Library, Community, Friends, Screenshots, Servers, Settings, Big Picture, SteamVR, Exit, etc.); default 77680. | Taskbar preferences checkboxes - Settings > Interface (Windows) | uint32 | UserLocal | `system\JumplistSettings` | `77680` |  |  |
+| 5009 | `enable_ui_sounds` | Plays Steam UI navigation sounds (default on). | 'Enable UI sounds' - Settings > Audio (Big Picture/Steam Deck) | bool | UserLocal | `system\EnableUISounds` | `true` |  |  |
+| 5010 | `enable_gamescope_composer` | Developer option: uses gamescope to composite Steam's browser views; requires restart (default off). | 'Enable gamescope browser composer' - Settings > Developer | bool | Registry | `HKEY_CURRENT_USER\Software\Valve\Steam\EnableGamescopeComposer` | `false` |  |  |
+| 5011 | `enable_gamescope_composer_vr` | Developer option: uses the gamescope browser composer in VR; requires restart (default on). | 'Enable gamescope VR browser composer' - Settings > Developer | bool | Registry | `HKEY_CURRENT_USER\Software\Valve\Steam\EnableGamescopeComposerVR` | `true` |  |  |
+| 5012 | `show_switch_to_desktop_at_login` | On SteamOS, offers a 'Switch to Desktop' option on the login screen when no user is logged in. | 'Show Switch To Desktop option when not logged in' - Settings > Interface (SteamOS) | bool | Install | `system\ShowSwitchToDesktopAtLogin` |  | pre-login |  |
+| 5013 | `enable_steamrt64_client` | Opts into the experimental 64-bit Steam client running in the Steam Linux Runtime 3 (steamrt64); requires restart. | 'Use experimental SteamRT3 Steam Client' - Settings > Interface (Linux) | bool | CustomFunc |  |  |  |  |
+| 6000 | `disable_all_toasts` | Together with disable_toasts_in_game drives 'Show Notification Toasts...': both false = Anytime, only in-game disabled = When I'm not in-game, this true = Never. | 'Show Notification Toasts...' dropdown (Anytime/When I'm not in-game/Never) - Settings > Notifications | bool | UserRoaming | `DisableAllToasts` |  |  |  |
+| 6001 | `disable_toasts_in_game` | Suppresses notification toasts while a game is running ('When I'm not in-game' choice of the notification-toasts dropdown). | 'Show Notification Toasts...' dropdown - Settings > Notifications | bool | UserRoaming | `DisableToastsInGame` |  |  |  |
+| 6002 | `play_sound_on_toast` | Plays a sound when a notification toast is shown (default on); when off, per-notification sound checkboxes are disabled. | 'Play a sound when a notification toast is displayed' - Settings > Notifications | bool | UserRoaming | `PlaySoundOnToast` | `true` |  |  |
+| 7000 | `library_display_size` | Size of library UI elements/capsules: Automatic, Small, Medium or Large. | 'Display size for Library user interface elements' - Settings > Library | int32 | UserLocal | `LibraryDisplaySize` |  |  |  |
+| 7001 | `library_whats_new_show_only_product_updates` | Limits the library home 'What's New' shelf to product updates (no other event types). | 'Only show product updates in What's New' - Library home shelf settings | bool | UserRoaming | `LibraryWhatsNewShowOnlyProductUpdates` |  |  |  |
+| 7002 | `show_store_content_on_home` | Shows personalized store content on the library home (default on). | 'Show personalized store content on my Home' - Library home settings | bool | UserRoaming | `ShowStoreContentOnHome` | `true` |  |  |
+| 7003 | `start_page` | Window/page Steam opens at startup: Store, Library, News, Friends, Friend Activity, Community Home or Servers (string value, e.g. 'library'). | 'Start Up Location' - Settings > Interface | string | CustomFunc |  |  |  |  |
+| 7004 | `library_low_bandwidth_mode` | Reduces bandwidth use by disabling features like auto-loading community content in the library. | 'Low Bandwidth Mode' - Settings > Library | bool | UserLocal | `LibraryLowBandwidthMode` |  |  |  |
+| 7005 | `library_low_perf_mode` | Improves library performance by disabling some graphical effects and transitions. | 'Low Performance Mode' - Settings > Library | bool | UserLocal | `LibraryLowPerfMode` |  |  |  |
+| 7006 | `library_disable_community_content` | Stops the library game page from automatically loading community content. | 'Disable Community Content' - Settings > Library | bool | UserLocal | `LibraryDisableCommunityContent` |  |  |  |
+| 7007 | `library_display_icon_in_game_list` | Shows game icons in the library's left-hand game list (default on). | 'Show game icons in the left column' - Settings > Library | bool | UserLocal | `LibraryDisplayIconInGameList` | `true` |  |  |
+| 7008 | `ready_to_play_includes_streaming` | Includes games streamable from another PC in the library's 'Ready to Play' filter and defaults their Play button to streaming. | 'Ready to Play should include streamable games' - Settings > Library | bool | CustomFunc | `ReadyToPlayIncludesStreaming` |  |  |  |
+| 7009 | `show_steam_deck_info` | Shows Steam Deck compatibility information in the library. | 'Show Steam Deck compatibility information in library' - Settings > Library | bool | UserLocal | `ShowSteamDeckInfoInLibrary` |  |  |  |
+| 7010 | `library_home_big_art` | Big Picture/Deck home screen alternate layout that highlights background art for the selected Recent Games title. | 'Big Art Mode' - Settings > Customization (Big Picture/Steam Deck) | bool | UserLocal | `LibraryHomeBigArt` |  |  |  |
+| 8000 | `enable_shader_precache` | Enables Shader Pre-caching: Steam downloads/collects precompiled shaders for your system (slightly more disk and bandwidth). The label shows the current cache size. | 'Enable Shader Pre-caching (N MB pre-cached)' - Settings > Downloads | bool | CustomFunc |  |  |  |  |
+| 8001 | `enable_shader_background_processing` | Allows Steam to compile/process Vulkan shaders in the background (e.g. while idle) so games start with fewer stutters. | 'Allow background processing of Vulkan shaders' - Settings > Downloads | bool | CustomFunc |  |  |  |  |
+| 8002 | `shader_precached_size` | Read-only: current size of the shader pre-cache (shown in MB in the pre-caching label). | Shown inside 'Enable Shader Pre-caching (%s MB pre-cached)' - Settings > Downloads | uint64 | CustomFunc |  |  | read-only |  |
+| 8003 | `needs_steam_service_repair` | Probably a read-only flag indicating the Windows Steam Client Service needs repair; no JS reference in this build. *(low)* | not shown in UI | bool | CustomFunc |  |  | read-only |  |
+| 8004 | `download_peer_content` | Game File Transfer over Local Network: off (don't allow local transfers) or allow transfers to/from Only me, Steam Friends, or Anyone. | 'Game File Transfer over Local Network' toggle + 'Allow transfers from this device to' dropdown - Settings > Downloads | int32 | CustomFunc |  |  |  |  |
+| 8005 | `download_rate_bits_per_s` | Displays download rates in bits per second (Kbps/Mbps) instead of bytes per second; also changes the unit of the speed-limit field. | 'Display download rates in bits per second' - Settings > Downloads | bool | CustomFunc |  |  |  |  |
+| 8006 | `restrict_auto_updates` | Only lets automatic game updates run inside the scheduled window given by restrict_auto_updates_start/_end. | 'Schedule auto-updates' - Settings > Downloads | bool | CustomFunc |  |  |  |  |
+| 8007 | `restrict_auto_updates_start` | Start hour of the auto-update window (hour value chosen from the client-provided list of valid hours). | 'Schedule auto-updates' start-time dropdown - Settings > Downloads | int32 | CustomFunc |  |  |  |  |
+| 8008 | `restrict_auto_updates_end` | End hour of the auto-update window. | 'Schedule auto-updates' end-time dropdown - Settings > Downloads | int32 | CustomFunc |  |  |  |  |
+| 8009 | `download_region` | Content server region used for downloads (region ID from the client's region list). | 'Download region' - Settings > Downloads | int32 | CustomFunc |  |  |  |  |
+| 8010 | `download_while_app_running` | Allows downloads to continue while a game is running. | 'Allow downloads during gameplay' - Settings > Downloads | bool | CustomFunc |  |  |  |  |
+| 8011 | `download_throttle_while_streaming` | Limits download speed while Remote Play streaming to keep stream quality high. | 'Throttle downloads while streaming' - Settings > Downloads | bool | CustomFunc |  |  |  |  |
+| 8012 | `download_throttle_rate` | Download speed limit (0 = unlimited); entered in KB/s or Kbps depending on download_rate_bits_per_s. Downloads show a throttle indicator when set. | 'Limit download speed' - Settings > Downloads | int32 | CustomFunc |  |  |  |  |
+| 8013 | `default_app_update_behavior` | Global default for automatic game updates used by games set to 'Use global setting': Wait until I launch the game, Let Steam decide when to update, or Immediately download updates. | Automatic Updates default - Settings > Downloads (also referenced in game Properties > Updates) | int32 | CustomFunc |  |  |  |  |
+| 10000 | `cloud_enabled` | Master switch for Steam Cloud synchronization of saves for supporting games (default on). | 'Enable Steam Cloud' - Settings > Cloud | bool | UserRoaming | `Software\Valve\Steam\CloudEnabled` | `true` |  |  |
+| 10001 | `show_screenshot_manager` | Opens the Screenshot Manager after closing a game in which screenshots were taken. | 'Screenshot Management' - Settings > Cloud | bool | UserRoaming | `Software\Valve\Steam\ShowScreenshotManager` |  |  |  |
+| 11000 | `music_volume` | Steam music player (soundtrack) volume, 0-100 in steps of 10. | 'Volume' slider - Settings > Music | int32 | CustomFunc |  |  |  |  |
+| 11001 | `music_pause_on_app_start` | Pauses Steam music playback when an application starts. | 'Pause music when starting an application' - Settings > Music | bool | Install | `Music\PauseOnAppStartedProcess` |  |  |  |
+| 11002 | `music_pause_on_voice_chat` | Pauses Steam music playback during voice chat. | 'Pause music when voice chatting' - Settings > Music | bool | Install | `Music\PauseOnVoiceChat` |  |  |  |
+| 11003 | `music_download_high_quality` | Downloads high-quality audio files for soundtracks. | 'Download high quality audio files' - Settings > Music | bool | Install | `Music\DownloadHighQualityAudioSoundtracks` |  |  |  |
+| 12000 | `broadcast_permissions` | Who may watch your Steam Broadcast: 0 Disabled, 1 Friends can request to watch (approve), 2 Friends can watch without asking, 3 Anyone can watch (public), 4 subscribers (default 1). | 'Privacy setting' - Settings > Broadcast | EBroadcastPermission | UserLocal | `Broadcast\Permissions` | `1` |  |  |
+| 12001 | `broadcast_output_width` | Broadcast video width in pixels; set together with broadcast_output_height by the video-dimensions dropdown. *(medium)* | 'Video Dimensions' dropdown (paired with height) - Settings > Broadcast | int32 | UserLocal | `Broadcast\OutputWidth` |  |  |  |
+| 12002 | `broadcast_output_height` | Broadcast video height in pixels (default 720); chosen via the video-dimensions dropdown which also sets the width. | 'Video Dimensions' - Settings > Broadcast | int32 | UserLocal | `Broadcast\OutputHeight` | `720` |  |  |
+| 12003 | `broadcast_bitrate` | Maximum broadcast bitrate in kbps (default 2500), selected from a dropdown. | 'Maximum Bitrate' - Settings > Broadcast | int32 | UserLocal | `Broadcast\MaxKbps` | `2500` |  |  |
+| 12004 | `broadcast_encoding_option` | Broadcast encoder preference: 0 best quality, 1 best performance. | 'Optimize encoding for' - Settings > Broadcast | EBroadcastEncoderSetting | UserLocal | `Broadcast\EncoderSetting` |  |  |  |
+| 12005 | `broadcast_record_all_video` | Captures video from all applications/the desktop rather than only the game while broadcasting. | 'Record video from all applications on this machine' - Settings > Broadcast | bool | UserLocal | `Broadcast\IncludeDesktop` |  |  |  |
+| 12006 | `broadcast_record_all_audio` | Captures audio from all applications on the machine while broadcasting. | 'Record audio from all applications on this machine' - Settings > Broadcast | bool | UserLocal | `Broadcast\RecordSystemAudio` |  |  |  |
+| 12007 | `broadcast_record_microphone` | Includes your microphone in the broadcast. | 'Record my microphone' - Settings > Broadcast | bool | UserLocal | `Broadcast\RecordMic` |  |  |  |
+| 12008 | `broadcast_show_upload_stats` | Shows broadcast upload statistics (debug info) in game. | 'Show upload stats' - Settings > Broadcast | bool | UserLocal | `Broadcast\ShowDebugInfo` |  |  |  |
+| 12009 | `broadcast_show_live_reminder` | Always shows the 'Live' indicator in game while broadcasting (default on). | 'Always show Live status' - Settings > Broadcast | bool | UserLocal | `Broadcast\ShowReminder` | `true` |  |  |
+| 12010 | `broadcast_chat_corner` | Screen corner where viewers' chat is shown in game, using the same Off/Top-left/Top-center/Top-right/Bottom-right/Bottom-center/Bottom-left choices as the performance monitor (default 1). | 'Show viewers' chat in game' - Settings > Broadcast | int32 | UserLocal | `Broadcast\ShowChat` | `1` |  |  |
+| 13000 | `gamestream_hardware_video_encode` | Uses GPU hardware video encoding for game recording/streaming (default on). | 'Enable GPU hardware encoding' - Settings > Game Recording | bool | UserLocal | `GameStream\HardwareVideoEncode` | `true` |  |  |
+| 13001 | `gamestream_enable_video_h265` | Allows the HEVC (H.265) codec for game recording/streaming video (default on). | 'Enable HEVC (H.265) video codec' - Settings > Game Recording | bool | UserLocal | `GameStream\EnableVideoH265` | `true` |  |  |
+| 14001 | `steam_input_configurator_error_msg_enable` | Steam Input layout dev mode: shows developer menu options and parse-error popups in the controller configurator; requires restart. | 'Steam Input Layout Dev Mode' - Settings > Developer | bool | Install | `SteamInput/Configurator/ErrorMsgEnabled` |  |  |  |
+| 14002 | `controller_guide_button_focus_steam` | Pressing the controller Guide/Steam button brings Steam (Big Picture) to the foreground (default on). | 'Guide button focuses Steam' - Settings > Controller | bool | UserLocal | `Controller_CheckGuideButton` | `true` |  |  |
+| 14003 | `controller_ps_support` | Steam Input for PlayStation controllers: Not Enabled, Enabled in Games w/o Support (value 1, default), or Enabled (value 2). | 'PlayStation Controller Support' - Settings > Controller | int32 | UserLocal | `SteamController_PSSupport` | `1` |  |  |
+| 14004 | `controller_xbox_support` | Enables Steam Input (remapping/configurations) for Xbox controllers. | 'Enable Steam Input for Xbox controllers' - Settings > Controller | bool | UserLocal | `SteamController_XBoxSupport` |  |  |  |
+| 14005 | `controller_xbox_driver` | Probably toggles Steam's extended Xbox controller driver (e.g. xpad/xone-style driver support); no JS reference in this build. *(low)* | not shown in UI | bool | UserLocal | `SteamController_XBoxDriver` |  |  |  |
+| 14006 | `controller_switch_support` | Enables Steam Input for Nintendo Switch Pro controllers. | 'Enable Steam Input for Switch Pro controllers' - Settings > Controller | bool | UserLocal | `SteamController_SwitchSupport` |  |  |  |
+| 14007 | `controller_generic_support` | Enables Steam Input for generic (non-Xbox/PS/Switch) gamepads. | 'Enable Steam Input for generic controllers' - Settings > Controller | bool | UserLocal | `SteamController_GenericGamepadSupport` |  |  |  |
+| 14008 | `controller_power_off_timeout` | Minutes of inactivity before Steam turns off wireless controllers: 5, 10, 15 (default), 30, 60, 120 or Never (stored as 9999). | Controller turn-off timeout dropdown - Settings > Controller | int32 | UserLocal | `CSettingsPanelGameController.Timeout` | `15` |  |  |
+| 14009 | `turn_off_controller_on_exit` | Turns off connected controllers when you exit Big Picture Mode. | 'Turn off controllers when exiting Big Picture Mode' - Settings > Controller | bool | UserLocal | `CSettingsPanelGameController.TurnOff` |  |  |  |
+| 14010 | `controller_combine_nintendo_joycons` | Treats a pair of Joy-Cons as one combined controller. | 'Combine Joy-Con Pairs' - Big Picture/Steam Deck QAM > Controller settings | bool | Install | `SteamInput/Configurator/CombinedJoycons` |  |  |  |
+| 140011 | `controller_enable_chord` | Enables Guide-button chord shortcuts (Guide + another button) on controllers (default on). | 'Enable Guide Button Chords for controllers' - Settings > Controller | bool | UserLocal | `SteamController_Enable_Chord` | `true` |  |  |
+| 140012 | `controller_poll_rate` | Probably a controller USB/HID polling-rate setting (declared bool but defaults to 2, so likely used as a small enum); no JS reference. *(low)* | not shown in UI | bool | UserLocal | `SteamController_Poll_Rate` | `2` |  |  |
+| 140013 | `controller_siapi_config_author_mode` | Steam Input API config author mode: forces new Steam Input API action sets to be shown so developers can author a new configuration. | 'Steam Input API Config Author Mode' - Settings > Developer | bool | UserLocal | `SteamInput/Configurator/SIAPIAuhtorMode` | `false` |  |  |
+| 140014 | `controller_show_ibex_tour` | Whether to show the Steam Controller welcome tour (codename 'Ibex') (default on). *(medium)* | 'Show Steam Controller Tour' - Settings > Developer > Miscellaneous | bool | UserRoaming | `ShowIbexWelcomeTour` | `true` |  |  |
+| 140030 | `controller_chat_radial_menu_option_0` | Probably the text/emote for slot 0 of the controller chat radial menu (quick chat messages sent from the in-game chat radial); stored under SteamInput/ChatRadialMenu/0, no direct JS reference by name. *(low)* | not shown in UI as a setting (chat radial menu slot) | string | UserLocal | `SteamInput/ChatRadialMenu/0` |  |  |  |
+| 140031 | `controller_chat_radial_menu_option_1` | Probably the text/emote for slot 1 of the controller chat radial menu (quick chat messages sent from the in-game chat radial); stored under SteamInput/ChatRadialMenu/1, no direct JS reference by name. *(low)* | not shown in UI as a setting (chat radial menu slot) | string | UserLocal | `SteamInput/ChatRadialMenu/1` |  |  |  |
+| 140032 | `controller_chat_radial_menu_option_2` | Probably the text/emote for slot 2 of the controller chat radial menu (quick chat messages sent from the in-game chat radial); stored under SteamInput/ChatRadialMenu/2, no direct JS reference by name. *(low)* | not shown in UI as a setting (chat radial menu slot) | string | UserLocal | `SteamInput/ChatRadialMenu/2` |  |  |  |
+| 140033 | `controller_chat_radial_menu_option_3` | Probably the text/emote for slot 3 of the controller chat radial menu (quick chat messages sent from the in-game chat radial); stored under SteamInput/ChatRadialMenu/3, no direct JS reference by name. *(low)* | not shown in UI as a setting (chat radial menu slot) | string | UserLocal | `SteamInput/ChatRadialMenu/3` |  |  |  |
+| 140034 | `controller_chat_radial_menu_option_4` | Probably the text/emote for slot 4 of the controller chat radial menu (quick chat messages sent from the in-game chat radial); stored under SteamInput/ChatRadialMenu/4, no direct JS reference by name. *(low)* | not shown in UI as a setting (chat radial menu slot) | string | UserLocal | `SteamInput/ChatRadialMenu/4` |  |  |  |
+| 140035 | `controller_chat_radial_menu_option_5` | Probably the text/emote for slot 5 of the controller chat radial menu (quick chat messages sent from the in-game chat radial); stored under SteamInput/ChatRadialMenu/5, no direct JS reference by name. *(low)* | not shown in UI as a setting (chat radial menu slot) | string | UserLocal | `SteamInput/ChatRadialMenu/5` |  |  |  |
+| 140036 | `controller_chat_radial_menu_option_6` | Probably the text/emote for slot 6 of the controller chat radial menu (quick chat messages sent from the in-game chat radial); stored under SteamInput/ChatRadialMenu/6, no direct JS reference by name. *(low)* | not shown in UI as a setting (chat radial menu slot) | string | UserLocal | `SteamInput/ChatRadialMenu/6` |  |  |  |
+| 140037 | `controller_chat_radial_menu_option_7` | Probably the text/emote for slot 7 of the controller chat radial menu (quick chat messages sent from the in-game chat radial); stored under SteamInput/ChatRadialMenu/7, no direct JS reference by name. *(low)* | not shown in UI as a setting (chat radial menu slot) | string | UserLocal | `SteamInput/ChatRadialMenu/7` |  |  |  |
+| 16000 | `startup_movie_id` | Community item ID of the equipped Big Picture/Steam Deck startup movie (set together with startup_movie_local_path when you equip one). *(medium)* | Startup movie picker - Settings > Customization (Big Picture/Steam Deck) | uint64 | Install | `Customization/StartupMovie/MovieID` |  | pre-login |  |
+| 16001 | `startup_movie_local_path` | Local file path of the startup movie video to play at boot. *(medium)* | Startup movie picker - Settings > Customization | string | Install | `Customization/StartupMovie/LocalPath` |  | pre-login |  |
+| 16002 | `startup_movie_shuffle` | Plays a random startup movie from your owned movies instead of a fixed one. | 'Shuffle Startup Movie' - Settings > Customization | bool | Install | `Customization/StartupMovie/Shuffle` |  | pre-login |  |
+| 16003 | `startup_movie_used_for_resume` | Also plays the startup movie when the device resumes from sleep. *(medium)* | Toggle next to the startup movie options - Settings > Customization | bool | UserLocal | `Customization/StartupMovie/UsedForResume` |  |  |  |
+| 16004 | `screensaver_current_id` | ID of the selected screensaver (e.g. a game slideshow/'All Games' screenshots or a downloaded screensaver). *(medium)* | Screensaver dropdown - Settings > Customization | string | Install | `Customization/Screensaver/CurrentScreensaver` |  |  |  |
+| 16005 | `screensaver_settings` | JSON blob of per-screensaver options (e.g. gameslideshow screenshot source all/general/none). *(medium)* | Screensaver options - Settings > Customization | string | Install | `Customization/Screensaver/Settings` |  |  |  |
+| 16006 | `screensaver_while_ingame` | Allows the screensaver to start while a game is running (default on). | 'Show screensavers when playing a game' - Settings > Customization | bool | Install | `Customization/Screensaver/WhileInGame` | `true` |  |  |
+| 17001 | `game_notes_enable_spellcheck` | Enables spellcheck in the game notes editor (default on). *(medium)* | Spellcheck toggle in the Game Notes editor | bool | UserRoaming | `GameNotesEnableSpellcheck` | `true` |  |  |
+| 18000 | `screenshot_items_per_row` | Probably the number of thumbnails per row in the screenshot viewer/manager grid (default 1); no JS reference in this build. *(low)* | not shown in UI | int32 | UserRoaming | `ScreenshotViewItemsPerRow` | `1` |  |  |
+| 18201 | `gamerecording_background_path` | Folder where game recordings (background/manual recordings) are stored; changing it needs a Steam restart. | 'Recordings folder' - Settings > Game Recording | string | CustomFunc |  |  |  |  |
+| 18202 | `gamerecording_background_max_keep` | Background recording length kept on disk, as 'Nmin' or 'infinite' (default '120min'); oldest footage is overwritten once full. | 'Background recording disk space' / Length - Settings > Game Recording | string | UserLocal | `GameRecording\BackgroundMaxKeep` | `'120min'` |  |  |
+| 18203 | `gamerecording_background_time_resolution` | Probably the time granularity of background recording segments/timeline in milliseconds (default 60000 = 1 minute); no JS reference. *(low)* | not shown in UI | int32 | UserLocal | `GameRecording\BackgroundTimeResolution` | `6e+04` |  |  |
+| 18207 | `gamerecording_background_mk` | Hotkey that adds a timeline marker to the recording (default Ctrl+F12). | 'Add a timeline marker' shortcut - Settings > Game Recording > Shortcut Keys | CMsgHotkey | UserLocal | `GameRecording\MarkerKey` | `'Ctrl\tKEY_F12'` |  |  |
+| 18208 | `gamerecording_background_tg` | Hotkey that starts/stops recording (or saving a clip) (default Ctrl+F11). | 'Start/stop recording' shortcut - Settings > Game Recording > Shortcut Keys | CMsgHotkey | UserLocal | `GameRecording\ToggleKey` | `'Ctrl\tKEY_F11'` |  |  |
+| 18209 | `gamerecording_background_a_m` | Records your microphone along with gameplay audio. | 'Record Microphone' - Settings > Game Recording > Audio Recording | bool | UserLocal | `GameRecording\Audio_Mic` | `false` |  |  |
+| 18210 | `gamerecording_video_bitrate` | Recording quality preset string (default 'preset_default' = High); presets Ultra, High, Medium, Low trade quality vs. disk space. | 'Recording Quality' - Settings > Game Recording | string | UserLocal | `GameRecording\VideoBitRate` | `'preset_default'` |  |  |
+| 18212 | `gamerecording_background_mode` | Game recording mode: 0 Recording Off, 1 Record in Background (always), 2 Record Manually (only after pressing the hotkey). | 'Record my games...' mode selector - Settings > Game Recording; also overlay/QAM Game Recording | EGRMode | UserLocal | `GameRecording\BackgroundRecordMode` | `0` |  |  |
+| 18213 | `gamerecording_background_audio` | Audio sources to record: 0 Game Audio Only, 1 All System Audio, 2 Game and Selected Programs. | 'Record Audio from...' - Settings > Game Recording | EGRAudio | UserLocal | `GameRecording\Recording_Audio_Option` | `0` |  |  |
+| 18214 | `gamerecording_max_fps` | Maximum recording frame rate (clamped 24-120, default 60). | 'Maximum frame rate' - Settings > Game Recording | int32 | UserLocal | `GameRecording\MaxFPS` | `60` | clamp [24..120] |  |
+| 18215 | `gamerecording_hotkey_ic` | Hotkey that saves the last N seconds (gamerecording_ic_seconds) as an instant clip (unbound by default). | 'Save the last N seconds of gameplay as a clip' shortcut - Settings > Game Recording > Shortcut Keys | CMsgHotkey | UserLocal | `GameRecording\InstantClipKey` | `'None'` |  |  |
+| 18216 | `gamerecording_ic_seconds` | Instant clip duration in seconds (default 30). | 'Clip duration' - Settings > Game Recording | float | UserLocal | `GameRecording\InstantClipDuration` | `3e+01` |  |  |
+| 18217 | `gamerecording_export_limit_type` | Remembered export mode in the Export Clip dialog: 0 Original, 1 File Size limit, 2 Custom (resolution/frame rate/bitrate). | Export Clip dialog limit type (Original / File Size / Custom) | EGRExportLimitType | UserLocal | `GameRecording\ExportLimitType` |  |  |  |
+| 18218 | `gamerecording_export_limit_size_mb` | Max file size in MB used by the 'File Size' export mode (default 100). | 'Max File Size' - Export Clip dialog | int32 | UserLocal | `GameRecording\ExportLimitSize` | `100` |  |  |
+| 18219 | `gamerecording_export_limit_bitrate` | Bitrate choice remembered for 'Custom' clip export (default 1; options Original/Ultra/High/Medium/Low). *(medium)* | 'Bitrate' - Export Clip dialog (Custom) | int32 | UserLocal | `GameRecording\ExportLimitBitrate` | `1` |  |  |
+| 18220 | `gamerecording_export_limit_width` | Output width remembered for 'Custom' clip export (default 3840). *(medium)* | 'Resolution' - Export Clip dialog (Custom) | int32 | UserLocal | `GameRecording\ExportLimitWidth` | `3840` |  |  |
+| 18221 | `gamerecording_export_limit_height` | Output height remembered for 'Custom' clip export (default 2160; options 720p-4k, never above the source). *(medium)* | 'Resolution' - Export Clip dialog (Custom) | int32 | UserLocal | `GameRecording\ExportLimitHeight` | `2160` |  |  |
+| 18222 | `gamerecording_export_limit_frame_rate` | Frame rate remembered for 'Custom' clip export (default 60). | 'Frame Rate' - Export Clip dialog (Custom) | int32 | UserLocal | `GameRecording\ExportLimitFrameRate` | `60` |  |  |
+| 18223 | `gamerecording_export_directory` | Last folder used when exporting clips to MP4. | Export Clip dialog folder ('Browse...') | string | CustomFunc | `GameRecording\ExportDirectory` |  |  |  |
+| 18224 | `gamerecording_export_codec` | Codec for exported clips: 0 Default, 1 H.264, 2 H.265 (HEVC). | 'Codec' - Export Clip dialog | EExportCodec | UserLocal | `GameRecording\ExportCodec` |  |  |  |
+| 18225 | `gamerecording_video_maxheight` | Maximum recorded video height (0 = native, clamp 0-2160); width follows the game's aspect ratio. | 'Maximum video height' - Settings > Game Recording | int32 | UserLocal | `GameRecording\VideoMaxHeight` | `0` | clamp [0..2160] |  |
+| 18226 | `gamerecording_force_mic_mono` | Records the microphone as mono (fixes mic heard in only one channel). | 'Force Microphone to Mono' - Settings > Game Recording | bool | UserLocal | `GameRecording\ForceMicMono` | `false` |  |  |
+| 18227 | `gamerecording_automatic_gain_control` | Applies automatic gain control to the recorded microphone (default on). | 'Automatic Gain Control' - Settings > Game Recording | bool | UserLocal | `GameRecording\AutomaticGainControl` | `true` |  |  |
+| 20000 | `show_timestamps_in_console` | Prefixes lines in the Steam console with timestamps. | 'Show timestamps in Steam console' - Settings > Developer | bool | UserLocal | `Developer\ShowTimestampsInConsole` |  |  |  |
+| 20002 | `override_browser_composer_mode` | Developer override of the browser composer mode; the toggle switches between two enum values (system composer vs. default) and prompts a restart. *(medium)* | 'Force system browser composer' - Settings > Developer | int32 | CustomFunc |  |  |  |  |
+| 20003 | `cef_remote_debugging_enabled` | Auto-enables CEF (Chromium) remote debugging of Steam's UI at startup; requires restart. | 'CEF Remote Debugging' - Settings > Developer | bool | CustomFunc |  |  |  |  |
+| 20004 | `force_deck_perf_tab` | Debug: forces the QAM Performance tab to show all Steam Deck settings on other hardware; its UI toggle is compiled out in this build. *(medium)* | not shown in UI (developer toggle compiled out) | bool | Install | `Developer/ForceDeckPerfTab` |  |  |  |
+| 20005 | `force_fake_mandatory_update` | Debug: makes the UI show a mandatory-update gate; applying it clears the flag. *(medium)* | not shown in UI | bool | Install | `Developer/FakeMandatoryUpdate` |  |  |  |
+| 20006 | `hdr_compat_testing` | Ignores previously published per-app HDR compatibility information (for testing HDR in games). | 'HDR Compatibility Testing' - Settings > Developer | bool | Install | `Developer/HDRCompatTesting` |  |  |  |
+| 20007 | `developer_mode_enabled` | Enables Developer Mode, which unlocks the Developer settings page (and other dev features, also exposed to SteamVR). | 'Enable Developer Mode' - Settings > System | bool | Install | `Developer/DevModeEnabled` |  |  |  |
+| 20008 | `show_advanced_update_channels` | Shows additional (advanced) SteamOS update channels in the update channel picker. | 'Show Advanced Update Channels' - Settings > Developer | bool | Install | `Developer/ShowAdvancedUpdateChannels` |  |  |  |
+| 20009 | `browserview_underlays_allowed` | Allows browser views to use hardware underlays when requirements are met; requires restart. *(medium)* | 'Enable browserview underlays' - Settings > Developer > Miscellaneous | bool | CustomFunc |  |  |  |  |
+| 21001 | `gamescope_hdr_visualization` | Gamescope HDR debug visualization: 0 None, 1 Heatmap, 2 Waveform/Color Gamut (Analysis), 3 Heatmap Extended, 4 Heatmap Classic. | 'HDR Debug Visualization' - Settings > Developer | EHDRVisualization | UserLocal | `Gamescope/HDRVisualization2` |  |  |  |
+| 21002 | `gamescope_app_target_framerate` | Per-game (and per-display) frame limit in FPS that gamescope enforces (0 = default/off); slider values depend on the display's refresh rate. | 'Frame Limit' slider - Steam Deck/SteamOS QAM > Performance | int32 | UserLocal | `Gamescope/AppTargetFrameRate` | `0` | per-game+display |  |
+| 21003 | `gamescope_enable_app_target_framerate` | Enables unified frame limit management, where the frame limit and refresh rate are managed together (default on). | 'Enable Unified Frame Limit Management' - QAM > Performance (SteamOS) | bool | Registry | `HKEY_CURRENT_USER\Software\Valve\Steam\GamescopeEnableAppTargetRefreshRate2` | `true` |  |  |
+| 21004 | `gamescope_disable_framelimit` | Per-game: disables the frame limit so the game renders as fast as possible, even above the display refresh rate. | 'Disable Frame Limit' - QAM > Performance (SteamOS) | bool | UserLocal | `Gamescope/DisableFrameLimit` | `false` | per-game+display |  |
+| 21005 | `gamescope_display_refresh_rate` | Per-game/per-display panel refresh rate in Hz used while that game runs (0 = default). | 'Refresh Rate' slider - QAM > Performance (SteamOS) | int32 | UserLocal | `Gamescope/RefreshRate` | `0` | per-game+display |  |
+| 21006 | `gamescope_use_game_refresh_rate_in_steam` | Keeps the game's display refresh rate while the Steam UI is shown instead of switching back (default on). *(medium)* | 'Use game display refresh rate in Steam' - Valve Internal/Developer > Display | bool | UserLocal | `Developer/DynamicRefreshRateInSteam` | `true` |  |  |
+| 21007 | `gamescope_disable_mura_correction` | Disables the display's mura (panel non-uniformity) compensation on supported SteamOS hardware. | 'Disable Mura Compensation' - Settings > Display (SteamOS) | bool | UserLocal | `Gamescope/MuraCorrectionDisabled` | `false` |  |  |
+| 21008 | `gamescope_include_steamui_in_screenshots` | Includes Steam UI elements (overlays, QAM etc.) in gamescope screenshots. | 'Include Steam UI elements in screenshots' - Settings > In Game (SteamOS) | bool | UserLocal | `Gamescope/IncludeSteamUIInScreenshots` | `false` |  |  |
+| 21009 | `gamescope_allow_tearing` | Per-game: lets the game present unsynchronized with the display (tearing) to reduce latency. | 'Allow Tearing' - QAM > Performance (SteamOS) | bool | UserLocal | `Gamescope/AllowTearing` | `false` | per-game |  |
+| 21010 | `gamescope_composite_debug` | Gamescope debug option that visualizes compositing (e.g. when gamescope composites vs. scans out directly). *(medium)* | 'Composite Debug' - QAM > Performance (developer) | bool | UserLocal | `Gamescope/CompositeDebug` | `false` |  |  |
+| 21011 | `gamescope_force_composite` | Forces gamescope to always composite frames instead of using direct scanout. *(medium)* | 'Force Composite' - QAM > Performance (developer) | bool | UserLocal | `Gamescope/ForceComposite` | `false` |  |  |
+| 21012 | `gamescope_game_resolution_global` | Global default maximum resolution for games under gamescope (string, default 'Default'); per-game resolution overrides take precedence. | 'Maximum Game Resolution' - Settings > Display (SteamOS/gamescope) | string | UserLocal | `Gamescope/GameResolutionGlobal` | `'Default'` |  |  |
+| 21013 | `gamescope_guide_hotkey` | Keyboard shortcut that opens the Steam main menu in gamescope sessions (default Shift+Tab). | 'Main Menu shortcut key(s)' - Settings > In Game (SteamOS) | CMsgHotkey | UserLocal | `Gamescope/GuideKeyboardHotkey` | `'Shift\tKEY_TAB'` |  |  |
+| 21014 | `gamescope_qam_hotkey` | Keyboard shortcut that opens the Quick Access Menu in gamescope sessions (default Ctrl+Shift+Tab). | 'Quick Access Menu shortcut key(s)' - Settings > In Game (SteamOS) | CMsgHotkey | UserLocal | `Gamescope/QAMKeyboardHotkey` | `'CTRL\tShift\tKEY_TAB'` |  |  |
+| 21015 | `gamescope_hdr_enabled` | Enables HDR output in gamescope (per display, default on). | 'Enable HDR' - Settings > Display (SteamOS) | bool | Install | `Gamescope/HDREnabled` | `true` | per-display |  |
+| 21016 | `gamescope_native_external_res_in_steam` | Runs the Steam UI at the external display's native resolution in gamescope. *(medium)* | 'Enable Native Resolution on External Displays' - Valve Internal settings (gamescope) | bool | Install | `Gamescope/EnableSteamNativeExternalResolution` |  |  |  |
+| 22000 | `steamos_status_led_brightness` | Brightness of the device status/power LED, 0-100 (default 100). | 'Status LED Brightness' - Settings > Display (SteamOS) | int32 | UserLocal | `SteamOS/StatusLEDBrightness` | `100` |  |  |
+| 22001 | `steamos_tdp_limit_enabled` | Per-game: enables a TDP (processor power) limit. | 'TDP Limit' - QAM > Performance (SteamOS) | bool | Install | `SteamOS/TDPLimitEnabled` | `false` | per-game |  |
+| 22002 | `steamos_tdp_limit` | Per-game TDP limit value in watts (range supplied by the hardware); lower values reduce power draw and performance. | TDP limit slider ('Watts') - QAM > Performance (SteamOS) | int32 | Install | `SteamOS/TDPLimit` | `0` | per-game |  |
+| 22003 | `steamos_cec_enabled` | Enables HDMI-CEC support (control/wake of TVs over HDMI) (default on). | 'Enable HDMI CEC Support' - Settings > Display (SteamOS) | bool | Install | `SteamOS/CECEnabled` | `true` |  |  |
+| 22004 | `steamos_cec_wake_on_resume` | Wakes the TV via HDMI-CEC when the device resumes from sleep (default on). | 'Wake TV when device resumes from sleep' - Settings > Display > HDMI-CEC | bool | Install | `SteamOS/WakeOnResume` | `true` |  |  |
+| 22005 | `steamos_wifi_debug` | Enables Wi-Fi debug data collection on SteamOS. | 'Enable Wi-Fi debug data collection' - Settings > Developer (SteamOS) | bool | Install | `SteamOS/WifiDebug` | `false` |  |  |
+| 22006 | `steamos_wifi_force_wpa_supplicant` | Forces the wpa_supplicant Wi-Fi backend (instead of the default backend, e.g. iwd) on SteamOS. | 'Force WPA Supplicant Wi-Fi backend' - Settings > Developer (SteamOS) | bool | Install | `SteamOS/WifiForceWPASupplicant` | `false` |  |  |
+| 22007 | `steamos_magnifier_scale` | Zoom level of the screen magnifier, 120-300% in 10% steps (default 150). | 'Magnifier Scale' - Settings > Display (SteamOS) | int32 | UserLocal | `SteamOS/MagnifierScale` | `150` |  |  |
+| 22008 | `steamos_manual_gpu_clock_enabled` | Per-game: locks the GPU to a fixed clock instead of automatic scaling. | 'Manual GPU Clock' - QAM > Performance (SteamOS) | bool | Install | `SteamOS/ManualGPUClockEnabled` | `false` | per-game |  |
+| 22009 | `steamos_manual_gpu_clock_hz` | Per-game fixed GPU clock; despite the 'hz' name the UI shows MHz (step 100, default 1000). | 'GPU Clock Frequency' slider (MHz) - QAM > Performance (SteamOS) | int32 | Install | `SteamOS/ManualGPUClockHz` | `1000` | per-game |  |
+| 22010 | `steamos_platform_performance_profile` | Per-game platform performance profile name (options provided by the hardware/OS, e.g. a power/performance profile). | 'Performance Profile' - QAM > Performance (SteamOS, when available) | string | Install | `SteamOS/PerformanceProfile` |  | per-game |  |
+| 22011 | `steamos_charge_limit_enabled` | Enables a battery charge limit to reduce battery wear. | 'Enable battery charging limit' - Settings > Power (SteamOS) | bool | Install | `SteamOS/ChargeLimitEnabled` | `false` |  |  |
+| 22012 | `steamos_charge_limit` | Battery charge limit in percent (default 80). | 'Battery charging limit' - Settings > Power (SteamOS) | int32 | Install | `SteamOS/ChargeLimit` | `80` |  |  |
+| 22013 | `steamos_charge_limit_devmode` | Allows the full range of charge limit values (developer option). | 'Allow battery limit full range' - Settings > Power/Developer (SteamOS) | bool | Install | `SteamOS/ChargeLimitDevMode` | `false` |  |  |
+| 22014 | `steamos_system_tracing_enabled` | Enables background tracing of CPU/GPU events for performance analysis (per-game). | 'Enable System Tracing' - Settings > Developer (SteamOS) | bool | UserLocal | `SteamOS/SystemTracingEnabled` | `false` | per-game |  |
+| 22015 | `steamos_vrs_enabled` | Per-game Half Rate Shading (variable rate shading) that lowers shading quality to save power/improve performance. | 'Half Rate Shading' - QAM > Performance (SteamOS) | bool | UserLocal | `SteamOS/VRSEnabled` | `false` | per-game |  |
+| 22016 | `steamos_separate_led_colors` | Allows LED strip colors to be controlled individually rather than as one color (on-disk key is misspelled 'SeparaeLEDColors'). | 'Control LED strip colors individually' - Settings > Display/LED (SteamOS) | bool | UserLocal | `SteamOS/SeparaeLEDColors` | `false` |  |  |
+| 22017 | `steamos_wifi_reload_wifi_driver_on_sleep` | Reloads the Wi-Fi driver around sleep/resume as a workaround for Wi-Fi issues. | 'Reload Wi-Fi driver on sleep' - Settings > Developer (SteamOS) | bool | Install | `SteamOS/WifiReloadDriverOnSleep` | `false` |  |  |
+| 220018 | `steamos_wifi_power_management_enabled` | Enables Wi-Fi power saving (default on); disabling it may improve reliability on 5GHz networks. | 'Enable Wi-Fi Power Management' - Settings > Developer (SteamOS) | bool | Install | `SteamOS/WifiPowerManagement` | `true` |  |  |
+| 22019 | `steamos_cec_control` | Accepts TV remote control input via HDMI-CEC (default on). | 'Enable remote control input' - Settings > Display > HDMI-CEC | bool | Install | `SteamOS/CECControl` | `true` |  |  |
+| 22020 | `steamos_cec_suspend_tv` | Turns the TV off via HDMI-CEC when the device goes to sleep (default on). | 'Turn off TV when going to sleep' - Settings > Display > HDMI-CEC | bool | Install | `SteamOS/CECSuspendTV` | `true` |  |  |
+| 22021 | `steamos_cec_suspend_device` | Puts the device to sleep when the TV is turned off (default on). | 'Sleep when turning off the TV' - Settings > Display > HDMI-CEC | bool | Install | `SteamOS/CECSuspendDevice` | `true` |  |  |
+| 22022 | `steamos_cec_wake_tv` | Turns the TV on via HDMI-CEC when the device resumes (default on). | 'Turn on TV when resuming from sleep' - Settings > Display > HDMI-CEC | bool | Install | `SteamOS/CECWakeTV` | `true` |  |  |
+| 22023 | `steamos_cec_wake_device` | Resumes the device from sleep when the TV is turned on (default on). | 'Resume from sleep when turning on the TV' - Settings > Display > HDMI-CEC | bool | Install | `SteamOS/CECWakeDevice` | `true` |  |  |
+| 22024 | `steamos_ec_logging_enabled` | Outputs the embedded controller (EC) firmware log to the system journal. | 'Enable EC logging' - Settings > Developer (SteamOS) | bool | Install | `SteamOS/ECLoggingEnabled` | `false` |  |  |
+| 23001 | `setting_validation_bool` | Test-only dummy bool field used to exercise the settings pipeline/controls; has no effect on Steam. | GamepadUI 'Settings Zoo' developer test page (/zoo/clientsettings) only | bool | Install | `SettingValidation/DummyBool` |  |  |  |
+| 23002 | `setting_validation_enum` | Test-only dummy enum field used to exercise the settings pipeline/controls; has no effect on Steam. | GamepadUI 'Settings Zoo' developer test page (/zoo/clientsettings) only | EHDRVisualization | Install | `SettingValidation/DummyEnum` |  |  |  |
+| 23003 | `setting_validation_int32` | Test-only dummy int32 field used to exercise the settings pipeline/controls; has no effect on Steam. | GamepadUI 'Settings Zoo' developer test page (/zoo/clientsettings) only | int32 | Install | `SettingValidation/DummyInt32` |  |  |  |
+| 23004 | `setting_validation_uint32` | Test-only dummy uint32 field used to exercise the settings pipeline/controls; has no effect on Steam. | GamepadUI 'Settings Zoo' developer test page (/zoo/clientsettings) only | uint32 | Install | `SettingValidation/DummyUInt32` |  |  |  |
+| 23005 | `setting_validation_uint64` | Test-only dummy uint64 field used to exercise the settings pipeline/controls; has no effect on Steam. | GamepadUI 'Settings Zoo' developer test page (/zoo/clientsettings) only | uint64 | Install | `SettingValidation/DummyUInt64` |  |  |  |
+| 23006 | `setting_validation_float` | Test-only dummy float field used to exercise the settings pipeline/controls; has no effect on Steam. | GamepadUI 'Settings Zoo' developer test page (/zoo/clientsettings) only | float | Install | `SettingValidation/DummyFloat` |  |  |  |
+| 23007 | `setting_validation_string` | Test-only dummy string field used to exercise the settings pipeline/controls; has no effect on Steam. | GamepadUI 'Settings Zoo' developer test page (/zoo/clientsettings) only | string | Install | `SettingValidation/DummyString` |  |  |  |
+| 23008 | `setting_validation_hotkey` | Test-only dummy hotkey field used to exercise the settings pipeline/controls; has no effect on Steam. | GamepadUI 'Settings Zoo' developer test page (/zoo/clientsettings) only | CMsgHotkey | Install | `SettingValidation/DummyHotkey` |  |  |  |
+| 24000 | `system_bluetooth_enabled` | Turns Bluetooth on or off on SteamOS devices (enabled automatically during setup when the service is available). | 'Enable Bluetooth' - Settings > Bluetooth and QAM | bool | Install | `System/Bluetooth/Enabled` | `false` |  |  |
+| 24001 | `hardware_updater_enabled` | Enables the hardware (firmware) updater; requires restart. *(medium)* | 'Enable Hardware Updater' - Valve Internal > Miscellaneous | bool | Install | `System/HardwareUpdater/Enabled` | `false` |  |  |
+| 24003 | `system_idle_suspend_battery_sec` | Seconds of idle on battery before the device sleeps (default 900 = 15 min). | 'Sleep after' (When On Battery and Idle) - Settings > Power (SteamOS) | int32 | Install | `Software\Valve\Steam\System\IdleSuspendBatterySeconds` | `900` |  |  |
+| 24004 | `system_idle_suspend_ac_sec` | Seconds of idle while plugged in before the device sleeps (default 3600 = 1 h). | 'Sleep after' (When Plugged In and Idle) - Settings > Power (SteamOS) | int32 | Install | `Software\Valve\Steam\System\IdleSuspendACSeconds` | `3600` |  |  |
+| 24005 | `system_enable_low_power_downloads` | Lets downloads finish in a low-power, display-off state when the device sleeps (default on). | 'Finish downloads with display off before sleeping' - Settings > Power (SteamOS) | bool | Install | `Software\Valve\Steam\System\EnableLowPowerDownloads` | `true` |  |  |
+| 24006 | `system_allow_battery_low_power_downloads` | Allows display-off downloads on battery; the device sleeps if battery falls below 20%. | 'Enable display-off downloads on battery power' - Settings > Power (SteamOS) | bool | Install | `Software\Valve\Steam\System\AllowBatteryLowPowerDownloads` | `false` |  |  |
+| 24008 | `system_idle_screensaver_battery_sec` | Seconds of idle on battery before the screensaver starts (default 0 = off). | 'Start screensaver after' (battery) - Settings > Power / Customization | int32 | Install | `Software\Valve\Steam\System\IdleScreensaverBatterySeconds` | `0` |  |  |
+| 24009 | `system_idle_screensaver_ac_sec` | Seconds of idle while plugged in before the screensaver starts (default 300 = 5 min). | 'Start screensaver after' / 'When idle, start screensaver after' - Settings > Power / Customization | int32 | Install | `Software\Valve\Steam\System\IdleScreensaverACSeconds` | `300` |  |  |
+| 25000 | `vr_show_perf_graph_in_hmd` | Probably shows the SteamVR performance (frame timing) graph inside the headset; no JS reference in this build. *(low)* | not shown in UI | bool | UserLocal | `VR/ShowPerfGraphInHMD` | `false` |  |  |
+| 26000 | `accessibility_debug_visualizer` | Developer visualizer that highlights accessibility (screen reader) information in the UI. *(medium)* | 'Enable Accessibility Debug Visualizer' - Valve Internal > Accessibility | bool | UserLocal | `Accessibility/DebugVisualizer` | `false` |  |  |
+| 26001 | `accessibility_screen_reader_enabled` | Enables the Steam UI screen reader. | 'Enable Screen Reader' - Settings > Accessibility | bool | Install | `Accessibility/ScreenReaderEnabled` | `false` |  |  |
+| 26002 | `accessibility_screen_reader_rate` | Screen reader speech rate, 0-1 (step 0.05, default 0.5). Note: stored on disk under the key 'ScreenReaderPitch' (keys swapped with pitch). | 'Reader Rate' - Settings > Accessibility | float | UserLocal | `Accessibility/ScreenReaderPitch` | `0.5` |  |  |
+| 26003 | `accessibility_screen_reader_pitch` | Screen reader voice pitch, 0-1 (step 0.05, default 0.5). Stored on disk under 'ScreenReaderRate'. | 'Reader Pitch' - Settings > Accessibility | float | UserLocal | `Accessibility/ScreenReaderRate` | `0.5` |  |  |
+| 26004 | `accessibility_screen_reader_volume` | Screen reader volume, 0-1 (step 0.05, default 1). | 'Reader Volume' - Settings > Accessibility | float | UserLocal | `Accessibility/ScreenReaderVolume` | `1` |  |  |
+| 26005 | `accessibility_high_contrast_mode` | Makes Steam text, buttons and icons more distinct from the background. | 'High Contrast Mode' - Settings > Accessibility | bool | UserLocal | `Accessibility/HighContrastMode` | `false` |  |  |
+| 26006 | `accessibility_reduce_motion` | Disables certain Steam animations, effects and transitions. | 'Reduce Motion' - Settings > Accessibility | bool | UserLocal | `Accessibility/ReduceMotion` | `false` |  |  |
+| 26008 | `accessibility_minimum_font_size` | Minimum font size for Steam UI text, 8-24 (0 = off/default). *(medium)* | 'Minimum Font Size' slider (unlocalized label, probably dev/internal) - Accessibility | uint32 | UserLocal | `Accessibility/MinimumFontSize` | `0` |  |  |
+| 26009 | `accessibility_color_filter_name` | Name of the color filter (e.g. color-blindness filter) applied to the display in-game and in Steam; '' = none. | 'Color Filter' - Settings > Accessibility (when available) | string | Install | `Accessibility/ColorFilterName` | `''` |  |  |
+| 26010 | `accessibility_desktop_ui_scale` | Desktop Steam UI scale factor (default 1; slider from 0.5 with Smaller/Larger text notches). | 'UI Scale' - Settings > Display / Accessibility (desktop) | float | Install | `Accessibility/DesktopUIScale` | `1` |  |  |
+| 26011 | `accessibility_screen_reader_locale` | Language/voice used by the screen reader ('auto' = follow Steam language). | 'Reader Language' - Settings > Accessibility | string | Install | `Accessibility/ScreenReaderLocale` | `'auto'` |  |  |
+| 26012 | `accessibility_mono_audio` | Probably mixes audio down to mono for accessibility; no JS reference in this build. *(low)* | not shown in UI | bool | Install | `Accessibility/MonoAudio` | `false` |  |  |
+| 27000 | `remote_play_wifi_ap_enabled` | Enables the Wireless Streaming Adapter (Steam Frame) access point used for Remote Play to the headset (default on). *(medium)* | 'Wireless Streaming Adapter (Steam Frame)' section - Settings > Remote Play | bool | Install | `streaming_v2\WifiAPEnabled` | `true` |  |  |
+| 27001 | `remote_play_wifi_ap_channel_5ghz` | Wi-Fi channel for the adapter's 5GHz operation (0 = Auto). | 'Channel (for 5GHz operation)' - Settings > Remote Play (advanced) | int32 | Install | `streaming_v2\WifiAPChannel5GHz` | `0` |  |  |
+| 27002 | `remote_play_wifi_ap_channel_6ghz` | Wi-Fi channel for the adapter's 6GHz operation (0 = Auto). | 'Channel (for 6GHz operation)' - Settings > Remote Play (advanced) | int32 | Install | `streaming_v2\WifiAPChannel6GHz` | `0` |  |  |
+| 27003 | `remote_play_wifi_ap_channel_width` | Wi-Fi channel width for the adapter: Auto (0), 80 MHz or 160 MHz. | 'Channel Width' - Settings > Remote Play (advanced) | int32 | Install | `streaming_v2\WifiAPChannelWidth` | `0` |  |  |
+| 27004 | `remote_play_wifi_ap_hotspot_mode` | Connection Management: Steam (false, default) or Custom (true), where the HMD acts as a Wi-Fi hotspot you connect to manually. | 'Connection Management' (Steam/Custom) - Settings > Remote Play | bool | Install | `streaming_v2\WifiAPHotspotMode` | `false` |  |  |
+| 27005 | `remote_play_wifi_ap_hotspot_ssid` | SSID of the custom hotspot. | 'Hotspot SSID' - Settings > Remote Play (Custom mode) | string | Install | `streaming_v2\WifiAPHotspotSSID` | `''` |  |  |
+| 27006 | `remote_play_wifi_ap_hotspot_password` | Password of the custom hotspot (stored in plain text in config.vdf). | 'Hotspot Password' - Settings > Remote Play (Custom mode) | string | Install | `streaming_v2\WifiAPHotspotPassword` | `''` |  |  |
+| 27007 | `remote_play_wifi_ap_hotspot_routing` | Internet access for hotspot clients: 'noroute' = None (streaming only, default) or NAT via the HMD's Wi-Fi. | 'Hotspot Client Internet' - Settings > Remote Play (Custom mode) | string | Install | `streaming_v2\WifiAPHotspotRouting` | `'noroute'` |  |  |
+| 27008 | `remote_play_wifi_ap_show_advanced` | Shows the advanced Wi-Fi settings (channels/width) for the streaming adapter. | 'Show Advanced Wi-Fi Settings' - Settings > Remote Play | bool | UserLocal | `streaming_v2/WifiAPShowAdvanced` | `false` |  |  |
+| 27009 | `remote_play_wifi_ap_paired_ssid` | SSID of the Wireless Streaming Adapter this device is paired to (state, used for the Pair/Unpair UI). *(medium)* | Pair/Unpair status - Settings > Remote Play | string | Install | `streaming_v2\WifiAPPairedSSID` | `''` |  |  |
+| 27010 | `skip_steamframe_pairing_dialog` | Suppresses the Steam Frame wireless adapter pairing dialog. *(medium)* | 'Don't show again' on the Steam Frame adapter pairing dialog | bool | UserLocal | `system\SteamFrameWirelessAdapterPairingDialog` |  |  |  |
+| 27011 | `skip_steamframe_troubleshooting_dialog` | Suppresses the Steam Frame wireless adapter troubleshooting dialog. | 'Don't show this dialog again' on the adapter troubleshooting dialog | bool | UserLocal | `system\SteamFrameWirelessAdapterTroubleshootingDialogSkip` |  |  |  |
+| 27012 | `skip_steamframe_airplane_dialog` | Suppresses the Steam Frame wireless adapter airplane-mode dialog. | 'Don't show this dialog again' on the adapter airplane-mode dialog | bool | UserLocal | `system\SteamFrameWirelessAdapterAirplaneDialogSkip` |  |  |  |
+| 28001 | `oobe_completed` | State: true once stage 1 of the out-of-box experience (first-run setup) is done, or on platforms without OOBE. | not shown in UI (OOBE state) | bool | CustomFunc |  |  | pre-login | True if OOBE stage 1 has completed or we're on a platform where we don't do OOBE |
+| 28002 | `oobe_test_mode_enabled` | Read-only: OOBE test mode, enabled by -testoobe or force_oobe; completion is then tracked in memory only. | not shown in UI (read-only state) | bool | CustomFunc |  |  | pre-login, read-only | OOBE test mode is enabled either by passing -testoobe on the command line or setting the force_oobe client setting |
+| 28003 | `force_oobe` | Forces the out-of-box (first-run) experience on every device start. | 'Force OOBE' - Valve Internal > OOBE | bool | Registry | `HKEY_CURRENT_USER\Software\Valve\Steam\ForceOOBE` |  | pre-login |  |
+| 28004 | `oobe_stage_2_completed` | State: true once OOBE stage 2 is completed, or on platforms without OOBE. | not shown in UI (OOBE state) | bool | CustomFunc |  |  | pre-login | True if OOBE stage 2 has completed or we're on a platform where we don't do OOBE |
+| 28005 | `oobe_stage_2_test_mode_enabled` | Read-only: OOBE stage-2 test mode, enabled by -testoobe or force_stage_2_oobe. | not shown in UI (read-only state) | bool | CustomFunc |  |  | pre-login, read-only | OOBE test mode is enabled for stage 2 either by passing -testoobe on the command line or setting the force_stage2_oobe client setting |
+| 28006 | `force_stage_2_oobe` | Forces OOBE stage 2 on every device start. | 'Force OOBE Stage 2' - Valve Internal > OOBE | bool | Registry | `HKEY_CURRENT_USER\Software\Valve\Steam\ForceOOBEStage2` |  | pre-login |  |
+| 29000 | `compat_show_all_tools` | Lists all compatibility tools (e.g. every Proton version) in Steam Play/compatibility choosers. | 'Show all compatibility tools' - Settings > Compatibility | bool | UserLocal | `Compatibility/ShowAllTools` | `false` |  |  |
 
 ## Enum types used by settings
 

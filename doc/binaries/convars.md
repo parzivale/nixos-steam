@@ -1,5 +1,9 @@
 # Console variables (ConVars)
 
+> **What it does** is written from how the option is used in the code (strings and log messages near each
+> read site, related options, Valve help). The confidence tag *(high/medium/low)* follows each inferred description.
+> Untagged descriptions restate Valve's own help text.
+>
 > Generated from the Steam Linux client, bootstrap manifest version **1791918634**, by static analysis of the
 > 64-bit binaries in `steamrt64/` and `ubuntu12_64/`. See [../README.md](../README.md) for method and caveats.
 
@@ -12,471 +16,456 @@ A leading `@` marks a client-config convar. Steam can override these from the se
 configuration it downloads at login (inferred from usage). Many are internal tuning knobs that never
 appear in any UI. **Flags** is the raw flags bitmask passed to the constructor.
 
-Total: **464**.
+Total: **449**.
 
-| Name | Default | Flags | Description (Valve help text) | Binaries |
-|---|---|---|---|---|
-| `AlwaysCustomizeOnBadExit` | `0` | 0x4 |  | steamclient.so |
-| `app_force_preload` | `0` | 0x4 | force this app into preload mode | steamclient.so |
-| `app_info_http_min` | `0` | 0x4 |  | steamclient.so |
-| `app_info_http_num_sockets` | `8` | 0x4 |  | steamclient.so |
-| `appcloudsessions` | `all` | 0x10 |  | steamclient.so |
-| `@AppMRUSize` | `20` | 0x0 |  | steamui.so |
-| `apps_per_overview_chunk` | `5000` | 0x0 |  | steamui.so |
-| `AsyncFileIOAlternateReadWrite` | `1` | 0x4 |  | steamclient.so |
-| `AsyncFileIODisableWrite` | `0` | 0x4 |  | steamclient.so |
-| `AsyncFileIOExpectOutstandingIO` | `6` | 0x4 |  | steamclient.so |
-| `AsyncFileIOMaxPendingWin32` | `256` | 0x4 |  | steamclient.so |
-| `AsyncFileIOReadHandleCache` | `64` | 0x4 |  | steamclient.so |
-| `AsyncFileIOWriteHandleCache` | `64` | 0x4 |  | steamclient.so |
-| `@bAssertOnProtoBufBodyMismatch` | `1` | 0x400000004 | Assert when a body parsed ahead of the main thread is not the type the handler builds.  See\n'protobuf_parse_stats' for the running count and which messages it happened to. | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `batterycharging` | `0` | 0x0 |  | steamclient.so |
-| `batterypercent` | `-1` | 0x0 |  | steamclient.so |
-| `batterytime` | `-1` | 0x0 |  | steamclient.so |
-| `bBroadcastAlwaysUploadThumbnails` | `1` | 0x4 |  | steamclient.so |
-| `@bCallerDeadlineAbortJobDisableWhenHTTPReqStart` | `1` | 0x400000004 |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `bCheckUGCIntegrity` | `1` | 0x4 |  | steamclient.so |
-| `bClientConvar601DEACE` | `1` | 0x4 |  | steamclient.so, steamservice.so, steamui.so |
-| `@bClientDownloadUseHTTPS` | `0` | 0x4 | Set this to use HTTPS on supported download servers | steamclient.so |
-| `@bClientOpenCacheStickyRedirects` | `1` | 0x4 |  | steamclient.so |
-| `bClientPingCSesForCellID` | `0` | 0x4 |  | steamclient.so |
-| `@bClientTryRequestManifestWithoutCode` | `0` | 0x4 | If set, client will try to get a manifest even without a manifest request code | steamclient.so |
-| `bCloudAcceptUnexpectedAutoCloudFileChanges` | `1` | 0x4 |  | steamclient.so |
-| `@bCloudSyncFailDownloadIfGameOutOfDate` | `0` | 0x4 |  | steamclient.so |
-| `@bCSForceNoCache` | `0` | 0x4 |  | steamclient.so |
-| `bDelayGameUpdatesOnBeta` | `0` | 0x4 | Should we do scheduling of updates on Steam Beta? If not, they'll all be ASAP | steamclient.so |
-| `@bDepotBuilderReadBufferSizeKB` | `8192` | 0x4 |  | steamclient.so |
-| `@bDepotBuilderUnbufferedReads` | `1` | 0x4 |  | steamclient.so |
-| `bDepotDeltaPatchUseAPI` | `1` | 0x4 |  | steamclient.so |
-| `bDepotUseSparseFiles` | `1` | 0x0 |  | steamclient.so |
-| `@bDisableDualStackDownloads` | `0` | 0x4 |  | steamclient.so |
-| `bDisableTenFootOverlay` | `0` | 0x4 |  | steamclient.so |
-| `@bDownloadThrottleDuringCloudSync` | `0` | 0x4 |  | steamclient.so |
-| `@bEnableFrameFuncOverageWarnings` | `0` | 0x4 | This turns on the spew in SPEW_MISC at level 4, still need to adjust spew levels to see it. | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `@bEnableHTTP2OnAllCHTTPClients` | `0` | 0x400000000 | Enable HTTP/2 on all CHTTPClients automatically for SSL connections | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `bEnableLoginUsersErrorUpload` | `0` | 0x10 | Set to enable uploading log files if there is an error loading login user info | steamui.so |
-| `@bEnableLogTearOff` | `1` | 0x0 |  | friendsui.so, gamelauncher, gameoverlayui.so, libvideo.so, steam, steamclient.so, steamservice.so, steamsysinfo, steamui.so, steamwebhelper |
-| `bEnableMHRCAsyncFileReadLog` | `0` | 0x4 |  | steamclient.so |
-| `@bEnableNetworkJobsOwnStartList` | `1` | 0x400000004 |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `@bEnableOfflineLogonTicket` | `1` | 0x4 | If true, an offline logon ticket will be requested during logon if none is cached | steamclient.so |
-| `@bEnableSiteLicenseConnect` | `1` | 0x0 |  | steamclient.so |
-| `@bEnableSiteLicenseConsoleLogging` | `0` | 0x0 |  | steamclient.so |
-| `@bEnableSpewThrottle` | `1` | 0x4 |  | friendsui.so, gamelauncher, gameoverlayui.so, libvideo.so, steam, steamclient.so, steamservice.so, steamsysinfo, steamui.so, steamwebhelper |
-| `bEnableSubscribedFileListCache` | `1` | 0x4 |  | steamclient.so |
-| `@bEnforceValidEmailDomains` | `1` | 0x4 | Enable valid email domains in BIsValidEmailAddress | steamclient.so |
-| `betaalwaysrebuild` | `0` | 0x0 |  | steamui.so |
-| `bExternalProcessForVOD` | `0` | 0x0 |  | steamui.so |
-| `bFinishStagedDepotVersions` | `1` | 0x4 |  | steamclient.so |
-| `@bForceAbsoluteMouseCoordinates` | `0` | 0x0 |  | steamui.so |
-| `@bForceLaunchEula` | `0` | 0x0 |  | steamui.so |
-| `@bForceOverlayAudioRecorder` | `0` | 0x4 | force overlay based audio capture (disable MF based audio capture path) | steamui.so |
-| `@bForceStreamUnsupportedApp` | `0` | 0x0 |  | steamclient.so |
-| `@bHttpClientRecordHostnameDimension` | `0` | 0x400000000 | Group HTTP metrics by hostname.  Careful, the cardinality of your in-memory map might be large. | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `@bHTTPServerHTTP2Enabled` | `0` | 0x400000004 | Global default for whether CHTTPServer advertises/accepts HTTP/2 (over TLS via ALPN). A server that calls SetHTTP2Enabled() explicitly overrides this value. | steamclient.so, steamui.so |
-| `bInstallscriptReports` | `1` | 0x4 | send reports about broken install scripts | steamclient.so |
-| `@bLANPeerConnectionTimeoutSec` | `5` | 0x4 |  | steamclient.so |
-| `@bLogMessageToProtobufClass` | `1` | 0x400000004 | We we first discover the protobuf class used for a particular EMsg, log it | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `@bMeasureSSLLatencyStats` | `1` | 0x0 |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `@bMetricsEnabled` | `1` | 0x4 | Enabling allows jobs to collect and report metrics through IMetricsReporters. | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `@bMsgErrorDump` | `0` | 0x4 |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `bPrefetchDownloadDetails` | `1` | 0x4 | Prefetch download size before actual update happens | steamclient.so |
-| `@bProfileYieldsInTestSuiteJobs` | `0` | 0x400000000 |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `@bProtoBufNetPacketDropRawBytes` | `1` | 0x400000004 | Release the raw packet bytes of an inbound message whose header and body were both parsed for us, rebuilding them on demand for the few callers that want them.  Also read by the SSL work thread, which then never copies those bytes out of its read buffer in the first place.  Watch 'protobuf_parse_stats' for how often that happens. | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `@bProtobufParseSizeProfile` | `1` | 0x400000004 | Track a histogram of protobuf message body sizes as they are parsed.  See the protobuf_parse_stats console command. | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `@bProtobufParseTimeProfile` | `0` | 0x400000004 | Also time each protobuf body parse, so protobuf_parse_stats can report time per size bucket and how much parse time actually moved off the job thread.  Off by default - it adds two clock samples per parse. | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `@bRefreshDownloadSourcesFrequently` | `0` | 0x4 |  | steamclient.so |
-| `@bRequireOfflineLogonTicket` | `1` | 0x4 | If true, a valid offline logon ticket is required when logging in in offline or no connection mode | steamclient.so |
-| `broadcast_adjust_bitrate` | `200` | 0x4 |  | steamui.so |
-| `broadcast_upload_drop_sec` | `6` | 0x4 |  | steamclient.so |
-| `broadcast_upload_update_sec` | `3` | 0x4 |  | steamclient.so |
-| `@bScreenshotsLegacyCloudUpload` | `0` | 0x4 | If set, use the legacy Steam Cloud upload path for screenshot uploads | steamclient.so |
-| `bShaderAllowReplay` | `1` | 0x4 |  | steamclient.so |
-| `bShaderAllowReplayOnNVIDIA` | `1` | 0x4 |  | steamclient.so |
-| `bShaderAlwaysProcessWhenRunningGame` | `0` | 0x4 |  | steamclient.so |
-| `bShaderCacheDownloads` | `1` | 0x4 | Allow to download shader cache depots | steamclient.so |
-| `@bShaderClientGetBucketManifestUseWebAPI` | `1` | 0x4 |  | steamclient.so |
-| `bShaderDepotNative` | `1` | 0x4 |  | steamclient.so |
-| `bShaderEnableCacheManagement` | `1` | 0x4 |  | steamclient.so |
-| `bShaderEnableFossilizeLayer` | `1` | 0x4 |  | steamclient.so |
-| `bShaderEnableUpload` | `1` | 0x4 |  | steamclient.so |
-| `bShaderFossilizeFastMerge` | `1` | 0x4 |  | steamclient.so |
-| `bShaderPrecompiledCache` | `1` | 0x4 |  | steamclient.so |
-| `bShaderVerboseLogs` | `0` | 0x4 |  | steamclient.so |
-| `@bShowUninstalledDemosInLibrary` | `0` | 0x4 |  | steamui.so |
-| `bSingleFileUpdateMode` | `1` | 0x4 |  | steamclient.so |
-| `@bSiteLicenseAllowCachedClientCredentials` | `0` | 0x0 | Allow Steam clients that associate to this site to save username and auth credentials locally | steamclient.so |
-| `@bSiteLicenseProxyCacheIsExternalProcess` | `0` | 0x0 | If set, the caching content proxy will be handled by some process other than steamcmd. You probably also should set @sSiteLicenseProxyExplicitIP. | steamclient.so |
-| `@bSiteLicenseProxyEnableIPv6` | `0` | 0x0 | If set, we will enable ipv6 communications to the Steam servers | steamclient.so |
-| `@bSiteLicenseServer` | `0` | 0x0 |  | steamclient.so |
-| `@bSSLThreadedMsgParse` | `1` | 0x400000004 | Parse framed Steam3 message headers and bodies on the SSL work thread, as well as framing them there.  Read per message, so it takes effect live. | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `@bSSLThreadedMsgParseRelayedBodies` | `0` | 0x400000004 | Pre-parse the bodies of service methods that execute on the client.  Off by default: the only\nservers those pass through - CM and UDS - relay them by header and never look at the body, so\nparsing it here is work nobody on this side consumes.  Watch 'protobuf_parse_stats'. | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `@bSSLThreadedSendDelivery` | `1` | 0x0 |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `bSteam3LimitedUserEnable` | `1` | 0x0 |  | steamclient.so |
-| `bSteamLoaderEnable` | `1` | 0x0 |  | steamclient.so |
-| `bUseSystemBrowserFor2DVOD` | `1` | 0x0 |  | steamui.so |
-| `bVerifyAllDownloads` | `0` | 0x4 | Verify all files after downloading an update | steamclient.so |
-| `bVerifyAllInstalled` | `0` | 0x4 | Verify all installed files before installing an update | steamclient.so |
-| `cAppUpdateWorkingSetMB` | `256` | 0x4 |  | steamclient.so |
-| `@cbPartnerUploadChunkSize` | `1000000` | 0x4 | Chunk size to use for POSTing partner uploads | steamclient.so |
-| `cChunkValidationMaxLog` | `100` | 0x4 |  | steamclient.so |
-| `@cCSClientMaxNumSocketsPerHost` | `4` | 0x4 |  | steamclient.so |
-| `@cCSClientMaxNumSocketsPerHostForCachingProxy` | `32` | 0x4 |  | steamclient.so |
-| `@cDefaultInitialDownloadSources` | `4` | 0x4 |  | steamclient.so |
-| `@cDepotBuilderFileChunkingThreads` | `0` | 0x4 |  | steamclient.so |
-| `@cFileChunkingCRCFalseAlarmBytesToSkip` | `128` | 0x4 |  | steamclient.so |
-| `@cFileChunkingCRCFalseAlarmThreshold` | `0` | 0x4 |  | steamclient.so |
-| `@cFileChunkingSupersectionSizeMB` | `1024` | 0x4 |  | steamclient.so |
-| `cFileValidationMaxLog` | `100` | 0x4 |  | steamclient.so |
-| `ClickPanel` | `index` |  | code | friendsui.so, gameoverlayui.so, steamui.so |
-| `ClientConnectTokenBucketEnable` | `1` | 0x0 |  | steamclient.so |
-| `clientui_overlay_fps` | `60` | 0x0 |  | steamui.so |
-| `clientuistats_batchsize` | `0` | 0x0 | Control how many events can be queued up for ClientUI stats before the batch is committed. 0 will commit every row. | steamui.so |
-| `@cloud_testdynamicsyncapp` | `0` | 0x10 |  | steamclient.so |
-| `@cMaxContentServersToRequest` | `20` | 0x4 |  | steamclient.so |
-| `cMaxDecryptThreadsOverride` | `0` | 0x4 |  | steamclient.so |
-| `@cMaxInitialDownloadSources` | `-1` | 0x0 |  | steamclient.so |
-| `@cMinimumJobTimeoutsToCheckPerFrame` | `100` | 0x400000004 |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `@cNetEncryptionHandshakeWorkMax_HighPri` | `8000` | 0x4 |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `@cNetEncryptionHandshakeWorkMax_LowPri` | `2000` | 0x4 |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `@cNetEncryptionHandshakeWorkMax_MedPri` | `4000` | 0x4 |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `com.steampowered.Atomupd1` | `/com/steampowered/Atomupd1` |  | DisableHttpProxy / EnableHttpProxy | steamui.so |
-| `controller_base_rotation_angle` | `0` | 0x0 |  | steamclient.so |
-| `controller_debug_triton_wireless` | `0` | 0x0 |  | steamclient.so |
-| `controller_edge_cutoff` | `0` | 0x0 |  | steamclient.so |
-| `controller_gyro_x_scale` | `16000` | 0x0 |  | steamclient.so |
-| `controller_idle_poll_interval` | `50000` | 0x0 | SteamInput Idle Polling interval in microseconds. Default 50,000us = 20hz | steamclient.so |
-| `controller_jerk_low_pass_filter_rate` | `4` | 0x0 | How quickly the low pass filter chases the raw gyro jerk value. | steamclient.so |
-| `controller_jerk_threshold` | `500` | 0x0 | The amount of Gyro Jerk (gyro change per second) required to create a Controller Jerk count. Note, only available on SteamDeck/Neptune/Galileo | steamclient.so |
-| `controller_jerk_threshold_debug` | `0` | 0x0 | Debug spew to tell us the current "Jerk" value coming from the accelerometer | steamclient.so |
-| `controller_jerk_throttle` | `2` | 0x0 | (Hz) The maximum callback rate for Controller Jerk Events. | steamclient.so |
-| `controller_min_activation_time` | `0.0333` | 0x0 |  | steamclient.so |
-| `controller_momentum_min_vel` | `0` | 0x0 |  | steamclient.so |
-| `controller_momentum_num_excluded_samples` | `1` | 0x0 |  | steamclient.so |
-| `controller_momentum_num_included_samples` | `5` | 0x0 |  | steamclient.so |
-| `controller_poll_state` | `-1` | 0x0 |  | steamclient.so |
-| `controller_rate` | `2000` | 0x0 | SteamInput Active Polling interval in microseconds. Default 2000us = 500hz | steamclient.so |
-| `controller_simulate_trackpad` | `0` | 0x0 | Simulate a trackpad swipe on the right trackpad when the left pad is touched | steamclient.so |
-| `controller_spew_level` | `3` | 0x0 |  | steamclient.so, steamui.so |
-| `countrycode` |  | 0x0 |  | steamclient.so |
-| `cPreallocateMinimumSizeKB` | `256` | 0x4 |  | steamclient.so |
-| `@csecAudioSignalLevelInterval` | `60.0` | 0x4 | Log audio capture signal levels every this many seconds | steamui.so |
-| `@csecCSJobSuccessfulRequestTimeWindow` | `60` | 0x4 |  | steamclient.so |
-| `@csecCSRequestProcessorTimeOut` | `300` | 0x4 |  | steamclient.so |
-| `@csecDurationControlPeriod` |  | 0x4 | Override default duration-control / anti-indulgence time period. If nonzero, initial playtime threshold is this value in seconds | steamclient.so |
-| `@csecDurationControlPeriodToday` |  | 0x4 | Override default duration-control / anti-indulgence time period. If nonzero, per-day playtime threshold is this value in seconds | steamclient.so |
-| `@csecDurationControlSimulated` |  | 0x4 | Simulate having already played this many seconds of playtime. | steamclient.so |
-| `@csecDurationControlSimulatedNonRecent` |  | 0x4 | Simulate having already played this many seconds of playtime today, but not recently. | steamclient.so |
-| `@csecFavoriteGameAccountCacheTime` | `86400` | 0x4 | Control how often we refresh the account IDs in the game server favorites list | steamclient.so |
-| `@csecIncomingDataRatePeriod` | `1` | 0x4 |  | steamclient.so |
-| `csecManifestDownloadTimeout` | `120` | 0x4 |  | steamclient.so |
-| `@csecSiteLicenseProxyStatsLog` | `60` | 0x0 | Log proxy stats this often | steamclient.so |
-| `@csecSiteLicenseProxyStatsUpdate` | `1` | 0x0 | update proxy stats internally this often | steamclient.so |
-| `@csecUpdateTargetNumConnectionsEpoch` | `10` | 0x4 |  | steamclient.so |
-| `@cSecUploadDownloadRates` | `300` | 0x4 |  | steamclient.so |
-| `@CSInterfaceProxyPassword` |  | 0x0 |  | steamclient.so |
-| `@CSInterfaceProxyUsername` |  | 0x0 |  | steamclient.so |
-| `@cUDPSendRetries` | `8` | 0x400000000 |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `CursorMoved` | `xpos` |  | ypos | friendsui.so, gameoverlayui.so, steamui.so |
-| `@CustomBinaryRequestRetryTimes` | `20` | 0x0 |  | steamclient.so |
-| `debugLaunchAppDelaySecs` | `0` | 0x0 |  | steamui.so |
-| `deck_mouse_haptic_tick_dist` | `9000` | 0x0 |  | steamclient.so |
-| `deck_mouse_leftside_filter` | `30500` | 0x0 |  | steamclient.so |
-| `@DepotBuilderDeltaMaxChunks` | `20000` | 0x4 |  | steamclient.so |
-| `@DepotBuilderEnableVZd` | `1` | 0x4 |  | steamclient.so |
-| `@DepotBuilderMaxParallelUploadChunks` | `24` | 0x4 |  | steamclient.so |
-| `@DepotBuilderNumHTTPSocketsToMDS` | `12` | 0x4 |  | steamclient.so |
-| `@DepotBuilderParallelUploadChunks` | `6` | 0x4 |  | steamclient.so |
-| `@DepotBuilderProgressTimeout` | `1000` | 0x4 |  | steamclient.so |
-| `@DepotBuilderVZdMinRatio` | `0.4` | 0x4 |  | steamclient.so |
-| `@DepotBuilderXORMatchPercent` | `95` | 0x4 |  | steamclient.so |
-| `DepotDeltaPatches` | `1` | 0x4 |  | steamclient.so |
-| `DepotDownloadProgressTimeout` | `120` | 0x4 |  | steamclient.so |
-| `DepotMinWriteGapSizeMB` | `64` | 0x0 |  | steamclient.so |
-| `DepotReconstructionBadChunk` | `0` | 0x0 |  | steamclient.so |
-| `DepotReconstructionForceGenericIO` |  | 0x4 |  | steamclient.so |
-| `DepotReconstructionLowPrio` | `1` | 0x4 |  | steamclient.so |
-| `DepotReconstructionNumIOThreads` | `32` | 0x4 |  | steamclient.so |
-| `DepotUseAlternatingReadWrite` | `1` | 0x4 |  | steamclient.so |
-| `developer` | `0` | 0x0 |  | friendsui.so, gameoverlayui.so, steamclient.so, steamui.so |
-| `@durationControlNightCheck` | `1` | 0x4 | Time of day check for duration-control feature. 1 = normal. 2 = force night-time. 0 = disable checks, only enabled for age verified accounts | steamclient.so |
-| `@EnableUDPHistory` | `0` | 0x400000000 |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `@fDownloadRateImprovementToAddAnotherConnection` | `1.2` | 0x4 |  | steamclient.so |
-| `@fMinDataRateToAttemptTwoConnectionsMbps` | `1.5` | 0x4 |  | steamclient.so |
-| `force_software_gyro_drift_correction` | `0` | 0x0 | 0: Only use software drift calibration based on controller capabilities. 1: Any controllers with IMUs will be forced to use the standard software drift calibration. | steamclient.so |
-| `@ForceContentServer` |  | 0x0 |  | steamclient.so |
-| `@ForceContentServerHTTPS` | `0` | 0x0 |  | steamclient.so |
-| `@ForceContentServerType` |  | 0x0 |  | steamclient.so |
-| `g_RumbleRepeatAfterDelaySeconds` | `0.050` | 0x0 |  | steamclient.so |
-| `g_RumbleSustainTimeSeconds` | `10` | 0x0 |  | steamclient.so |
-| `@GCNameOverride` |  | 0x10 |  | steamclient.so |
-| `grip_sense_haptic_test` | `0` | 0x0 |  | steamclient.so |
-| `grip_sense_haptic_test_repeats` | `1` | 0x0 |  | steamclient.so |
-| `grip_sense_haptic_test_strength` | `125` | 0x0 |  | steamclient.so |
-| `gyro_auto_detect_polling_rate` | `1` | 0x0 | Wired Connections only. 0: Legacy Mode. Known to be buggy with Blitz 2 and other controllers set to 1000hz+. 1: If SDL3 sensor delta time is zero, or unexpected sensor timings are detected, fall back on packet-rate based estimation of polling rate (if outside a margin of error: gyro_sensor_margin_of_error_pct). 2: Exclusively use packet-rate based estimation of polling rate. | steamclient.so |
-| `gyro_calibration_duration_automatic` | `5.0` | 0x0 | Duration in seconds required to calibrate gyro drift outside of manual calibration. Warning: Short calibration times are more likely to result in false positive anti-drift solutions. | steamclient.so |
-| `gyro_calibration_duration_manual` | `5.0` | 0x0 | Duration in second of manual gyro drift calibration. Longer durations make for more accurate drift corrections. | steamclient.so |
-| `gyro_calibration_duration_manual_timeout` | `30.0` | 0x0 | Duration before manual gyro drift calibration times out, and returns to calibrating the noise tolerance. | steamclient.so |
-| `gyro_calibration_duration_stationary` | `5.0` | 0x0 | Duration in second of gyro noise tolerance calibration. | steamclient.so |
-| `gyro_debug_gyro_speed_vs_quaternion_speed` | `0` | 0x0 | 0: Off. 1: Spew the gyro speed and the extracted quaternion rotation speed | steamclient.so |
-| `gyro_debug_hardware_vs_mode_time` | `0` | 0x0 | 0: Off. 1: Spew the hardware delta time vs. the platform delta time. | steamclient.so |
-| `gyro_debug_sensor_timings` | `0` | 0x0 |  | steamclient.so |
-| `gyro_drift_calibration_debug` | `0` | 0x0 | Display which sensor readings (accelerometer or gyroscope) are restarting the drift calibration due to their noise being bigger than noise tolerance. | steamclient.so |
-| `gyro_drift_correction_enabled` | `1` | 0x0 | Turn on/off software gyro anti-drift correction. | steamclient.so |
-| `gyro_drift_detection_debug` | `0` | 0x0 | Spew information about how far the gyro has deflected over time. | steamclient.so |
-| `gyro_drift_detection_duration` | `30.0` | 0x0 | How long we sample for before triggering a calibration warning. Seconds. | steamclient.so |
-| `gyro_drift_detection_min_deflection` | `270.0` | 0x0 | The minimum degrees of deflection we must have turned through to detect a drift event. This intentionally higher than rotations we'd expect from regular use. | steamclient.so |
-| `gyro_drift_detection_min_drift_rate` | `0.1` | 0x0 | The minimum degrees per second we consider to be gyro drift. i.e. if we notice the gyroscope has drifted at higher than this rate, it could be drifting noticeably. | steamclient.so |
-| `gyro_filter_enabled` | `1` | 0x0 | Enable (Pseudo) One Euro Filter to internal gyro quaternion. This reduces low level sensor noise and hand shake.  | steamclient.so |
-| `gyro_filter_max_speed` | `16.0` | 0x0 | Above this gyro rotation speed (degrees/second) we apply min (zero) smoothing. | steamclient.so |
-| `gyro_filter_min_speed` | `2` | 0x0 | Below this gyro rotation speed (degrees/second) we apply max smoothing (low pass filter). | steamclient.so |
-| `gyro_filter_smoothness` | `75` | 0x0 | Smoothing amount for low pass filter. 1 is TOO smoothed (barely responding). 100 is barely smoothed. | steamclient.so |
-| `gyro_force_handheld_orientation` | `0` | 0x0 | 0: Auto. 1: Force Controller to be "HandHeld" orientation, like SteamDeck (tilt in pitch by 90 degrees so that "Yaw" is "Through the Screen". 2: Force Controller to be "Standalone" controller like Steam Controller, where "Yaw" is "Through Sticks".  | steamclient.so |
-| `gyro_force_sensor_rate` | `0` | 0x0 | If zero, cull suspected bad sensor data (can result in a loss of natural sensitivity). If not zero, ignore IMU sensor timing and use fixed rate instead. Measured in HZ. Common values: 250hz (PS5), 250hz (PS4), 200hz (Nintendo Switch) | steamclient.so |
-| `gyro_handheld_pitch_offset` | `90` | 0x0 | When in handheld mode, how far we tilt the gyro quaternion before processing. This affects only the "Gyro to Mouse" and "Gyro to JoystickCamera" modes. And only affects Yaw, Roll, Yaw + Roll, and Laser Pointer 3DOF to 2D conversion styles within those modes. Player Space and World Space are controller affordance agnostic. | steamclient.so |
-| `gyro_haptic_probe_enabled` | `0` | 0x0 | 0: Off. 1: Try new gyro mode. Config must have haptic level set to something other than "off\n | steamclient.so |
-| `gyro_haptic_probe_max_pulse` | `100` | 0x0 | How loud the grip effect gets at max speed | steamclient.so |
-| `gyro_haptic_probe_max_speed` | `360.0` | 0x0 | Highest speed for haptic probe movement. Degrees per second. | steamclient.so |
-| `gyro_haptic_probe_min_pulse` | `20` | 0x0 | How loud the grip effect gets at max speed | steamclient.so |
-| `gyro_haptic_probe_min_speed` | `0.125` | 0x0 | Lowest speed for haptic probe movement. Degrees per second. | steamclient.so |
-| `gyro_haptic_probe_offset_scale` | `0.65` | 0x0 | How far to spread the haptic probe set is spread out. 0 = ontop of each other. 1 = 1 degree separation. | steamclient.so |
-| `gyro_haptic_probe_types` | `3` | 0x0 | 0: None. 1: Trackpad Only. 2: Rumble Only. 3: Both | steamclient.so |
-| `gyro_precision_speed` | `0.75` | 0x8 |  | steamclient.so |
-| `gyro_precision_speed_enabled` | `1` | 0x0 | Enable linear response multiplier to speeds below the value set in the "Gyro To..." modes. This applies itself to the remaining speed after the gyro speed deadzone has been applied. | steamclient.so |
-| `gyro_prediction_correction_speed_max` | `180.0` | 0x0 | Above this speed (degrees per second) there is full correction of the predicted quaternion toward the  "ground truth" quaternion. Note this will still be gradual correction, and only in the shared direction of user rotation and the correction required. | steamclient.so |
-| `gyro_prediction_correction_speed_min` | `30.0` | 0x0 | Below this speed (degrees per second) there is no correction of the predicted quaternion toward the  "ground truth" quaternion. | steamclient.so |
-| `gyro_prediction_enabled` | `1` | 0x0 | Enable extrapolation of rotation using the last known gyro speed. This is important to avoid staggered signals over blue tooth, but generally upgrades gyros that run lower than 500hz. The extrapolated quaternion will correct back toward the "ground truth" quaternion when the speed exceeds. | steamclient.so |
-| `gyro_raw_deadzone` | `6.0` | 0x0 | Legacy deadzoning for gyro signal. Only affects "As Mouse" and its derivative modes. | steamclient.so |
-| `gyro_sensor_margin_of_error_pct` | `25` | 0x0 | If gyro_auto_detect_polling_rate is set to mode 2, use this +/- X% value as the acceptable margin of error before falling back on packet-rate based estimation of polling rate. | steamclient.so |
-| `gyro_speed_deadzone` | `0.5` | 0x8 |  | steamclient.so |
-| `gyro_speed_deadzone_enabled` | `1` | 0x0 | Enable the minimum speed required to update the gyroscope response. | steamclient.so |
-| `gyro_stationary_calibration_debug` | `0` | 0x0 | Display which sensor readings (accelerometer or gyroscope) are restarting the tolerance calibration due to their noise being too large. | steamclient.so |
-| `gyro_to_joystick_camera_raw` | `1` | 0x0 | Used to test old Gyro to joystick Camera processing pipeline (1) against old (0). | steamclient.so |
-| `gyro_to_joystick_camera_relax` | `0` | 0x0 | Low pass filter on the output to help lower FPS games. Needs more thought. | steamclient.so |
-| `gyro_use_polling_time_for_prediction` | `1` | 0x0 | Use the main loop's cached time as opposed to a fresh sample. Just for A/B testing. | steamclient.so |
-| `haptic_click_gain_modifier` | `0` | 0x0 |  | steamclient.so |
-| `haptic_intensity` | `8000` | 0x0 |  | steamclient.so |
-| `haptic_intensity_old` | `2500` | 0x0 |  | steamclient.so |
-| `haptic_new` | `0` | 0x0 |  | steamclient.so |
-| `haptic_off_divisor` | `5.0f` | 0x0 |  | steamclient.so |
-| `haptic_tick_gain_modifier` | `0` | 0x0 |  | steamclient.so |
-| `ibex_mouse_leftside_filter` | `32500` | 0x0 |  | steamclient.so |
-| `ibex_rumble_deadzone` | `635` | 0x0 |  | steamclient.so |
-| `installmanagertimeout` | `15` | 0x0 |  | steamui.so |
-| `ItemsChecked` | `count` |  | itemid | friendsui.so, gameoverlayui.so, steamui.so |
-| `KeyCodeTyped` | `code` |  | modifiers | friendsui.so, gameoverlayui.so, steamui.so |
-| `lenovo_hook_filter` | `31500` | 0x0 |  | steamclient.so |
-| `library_asset_cache_asset_file_min_sec` | `120` | 0x0 |  | steamui.so |
-| `library_asset_cache_conversion_rtime` | `1724792014` | 0x0 |  | steamui.so |
-| `library_asset_cache_full_check_threshold` | `25` | 0x0 |  | steamui.so |
-| `library_asset_cache_full_recheck_min_hours` | `1` | 0x0 |  | steamui.so |
-| `library_asset_cache_kvfile_name` | `assetcache.vdf` | 0x0 |  | steamui.so |
-| `library_asset_cache_kvfile_version` | `2` | 0x0 |  | steamui.so |
-| `library_asset_cache_max_notify` | `200` | 0x0 |  | steamui.so |
-| `library_asset_cache_max_requests` | `20` | 0x0 |  | steamui.so |
-| `library_asset_cache_notify_debounce_sec` | `60` | 0x0 |  | steamui.so |
-| `library_asset_cache_version` | `3` | 0x0 |  | steamui.so |
-| `library_sharing_account_max` | `5` | 0x4 |  | steamui.so |
-| `@LocalContentServer` |  | 0x0 |  | steamclient.so |
-| `log_files_always_flush` | `0` | 0x4 |  | gamelauncher, gameoverlayui.so, steam, steamclient.so, steamsysinfo, steamui.so, steamwebhelper |
-| `log_matchmaking_callbacks` | `0` | 0x0 |  | steamclient.so |
-| `@MatchmakingCreatePingWaitTime` | `0` | 0x4 |  | steamclient.so |
-| `@MatchmakingJoinPingWaitTime` | `0` | 0x4 |  | steamclient.so |
-| `@MatchmakingSearchPingWaitTime` | `0` | 0x4 |  | steamclient.so |
-| `@MatchmakingTotalPingWaitTime` | `0` | 0x4 |  | steamclient.so |
-| `@MaxOutstandingSendThreadItemFatalAssert` | `30000` | 0x0 |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `@MaxOutstandingSendThreadItemFatalAssertSecondsAtLimit` | `30` | 0x0 |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `@MaxOutstandingSendThreadItemSleep` | `10000` | 0x0 |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `MergeCapReprocess_minutes` | `480` | 0x4 |  | steamclient.so |
-| `@metricsDisabledCatalogs` |  | 0x4 | Comma separated list of metrics catalogs to disable.  This is the last check. | steamclient.so |
-| `@metricsDisabledOperations` |  | 0x4 | Comma separated list of metrics operations that are disabled.  This setting has highest priority | steamclient.so |
-| `@metricsEnabledOperations` |  | 0x4 | Comma separated list of metrics operations.  Overrides disabled catalogs | steamclient.so |
-| `mic_autogain` | `16000` | 0x0 | automatic gain control level for microphone input | steamclient.so |
-| `mic_inputfile` |  | 0x0 | causes voice data to be read from the specified file instead of from the microphone | steamclient.so |
-| `mic_outputfile` |  | 0x0 | causes microphone data to be written out to the specified file | steamclient.so |
-| `MouseDoublePressed` | `code` |  | modifiers | friendsui.so, gameoverlayui.so, steamui.so |
-| `MousePressed` | `code` |  | modifiers | friendsui.so, gameoverlayui.so, steamui.so |
-| `musiclogging` | `0` | 0x0 |  | steamclient.so |
-| `@nBootReserveRetryPeriodSec` | `30` | 0x4 | Number of seconds to wait before retrying after failing to create a boot reserve file. Should be a multiple of 10. | steamclient.so |
-| `nBroadcastSessionMaxDropFrames` | `100` | 0x4 |  | steamclient.so |
-| `@nCallerDeadlineHopLatencyMS` | `10` | 0x400000004 | When we send a message expecting a reply from a job with a deadline, set the timeout on the message to [current time remaining in this job] - N ms.  A negative value prevents propagating caller deadlines down the chain | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `nClientBackgroundAutoUpdateLessRecentlyPlayedThresholdHours` | `168` | 0x4 | If you've played the game more recently than this, we'll schedule the background update sooner. | steamclient.so |
-| `nClientBackgroundAutoUpdateNotPlayedTimeSpreadDays` | `14` | 0x4 | If the user hasn't played this game in a while, pick a morning up to this many days out to update. | steamclient.so |
-| `nClientBackgroundAutoUpdateRecentlyPlayedThresholdHours` | `72` | 0x4 | If you've played the game more recently than this, we'll schedule the background update sooner. | steamclient.so |
-| `nClientBackgroundAutoUpdateTargetHour` | `6` | 0x4 | Target hour, in local time, for auto-scheduled app updates. Will be spread around this point via the convar below. | steamclient.so |
-| `nClientBackgroundAutoUpdateTimeSpreadMinutes` | `360` | 0x4 | Spread of time around the above target hour - this is the +/- 2-sigma window, so half this on either side. | steamclient.so |
-| `@nClientCloudMaxMBParallelDownloads` | `64` | 0x4 |  | steamclient.so |
-| `@nClientCloudMaxMBParallelUploads` | `64` | 0x4 |  | steamclient.so |
-| `@nClientCloudMaxNumParallelDeletes` | `10` | 0x4 |  | steamclient.so |
-| `@nClientCloudMaxNumParallelDownloads` | `10` | 0x4 |  | steamclient.so |
-| `@nClientCloudMaxNumParallelUploads` | `10` | 0x4 |  | steamclient.so |
-| `@nClientCloudMaxNumUploadsPerBatch` | `100` | 0x4 |  | steamclient.so |
-| `@nClientCMDirectoryResultLoadPercentDither` | `10` | 0x8800000004 | Dither to apply to CM server loads received by CMDirectory query | steamclient.so |
-| `@nClientCMUDPPingTimeGoodEnoughThresholdMS` | `50` | 0x4 |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `@nClientCMUDPPingTimeoutUseGoodEnoughMS` | `250` | 0x4 |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `@nClientDownloadEnableHTTP2PlatformLinux` | `1` | 0x4 | Enable HTTP/2 connections on Linux clients | steamclient.so |
-| `@nClientDownloadEnableHTTP2PlatformWindows` | `1` | 0x4 | Enable HTTP/2 connections on Windows clients | steamclient.so |
-| `@nClientDownloadEnableHTTP2RelBranch` | `0` | 0x4 | Only enable HTTP/2 on enabled platforms on rel branch client if this is set | steamclient.so |
-| `@nClientDownloadInitWindowSizeHTTP2Connection` | `10000000` | 0x2700000004 | Init per-connection window size for HTTP/2. | steamclient.so |
-| `@nClientDownloadInitWindowSizeHTTP2Stream` | `2000000` | 0x2700000004 | Init per-stream window size for HTTP/2. | steamclient.so |
-| `@nClientDownloadProbUseHTTP2IfAvailable` | `50` | 0x4 | If http/2 is available for a given download source, use it w/ this probability [0,100] | steamclient.so |
-| `@nClientEnableHTTP2PlatformLinux` | `1` | 0x4 | Enable HTTP/2 connections on Linux clients | steamclient.so |
-| `@nClientEnableHTTP2PlatformWindows` | `1` | 0x4 | Enable HTTP/2 connections on Windows clients | steamclient.so |
-| `@nClientEnableIPv6ForHTTPPlatformLinux` | `0` | 0x4 | Enable IPv6 HTTP connections by default on Linux clients | steamclient.so |
-| `@nClientEnableIPv6ForHTTPPlatformWindows` | `0` | 0x4 | Enable IPv6 HTTP connections by default on Windows clients | steamclient.so |
-| `@nClientFrameRateReportBatchSize` | `60` | 0x4 | Number of frame rate reports to collect locally before sending to the server | steamclient.so |
-| `@nClientFrameRateReportSecs` | `60` | 0x4 | Number of seconds between individual frame rate reports | steamclient.so |
-| `@nClientInitWindowSizeHTTP2Connection` | `10000000` | 0x2700000004 | Init per-connection window size for HTTP/2. | steamclient.so |
-| `@nClientInitWindowSizeHTTP2Stream` | `2000000` | 0x2700000004 | Init per-stream window size for HTTP/2. | steamclient.so |
-| `@nClientQueryCMDirectoryBeforeConnect` | `1` | 0x4 | Use CMDirectory webapi to get fresh CM list on connect - 0=disabled, 1=enabled, 2=main/dev/beta clients only | steamclient.so |
-| `@nClientServiceMethodForDownloadListPercent` | `100` | 0x4 |  | steamclient.so |
-| `nCloudFileCompressionMinFileSizeKB` | `16` | 0x4 |  | steamclient.so |
-| `nCloudFileCompressionMinFileSizeKBSharedFile` | `128` | 0x4 |  | steamclient.so |
-| `nCloudFileCompressionPercentageMin` | `10` | 0x4 |  | steamclient.so |
-| `nCloudFileCompressionPercentageMinSharedFile` | `50` | 0x4 |  | steamclient.so |
-| `nCloudUploadMinIntervalSec` | `1800` | 0x4 |  | steamclient.so |
-| `nCloudUploadNetworkTimeoutSeconds` | `400` | 0x4 |  | steamclient.so |
-| `@nContentDeltaChunkAppendChunksAfterProtobufSizeThresholdMB` | `33` | 0x4 |  | steamclient.so |
-| `nContentDownloadsToOtherDrive` | `1` | 0x4 | Allow to download updates to other drives then install folder is on | steamclient.so |
-| `nContentStatsReportInterval` | `72` | 0x4 | In Hours | steamclient.so |
-| `@nContentUpdateAutoVerifyCleanBytesThresholdMB` | `2048` | 0x4 | How many clean MB must we verify before backing off on auto-verifies | steamclient.so |
-| `@nContentUpdateAutoVerifyEnable` | `1` | 0x4 | 0 = disabled; 1 = enabled all clients | steamclient.so |
-| `@nContentUpdateAutoVerifyIntervalDays` | `15` | 0x4 | Auto-verify game updates ever N days | steamclient.so |
-| `@nCSClientRateLimitKbps` | `0` | 0x4 |  | steamclient.so |
-| `@nCSJob404ResponseLimit` | `25` | 0x4 |  | steamclient.so |
-| `@nCSJob5xyResponseLimit` | `10` | 0x4 |  | steamclient.so |
-| `nDepotSaveCorruptChunks` | `0` | 0x4 |  | steamclient.so |
-| `@nDownloadLANChunkCacheSizeMB` | `128` | 0x4 |  | steamclient.so |
-| `@nDownloadLANPeerGroup` | `0` | 0x4 |  | steamclient.so |
-| `@net_backlog_bytes_allowed` | `60000000` | 0x0 |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `@net_backlog_time_allowed_sec` | `8` | 0x0 |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `net_incomingcheck` | `1` | 0x0 |  | steamclient.so |
-| `@net_loopback` | `1` | 0x0 |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `net_maxresendsperframe` | `32` | 0x0 |  | steamclient.so |
-| `@NetConnectionBufferMsgLimit` | `1000` | 0x4 | Max # of message that will be buffered into a single zipped packet | steamclient.so |
-| `@NetConnectionBufferThreaded` | `1` | 0x4 |  | steamclient.so |
-| `@nGameRecordingTextureGPU` | `0` | 0x0 |  | steamui.so |
-| `@nHTTPServerHTTP2InitWindowSizePerConnection` | `3145728` | 0x400000004 | Default HTTP/2 per-connection flow-control initial window size in bytes for CHTTPServer connections. Overridden per-server by SetHTTP2FlowControlInitWindowSizePerConnection(). | steamclient.so, steamui.so |
-| `@nHTTPServerHTTP2InitWindowSizePerStream` | `1048576` | 0x400000004 | Default HTTP/2 per-stream flow-control initial window size in bytes for CHTTPServer connections. Overridden per-server by SetHTTP2FlowControlInitWindowSizePerStream(). | steamclient.so, steamui.so |
-| `@nHTTPServerHTTP2MaxConcurrentStreams` | `25` | 0x400000004 | Default maximum concurrent HTTP/2 streams advertised per CHTTPServer connection. Overridden per-server by SetHTTP2MaxConcurrentStreamsPerConnection(). | steamclient.so, steamui.so |
-| `@nHTTPServerLogLevelAccessLine200` | `3` | 0x400000000 | Log level to use for one-line access-log-style for each http server request returning 200 | steamclient.so, steamui.so |
-| `@nHTTPServerLogLevelAccessLineNon200` | `2` | 0x400000000 | Log level to use for one-line access-log-style for each http server request that returns != 200 | steamclient.so, steamui.so |
-| `@nHTTPServerLogLevelDetails200` | `4` | 0x400000000 | Log level to use for full details of any http server request returning 200.  This will probably fill up the log if you leave it on. | steamclient.so, steamui.so |
-| `@nHTTPServerLogLevelDetailsNon200` | `4` | 0x400000000 | Log level to use for full details of any http server request returning != 200 | steamclient.so, steamui.so |
-| `@nHTTPServerMaxPipelinedReqsPerConnection` | `8` | 0x400000000 | Max outstanding pipelined reqs per connection | steamclient.so, steamui.so |
-| `@nHTTPServerYieldOn100ContinueSendSecs` | `300` | 0x400000000 | Seconds to yield when sending a 100 continue for purposes of telling client to send body of request | steamclient.so, steamui.so |
-| `@nIOCPThreadCount` | `1` | 0x0 |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `@nJobInteryieldMillisecondsAlertThreshold` | `120` | 0x400000004 |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `@nJobInteryieldMillisecondsLogThreshold` | `80` | 0x400000004 |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `@nJobInteryieldMillisecondsSpewThreshold` | `500` | 0x400000004 |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `@nJobNetSendsInsaneThreshold` | `15000` | 0x400000004 |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `@nJWTVerifiedTokenCacheSize` | `0` | 0x4 | Number of verified JWTs to memoize so that re-presenting a token doesn't re-check its signature. 0 disables the cache. | steamclient.so, steamui.so |
-| `@nLANPeerGroupRateLimitKbps` | `0` | 0x4 |  | steamclient.so |
-| `@nLANPeerMaxConnections` | `24` | 0x4 |  | steamclient.so |
-| `@nLANPeerRateLimitKbps` | `0` | 0x4 |  | steamclient.so |
-| `@nLegalDictionaryUpdateRateInSeconds` | `600` | 0x4 |  | steamclient.so |
-| `@nNetConnectionBufferZipLevel` | `1` | 0x4 |  | steamclient.so |
-| `@nParentalSettingsLogLevel` | `4` | 0x4 | Control the amount of spew written to the parental log file | steamclient.so |
-| `@nPartnerUploadFinalizeTimeoutSecs` | `600` | 0x4 | Seconds to timeout the DRM finalize which can be slow as it involves sending to cloud storage | steamclient.so |
-| `nPeerContentDefaultMode` | `1` | 0x4 | 0 = off, 1 = only me, 2 = only friends, 3 = anyone | steamclient.so |
-| `nProductInfoUpdateInterval` | `900` | 0x4 |  | steamclient.so |
-| `@nProtobufArenaInitialBlockSize` | `65536` | 0x400000004 | Default initial allocation size for PB arena | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `@nProtobufArenaMaxBlockSize` | `524288` | 0x400000004 | Max block allocation size for PB arena | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `@nProtobufArenaNumberOfHeadersToShare` | `128` | 0x400000004 | Number of Jobs to give a single protobuf Arena before we create a new one | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `@nProtobufArenaNumberOfJobsToShare` | `128` | 0x400000004 | Number of Jobs to give a single protobuf Arena before we create a new one | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `nRichPresenceUploadThrottleSecs` | `5` | 0x4 |  | steamclient.so |
-| `@nRoamingConfigReconnectCloudSyncWindowSec` | `7200` | 0x4 |  | steamclient.so |
-| `@nScreenshotSaveMaxWidth` | `9999` | 0x0 |  | steamclient.so |
-| `@nServerRefreshRateLimitAdditional` | `1` | 0x4 | Limits the burst number of calls per appid to refresh GMS game server lists | steamclient.so |
-| `@nServerRefreshRateLimitBurst` | `100` | 0x4 | Limits the burst number of calls per appid to refresh GMS game server lists | steamclient.so |
-| `@nServerRefreshRateLimitInterval` | `20` | 0x4 | Limits the burst number of calls per appid to refresh GMS game server lists | steamclient.so |
-| `@nSiteLicenseProxyCacheMaxGB` | `100` | 0x0 | If local content cache is enabled, use up to this much disk space | steamclient.so |
-| `@nSiteLicenseProxyEnableP2P` | `0` | 0x0 | If set, will have all connected clients join the same P2P download group | steamclient.so |
-| `@nSiteLicenseProxyPort` | `0` | 0x0 | Local content cache: set > 0 to enable, will listen on this port | steamclient.so |
-| `@nSpewThrottleNagFrequencyMs` | `5000` | 0x4 |  | friendsui.so, gamelauncher, gameoverlayui.so, libvideo.so, steam, steamclient.so, steamservice.so, steamsysinfo, steamui.so, steamwebhelper |
-| `@nSpewThrottlePeriodMs` | `1000` | 0x4 |  | friendsui.so, gamelauncher, gameoverlayui.so, libvideo.so, steam, steamclient.so, steamservice.so, steamsysinfo, steamui.so, steamwebhelper |
-| `@nSpewThrottleResumeThreshold` | `3` | 0x4 |  | friendsui.so, gamelauncher, gameoverlayui.so, libvideo.so, steam, steamclient.so, steamservice.so, steamsysinfo, steamui.so, steamwebhelper |
-| `@nSpewThrottleTriggerThreshold` | `10` | 0x4 |  | friendsui.so, gamelauncher, gameoverlayui.so, libvideo.so, steam, steamclient.so, steamservice.so, steamsysinfo, steamui.so, steamwebhelper |
-| `@nSpewThrottleUnconditionalResumeMs` | `5000` | 0x4 |  | friendsui.so, gamelauncher, gameoverlayui.so, libvideo.so, steam, steamclient.so, steamservice.so, steamsysinfo, steamui.so, steamwebhelper |
-| `@nSpewThrottleUnconditionalTriggerCount` | `50` | 0x4 |  | friendsui.so, gamelauncher, gameoverlayui.so, libvideo.so, steam, steamclient.so, steamservice.so, steamsysinfo, steamui.so, steamwebhelper |
-| `@nThreadedProtobufParseMinBytes` | `128` | 0x400000004 | Parse protobuf message bodies of at least this many bytes on a worker thread instead of on the job thread.  0 disables threaded parsing entirely. | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `@nThreadedProtobufParseThreads` | `2` | 0x400000004 | Max worker threads in the dedicated pool used for threaded protobuf body parses (see @nThreadedProtobufParseMinBytes).  Changes take effect live. | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `@nVoicePostActivityXmitMS` | `250` | 0x4 | after voice activity, continue recording for this many ms even if there is silence | steamui.so |
-| `@nWatchdogSteamUIPercentReport` | `1` | 0x4 |  | steamui.so |
-| `OnCursorMoved` | `x` |  | y | friendsui.so, gameoverlayui.so, steamui.so |
-| `OnScreenSizeChanged` | `oldwide` |  | oldtall | friendsui.so, gameoverlayui.so, steamui.so |
-| `org.freedesktop.DBus` | `/org/freedesktop/DBus` / `/org/freedeskop/DBus` |  | GetConnectionUnixProcessID / AddMatch | steamclient.so, steamui.so |
-| `@OSJumpListMRUSize` | `5` | 0x0 |  | steamui.so |
-| `p2p_connecttimeout` | `15` | 0x0 |  | steamclient.so |
-| `p2p_unusedtimeout` | `120` | 0x0 |  | steamclient.so |
-| `@PeerContentClientMaxJobs` | `1` | 0x4 | number of peer sources used at the same time | steamclient.so |
-| `@PeerContentServerMaxClients` | `8` | 0x4 | limit number of peers connected | steamclient.so |
-| `@PeerContentServerPort` | `27040` | 0x4 | If peer content server, will listen on this port for TCP connections from peers | steamclient.so |
-| `@PeerContentServerRetryDelay` | `60` | 0x4 | seconds before retrying peer content server | steamclient.so |
-| `@PyrowaveHeightFactor` | `2` | 0x0 |  | steamui.so |
-| `@PyrowavePSNR` | `35` | 0x0 |  | steamui.so |
-| `@sBroadcastPreset` |  | 0x0 |  | steamui.so |
-| `@sBroadcastTune` | `film` | 0x0 |  | steamui.so |
-| `sc_kalman_a_vel` | `1.0` | 0x0 |  | steamclient.so |
-| `sc_kalman_fastq` | `0` | 0x0 |  | steamclient.so |
-| `sc_kalman_h_vel` | `1.0` | 0x0 |  | steamclient.so |
-| `sc_kalman_q_vel` | `2.0` | 0x0 |  | steamclient.so |
-| `sc_kalman_r_vel` | `2.0` | 0x0 |  | steamclient.so |
-| `sc_kalman_repeated_sample` | `0` | 0x0 |  | steamclient.so |
-| `sc_kalman_slowq` | `0` | 0x0 |  | steamclient.so |
-| `@sCSDSVirtualHostHeader` |  | 0x4 |  | steamclient.so |
-| `sDepotDownloadFileFilter` |  | 0x4 | only download matching files, eg *.exe;*.dll | steamclient.so |
-| `@sForceLocalContentCache` |  | 0x4 |  | steamclient.so |
-| `@sHardwareUpdateForceRequiredPriorityTS` |  | 0x4 |  | steamui.so |
-| `spew_controller_loss` | `0` | 0x0 |  | steamclient.so |
-| `@sSiteLicenseProxyCacheDirectory` | `appcache/slscache` | 0x0 | If local content cache is enabled, use this path for disk cache | steamclient.so |
-| `@sSiteLicenseProxyExplicitIP` |  | 0x0 | Local content cache: if not blank, will instruct clients to go to this IP for the content cache. | steamclient.so |
-| `@sSteamCmdForcePlatformBitness` |  | 0x4 | Must be one of: [32 \| 64] | steamclient.so |
-| `@sSteamCmdForcePlatformCPU` |  | 0x4 | Must be one of: [x86 \| arm64] | steamclient.so |
-| `@sSteamCmdForcePlatformType` |  | 0x4 | Must be one of: [windows \| macos \| linux \| android] | steamclient.so |
-| `steam_controller_force_oobe` | `0` | 0x0 |  | steamclient.so |
-| `@strCSNoCacheHeader` | `no-cache` | 0x4 |  | steamclient.so |
-| `@StreamClientArgs` |  | 0x0 |  | steamclient.so |
-| `streaming_log_spikes` | `0` | 0x0 |  | steamui.so |
-| `@StreamTransportICEPenalty` | `0` | 0x0 | Add penalty (ms) to ICE for streaming transport selection | steamui.so |
-| `@StreamTransportSDRPenalty` | `0` | 0x0 | Add penalty (ms) to SDR for streaming transport selection | steamui.so |
-| `@sTrustedLocalContentCacheName` |  | 0x4 | Set this to the machine name where a trusted local Steam download cache is hosted, and we'll use it if available. | steamclient.so |
-| `@test_bCloudForceSyncConflict` | `0` | 0x0 | If @test_nCloudForceSyncFailureAppID is set, then set this so that the failure case is 'file conflict' instead of generic failure | steamclient.so |
-| `@test_nCloudForceSyncFailureAppID` | `0` | 0x0 | Set this to a non-zero App ID to test cloud sync failure. The next sync request will fail. | steamclient.so |
-| `testappcloudpaths` | `0` | 0x10 |  | steamclient.so |
-| `triton_imu_sensortime_log` | `0` | 0x0 | Spew the triton IMU sensor timings to console. | steamclient.so |
-| `@uDownloadLANPeerPort` | `27038` | 0x4 | If LAN p2p download enabled, will listen on this port for TCP connections from peers. Must be set consistently across all members of the group! | steamclient.so |
-| `ugc_query_default_cache_time` | `600` | 0x4 |  | steamclient.so |
-| `ugc_query_max_get_details` | `2000` | 0x4 |  | steamclient.so |
-| `UGCCDNReportPct` | `100` | 0x4 |  | steamclient.so |
-| `@unMinimumShaderDownloadSizeInUI` | `33554432` | 0x4 |  | steamclient.so, steamui.so |
-| `unShaderBackgroundProcessingThreads` | `0` | 0x4 |  | steamclient.so |
-| `unShaderHighPriorityProcessingThreads` | `0` | 0x4 |  | steamclient.so |
-| `unShaderHitCacheGeneration` | `0` | 0x4 |  | steamclient.so |
-| `unShaderMaxHeadersPerMessage` | `1024` | 0x4 |  | steamclient.so |
-| `unShaderMaxUploadMessageSizeKb` | `256` | 0x4 |  | steamclient.so |
-| `@unUserStatsTest` | `0` | 0x4 |  | steamclient.so |
-| `@uRemoteDiscoveryPortOverride` | `0` | 0x4 | If non-zero, will listen on this port for broadcasts instead of k_nBroadcastPort | steamclient.so |
-| `@uRemoteDiscoveryPortTransmit` | `0` | 0x4 | If non-zero, will transmit outgoing broadcasts on this port instead of on the listen port | steamclient.so |
-| `verifySignaturesBeforeLaunch` | `1` | 0x0 |  | steamui.so |
-| `vgui_autocomplete_new_style` | `1` | 0x0 |  | steamui.so |
-| `VK_LAYER_VALVE_steam_fossilize_32` | `ubuntu12_32/libVkLayer_steam_fossilize.so` |  | VK_LAYER_VALVE_steam_fossilize_1 | steamui.so |
-| `VK_LAYER_VALVE_steam_fossilize_64` | `ubuntu12_64/libVkLayer_steam_fossilize.so` |  | VK_LAYER_VALVE_steam_fossilize_1 | steamui.so |
-| `VK_LAYER_VALVE_steam_overlay_32` | `ubuntu12_32/steamoverlayvulkanlayer.so` |  | VK_LAYER_VALVE_steam_overlay_1 | steamui.so |
-| `VK_LAYER_VALVE_steam_overlay_64` | `ubuntu12_64/steamoverlayvulkanlayer.so` |  | VK_LAYER_VALVE_steam_overlay_1 | steamui.so |
-| `voice_api_optimalrate` | `24000` | 0x10 |  | steamclient.so |
-| `voice_autogain` | `0` | 0x0 |  | steamclient.so |
-| `voice_fakeloss` | `0` | 0x0 |  | steamclient.so |
-| `@voice_minabs` | `0.15` | 0x0 |  | libvideo.so, steamclient.so, steamui.so |
-| `@voice_minavg` | `1.0` | 0x0 |  | libvideo.so, steamclient.so, steamui.so |
-| `voice_outputdevice` | `0` | 0x0 | 0=>Miles 1=>XAudio2 | steamclient.so |
-| `voice_outputfile` |  | 0x0 | causes output from voice system to be written out to the specified file | steamclient.so |
-| `voice_preprocess` | `0` | 0x0 | enables voice cleanup on incoming microphone data | steamclient.so |
-| `voice_quality` | `4` | 0x0 |  | steamclient.so |
-| `voice_resample_quality` | `1` | 0x10 |  | steamclient.so |
-| `voice_silk_bitrate` | `30000` | 0x10 |  | steamclient.so |
-| `@voice_spew_activity_check` | `0` | 0x0 |  | libvideo.so, steamclient.so, steamui.so |
-| `@WatchdogThreadPercentReport` | `5` | 0x4 |  | steamclient.so |
-| `workshop_items_cache_days` | `14` | 0x4 |  | steamclient.so |
-| `workshop_items_full_check_interval` | `86400` | 0x4 |  | steamclient.so |
-| `workshop_items_update_interval` | `2700` | 0x4 |  | steamclient.so |
-| `WrapPanelItemVisibility` | `item` |  | visible | gameoverlayui.so, steamui.so |
+| Name | Default | What it does | Valve help text | Flags | Binaries |
+|---|---|---|---|---|---|
+| `AlwaysCustomizeOnBadExit` | `0` | Bool (0/1). Probably makes Steam open a customization/recovery prompt after the client exited abnormally. No usage strings found, so this is inferred from the name only. *(low)* |  | 0x4 | steamclient.so |
+| `app_force_preload` | `0` | App ID (0 = off). Forces the given app into preload mode, where content downloads before release. It is read next to the ownership checks (CheckAppOwnership, FreeWeekend, TimedTrialMinutes), so it is mainly a testing override for app ownership and licensing. *(medium)* | force this app into preload mode | 0x4 | steamclient.so |
+| `app_info_http_min` | `0` | Int, default 0. Probably the minimum number of app/package info requests before the client fetches app info over HTTP instead of the CM connection. It is used by the app-info cache (appdatacache.cpp), next to the handling for 'Server changenumber out of sync'. *(low)* |  | 0x4 | steamclient.so |
+| `app_info_http_num_sockets` | `8` | Int, default 8. Number of HTTP sockets in the 'App Info' HTTP client, which downloads app and package info (PICS) data. *(medium)* |  | 0x4 | steamclient.so |
+| `appcloudsessions` | `all` | String, default 'all'. Selects which apps take part in Steam Cloud session tracking ('all' is the only value seen). This is probably a debugging or rollout filter for cloud sync sessions. *(low)* |  | 0x10 | steamclient.so |
+| `@AppMRUSize` | `20` | Int, default 20. Size of the list of most recently played games, which the update manager keeps in RecentLocalPlayedGameIDs (UpdateTimePlayedMRU / UpdateLocallyPlayedMRU). Recently played apps can get update priority. *(high)* |  | 0x0 | steamui.so |
+| `apps_per_overview_chunk` | `5000` | Int, default 5000. Number of apps per chunk when the UI app controller sends app overview data to the library UI. Larger values mean fewer, bigger batches. *(medium)* |  | 0x0 | steamui.so |
+| `AsyncFileIOAlternateReadWrite` | `1` | Bool (0/1), default 1. Async file I/O (asyncfileiohandler.cpp): probably alternates between servicing read and write work on the separate read and write I/O threads so neither starves the other. *(low)* |  | 0x4 | steamclient.so |
+| `AsyncFileIODisableWrite` | `0` | Bool (0/1), default 0. Debug switch in async file I/O. When set, write commands are skipped or not performed, which is useful to benchmark download and disk throughput without writing to disk. Do not enable it for normal use. *(medium)* |  | 0x4 | steamclient.so |
+| `AsyncFileIOExpectOutstandingIO` | `6` | Int, default 6. Expected number of outstanding async I/O operations. It is used to size the async file I/O handle caches and thread queues, and it counts toward the clamp that keeps the read/write handle caches under the process's max open file-descriptor limit. *(medium)* |  | 0x4 | steamclient.so |
+| `AsyncFileIOMaxPendingWin32` | `256` | Int, default 256. Maximum pending async I/O requests on the Windows (Win32 overlapped I/O) path. It probably has no effect on Linux. *(medium)* |  | 0x4 | steamclient.so |
+| `AsyncFileIOReadHandleCache` | `64` | Int, default 64. Number of open file handles the async file I/O read thread keeps cached. It is clamped automatically so that read and write caches together stay under the max open-descriptor limit. *(high)* |  | 0x4 | steamclient.so |
+| `AsyncFileIOWriteHandleCache` | `64` | Int, default 64. Number of open file handles the async file I/O write thread keeps cached, used during content installs and updates. It is clamped along with the read cache to stay under the open-descriptor limit. *(high)* |  | 0x4 | steamclient.so |
+| `@bAssertOnProtoBufBodyMismatch` | `1` | Bool (0/1), default 1. Message-parsing diagnostics. When a protobuf body that was pre-parsed off the main thread has a different type than the handler expects, the client asserts and logs 'Pre-parsed body type disagrees with the handler'. Mismatch counts appear in the 'protobuf_parse_stats' command. | Assert when a body parsed ahead of the main thread is not the type the handler builds.  See\n'protobuf_parse_stats' for the running count and which messages it happened to. | 0x400000004 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `batterycharging` | `0` | Bool (0/1), default 0. Probably a debug override that reports the battery as charging, for testing the low-battery handling. *(low)* |  | 0x0 | steamclient.so |
+| `batterypercent` | `-1` | Int percent, default -1 (= use the real value). Probably overrides the reported battery percentage for testing; CSteamEngine::CheckForLowBattery uses it to decide whether to raise low-battery notifications. *(medium)* |  | 0x0 | steamclient.so |
+| `batterytime` | `-1` | Int, default -1 (= use the real value). Probably overrides the reported remaining battery time, which CSteamEngine::CheckForLowBattery uses to trigger low-battery callbacks. Useful for testing low-battery warnings. *(medium)* |  | 0x0 | steamclient.so |
+| `bBroadcastAlwaysUploadThumbnails` | `1` | Bool (0/1), default 1. Steam Broadcasting: always upload thumbnail images for a broadcast session (set up around Broadcast.BeginBroadcastSession), rather than only when someone is watching. *(medium)* |  | 0x4 | steamclient.so |
+| `@bCallerDeadlineAbortJobDisableWhenHTTPReqStart` | `1` | Bool (0/1), default 1. Job system and HTTP: once a job's HTTP request has started, the caller's deadline no longer aborts the job, so requests already in flight are not cut off. *(medium)* |  | 0x400000004 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `bCheckUGCIntegrity` | `1` | Bool (0/1), default 1. Workshop/UGC downloads: checks the length and hash of downloaded UGC files and deletes corrupt ones ('[UGC] File corrupted during download'). Failures are reported through Cloud.CDNReport. *(high)* |  | 0x4 | steamclient.so |
+| `bClientConvar601DEACE` | `1` | Bool (0/1), default 1. Feature flag with an opaque, hash-like name. The nearby strings are from the IClientUser interface-map serialization ('Fencepost deserialize mismatch'), so it probably toggles some IPC interface behavior. Its exact purpose is unknown. *(low)* |  | 0x4 | steamclient.so, steamservice.so, steamui.so |
+| `@bClientDownloadUseHTTPS` | `0` | Bool (0/1), default 0. Content downloads use HTTPS on content servers that support it, instead of plain HTTP. Can be overridden server-side. | Set this to use HTTPS on supported download servers | 0x4 | steamclient.so |
+| `@bClientOpenCacheStickyRedirects` | `1` | Bool (0/1), default 1. Content downloads through a caching proxy (for example a LAN cache): when the proxy redirects the client, the client remembers the redirect ('memorizing that'). If the redirect points at the origin server itself, the client forgets the proxy. *(high)* |  | 0x4 | steamclient.so |
+| `bClientPingCSesForCellID` | `0` | Bool (0/1), default 0. Probably makes the client ping content servers to choose its download region (cell ID) instead of using the server-assigned one. *(low)* |  | 0x4 | steamclient.so |
+| `@bClientTryRequestManifestWithoutCode` | `0` | Bool (0/1), default 0. Content downloads: tries to fetch a depot manifest even when it has no manifest request code (normally obtained from the backend first). Useful for diagnostics. | If set, client will try to get a manifest even without a manifest request code | 0x4 | steamclient.so |
+| `bCloudAcceptUnexpectedAutoCloudFileChanges` | `1` | Bool (0/1), default 1. Steam Cloud (Auto-Cloud) cache validation: when a file on disk has a different SHA or timestamp than the cached record, or has gone missing, the client accepts that as a local change and syncs it, rather than treating it as an error. *(medium)* |  | 0x4 | steamclient.so |
+| `@bCloudSyncFailDownloadIfGameOutOfDate` | `0` | Bool (0/1), default 0. Steam Cloud: makes the cloud download sync fail when the game itself needs an update, so old game builds don't load newer saves. *(medium)* |  | 0x4 | steamclient.so |
+| `@bCSForceNoCache` | `0` | Bool (0/1), default 0. Content-server downloads: sends 'Cache-Control' no-cache and appends a cache-busting query string ('?%u') to chunk requests, so CDN and proxy caches are bypassed. *(high)* |  | 0x4 | steamclient.so |
+| `bDelayGameUpdatesOnBeta` | `0` | Bool (0/1), default 0. Auto-update scheduling: when on, clients on the Steam Beta also get scheduled (delayed) game updates. When off, beta clients update games as soon as possible. | Should we do scheduling of updates on Steam Beta? If not, they'll all be ASAP | 0x4 | steamclient.so |
+| `@bDepotBuilderReadBufferSizeKB` | `8192` | Int KB, default 8192 (8 MB). Despite the 'b' prefix this is a size: the read buffer that the depot builder's file reader thread uses when chunking files for content builds and uploads (chunkfinder.cpp). *(high)* |  | 0x4 | steamclient.so |
+| `@bDepotBuilderUnbufferedReads` | `1` | Bool (0/1), default 1. Depot builder / content chunking: reads source files unbuffered (bypassing the OS cache, e.g. O_DIRECT), which needs the chunk size to align with the disk sector size ('Default chunk and disk sector size don't align'). *(high)* |  | 0x4 | steamclient.so |
+| `bDepotDeltaPatchUseAPI` | `1` | Bool (0/1), default 1. Content updates: applies downloaded depot delta patches (depot_<id>_<from>_<to>.delta in DepotDeltaPatches) with the patching API, instead of the older method. *(low)* |  | 0x4 | steamclient.so |
+| `bDepotUseSparseFiles` | `1` | Bool (0/1), default 1. Content updates: creates installed and staged files as sparse files, so they don't take up their full size on disk until written. *(medium)* |  | 0x0 | steamclient.so |
+| `@bDisableDualStackDownloads` | `0` | Bool (0/1), default 0. Content downloads: forces an IPv4-only HTTP client for depot downloads instead of the default dual-stack IPv4/IPv6 client. Try it if IPv6 downloads are broken. *(high)* |  | 0x4 | steamclient.so |
+| `bDisableTenFootOverlay` | `0` | Bool (0/1), default 0. Disables the Big Picture (ten-foot) version of the in-game overlay. No usage strings. *(low)* |  | 0x4 | steamclient.so |
+| `@bDownloadThrottleDuringCloudSync` | `0` | Bool (0/1), default 0. Applies the download bandwidth limit (DownloadThrottleKbps) while Steam Cloud syncs run, too. *(medium)* |  | 0x4 | steamclient.so |
+| `@bEnableFrameFuncOverageWarnings` | `0` | Bool (0/1), default 0. Logs a warning when a frame function goes over its time budget (CFrameFunctionMgr 'OverageWarning'). Output goes to SPEW_MISC at level 4, so you also need to raise spew levels to see it. | This turns on the spew in SPEW_MISC at level 4, still need to adjust spew levels to see it. | 0x4 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `@bEnableHTTP2OnAllCHTTPClients` | `0` | Bool (0/1), default 0. Turns on HTTP/2 automatically for every internal CHTTPClient pool on SSL connections. | Enable HTTP/2 on all CHTTPClients automatically for SSL connections | 0x400000000 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `bEnableLoginUsersErrorUpload` | `0` | Bool (0/1), default 0. Login UI: uploads log files when the client fails to load login user info (loginusers), to help diagnose problems. | Set to enable uploading log files if there is an error loading login user info | 0x10 | steamui.so |
+| `@bEnableLogTearOff` | `1` | Bool (0/1), default 1. Logging subsystem (logger.cpp, present in all binaries): probably lets the logger hand writes off from the main thread, or 'tear off' log output to a separate stream. *(low)* |  | 0x0 | friendsui.so, gamelauncher, gameoverlayui.so, libvideo.so, steam, steamclient.so, steamservice.so, steamsysinfo, steamui.so, steamwebhelper |
+| `bEnableMHRCAsyncFileReadLog` | `0` | Bool (0/1), default 0. Turns on logging of async file reads in some 'MHRC' component; what that component is is unknown. *(low)* |  | 0x4 | steamclient.so |
+| `@bEnableNetworkJobsOwnStartList` | `1` | Bool (0/1), default 1. Job manager: network-started jobs get their own start/yield list (CJobMgr JobYielding_t linked list), separate from other jobs. This is an internal scheduling tweak. *(low)* |  | 0x400000004 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `@bEnableOfflineLogonTicket` | `1` | Bool (0/1), default 1. Login: asks the server for an offline logon ticket during login if none is cached, so Offline Mode works later. | If true, an offline logon ticket will be requested during logon if none is cached | 0x4 | steamclient.so |
+| `@bEnableSiteLicenseConnect` | `1` | Bool (0/1), default 1. Lets the client connect to a site-license (cafe/LAN center) server when one is present. *(medium)* |  | 0x0 | steamclient.so |
+| `@bEnableSiteLicenseConsoleLogging` | `0` | Bool (0/1), default 0. Site-license provider (steamcmd -sitelicense): writes verbose site-license logs to the console, including authentication and local content cache status. *(medium)* |  | 0x0 | steamclient.so |
+| `@bEnableSpewThrottle` | `1` | Bool (0/1), default 1. Logging: rate-limits repeated debug spew and log messages in all Steam binaries. *(medium)* |  | 0x4 | friendsui.so, gamelauncher, gameoverlayui.so, libvideo.so, steam, steamclient.so, steamservice.so, steamsysinfo, steamui.so, steamwebhelper |
+| `bEnableSubscribedFileListCache` | `1` | Bool (0/1), default 1. Workshop: caches the user's subscribed-file list (from PublishedFile.GetUserFiles) so it isn't fetched again every time. *(medium)* |  | 0x4 | steamclient.so |
+| `@bEnforceValidEmailDomains` | `1` | Bool (0/1), default 1. When validating an email address (BIsValidEmailAddress), the domain must be valid too. | Enable valid email domains in BIsValidEmailAddress | 0x4 | steamclient.so |
+| `betaalwaysrebuild` | `0` | Bool (0/1), default 0. Game launch flow (gameactionlaunchapp.cpp): probably forces a rebuild/re-verify step on every launch for beta branches. The evidence is weak. *(low)* |  | 0x0 | steamui.so |
+| `bExternalProcessForVOD` | `0` | Bool (0/1), default 0. Video playback (steam://video/watch/<appid>): plays the video in a separate external process instead of inside the client. *(medium)* |  | 0x0 | steamui.so |
+| `bFinishStagedDepotVersions` | `1` | Bool (0/1), default 1. Content updates: if an earlier update was interrupted, finishes downloading the staged manifest version first ('resuming download of previous manifest') instead of switching to the newest one. *(high)* |  | 0x4 | steamclient.so |
+| `@bForceAbsoluteMouseCoordinates` | `0` | Bool (0/1), default 0. Forces absolute mouse coordinates (the per-app extended/AbsoluteMouseCoordinates setting) for every app. Probably affects Remote Play and Steam Input mouse injection. *(medium)* |  | 0x0 | steamui.so |
+| `@bForceLaunchEula` | `0` | Bool (0/1), default 0. Shows an app's launch EULA every time, ignoring the 'ViewedLaunchEULA' flag stored in the app's registry/config. *(high)* |  | 0x0 | steamui.so |
+| `@bForceOverlayAudioRecorder` | `0` | Bool (0/1), default 0. Game recording/broadcast: forces the overlay-based audio capture path and disables the Media Foundation path, which only exists on Windows. | force overlay based audio capture (disable MF based audio capture path) | 0x4 | steamui.so |
+| `@bForceStreamUnsupportedApp` | `0` | Bool (0/1), default 0. Remote Play: allows streaming an app even if it is marked as unsupported (extended/DisableStreaming). *(high)* |  | 0x0 | steamclient.so |
+| `@bHttpClientRecordHostnameDimension` | `0` | Bool (0/1), default 0. HTTP metrics: adds the hostname as a dimension, alongside method, status and response latency. This can create many distinct metric keys and use a lot of memory. | Group HTTP metrics by hostname.  Careful, the cardinality of your in-memory map might be large. | 0x400000000 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `@bHTTPServerHTTP2Enabled` | `0` | Bool (0/1), default 0. Built-in HTTPS server (uses a self-signed certificate): the global default for advertising HTTP/2 over TLS via ALPN. A server that calls SetHTTP2Enabled() explicitly ignores it. | Global default for whether CHTTPServer advertises/accepts HTTP/2 (over TLS via ALPN). A server that calls SetHTTP2Enabled() explicitly overrides this value. | 0x400000004 | steamclient.so, steamui.so |
+| `bInstallscriptReports` | `1` | Bool (0/1), default 1. Sends reports to Valve when an app's install script (installscript.vdf) fails. | send reports about broken install scripts | 0x4 | steamclient.so |
+| `@bLANPeerConnectionTimeoutSec` | `5` | Int seconds, default 5. Despite the 'b' prefix this is a timeout: how long to wait when connecting to a LAN peer for peer-to-peer content transfer (ContentServerDirectory.RequestPeerContentServer) before 'Timed out connecting'. *(high)* |  | 0x4 | steamclient.so |
+| `@bLogMessageToProtobufClass` | `1` | Bool (0/1), default 1. Message diagnostics: the first time the client sees a message type (EMsg), it logs which protobuf class that message uses ('MessageToProtobufClass: ...'). | We we first discover the protobuf class used for a particular EMsg, log it | 0x400000004 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `@bMeasureSSLLatencyStats` | `1` | Bool (0/1), default 1. Collects latency statistics for SSL/TLS connections (handshake and round trip) for networking metrics. *(medium)* |  | 0x0 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `@bMetricsEnabled` | `1` | Bool (0/1), default 1. Master switch for job metrics collected and reported through IMetricsReporters. Individual operations can still be turned off or on by a blacklist or whitelist. | Enabling allows jobs to collect and report metrics through IMetricsReporters. | 0x4 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `@bMsgErrorDump` | `0` | Bool (0/1), default 0. When a network message fails to parse, dumps it in hex (header, struct and var data) to the log for debugging. *(high)* |  | 0x4 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `bPrefetchDownloadDetails` | `1` | Bool (0/1), default 1. Content updates: works out the download size of a pending update ahead of time, so the size is known before the update runs. | Prefetch download size before actual update happens | 0x4 | steamclient.so |
+| `@bProfileYieldsInTestSuiteJobs` | `0` | Bool (0/1), default 0. Profiles job yields when running internal test-suite jobs. Developer-only. *(medium)* |  | 0x400000000 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `@bProtoBufNetPacketDropRawBytes` | `1` | Bool (0/1), default 1. CM message handling: frees an inbound packet's raw bytes once its header and body have been pre-parsed (the SSL thread also avoids copying them), and rebuilds them only if a caller asks. This saves memory; see 'protobuf_parse_stats'. | Release the raw packet bytes of an inbound message whose header and body were both parsed for us, rebuilding them on demand for the few callers that want them.  Also read by the SSL work thread, which then never copies those bytes out of its read buffer in the first place.  Watch 'protobuf_parse_stats' for how often that happens. | 0x400000004 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `@bProtobufParseSizeProfile` | `1` | Bool (0/1), default 1. Keeps a histogram of protobuf message body sizes as they are parsed, shown by the 'protobuf_parse_stats' console command. | Track a histogram of protobuf message body sizes as they are parsed.  See the protobuf_parse_stats console command. | 0x400000004 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `@bProtobufParseTimeProfile` | `0` | Bool (0/1), default 0. Also times each protobuf body parse, so 'protobuf_parse_stats' can show ms/us per size bucket and how much parsing moved off the job thread. It adds two clock reads per parse. | Also time each protobuf body parse, so protobuf_parse_stats can report time per size bucket and how much parse time actually moved off the job thread.  Off by default - it adds two clock samples per parse. | 0x400000004 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `@bRefreshDownloadSourcesFrequently` | `0` | Bool (0/1), default 0. Content downloads: refreshes the list of download sources (content servers, caches, peers) more often, while connection counts are adjusted based on the current download rate (Mbps). *(medium)* |  | 0x4 | steamclient.so |
+| `@bRequireOfflineLogonTicket` | `1` | Bool (0/1), default 1. Login: you need a valid cached offline logon ticket to log in in Offline Mode or with no connection. | If true, a valid offline logon ticket is required when logging in in offline or no connection mode | 0x4 | steamclient.so |
+| `broadcast_adjust_bitrate` | `200` | Int, default 200. Steam Broadcasting: probably the step (likely kbps) by which the encoder bitrate is raised or lowered when upload conditions change. *(low)* |  | 0x4 | steamui.so |
+| `broadcast_upload_drop_sec` | `6` | Int seconds, default 6. Steam Broadcasting upload: when the upload queue falls this many seconds behind, video frames are dropped ('Upload job : dropped %u video frames'). *(medium)* |  | 0x4 | steamclient.so |
+| `broadcast_upload_update_sec` | `3` | Int seconds, default 3. Steam Broadcasting: how often the BroadcastUploadStatus_t callback is posted (bytes sent, dropped and pending, processing time). *(high)* |  | 0x4 | steamclient.so |
+| `@bScreenshotsLegacyCloudUpload` | `0` | Bool (0/1), default 0. Screenshots: uploads screenshots through the legacy Steam Cloud upload path instead of the current one. | If set, use the legacy Steam Cloud upload path for screenshot uploads | 0x4 | steamclient.so |
+| `bShaderAllowReplay` | `1` | Bool (0/1), default 1. Shader cache manager (Linux/Vulkan): allows replaying Fossilize pipeline caches in the background to precompile shaders for an app. *(high)* |  | 0x4 | steamclient.so |
+| `bShaderAllowReplayOnNVIDIA` | `1` | Bool (0/1), default 1. Shader cache manager: allows background Fossilize replay on NVIDIA GPUs. If 0, the client logs 'Replay currently disabled on NVIDIA'. *(high)* |  | 0x4 | steamclient.so |
+| `bShaderAlwaysProcessWhenRunningGame` | `0` | Bool (0/1), default 0. Shader cache manager: keeps doing background shader processing (Fossilize replay) while a game is running, instead of pausing it. *(medium)* |  | 0x4 | steamclient.so |
+| `bShaderCacheDownloads` | `1` | Bool (0/1), default 1. Shader pre-caching: allows downloading pre-compiled shader cache depots (type 'shadercachedepot'). | Allow to download shader cache depots | 0x4 | steamclient.so |
+| `@bShaderClientGetBucketManifestUseWebAPI` | `1` | Bool (0/1), default 1. Shader pre-caching: fetches shader bucket manifests through the web API (IShaderService/GetBucketManifestUsingKeyHash) instead of over the CM connection. *(high)* |  | 0x4 | steamclient.so |
+| `bShaderDepotNative` | `1` | Bool (0/1), default 1. Shader pre-caching: converts downloaded shader depots into the native driver cache format (e.g. VulkanPipelinesV<n>, steam_shader_cache folders), rather than using them only through Fossilize/swarm archives. *(medium)* |  | 0x4 | steamclient.so |
+| `bShaderEnableCacheManagement` | `1` | Bool (0/1), default 1. Master switch for the shader cache manager (shader pre-caching, background processing, cache folders). It can also be turned off by the STEAM_ENABLE_SHADER_CACHE_MANAGEMENT environment variable, the command line or the registry; it is always off under steamcmd. *(high)* |  | 0x4 | steamclient.so |
+| `bShaderEnableFossilizeLayer` | `1` | Bool (0/1), default 1. Shader pre-caching: injects the Vulkan Fossilize layer (ENABLE_VK_LAYER_VALVE_steam_fossilize_1, STEAM_FOSSILIZE_DUMP_PATH) into games to record pipelines into .foz caches. *(high)* |  | 0x4 | steamclient.so |
+| `bShaderEnableUpload` | `1` | Bool (0/1), default 1. Shader pre-caching: uploads the client's recorded shaders and pipelines to Valve when the server asks for them ('Server requested %u shaders; uploading is enabled/disabled'). *(high)* |  | 0x4 | steamclient.so |
+| `bShaderFossilizeFastMerge` | `1` | Bool (0/1), default 1. Shader cache: uses a fast merge when combining Fossilize (.foz) pipeline cache files (steam_pipeline_cache, replay_cache, video/audio media caches) into one archive. *(medium)* |  | 0x4 | steamclient.so |
+| `bShaderPrecompiledCache` | `1` | Bool (0/1), default 1. Shader pre-caching: uses precompiled shader buckets from Valve and points Mesa at them as read-only Fossilize databases (MESA_DISK_CACHE_READ_ONLY_FOZ_DBS=steam_precompiled_*). *(high)* |  | 0x4 | steamclient.so |
+| `bShaderVerboseLogs` | `0` | Bool (0/1), default 0. Shader cache manager: writes detailed logs about bucket and depot manifest requests, compat-tool buckets and precompiled cache lookups. *(high)* |  | 0x4 | steamclient.so |
+| `@bShowUninstalledDemosInLibrary` | `0` | Bool (0/1), default 0. Library: shows demos that are not installed in the games list (IsVisibleInGamesList). *(medium)* |  | 0x4 | steamui.so |
+| `bSingleFileUpdateMode` | `1` | Bool (0/1), default 1. Content updates: when free disk space is too low for normal staging, updates one file at a time ('switching to single file update mode (%u MB needed, %u MB available)'). *(high)* |  | 0x4 | steamclient.so |
+| `@bSiteLicenseAllowCachedClientCredentials` | `0` | Bool (0/1), default 0. Site license (cafe/LAN center): lets clients associated with the site save their username and login credentials on the machine. | Allow Steam clients that associate to this site to save username and auth credentials locally | 0x0 | steamclient.so |
+| `@bSiteLicenseProxyCacheIsExternalProcess` | `0` | Bool (0/1), default 0. Site-license provider: the local content caching proxy runs in a separate external process instead of inside steamcmd ('Local content cache ENABLED for an EXTERNAL process at ip:port'). Usually you also set @sSiteLicenseProxyExplicitIP. | If set, the caching content proxy will be handled by some process other than steamcmd. You probably also should set @sSiteLicenseProxyExplicitIP. | 0x0 | steamclient.so |
+| `@bSiteLicenseProxyEnableIPv6` | `0` | Bool (0/1), default 0. Site-license (SLS) proxy: allows IPv6 connections to the Steam servers. | If set, we will enable ipv6 communications to the Steam servers | 0x0 | steamclient.so |
+| `@bSiteLicenseServer` | `0` | Bool (0/1), default 0. Makes this instance run as a site-license provider, the same as the '-sitelicense' command-line flag ('Enabling use as site license provider via convar'). *(high)* |  | 0x0 | steamclient.so |
+| `@bSSLThreadedMsgParse` | `1` | Bool (0/1), default 1. CM connection: parses Steam3 message headers and bodies on the SSL work thread, not only framing them there, to take work off the main thread. Takes effect immediately. | Parse framed Steam3 message headers and bodies on the SSL work thread, as well as framing them there.  Read per message, so it takes effect live. | 0x400000004 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `@bSSLThreadedMsgParseRelayedBodies` | `0` | Bool (0/1), default 0. CM connection: also pre-parses the bodies of service methods that run on the client. Off by default because the servers that relay them (CM and UDS) never look at the body; check 'protobuf_parse_stats'. | Pre-parse the bodies of service methods that execute on the client.  Off by default: the only\nservers those pass through - CM and UDS - relay them by header and never look at the body, so\nparsing it here is work nobody on this side consumes.  Watch 'protobuf_parse_stats'. | 0x400000004 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `@bSSLThreadedSendDelivery` | `1` | Bool (0/1), default 1. TCP/SSL connections: delivers outgoing messages from the SSL work thread instead of the calling thread. *(medium)* |  | 0x0 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `bSteam3LimitedUserEnable` | `1` | Bool (0/1), default 1. Probably turns on handling for limited user accounts (accounts that have not spent money and have restricted features). *(low)* |  | 0x0 | steamclient.so |
+| `bSteamLoaderEnable` | `1` | Bool (0/1), default 1. Turns on the 'Steam loader' feature, probably the game launch/loader stub. The evidence is thin. *(low)* |  | 0x0 | steamclient.so |
+| `bUseSystemBrowserFor2DVOD` | `1` | Bool (0/1), default 1. Video playback: opens normal (2D) videos (steam://video/watch/<appid>) in the system web browser (steam://openurl_external) instead of inside Steam. *(medium)* |  | 0x0 | steamui.so |
+| `bVerifyAllDownloads` | `0` | Bool (0/1), default 0. Content updates: verifies every file after an update has downloaded (the VerifyUpdates behavior), not just the changed ones. | Verify all files after downloading an update | 0x4 | steamclient.so |
+| `bVerifyAllInstalled` | `0` | Bool (0/1), default 0. Content updates: verifies all installed files before applying an update. | Verify all installed files before installing an update | 0x4 | steamclient.so |
+| `cAppUpdateWorkingSetMB` | `256` | Int MB, default 256. Content updates: probably the memory working-set budget used while downloading, decrypting and writing update chunks. *(medium)* |  | 0x4 | steamclient.so |
+| `@cbPartnerUploadChunkSize` | `1000000` | Int bytes, default 1000000. Partner uploads: chunk size for POSTing content to partner.steamgames.com in pieces using Content-Range. | Chunk size to use for POSTing partner uploads | 0x4 | steamclient.so |
+| `cChunkValidationMaxLog` | `100` | Int, default 100. Content validation: maximum number of bad-chunk messages to log during one validation, to keep logs from flooding. *(medium)* |  | 0x4 | steamclient.so |
+| `@cCSClientMaxNumSocketsPerHost` | `4` | Int, default 4. Content downloads: maximum number of simultaneous HTTP connections to each content server host in the 'Depot Download' HTTP client. *(high)* |  | 0x4 | steamclient.so |
+| `@cCSClientMaxNumSocketsPerHostForCachingProxy` | `32` | Int, default 32. Content downloads: maximum number of simultaneous HTTP connections to a caching proxy or LAN cache host. It is higher than for normal content servers. *(high)* |  | 0x4 | steamclient.so |
+| `@cDefaultInitialDownloadSources` | `4` | Int, default 4. Content downloads: number of download sources (content servers, caches, peers) to connect to at the start of a download, before adjusting based on throughput. *(high)* |  | 0x4 | steamclient.so |
+| `@cDepotBuilderFileChunkingThreads` | `0` | Int, default 0 (= automatic). Depot builder: number of threads used to chunk files during content builds. *(medium)* |  | 0x4 | steamclient.so |
+| `@cFileChunkingCRCFalseAlarmBytesToSkip` | `128` | Int bytes, default 128. Depot builder chunk finder: when a rolling-CRC chunk match turns out to be wrong after the SHA check, skips this many bytes before trying again. *(medium)* |  | 0x4 | steamclient.so |
+| `@cFileChunkingCRCFalseAlarmThreshold` | `0` | Int, default 0. Depot builder chunk finder: number of false CRC matches allowed before skipping ahead (see @cFileChunkingCRCFalseAlarmBytesToSkip). 0 probably turns the heuristic off. *(low)* |  | 0x4 | steamclient.so |
+| `@cFileChunkingSupersectionSizeMB` | `1024` | Int MB, default 1024. Depot builder: size of the file 'supersections' that the file-section chunker threads work on in parallel. *(medium)* |  | 0x4 | steamclient.so |
+| `cFileValidationMaxLog` | `100` | Int, default 100. Content validation: maximum number of bad-file messages to log during one verify. *(medium)* |  | 0x4 | steamclient.so |
+| `ClientConnectTokenBucketEnable` | `1` | Bool (0/1), default 1. CM connection: rate-limits reconnect attempts to Steam servers with a token bucket. When throttled, the client posts SteamServersConnectionAttemptThottled_t with a cooldown expiry time. *(high)* |  | 0x0 | steamclient.so |
+| `clientui_overlay_fps` | `60` | Int FPS, default 60. Probably the frame rate cap for the client UI when it is drawn as the in-game overlay. *(low)* |  | 0x0 | steamui.so |
+| `clientuistats_batchsize` | `0` | Int, default 0. Client UI usage stats (ClientUIComponentDisplay events): number of events to queue before writing a batch. 0 writes each row immediately. | Control how many events can be queued up for ClientUI stats before the batch is committed. 0 will commit every row. | 0x0 | steamui.so |
+| `@cloud_testdynamicsyncapp` | `0` | App ID, default 0. Steam Cloud testing: treats the given app as using dynamic sync, including 'sync_while_suspended'. Developer-only. *(low)* |  | 0x10 | steamclient.so |
+| `@cMaxContentServersToRequest` | `20` | Int, default 20. Content downloads: maximum number of content servers to ask the directory for when building the download server list. *(medium)* |  | 0x4 | steamclient.so |
+| `cMaxDecryptThreadsOverride` | `0` | Int, default 0 (= automatic). Content updates: overrides the number of CPU threads that decrypt and decompress chunks (CContentUpdateContext CPU thread pool). *(medium)* |  | 0x4 | steamclient.so |
+| `@cMaxInitialDownloadSources` | `-1` | Int, default -1 (no limit). Content downloads (CDepotDownloadMgr): caps how many download sources the client starts with, across source priority classes. Sources are still filtered by app, and some are skipped as Steam China-only. *(medium)* |  | 0x0 | steamclient.so |
+| `@cMinimumJobTimeoutsToCheckPerFrame` | `100` | Int, default 100. Job manager: the minimum number of jobs whose timeouts are checked each frame in CJobMgr::BCheckForJobTimeouts. *(high)* |  | 0x400000004 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `@cNetEncryptionHandshakeWorkMax_HighPri` | `8000` | Int, default 8000. Networking: the work budget (probably handshakes per period) for high-priority encrypted connection handshakes. The low- and medium-priority versions have budgets of 2000 and 4000. *(low)* |  | 0x4 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `@cNetEncryptionHandshakeWorkMax_LowPri` | `2000` | Int, default 2000. Networking: the work budget for low-priority encrypted connection handshakes; see the HighPri/MedPri versions. *(low)* |  | 0x4 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `@cNetEncryptionHandshakeWorkMax_MedPri` | `4000` | Int, default 4000. Networking: the work budget for medium-priority encrypted connection handshakes; see the HighPri/LowPri versions. *(low)* |  | 0x4 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `controller_base_rotation_angle` | `0` | Number, default 0. Steam Input: probably a base rotation angle applied to controller stick or trackpad input. Its usage is near the 'Ignoring initial input' connection handling. *(low)* |  | 0x0 | steamclient.so |
+| `controller_debug_triton_wireless` | `0` | Bool (0/1), default 0. Steam Input debugging for the 'Triton' controller (Valve's internal codename, believed to be the new Steam Controller) over a wireless connection. Probably adds wireless/serial-number debug handling in controller.cpp. *(low)* |  | 0x0 | steamclient.so |
+| `controller_edge_cutoff` | `0` | Number, default 0. Steam Input: probably an edge cutoff or deadzone at the outer edge of a trackpad or stick. Its exact units are unknown. *(low)* |  | 0x0 | steamclient.so |
+| `controller_gyro_x_scale` | `16000` | Int, default 16000. Steam Input: the scale factor used to convert gyro X-axis input into 2D (mouse or stick) output. *(low)* |  | 0x0 | steamclient.so |
+| `controller_idle_poll_interval` | `50000` | Int microseconds, default 50000 (20 Hz). Steam Input: how often idle controllers are polled. | SteamInput Idle Polling interval in microseconds. Default 50,000us = 20hz | 0x0 | steamclient.so |
+| `controller_jerk_low_pass_filter_rate` | `4` | Float, default 4. Steam Input (Steam Deck): how quickly the low-pass filter follows the raw gyro 'jerk' value used for jerk/shake detection. | How quickly the low pass filter chases the raw gyro jerk value. | 0x0 | steamclient.so |
+| `controller_jerk_threshold` | `500` | Float, default 500. Steam Input: the gyro jerk (change in gyro per second) needed to count one 'controller jerk' event. Steam Deck only (Neptune/Galileo). | The amount of Gyro Jerk (gyro change per second) required to create a Controller Jerk count. Note, only available on SteamDeck/Neptune/Galileo | 0x0 | steamclient.so |
+| `controller_jerk_threshold_debug` | `0` | Bool (0/1), default 0. Steam Input: logs the gyro noise, raw jerk value, low-pass jerk value, threshold and jerk count, for tuning controller_jerk_threshold. | Debug spew to tell us the current "Jerk" value coming from the accelerometer | 0x0 | steamclient.so |
+| `controller_jerk_throttle` | `2` | Float Hz, default 2. Steam Input: the maximum rate at which controller jerk event callbacks are sent. | (Hz) The maximum callback rate for Controller Jerk Events. | 0x0 | steamclient.so |
+| `controller_min_activation_time` | `0.0333` | Float seconds, default 0.0333 (about one frame at 30 Hz). Steam Input: probably the minimum time an action stays active once triggered, so very short presses still register. *(low)* |  | 0x0 | steamclient.so |
+| `controller_momentum_min_vel` | `0` | Float, default 0. Steam Input trackpad momentum (trackball mode): probably the minimum swipe speed needed to start momentum. *(low)* |  | 0x0 | steamclient.so |
+| `controller_momentum_num_excluded_samples` | `1` | Int, default 1. Steam Input trackpad momentum: the number of most recent touch samples left out when estimating release speed (trackpad_weightedfilter). *(medium)* |  | 0x0 | steamclient.so |
+| `controller_momentum_num_included_samples` | `5` | Int, default 5. Steam Input trackpad momentum: the number of touch samples averaged by the weighted filter to estimate release speed. *(medium)* |  | 0x0 | steamclient.so |
+| `controller_poll_state` | `-1` | Int, default -1 (automatic). Steam Input: forces the controller polling state used by the HID I/O thread ('Controller PollState Changed from %d to %d'). This is a debugging override. *(medium)* |  | 0x0 | steamclient.so |
+| `controller_rate` | `2000` | Int microseconds, default 2000 (500 Hz). Steam Input: how often active controllers are polled. It is probably linked to the SteamController_Poll_Rate setting. | SteamInput Active Polling interval in microseconds. Default 2000us = 500hz | 0x0 | steamclient.so |
+| `controller_simulate_trackpad` | `0` | Bool (0/1), default 0. Steam Input debug: when the left trackpad is touched, simulates a swipe on the right trackpad. | Simulate a trackpad swipe on the right trackpad when the left pad is touched | 0x0 | steamclient.so |
+| `controller_spew_level` | `3` | Int log level, default 3. Steam Input: how verbose controller logging is (config load/save, SDL mappings, controller info reads). Higher means more output. *(medium)* |  | 0x0 | steamclient.so, steamui.so |
+| `countrycode` |  | String, no default. CM login (cminterface.cpp): probably overrides the country code the client reports for the account or IP at logon. Mainly for testing. *(low)* |  | 0x0 | steamclient.so |
+| `cPreallocateMinimumSizeKB` | `256` | Int KB, default 256. Content installs: only files at least this large have their disk space allocated up front (AllocateDiskSpace). *(medium)* |  | 0x4 | steamclient.so |
+| `@csecAudioSignalLevelInterval` | `60.0` | Float seconds, default 60. Game recording audio capture: how often the signal levels (dB) of each audio source are written to the log. | Log audio capture signal levels every this many seconds | 0x4 | steamui.so |
+| `@csecCSJobSuccessfulRequestTimeWindow` | `60` | Int seconds, default 60. Content downloads: the time window used to judge whether a content-server connection has made successful requests recently, which decides things like turning off dual-stack for that connection. *(low)* |  | 0x4 | steamclient.so |
+| `@csecCSRequestProcessorTimeOut` | `300` | Int seconds, default 300. Content downloads: a content-server request processor that is idle or making no progress for this long closes its connection ('Timed out waiting for progress after %d seconds'). *(high)* |  | 0x4 | steamclient.so |
+| `@csecDurationControlPeriod` |  | Int seconds. Duration control (China anti-indulgence playtime limits): overrides the first playtime threshold for testing. Nonzero sets the threshold to this many seconds; 0 uses the normal one. | Override default duration-control / anti-indulgence time period. If nonzero, initial playtime threshold is this value in seconds | 0x4 | steamclient.so |
+| `@csecDurationControlPeriodToday` |  | Int seconds. Duration control: overrides the per-day playtime threshold for testing. Nonzero sets the limit to this many seconds. | Override default duration-control / anti-indulgence time period. If nonzero, per-day playtime threshold is this value in seconds | 0x4 | steamclient.so |
+| `@csecDurationControlSimulated` |  | Int seconds. Duration control testing: pretends the user has already played this many seconds recently. Setting it makes the client ask the backend (Player.GetDurationControl) with the overridden state. | Simulate having already played this many seconds of playtime. | 0x4 | steamclient.so |
+| `@csecDurationControlSimulatedNonRecent` |  | Int seconds. Duration control testing: pretends the user has already played this many seconds today, but not recently. | Simulate having already played this many seconds of playtime today, but not recently. | 0x4 | steamclient.so |
+| `@csecFavoriteGameAccountCacheTime` | `86400` | Int seconds, default 86400 (1 day). Server browser: how often the game-server account IDs in the favorites list are refreshed (GameServers.GetServerSteamIDsByIP / GetServerIPsBySteamID). | Control how often we refresh the account IDs in the game server favorites list | 0x4 | steamclient.so |
+| `@csecIncomingDataRatePeriod` | `1` | Int seconds, default 1. Content downloads: the sampling period for measuring the incoming download rate (Mbps), which decides whether to add more download connections. *(medium)* |  | 0x4 | steamclient.so |
+| `csecManifestDownloadTimeout` | `120` | Int seconds, default 120. Content updates: timeout for downloading a depot manifest before it counts as failed ('failed to downloading manifest'). *(high)* |  | 0x4 | steamclient.so |
+| `@csecSiteLicenseProxyStatsLog` | `60` | Int seconds, default 60. Site-license content proxy: how often connection, request, byte and cached-byte statistics are written to the log. | Log proxy stats this often | 0x0 | steamclient.so |
+| `@csecSiteLicenseProxyStatsUpdate` | `1` | Int seconds, default 1. Site-license content proxy: how often the internal statistics are updated. | update proxy stats internally this often | 0x0 | steamclient.so |
+| `@csecUpdateTargetNumConnectionsEpoch` | `10` | Int seconds, default 10. Content downloads: how often the client reconsiders the target number of download connections based on the measured rate. *(medium)* |  | 0x4 | steamclient.so |
+| `@cSecUploadDownloadRates` | `300` | Int seconds, default 300. Content downloads: how often recorded download-rate statistics per source are reported to Steam (CJobUploadDownloadRates; also saved as RecentDownloadRate). *(medium)* |  | 0x4 | steamclient.so |
+| `@CSInterfaceProxyPassword` |  | String. Content downloads: the password for an HTTP proxy used to reach content servers, sent with Basic auth as 'user:pass'. Use it together with @CSInterfaceProxyUsername. *(medium)* |  | 0x0 | steamclient.so |
+| `@CSInterfaceProxyUsername` |  | String. Content downloads: the username for an HTTP proxy used to reach content servers (Basic auth). Use it together with @CSInterfaceProxyPassword. *(medium)* |  | 0x0 | steamclient.so |
+| `@cUDPSendRetries` | `8` | Int, default 8. Legacy UDP connection layer (udpconnection.cpp): how many times an unacknowledged packet is resent before giving up. *(medium)* |  | 0x400000000 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `@CustomBinaryRequestRetryTimes` | `20` | Int, default 20. DRM: how many times to retry a custom DRM binary request (RequestCustomBinary / CClientDRMDownloadJob). *(high)* |  | 0x0 | steamclient.so |
+| `debugLaunchAppDelaySecs` | `0` | Int seconds, default 0. Game launch debugging: adds an artificial delay to the launch steps (license check, cloud sync, Steam Input config sync), for testing the launch progress UI. *(medium)* |  | 0x0 | steamui.so |
+| `deck_mouse_haptic_tick_dist` | `9000` | Int, default 9000. Steam Deck trackpad-as-mouse: the distance moved (in raw trackpad units) between haptic 'ticks'. *(low)* |  | 0x0 | steamclient.so |
+| `deck_mouse_leftside_filter` | `30500` | Int, default 30500. Steam Deck: probably a raw-coordinate threshold that filters touches on the left side or edge of a trackpad when it is used as a mouse. *(low)* |  | 0x0 | steamclient.so |
+| `@DepotBuilderDeltaMaxChunks` | `20000` | Int, default 20000. Depot builder: the maximum number of chunks to consider when building delta patches between builds. *(low)* |  | 0x4 | steamclient.so |
+| `@DepotBuilderEnableVZd` | `1` | Bool (0/1), default 1. Depot builder: allows chunks to be compressed with Valve's 'VZd' format (probably the Zstd-based variant). *(medium)* |  | 0x4 | steamclient.so |
+| `@DepotBuilderMaxParallelUploadChunks` | `24` | Int, default 24. Depot builder: the maximum number of chunks uploaded or written at once, including writing depots to a local content server (LCS). *(medium)* |  | 0x4 | steamclient.so |
+| `@DepotBuilderNumHTTPSocketsToMDS` | `12` | Int, default 12. Depot builder: number of HTTP sockets in the 'Depot Build' client that talks to the manifest/depot upload server (MDS). *(medium)* |  | 0x4 | steamclient.so |
+| `@DepotBuilderParallelUploadChunks` | `6` | Int, default 6. Depot builder: number of chunks uploaded or verified in parallel (chunk verify worker pool). *(medium)* |  | 0x4 | steamclient.so |
+| `@DepotBuilderProgressTimeout` | `1000` | Int, default 1000 (probably seconds). Depot builder: if a build makes no upload progress for this long, it fails ('No progress while uploading chunks', 'Timeout uploading manifest'). *(medium)* |  | 0x4 | steamclient.so |
+| `@DepotBuilderVZdMinRatio` | `0.4` | Float, default 0.4. Depot builder: the VZd-compressed size must be at most this fraction of the original before VZd is used. Otherwise another compression is used. *(low)* |  | 0x4 | steamclient.so |
+| `@DepotBuilderXORMatchPercent` | `95` | Int percent, default 95. Depot builder delta/patch generation: the similarity a chunk needs to an older chunk before it is stored as an XOR delta. *(low)* |  | 0x4 | steamclient.so |
+| `DepotDeltaPatches` | `1` | Bool (0/1), default 1. Content updates: allows downloading and applying depot delta patches (depot_<id>_<from>_<to>.delta) instead of whole changed chunks. *(high)* |  | 0x4 | steamclient.so |
+| `DepotDownloadProgressTimeout` | `120` | Int seconds, default 120. Content updates: how long depot reconstruction waits for download progress before it treats the update as stalled. *(medium)* |  | 0x4 | steamclient.so |
+| `DepotMinWriteGapSizeMB` | `64` | Int MB, default 64. Content updates (depotreconstruct): the minimum gap between write regions when grouping chunk writes. It relates to the extra downloads in single-file mode. *(low)* |  | 0x0 | steamclient.so |
+| `DepotReconstructionBadChunk` | `0` | Int, default 0. Content updates debug: probably deliberately corrupts or marks a chunk as bad, to test bad-chunk handling. *(low)* |  | 0x0 | steamclient.so |
+| `DepotReconstructionForceGenericIO` |  | Content updates (depot reconstruction): forces the generic file I/O path instead of the optimized/async one. 'all' was seen as a possible value, perhaps a per-depot selector. *(low)* |  | 0x4 | steamclient.so |
+| `DepotReconstructionLowPrio` | `1` | Bool (0/1), default 1. Content updates: runs depot reconstruction (decrypt, decompress, write) at low thread/IO priority so it doesn't slow down the system. *(medium)* |  | 0x4 | steamclient.so |
+| `DepotReconstructionNumIOThreads` | `32` | Int, default 32. Content updates: number of disk I/O threads used during depot reconstruction. *(medium)* |  | 0x4 | steamclient.so |
+| `DepotUseAlternatingReadWrite` | `1` | Bool (0/1), default 1. Content updates: when using chunks from a staged chunk store, alternates between read and write phases instead of doing both at once. *(low)* |  | 0x4 | steamclient.so |
+| `developer` | `0` | Int, default 0. General developer mode for the client UI. When set, extra developer commands and features are available, such as profiling commands, the devtools file links and debug menu tasks. *(medium)* |  | 0x0 | friendsui.so, gameoverlayui.so, steamclient.so, steamui.so |
+| `@durationControlNightCheck` | `1` | Int enum, default 1. Duration control (China anti-indulgence): the time-of-day check. 1 = normal, 2 = force night-time, 0 = no check (only allowed for age-verified accounts). | Time of day check for duration-control feature. 1 = normal. 2 = force night-time. 0 = disable checks, only enabled for age verified accounts | 0x4 | steamclient.so |
+| `@EnableUDPHistory` | `0` | Bool (0/1), default 0. Keeps a history of UDP connection packets or events for debugging the legacy UDP transport. *(low)* |  | 0x400000000 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `@fDownloadRateImprovementToAddAnotherConnection` | `1.2` | Float ratio, default 1.2. Content downloads: adding a connection must raise the download rate by at least this factor (20%) before the client keeps adding more. *(high)* |  | 0x4 | steamclient.so |
+| `@fMinDataRateToAttemptTwoConnectionsMbps` | `1.5` | Float Mbps, default 1.5. Content downloads: the minimum measured download rate before the client tries a second download connection. *(high)* |  | 0x4 | steamclient.so |
+| `force_software_gyro_drift_correction` | `0` | Int, default 0. Steam Input gyro: 0 = use software drift calibration only when the controller needs it, 1 = force the standard software drift calibration on every controller with an IMU. | 0: Only use software drift calibration based on controller capabilities. 1: Any controllers with IMUs will be forced to use the standard software drift calibration. | 0x0 | steamclient.so |
+| `@ForceContentServer` |  | String hostname or IP (empty = off). Content downloads: always use this content server instead of the list from ContentServerDirectory.GetServersForSteamPipe ('Forcing content server %s for download!'). Useful for testing a particular CDN node or a LAN cache. *(high)* |  | 0x0 | steamclient.so |
+| `@ForceContentServerHTTPS` | `0` | Bool (0/1), default 0. Content downloads: connect to the server set in @ForceContentServer over HTTPS. *(medium)* |  | 0x0 | steamclient.so |
+| `@ForceContentServerType` |  | String. Content downloads: only use content servers of this type (e.g. CDN, SteamCache, OpenCache), probably with 'local' as a special value. It filters the server list from ContentServerDirectory. *(low)* |  | 0x0 | steamclient.so |
+| `g_RumbleRepeatAfterDelaySeconds` | `0.050` | Float seconds, default 0.050. Steam Input rumble: the delay before a rumble command is sent again to keep it going. *(low)* |  | 0x0 | steamclient.so |
+| `g_RumbleSustainTimeSeconds` | `10` | Float seconds, default 10. Steam Input rumble: the longest a rumble effect is kept going without new commands before it stops. *(low)* |  | 0x0 | steamclient.so |
+| `@GCNameOverride` |  | String. Game Coordinator (ISteamGameCoordinator): overrides which Game Coordinator name or instance messages are sent to. Developer testing. *(low)* |  | 0x10 | steamclient.so |
+| `grip_sense_haptic_test` | `0` | Bool (0/1), default 0. Steam Input debug: plays a test haptic pulse when grip sense (capacitive grip) is triggered. *(low)* |  | 0x0 | steamclient.so |
+| `grip_sense_haptic_test_repeats` | `1` | Int, default 1. Number of pulses for the grip-sense haptic test (see grip_sense_haptic_test). *(low)* |  | 0x0 | steamclient.so |
+| `grip_sense_haptic_test_strength` | `125` | Int, default 125. Strength of the grip-sense haptic test pulse (see grip_sense_haptic_test). *(low)* |  | 0x0 | steamclient.so |
+| `gyro_auto_detect_polling_rate` | `1` | Int enum, default 1 (wired controllers only). Steam Input gyro: how the IMU polling rate is worked out. 0 = legacy (buggy with controllers at 1000 Hz or more), 1 = use SDL3 sensor timing but fall back to estimating from the packet rate when it looks wrong, 2 = always estimate from the packet rate. | Wired Connections only. 0: Legacy Mode. Known to be buggy with Blitz 2 and other controllers set to 1000hz+. 1: If SDL3 sensor delta time is zero, or unexpected sensor timings are detected, fall back on packet-rate based estimation of polling rate (if outside a margin of error: gyro_sensor_margin_of_error_pct). 2: Exclusively use packet-rate based estimation of polling rate. | 0x0 | steamclient.so |
+| `gyro_calibration_duration_automatic` | `5.0` | Float seconds, default 5.0. Steam Input gyro: how long a controller must stay still to calibrate drift automatically. Shorter times are more likely to produce wrong corrections. | Duration in seconds required to calibrate gyro drift outside of manual calibration. Warning: Short calibration times are more likely to result in false positive anti-drift solutions. | 0x0 | steamclient.so |
+| `gyro_calibration_duration_manual` | `5.0` | Float seconds, default 5.0. Steam Input gyro: how long manual drift calibration runs. Longer is more accurate. | Duration in second of manual gyro drift calibration. Longer durations make for more accurate drift corrections. | 0x0 | steamclient.so |
+| `gyro_calibration_duration_manual_timeout` | `30.0` | Float seconds, default 30. Steam Input gyro: if manual drift calibration hasn't succeeded within this time, it goes back to calibrating noise tolerance. | Duration before manual gyro drift calibration times out, and returns to calibrating the noise tolerance. | 0x0 | steamclient.so |
+| `gyro_calibration_duration_stationary` | `5.0` | Float seconds, default 5.0. Steam Input gyro: how long to sample while still to measure gyro and accelerometer noise tolerance. | Duration in second of gyro noise tolerance calibration. | 0x0 | steamclient.so |
+| `gyro_debug_gyro_speed_vs_quaternion_speed` | `0` | Bool (0/1), default 0. Steam Input gyro debug: logs the raw gyro speed next to the rotation speed taken from the quaternion, per hardware frame. | 0: Off. 1: Spew the gyro speed and the extracted quaternion rotation speed | 0x0 | steamclient.so |
+| `gyro_debug_hardware_vs_mode_time` | `0` | Bool (0/1), default 0. Steam Input gyro debug: logs the hardware delta time next to the platform/mode delta time and prediction timing. | 0: Off. 1: Spew the hardware delta time vs. the platform delta time. | 0x0 | steamclient.so |
+| `gyro_debug_sensor_timings` | `0` | Bool (0/1), default 0. Steam Input gyro debug: logs IMU sensor timing, including expected and measured delta-µs, rate changes and fallbacks to estimated polling rates. *(high)* |  | 0x0 | steamclient.so |
+| `gyro_drift_calibration_debug` | `0` | Bool (0/1), default 0. Steam Input gyro debug: shows which sensor (accelerometer or gyro) is restarting drift calibration because of noise, and logs candidate and applied drift values. Drift values are saved per controller in <serial>_gyro.vdf. | Display which sensor readings (accelerometer or gyroscope) are restarting the drift calibration due to their noise being bigger than noise tolerance. | 0x0 | steamclient.so |
+| `gyro_drift_correction_enabled` | `1` | Bool (0/1), default 1. Steam Input: turns software gyro drift correction on or off. | Turn on/off software gyro anti-drift correction. | 0x0 | steamclient.so |
+| `gyro_drift_detection_debug` | `0` | Bool (0/1), default 0. Steam Input gyro debug: logs how far the gyro has turned over time ('Detected Gyro Deflection'). | Spew information about how far the gyro has deflected over time. | 0x0 | steamclient.so |
+| `gyro_drift_detection_duration` | `30.0` | Float seconds, default 30. Steam Input gyro: how long the client samples before raising a 'gyro needs calibration' warning. | How long we sample for before triggering a calibration warning. Seconds. | 0x0 | steamclient.so |
+| `gyro_drift_detection_min_deflection` | `270.0` | Float degrees, default 270. Steam Input gyro: how many degrees the gyro must turn before it counts as drift. This is deliberately more than normal use would produce. | The minimum degrees of deflection we must have turned through to detect a drift event. This intentionally higher than rotations we'd expect from regular use. | 0x0 | steamclient.so |
+| `gyro_drift_detection_min_drift_rate` | `0.1` | Float degrees/second, default 0.1. Steam Input gyro: the lowest steady rotation rate that counts as noticeable drift. | The minimum degrees per second we consider to be gyro drift. i.e. if we notice the gyroscope has drifted at higher than this rate, it could be drifting noticeably. | 0x0 | steamclient.so |
+| `gyro_filter_enabled` | `1` | Bool (0/1), default 1. Steam Input gyro: applies a pseudo One-Euro smoothing filter to the gyro rotation (quaternion) to reduce sensor noise and hand shake. | Enable (Pseudo) One Euro Filter to internal gyro quaternion. This reduces low level sensor noise and hand shake.  | 0x0 | steamclient.so |
+| `gyro_filter_max_speed` | `16.0` | Float degrees/second, default 16. Steam Input gyro filter: above this rotation speed, no smoothing is applied. | Above this gyro rotation speed (degrees/second) we apply min (zero) smoothing. | 0x0 | steamclient.so |
+| `gyro_filter_min_speed` | `2` | Float degrees/second, default 2. Steam Input gyro filter: below this rotation speed, maximum smoothing (low-pass) is applied. | Below this gyro rotation speed (degrees/second) we apply max smoothing (low pass filter). | 0x0 | steamclient.so |
+| `gyro_filter_smoothness` | `75` | Int 1-100, default 75. Steam Input gyro filter: how strong the low-pass smoothing is. 1 is heavily smoothed (barely responds), 100 is barely smoothed. | Smoothing amount for low pass filter. 1 is TOO smoothed (barely responding). 100 is barely smoothed. | 0x0 | steamclient.so |
+| `gyro_force_handheld_orientation` | `0` | Int enum, default 0. Steam Input gyro orientation: 0 = auto, 1 = handheld like the Steam Deck (pitched 90°, yaw goes through the screen), 2 = standalone controller like the Steam Controller (yaw goes through the sticks). | 0: Auto. 1: Force Controller to be "HandHeld" orientation, like SteamDeck (tilt in pitch by 90 degrees so that "Yaw" is "Through the Screen". 2: Force Controller to be "Standalone" controller like Steam Controller, where "Yaw" is "Through Sticks".  | 0x0 | steamclient.so |
+| `gyro_force_sensor_rate` | `0` | Int Hz, default 0. Steam Input gyro: 0 = use the IMU's timing and drop suspicious samples; nonzero = ignore sensor timing and assume this fixed rate (e.g. 250 for PS4/PS5, 200 for Switch). | If zero, cull suspected bad sensor data (can result in a loss of natural sensitivity). If not zero, ignore IMU sensor timing and use fixed rate instead. Measured in HZ. Common values: 250hz (PS5), 250hz (PS4), 200hz (Nintendo Switch) | 0x0 | steamclient.so |
+| `gyro_handheld_pitch_offset` | `90` | Float degrees, default 90. Steam Input gyro: in handheld mode, how far the gyro rotation is tilted before processing. This only affects the Yaw/Roll/Laser-pointer styles of Gyro to Mouse and Gyro to Joystick Camera. | When in handheld mode, how far we tilt the gyro quaternion before processing. This affects only the "Gyro to Mouse" and "Gyro to JoystickCamera" modes. And only affects Yaw, Roll, Yaw + Roll, and Laser Pointer 3DOF to 2D conversion styles within those modes. Player Space and World Space are controller affordance agnostic. | 0x0 | steamclient.so |
+| `gyro_haptic_probe_enabled` | `0` | Bool (0/1), default 0. Steam Input: turns on the experimental 'haptic probe' gyro mode, which gives haptic feedback as the gyro moves. The config's haptic level must not be 'off'. | 0: Off. 1: Try new gyro mode. Config must have haptic level set to something other than "off\n | 0x0 | steamclient.so |
+| `gyro_haptic_probe_max_pulse` | `100` | Int, default 100. Steam Input haptic probe: pulse strength at the highest gyro speed. | How loud the grip effect gets at max speed | 0x0 | steamclient.so |
+| `gyro_haptic_probe_max_speed` | `360.0` | Float degrees/second, default 360. Steam Input haptic probe: the gyro speed at which the strongest pulse is used. | Highest speed for haptic probe movement. Degrees per second. | 0x0 | steamclient.so |
+| `gyro_haptic_probe_min_pulse` | `20` | Int, default 20. Steam Input haptic probe: pulse strength at the lowest gyro speed. Valve's help text was copied from max_pulse, but the name and default show this is the minimum. *(medium)* | How loud the grip effect gets at max speed | 0x0 | steamclient.so |
+| `gyro_haptic_probe_min_speed` | `0.125` | Float degrees/second, default 0.125. Steam Input haptic probe: the lowest gyro speed that produces haptic feedback. | Lowest speed for haptic probe movement. Degrees per second. | 0x0 | steamclient.so |
+| `gyro_haptic_probe_offset_scale` | `0.65` | Float degrees, default 0.65. Steam Input haptic probe: how far apart the set of probes is spread (0 = all in one place, 1 = 1° apart). | How far to spread the haptic probe set is spread out. 0 = ontop of each other. 1 = 1 degree separation. | 0x0 | steamclient.so |
+| `gyro_haptic_probe_types` | `3` | Int enum, default 3. Steam Input haptic probe output: 0 = none, 1 = trackpad haptics only, 2 = rumble only, 3 = both. | 0: None. 1: Trackpad Only. 2: Rumble Only. 3: Both | 0x0 | steamclient.so |
+| `gyro_precision_speed` | `0.75` | Float, default 0.75. Steam Input gyro: the multiplier or threshold for the precision-speed response; see gyro_precision_speed_enabled. *(low)* |  | 0x8 | steamclient.so |
+| `gyro_precision_speed_enabled` | `1` | Bool (0/1), default 1. Steam Input gyro: applies a linear response multiplier to speeds below the precision speed set in 'Gyro To...' modes, after the speed deadzone, for finer slow aiming. | Enable linear response multiplier to speeds below the value set in the "Gyro To..." modes. This applies itself to the remaining speed after the gyro speed deadzone has been applied. | 0x0 | steamclient.so |
+| `gyro_prediction_correction_speed_max` | `180.0` | Float degrees/second, default 180. Steam Input gyro prediction: above this speed, the predicted rotation is fully corrected toward the measured value. The correction is still gradual. | Above this speed (degrees per second) there is full correction of the predicted quaternion toward the  "ground truth" quaternion. Note this will still be gradual correction, and only in the shared direction of user rotation and the correction required. | 0x0 | steamclient.so |
+| `gyro_prediction_correction_speed_min` | `30.0` | Float degrees/second, default 30. Steam Input gyro prediction: below this speed, the predicted rotation is not corrected toward the measured value. | Below this speed (degrees per second) there is no correction of the predicted quaternion toward the  "ground truth" quaternion. | 0x0 | steamclient.so |
+| `gyro_prediction_enabled` | `1` | Bool (0/1), default 1. Steam Input gyro: predicts rotation from the last known gyro speed. This smooths uneven Bluetooth delivery and gyros slower than 500 Hz. | Enable extrapolation of rotation using the last known gyro speed. This is important to avoid staggered signals over blue tooth, but generally upgrades gyros that run lower than 500hz. The extrapolated quaternion will correct back toward the "ground truth" quaternion when the speed exceeds. | 0x0 | steamclient.so |
+| `gyro_raw_deadzone` | `6.0` | Float, default 6.0. Steam Input: the legacy deadzone on the raw gyro signal. Only affects 'As Mouse' and modes based on it. | Legacy deadzoning for gyro signal. Only affects "As Mouse" and its derivative modes. | 0x0 | steamclient.so |
+| `gyro_sensor_margin_of_error_pct` | `25` | Int percent, default 25. Steam Input gyro: how far (+/-) sensor timing may differ from the expected value before the client falls back to estimating the polling rate from packets. Valve's help says it applies when gyro_auto_detect_polling_rate is 2, though mode 1's description suggests it is used there too. | If gyro_auto_detect_polling_rate is set to mode 2, use this +/- X% value as the acceptable margin of error before falling back on packet-rate based estimation of polling rate. | 0x0 | steamclient.so |
+| `gyro_speed_deadzone` | `0.5` | Float, default 0.5 (probably degrees/second). Steam Input gyro: the minimum rotation speed before the gyro response updates; see gyro_speed_deadzone_enabled. *(medium)* |  | 0x8 | steamclient.so |
+| `gyro_speed_deadzone_enabled` | `1` | Bool (0/1), default 1. Steam Input gyro: turns on the minimum-speed deadzone (gyro_speed_deadzone). | Enable the minimum speed required to update the gyroscope response. | 0x0 | steamclient.so |
+| `gyro_stationary_calibration_debug` | `0` | Bool (0/1), default 0. Steam Input gyro debug: shows which sensor (gyro or accelerometer) is restarting noise-tolerance calibration because its noise is too high, and logs the resulting tolerances. | Display which sensor readings (accelerometer or gyroscope) are restarting the tolerance calibration due to their noise being too large. | 0x0 | steamclient.so |
+| `gyro_to_joystick_camera_raw` | `1` | Bool (0/1), default 1. Steam Input: A/B test switch between two Gyro to Joystick Camera pipelines (1 vs 0). Valve's help calls both 'old', so it is unclear which is newer. *(medium)* | Used to test old Gyro to joystick Camera processing pipeline (1) against old (0). | 0x0 | steamclient.so |
+| `gyro_to_joystick_camera_relax` | `0` | Float, default 0. Steam Input Gyro to Joystick Camera: an experimental low-pass filter on the output, meant to help games with low frame rates. Valve marks it 'needs more thought'. | Low pass filter on the output to help lower FPS games. Needs more thought. | 0x0 | steamclient.so |
+| `gyro_use_polling_time_for_prediction` | `1` | Bool (0/1), default 1. Steam Input gyro prediction: uses the main loop's cached time instead of reading the clock again. Only for A/B testing. | Use the main loop's cached time as opposed to a fresh sample. Just for A/B testing. | 0x0 | steamclient.so |
+| `haptic_click_gain_modifier` | `0` | Number, default 0. Steam Input haptics: a gain adjustment applied to trackpad 'click' haptic pulses. *(low)* |  | 0x0 | steamclient.so |
+| `haptic_intensity` | `8000` | Int, default 8000. Steam Input haptics: the base intensity (amplitude) of trackpad haptic pulses in the newer haptic code. Compare haptic_intensity_old (2500). *(low)* |  | 0x0 | steamclient.so |
+| `haptic_intensity_old` | `2500` | Int, default 2500. Steam Input haptics: the base pulse intensity used by the legacy haptic code (when haptic_new = 0). *(low)* |  | 0x0 | steamclient.so |
+| `haptic_new` | `0` | Bool (0/1), default 0. Steam Input: switches to the newer controller haptics code. Testing toggle. *(low)* |  | 0x0 | steamclient.so |
+| `haptic_off_divisor` | `5.0f` | Float, default 5.0. Steam Input haptics: probably a divisor that sets the 'off' part of a pulse relative to the 'on' part (duty cycle). *(low)* |  | 0x0 | steamclient.so |
+| `haptic_tick_gain_modifier` | `0` | Number, default 0. Steam Input haptics: a gain adjustment applied to trackpad 'tick' (detent) haptic pulses. *(low)* |  | 0x0 | steamclient.so |
+| `ibex_mouse_leftside_filter` | `32500` | Int, default 32500. Steam Input: like deck_mouse_leftside_filter, but for the 'Ibex' device (a Valve internal codename for a controller). Probably a raw trackpad coordinate threshold used when the trackpad acts as a mouse. *(low)* |  | 0x0 | steamclient.so |
+| `ibex_rumble_deadzone` | `635` | Int, default 635. Steam Input: rumble values below this are ignored on the 'Ibex' device (a Valve internal codename). *(low)* |  | 0x0 | steamclient.so |
+| `installmanagertimeout` | `15` | Int, default 15 (probably seconds). Install manager UI: a timeout used while the install/backup restore manager is working. *(low)* |  | 0x0 | steamui.so |
+| `lenovo_hook_filter` | `31500` | Int, default 31500. Steam Input: probably a raw trackpad/touch coordinate threshold for a Lenovo handheld (e.g. Legion Go) in mouse mode, like deck_mouse_leftside_filter. *(low)* |  | 0x0 | steamclient.so |
+| `library_asset_cache_asset_file_min_sec` | `120` | Int seconds, default 120. Library artwork cache (libraryassetcache.cpp): asset files younger than this are skipped when the cache is cleaned up. *(low)* |  | 0x0 | steamui.so |
+| `library_asset_cache_conversion_rtime` | `1724792014` | Unix time, default 1724792014 (2024-08-27). Library artwork cache: apps whose cache is older than this need converting to the new cache layout ('App %u requires conversion'). *(medium)* |  | 0x0 | steamui.so |
+| `library_asset_cache_full_check_threshold` | `25` | Int, default 25. Library artwork cache: probably the number of changed apps (or a percentage) above which the whole cache is checked instead of just some apps. *(low)* |  | 0x0 | steamui.so |
+| `library_asset_cache_full_recheck_min_hours` | `1` | Int hours, default 1. Library artwork cache: the minimum time between full rechecks of the asset cache. *(medium)* |  | 0x0 | steamui.so |
+| `library_asset_cache_kvfile_name` | `assetcache.vdf` | String, default 'assetcache.vdf'. Library artwork cache: the file name of the cache index (KeyValues file) in the library cache folder. *(high)* |  | 0x0 | steamui.so |
+| `library_asset_cache_kvfile_version` | `2` | Int, default 2. Library artwork cache: the format version of the index file. If the version changes, the index is rebuilt. *(medium)* |  | 0x0 | steamui.so |
+| `library_asset_cache_max_notify` | `200` | Int, default 200. Library artwork cache: the maximum number of asset-changed notifications sent to the library UI in one batch. *(low)* |  | 0x0 | steamui.so |
+| `library_asset_cache_max_requests` | `20` | Int, default 20. Library artwork cache: the maximum number of artwork downloads at once. *(medium)* |  | 0x0 | steamui.so |
+| `library_asset_cache_notify_debounce_sec` | `60` | Int seconds, default 60. Library artwork cache: groups asset-change notifications to the UI so they are sent at most once per this interval. *(low)* |  | 0x0 | steamui.so |
+| `library_asset_cache_version` | `3` | Int, default 3. Library artwork cache: the version number added to artwork URLs ('cv=%u'), so changing it makes the client fetch fresh images from the CDN. *(high)* |  | 0x0 | steamui.so |
+| `library_sharing_account_max` | `5` | Int, default 5. Steam Family / Library Sharing: the maximum number of accounts that can share a library on this machine. *(medium)* |  | 0x4 | steamui.so |
+| `@LocalContentServer` |  | String. Content downloads: the address of a partner Local Content Server (LCS). It is used for branches marked 'lcsrequired' ('no local content server for beta %s, falling back to public'). *(medium)* |  | 0x0 | steamclient.so |
+| `log_files_always_flush` | `0` | Bool (0/1), default 0. Logging: flushes each line to the log files (logs/<name>.txt) right away. Useful when debugging crashes; slightly slower. *(medium)* |  | 0x4 | gamelauncher, gameoverlayui.so, steam, steamclient.so, steamsysinfo, steamui.so, steamwebhelper |
+| `log_matchmaking_callbacks` | `0` | Bool (0/1), default 0. Matchmaking: logs lobby and matchmaking callbacks sent to games. *(medium)* |  | 0x0 | steamclient.so |
+| `@MatchmakingCreatePingWaitTime` | `0` | Int (probably ms), default 0. Lobby matchmaking: how long lobby creation waits for ping/location data before it continues (LobbyCreated_t). *(low)* |  | 0x4 | steamclient.so |
+| `@MatchmakingJoinPingWaitTime` | `0` | Int (probably ms), default 0. Lobby matchmaking: how long a lobby join waits for ping data before it continues (LobbyEnter_t). *(low)* |  | 0x4 | steamclient.so |
+| `@MatchmakingSearchPingWaitTime` | `0` | Int (probably ms), default 0. Lobby matchmaking: how long a lobby search waits for ping data before it returns results (LobbyMatchList_t). *(low)* |  | 0x4 | steamclient.so |
+| `@MatchmakingTotalPingWaitTime` | `0` | Int (probably ms), default 0. Lobby matchmaking: the total ping-wait budget across create, join and search operations. *(low)* |  | 0x4 | steamclient.so |
+| `@MaxOutstandingSendThreadItemFatalAssert` | `30000` | Int, default 30000. TCP/SSL send thread: if more items than this are queued for longer than @MaxOutstandingSendThreadItemFatalAssertSecondsAtLimit, the process is killed on purpose ('killing process'). *(high)* |  | 0x0 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `@MaxOutstandingSendThreadItemFatalAssertSecondsAtLimit` | `30` | Int seconds, default 30. TCP send thread: how long the queue may stay above the fatal limit before the process is killed. *(high)* |  | 0x0 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `@MaxOutstandingSendThreadItemSleep` | `10000` | Int, default 10000. TCP send thread: when this many items are queued, the sender pauses (back-pressure) before adding more. *(medium)* |  | 0x0 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `MergeCapReprocess_minutes` | `480` | Int minutes, default 480 (8 hours). Probably the minimum time before merged capture/cache data (likely shader cache merges) is processed again. *(low)* |  | 0x4 | steamclient.so |
+| `@metricsDisabledCatalogs` |  | Comma-separated list. Metrics: whole metrics catalogs to turn off. This is checked last; @metricsEnabledOperations overrides it. | Comma separated list of metrics catalogs to disable.  This is the last check. | 0x4 | steamclient.so |
+| `@metricsDisabledOperations` |  | Comma-separated list. Metrics: operations to turn off. This setting takes priority over everything else ('Metrics disabled by operation blacklist'). | Comma separated list of metrics operations that are disabled.  This setting has highest priority | 0x4 | steamclient.so |
+| `@metricsEnabledOperations` |  | Comma-separated list. Metrics: operations to turn on even if their catalog is disabled ('Metrics enabled by operation whitelist'). | Comma separated list of metrics operations.  Overrides disabled catalogs | 0x4 | steamclient.so |
+| `mic_autogain` | `16000` | Int, default 16000. Voice chat: the target level for automatic gain control on microphone input, probably as a peak sample amplitude. | automatic gain control level for microphone input | 0x0 | steamclient.so |
+| `mic_inputfile` |  | File path. Voice chat testing: reads voice data from this WAV file (played in a loop) instead of the microphone. | causes voice data to be read from the specified file instead of from the microphone | 0x0 | steamclient.so |
+| `mic_outputfile` |  | File path. Voice chat debugging: writes the microphone data to this file as a RIFF/WAVE file. Close Steam before using the file. | causes microphone data to be written out to the specified file | 0x0 | steamclient.so |
+| `musiclogging` | `0` | Bool (0/1), default 0. Turns on logging for the client's music player (CClientMusic). *(medium)* |  | 0x0 | steamclient.so |
+| `@nBootReserveRetryPeriodSec` | `30` | Int seconds, default 30 (should be a multiple of 10). Disk space: how long to wait before retrying after creating the 'boot reserve' file fails. That file keeps space free so Steam can still start on a nearly full disk. | Number of seconds to wait before retrying after failing to create a boot reserve file. Should be a multiple of 10. | 0x4 | steamclient.so |
+| `nBroadcastSessionMaxDropFrames` | `100` | Int, default 100. Steam Broadcasting: probably the maximum number of dropped frames allowed in a session before it is ended or reset. *(low)* |  | 0x4 | steamclient.so |
+| `@nCallerDeadlineHopLatencyMS` | `10` | Int ms, default 10. Job/message system: when a job with a deadline sends a request, the reply timeout is set to the job's remaining time minus this many ms. A negative value stops deadlines being passed on. | When we send a message expecting a reply from a job with a deadline, set the timeout on the message to [current time remaining in this job] - N ms.  A negative value prevents propagating caller deadlines down the chain | 0x400000004 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `nClientBackgroundAutoUpdateLessRecentlyPlayedThresholdHours` | `168` | Int hours, default 168 (1 week). Scheduled background updates: games played within this time are updated sooner than games not played for longer. This is the 'less recent' tier. | If you've played the game more recently than this, we'll schedule the background update sooner. | 0x4 | steamclient.so |
+| `nClientBackgroundAutoUpdateNotPlayedTimeSpreadDays` | `14` | Int days, default 14. Scheduled background updates: a game not played for a while is updated on a morning chosen within this many days. | If the user hasn't played this game in a while, pick a morning up to this many days out to update. | 0x4 | steamclient.so |
+| `nClientBackgroundAutoUpdateRecentlyPlayedThresholdHours` | `72` | Int hours, default 72. Scheduled background updates: games played within this time are treated as recently played and updated soonest. | If you've played the game more recently than this, we'll schedule the background update sooner. | 0x4 | steamclient.so |
+| `nClientBackgroundAutoUpdateTargetHour` | `6` | Int hour 0-23 (local time), default 6. Scheduled background updates: the target hour for automatic app updates. Updates are spread around it (see nClientBackgroundAutoUpdateTimeSpreadMinutes). | Target hour, in local time, for auto-scheduled app updates. Will be spread around this point via the convar below. | 0x4 | steamclient.so |
+| `nClientBackgroundAutoUpdateTimeSpreadMinutes` | `360` | Int minutes, default 360. Scheduled background updates: the window around the target hour (a ±2-sigma window, so half on each side) over which updates are randomly spread. | Spread of time around the above target hour - this is the +/- 2-sigma window, so half this on either side. | 0x4 | steamclient.so |
+| `@nClientCloudMaxMBParallelDownloads` | `64` | Int MB, default 64. Steam Cloud sync: the maximum total size of files downloaded at once. *(high)* |  | 0x4 | steamclient.so |
+| `@nClientCloudMaxMBParallelUploads` | `64` | Int MB, default 64. Steam Cloud sync: the maximum total size of files uploaded at once within an upload batch. *(high)* |  | 0x4 | steamclient.so |
+| `@nClientCloudMaxNumParallelDeletes` | `10` | Int, default 10. Steam Cloud sync: the maximum number of cloud file deletes or forgets at once. *(high)* |  | 0x4 | steamclient.so |
+| `@nClientCloudMaxNumParallelDownloads` | `10` | Int, default 10. Steam Cloud sync: the maximum number of file downloads at once. *(high)* |  | 0x4 | steamclient.so |
+| `@nClientCloudMaxNumParallelUploads` | `10` | Int, default 10. Steam Cloud sync: the maximum number of file uploads at once. *(high)* |  | 0x4 | steamclient.so |
+| `@nClientCloudMaxNumUploadsPerBatch` | `100` | Int, default 100. Steam Cloud: the maximum number of files in one app upload batch (Cloud.BeginAppUploadBatch). Bigger syncs are split into several batches. *(high)* |  | 0x4 | steamclient.so |
+| `@nClientCMDirectoryResultLoadPercentDither` | `10` | Int percent, default 10. CM connection: random variation added to the CM server load values from the CMDirectory query, so clients don't all choose the same server. | Dither to apply to CM server loads received by CMDirectory query | 0x8800000004 | steamclient.so |
+| `@nClientCMUDPPingTimeGoodEnoughThresholdMS` | `50` | Int ms, default 50. CM connection over UDP: while looking for the best server, a CM that answers within this time is good enough and the search stops. *(medium)* |  | 0x4 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `@nClientCMUDPPingTimeoutUseGoodEnoughMS` | `250` | Int ms, default 250. CM connection over UDP: after this long searching for the best server, the client takes a good-enough server instead of waiting for all ping replies. *(medium)* |  | 0x4 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `@nClientDownloadEnableHTTP2PlatformLinux` | `1` | Bool (0/1), default 1. Content downloads: allows HTTP/2 connections to content servers on Linux clients. | Enable HTTP/2 connections on Linux clients | 0x4 | steamclient.so |
+| `@nClientDownloadEnableHTTP2PlatformWindows` | `1` | Bool (0/1), default 1. Content downloads: allows HTTP/2 to content servers on Windows clients. Not used on Linux. | Enable HTTP/2 connections on Windows clients | 0x4 | steamclient.so |
+| `@nClientDownloadEnableHTTP2RelBranch` | `0` | Bool (0/1), default 0. Content downloads: on stable (non-beta) clients, HTTP/2 is used on the enabled platforms only if this is set. | Only enable HTTP/2 on enabled platforms on rel branch client if this is set | 0x4 | steamclient.so |
+| `@nClientDownloadInitWindowSizeHTTP2Connection` | `10000000` | Int bytes, default 10000000 (~10 MB). Content downloads: the initial HTTP/2 flow-control window for each connection. | Init per-connection window size for HTTP/2. | 0x2700000004 | steamclient.so |
+| `@nClientDownloadInitWindowSizeHTTP2Stream` | `2000000` | Int bytes, default 2000000 (~2 MB). Content downloads: the initial HTTP/2 flow-control window for each stream. | Init per-stream window size for HTTP/2. | 0x2700000004 | steamclient.so |
+| `@nClientDownloadProbUseHTTP2IfAvailable` | `50` | Int percent 0-100, default 50. Content downloads: the chance of using HTTP/2 for a download source that supports it. This is a rollout or A/B setting. | If http/2 is available for a given download source, use it w/ this probability [0,100] | 0x4 | steamclient.so |
+| `@nClientEnableHTTP2PlatformLinux` | `1` | Bool (0/1), default 1. General client HTTP (the 'App Info' / Steam Engine HTTP client, not depot downloads): allows HTTP/2 on Linux. | Enable HTTP/2 connections on Linux clients | 0x4 | steamclient.so |
+| `@nClientEnableHTTP2PlatformWindows` | `1` | Bool (0/1), default 1. General client HTTP: allows HTTP/2 on Windows clients. Not used on Linux. | Enable HTTP/2 connections on Windows clients | 0x4 | steamclient.so |
+| `@nClientEnableIPv6ForHTTPPlatformLinux` | `0` | Bool (0/1), default 0. General client HTTP (Steam Engine / App Info client): uses IPv6 for HTTP connections by default on Linux. | Enable IPv6 HTTP connections by default on Linux clients | 0x4 | steamclient.so |
+| `@nClientEnableIPv6ForHTTPPlatformWindows` | `0` | Bool (0/1), default 0. General client HTTP: uses IPv6 by default on Windows clients. Not used on Linux. | Enable IPv6 HTTP connections by default on Windows clients | 0x4 | steamclient.so |
+| `@nClientFrameRateReportBatchSize` | `60` | Int, default 60. Game performance metrics: number of frame-rate reports collected locally before they are sent to Valve. | Number of frame rate reports to collect locally before sending to the server | 0x4 | steamclient.so |
+| `@nClientFrameRateReportSecs` | `60` | Int seconds, default 60. Game performance metrics: the time between individual frame-rate samples taken while a game runs. | Number of seconds between individual frame rate reports | 0x4 | steamclient.so |
+| `@nClientInitWindowSizeHTTP2Connection` | `10000000` | Int bytes, default 10000000. General client HTTP ('App Info' client): the initial HTTP/2 flow-control window for each connection. | Init per-connection window size for HTTP/2. | 0x2700000004 | steamclient.so |
+| `@nClientInitWindowSizeHTTP2Stream` | `2000000` | Int bytes, default 2000000. General client HTTP ('App Info' client): the initial HTTP/2 flow-control window for each stream. | Init per-stream window size for HTTP/2. | 0x2700000004 | steamclient.so |
+| `@nClientQueryCMDirectoryBeforeConnect` | `1` | Int enum, default 1. CM connection: fetches a fresh CM server list from the CMDirectory web API before connecting. 0 = off, 1 = on, 2 = only main/dev/beta clients. The result also decides WebSockets vs UDP (Netfilter) CMs by a percentage roll. | Use CMDirectory webapi to get fresh CM list on connect - 0=disabled, 1=enabled, 2=main/dev/beta clients only | 0x4 | steamclient.so |
+| `@nClientServiceMethodForDownloadListPercent` | `100` | Int percent, default 100. Content downloads: the share of clients that get the download-source list through the service method (ContentServerDirectory.GetServersForSteamPipe) instead of the legacy path. A rollout dial. *(medium)* |  | 0x4 | steamclient.so |
+| `nCloudFileCompressionMinFileSizeKB` | `16` | Int KB, default 16. Steam Cloud: files smaller than this are uploaded without compression. *(medium)* |  | 0x4 | steamclient.so |
+| `nCloudFileCompressionMinFileSizeKBSharedFile` | `128` | Int KB, default 128. Steam Cloud: the minimum size before shared (UGC) files are compressed for upload. *(medium)* |  | 0x4 | steamclient.so |
+| `nCloudFileCompressionPercentageMin` | `10` | Int percent, default 10. Steam Cloud: compression must save at least this much before the compressed version is uploaded. *(medium)* |  | 0x4 | steamclient.so |
+| `nCloudFileCompressionPercentageMinSharedFile` | `50` | Int percent, default 50. Steam Cloud: the minimum saving from compression before a shared (UGC) file is uploaded compressed. *(medium)* |  | 0x4 | steamclient.so |
+| `nCloudUploadMinIntervalSec` | `1800` | Int seconds, default 1800 (30 min). Roaming Config cloud sync (cloud-synced client/user settings): the minimum time between uploads of local changes. *(medium)* |  | 0x4 | steamclient.so |
+| `nCloudUploadNetworkTimeoutSeconds` | `400` | Int seconds, default 400. Steam Cloud: the network timeout for one HTTP file upload to cloud storage before it counts as 'timed out'. *(high)* |  | 0x4 | steamclient.so |
+| `@nContentDeltaChunkAppendChunksAfterProtobufSizeThresholdMB` | `33` | Int MB, default 33. Content updates with delta chunks: when the delta data in a protobuf message goes over this size, the remaining chunks are appended outside the protobuf, probably to stay under message size limits. *(low)* |  | 0x4 | steamclient.so |
+| `nContentDownloadsToOtherDrive` | `1` | Bool (0/1), default 1. Content updates: allows staging an update on a different drive from the install folder when space is short ('switched staging folder to ...'). | Allow to download updates to other drives then install folder is on | 0x4 | steamclient.so |
+| `nContentStatsReportInterval` | `72` | Int hours, default 72. Content subsystem: how often content and download statistics are reported to Valve. *(medium)* | In Hours | 0x4 | steamclient.so |
+| `@nContentUpdateAutoVerifyCleanBytesThresholdMB` | `2048` | Int MB, default 2048. Content updates auto-verify: once this many MB have been verified clean, automatic verification backs off. The tally resets when the last verify is old. | How many clean MB must we verify before backing off on auto-verifies | 0x4 | steamclient.so |
+| `@nContentUpdateAutoVerifyEnable` | `1` | Int, default 1. Content updates: automatically verifies installed files after game updates. 0 = off, 1 = on for all clients. | 0 = disabled; 1 = enabled all clients | 0x4 | steamclient.so |
+| `@nContentUpdateAutoVerifyIntervalDays` | `15` | Int days, default 15. Content updates: auto-verify a library folder during game updates every N days. | Auto-verify game updates ever N days | 0x4 | steamclient.so |
+| `@nCSClientRateLimitKbps` | `0` | Int kbps, default 0 (= no limit). Content downloads: a download bandwidth limit that works alongside the user's DownloadThrottleKbps setting. *(medium)* |  | 0x4 | steamclient.so |
+| `@nCSJob404ResponseLimit` | `25` | Int, default 25. Content downloads: after this many HTTP 404 responses from one content server, the client stops using it for the download. *(high)* |  | 0x4 | steamclient.so |
+| `@nCSJob5xyResponseLimit` | `10` | Int, default 10. Content downloads: after this many HTTP 5xx responses from one content server, the client stops using it. *(high)* |  | 0x4 | steamclient.so |
+| `nDepotSaveCorruptChunks` | `0` | Int/bool, default 0. Content updates debug: keeps corrupt downloaded chunks on disk for later analysis instead of throwing them away. *(medium)* |  | 0x4 | steamclient.so |
+| `@nDownloadLANChunkCacheSizeMB` | `128` | Int MB, default 128. LAN peer-to-peer content transfer: the size of the in-memory chunk cache used when serving content to other Steam clients on the LAN. *(medium)* |  | 0x4 | steamclient.so |
+| `@nDownloadLANPeerGroup` | `0` | Int, default 0. LAN peer content transfer: the peer-to-peer download group ID this client joins (site-license servers can set it: 'Joining P2P download group %u'). 0 = no group. *(medium)* |  | 0x4 | steamclient.so |
+| `@net_backlog_bytes_allowed` | `60000000` | Int bytes, default 60000000 (60 MB). TCP connections: if unsent data goes above this (together with net_backlog_time_allowed_sec), the connection closes itself. *(high)* |  | 0x0 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `@net_backlog_time_allowed_sec` | `8` | Int seconds, default 8. TCP connections: how long a connection may stay over the send backlog limit before it closes itself. *(high)* |  | 0x0 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `net_incomingcheck` | `1` | Bool (0/1), default 1. Legacy P2P networking (ISteamNetworking sockets): probably checks or validates incoming connections and packets on P2P sockets. *(low)* |  | 0x0 | steamclient.so |
+| `@net_loopback` | `1` | Bool (0/1), default 1. Networking: allows the in-process loopback transport for connections to local endpoints. *(low)* |  | 0x0 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `net_maxresendsperframe` | `32` | Int, default 32. Legacy P2P networking: the maximum number of dropped packets resent per frame. *(high)* |  | 0x0 | steamclient.so |
+| `@NetConnectionBufferMsgLimit` | `1000` | Int, default 1000. CM connection: the maximum number of messages batched into one compressed (zipped) multi-packet. | Max # of message that will be buffered into a single zipped packet | 0x4 | steamclient.so |
+| `@NetConnectionBufferThreaded` | `1` | Bool (0/1), default 1. CM connection: buffers and flushes outgoing messages on a worker thread. *(low)* |  | 0x4 | steamclient.so |
+| `@nGameRecordingTextureGPU` | `0` | Int, default 0. Game recording / Remote Play encoder: picks which GPU (adapter index) to capture and encode on ('Changing adapter'). *(medium)* |  | 0x0 | steamui.so |
+| `@nHTTPServerHTTP2InitWindowSizePerConnection` | `3145728` | Int bytes, default 3145728 (3 MB). Built-in HTTP server: the default HTTP/2 flow-control window for each connection. A server can set its own. | Default HTTP/2 per-connection flow-control initial window size in bytes for CHTTPServer connections. Overridden per-server by SetHTTP2FlowControlInitWindowSizePerConnection(). | 0x400000004 | steamclient.so, steamui.so |
+| `@nHTTPServerHTTP2InitWindowSizePerStream` | `1048576` | Int bytes, default 1048576 (1 MB). Built-in HTTP server: the default HTTP/2 flow-control window for each stream. A server can set its own. | Default HTTP/2 per-stream flow-control initial window size in bytes for CHTTPServer connections. Overridden per-server by SetHTTP2FlowControlInitWindowSizePerStream(). | 0x400000004 | steamclient.so, steamui.so |
+| `@nHTTPServerHTTP2MaxConcurrentStreams` | `25` | Int, default 25. Built-in HTTP server: the default maximum number of HTTP/2 streams per connection. A server can set its own. | Default maximum concurrent HTTP/2 streams advertised per CHTTPServer connection. Overridden per-server by SetHTTP2MaxConcurrentStreamsPerConnection(). | 0x400000004 | steamclient.so, steamui.so |
+| `@nHTTPServerLogLevelAccessLine200` | `3` | Int log level, default 3. Built-in HTTP server: the log level for the one-line access log entry of requests that return 200. | Log level to use for one-line access-log-style for each http server request returning 200 | 0x400000000 | steamclient.so, steamui.so |
+| `@nHTTPServerLogLevelAccessLineNon200` | `2` | Int log level, default 2. Built-in HTTP server: the log level for the one-line access log entry of requests that don't return 200. | Log level to use for one-line access-log-style for each http server request that returns != 200 | 0x400000000 | steamclient.so, steamui.so |
+| `@nHTTPServerLogLevelDetails200` | `4` | Int log level, default 4. Built-in HTTP server: the log level for full details of requests that return 200. If turned on, it will fill the log quickly. | Log level to use for full details of any http server request returning 200.  This will probably fill up the log if you leave it on. | 0x400000000 | steamclient.so, steamui.so |
+| `@nHTTPServerLogLevelDetailsNon200` | `4` | Int log level, default 4. Built-in HTTP server: the log level for full details of requests that don't return 200. | Log level to use for full details of any http server request returning != 200 | 0x400000000 | steamclient.so, steamui.so |
+| `@nHTTPServerMaxPipelinedReqsPerConnection` | `8` | Int, default 8. Built-in HTTP server: the maximum number of pipelined HTTP/1.1 requests waiting on each connection. | Max outstanding pipelined reqs per connection | 0x400000000 | steamclient.so, steamui.so |
+| `@nHTTPServerYieldOn100ContinueSendSecs` | `300` | Int seconds, default 300. Built-in HTTP server: after sending '100 Continue', how long to wait for the client to send the request body. | Seconds to yield when sending a 100 continue for purposes of telling client to send body of request | 0x400000000 | steamclient.so, steamui.so |
+| `@nIOCPThreadCount` | `1` | Int, default 1. Networking: the number of I/O completion port threads. This is a Windows IOCP setting and probably does nothing on Linux. *(medium)* |  | 0x0 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `@nJobInteryieldMillisecondsAlertThreshold` | `120` | Int ms, default 120. Job system: a job that runs longer than this without yielding raises an alert-level 'Long interyield runtime' report. *(medium)* |  | 0x400000004 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `@nJobInteryieldMillisecondsLogThreshold` | `80` | Int ms, default 80. Job system: a job that runs longer than this without yielding is logged ('Long interyield runtime'). These messages are rate-limited. *(high)* |  | 0x400000004 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `@nJobInteryieldMillisecondsSpewThreshold` | `500` | Int ms, default 500. Job system: a job that runs longer than this without yielding gets the most detailed 'Long interyield runtime' report (with job details). It is the highest of the log/alert/spew thresholds. *(medium)* |  | 0x400000004 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `@nJobNetSendsInsaneThreshold` | `15000` | Int, default 15000. Job system: a job that sends more than this many network messages is reported as 'Insane net sends' (rate-limited). This catches runaway jobs. *(high)* |  | 0x400000004 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `@nJWTVerifiedTokenCacheSize` | `0` | Int, default 0 (cache off). Auth tokens: how many verified JWTs to remember, so a token presented again doesn't need its signature checked again. | Number of verified JWTs to memoize so that re-presenting a token doesn't re-check its signature. 0 disables the cache. | 0x4 | steamclient.so, steamui.so |
+| `@nLANPeerGroupRateLimitKbps` | `0` | Int kbps, default 0 (= no limit). LAN peer-to-peer content transfer: a bandwidth limit for transfers within the LAN peer download group. *(medium)* |  | 0x4 | steamclient.so |
+| `@nLANPeerMaxConnections` | `24` | Int, default 24. LAN peer content transfer: the maximum number of connections to LAN peers used as download sources. *(medium)* |  | 0x4 | steamclient.so |
+| `@nLANPeerRateLimitKbps` | `0` | Int kbps, default 0 (= no limit). LAN peer content transfer: a bandwidth limit for each LAN peer connection. *(medium)* |  | 0x4 | steamclient.so |
+| `@nLegalDictionaryUpdateRateInSeconds` | `600` | Int seconds, default 600. Steam engine main loop: how often the 'legal dictionary' (probably the list of allowed words or names used for text filtering) is refreshed. *(low)* |  | 0x4 | steamclient.so |
+| `@nNetConnectionBufferZipLevel` | `1` | Int compression level, default 1. CM connection: the zlib level used when batching buffered outgoing messages into one compressed packet. *(medium)* |  | 0x4 | steamclient.so |
+| `@nParentalSettingsLogLevel` | `4` | Int log level, default 4. Family View / parental controls: how much is written to the parental log file (lock/unlock with PIN, settings changes). | Control the amount of spew written to the parental log file | 0x4 | steamclient.so |
+| `@nPartnerUploadFinalizeTimeoutSecs` | `600` | Int seconds, default 600. Partner uploads: the timeout for the DRM finalize step, which can be slow because it copies the file to cloud storage. | Seconds to timeout the DRM finalize which can be slow as it involves sending to cloud storage | 0x4 | steamclient.so |
+| `nPeerContentDefaultMode` | `1` | Int enum, default 1. Local network game transfers (peer content): the default for who this client shares with or downloads from. 0 = off, 1 = only my own devices, 2 = friends only, 3 = anyone. It is stored as PeerContent ClientMode/ServerMode. | 0 = off, 1 = only me, 2 = only friends, 3 = anyone | 0x4 | steamclient.so |
+| `nProductInfoUpdateInterval` | `900` | Int seconds, default 900 (15 min). Steam engine: how often app and package product info (PICS) is checked for changes. *(medium)* |  | 0x4 | steamclient.so |
+| `@nProtobufArenaInitialBlockSize` | `65536` | Int bytes, default 65536. Protobuf message handling: the size of the first memory block each protobuf arena allocates. | Default initial allocation size for PB arena | 0x400000004 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `@nProtobufArenaMaxBlockSize` | `524288` | Int bytes, default 524288. Protobuf message handling: the largest memory block a protobuf arena allocates. | Max block allocation size for PB arena | 0x400000004 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `@nProtobufArenaNumberOfHeadersToShare` | `128` | Int, default 128. Protobuf message handling: how many message headers share one protobuf arena before a new arena is created. Valve's help text is copied from the Jobs version. *(medium)* | Number of Jobs to give a single protobuf Arena before we create a new one | 0x400000004 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `@nProtobufArenaNumberOfJobsToShare` | `128` | Int, default 128. Protobuf message handling: how many jobs share one protobuf arena before a new one is created. | Number of Jobs to give a single protobuf Arena before we create a new one | 0x400000004 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `nRichPresenceUploadThrottleSecs` | `5` | Int seconds, default 5. Rich presence: game changes (SetRichPresence, including session-share links) are sent to Steam at most once per this interval. *(medium)* |  | 0x4 | steamclient.so |
+| `@nRoamingConfigReconnectCloudSyncWindowSec` | `7200` | Int seconds, default 7200 (2 h). Roaming Config cloud sync: after reconnecting to Steam, the cloud is re-synced if the last sync was longer ago than this. *(low)* |  | 0x4 | steamclient.so |
+| `@nScreenshotSaveMaxWidth` | `9999` | Int pixels, default 9999. Screenshots: the maximum width of saved overlay screenshots (also applies to uncompressed/AVIF saves); wider ones are scaled down. *(medium)* |  | 0x0 | steamclient.so |
+| `@nServerRefreshRateLimitAdditional` | `1` | Int, default 1. Server browser: the token-bucket refill amount for game-server list refreshes (GMS master server) per app. Valve's help text is shared by all three RateLimit settings. *(medium)* | Limits the burst number of calls per appid to refresh GMS game server lists | 0x4 | steamclient.so |
+| `@nServerRefreshRateLimitBurst` | `100` | Int, default 100. Server browser: the burst size, i.e. the maximum number of game-server list refreshes allowed at once per app. | Limits the burst number of calls per appid to refresh GMS game server lists | 0x4 | steamclient.so |
+| `@nServerRefreshRateLimitInterval` | `20` | Int, default 20 (probably seconds). Server browser: the refill interval of the rate limiter for game-server list refreshes per app. *(medium)* | Limits the burst number of calls per appid to refresh GMS game server lists | 0x4 | steamclient.so |
+| `@nSiteLicenseProxyCacheMaxGB` | `100` | Int GB, default 100. Site-license provider: the maximum disk space used by the local content cache. | If local content cache is enabled, use up to this much disk space | 0x0 | steamclient.so |
+| `@nSiteLicenseProxyEnableP2P` | `0` | Bool (0/1), default 0. Site-license provider: puts all connected clients in one LAN peer-to-peer download group. | If set, will have all connected clients join the same P2P download group | 0x0 | steamclient.so |
+| `@nSiteLicenseProxyPort` | `0` | Int port, default 0 (= off). Site-license provider: a value above 0 turns on the local content cache, which listens on this port for /depot/ HTTP requests from site clients. | Local content cache: set > 0 to enable, will listen on this port | 0x0 | steamclient.so |
+| `@nSpewThrottleNagFrequencyMs` | `5000` | Int ms, default 5000. Log throttling (@bEnableSpewThrottle): how often to log a reminder that messages are being suppressed. *(medium)* |  | 0x4 | friendsui.so, gamelauncher, gameoverlayui.so, libvideo.so, steam, steamclient.so, steamservice.so, steamsysinfo, steamui.so, steamwebhelper |
+| `@nSpewThrottlePeriodMs` | `1000` | Int ms, default 1000. Log throttling: the time window over which repeated messages are counted. *(medium)* |  | 0x4 | friendsui.so, gamelauncher, gameoverlayui.so, libvideo.so, steam, steamclient.so, steamservice.so, steamsysinfo, steamui.so, steamwebhelper |
+| `@nSpewThrottleResumeThreshold` | `3` | Int, default 3. Log throttling: once a throttled message drops to this many per period, normal logging resumes. *(medium)* |  | 0x4 | friendsui.so, gamelauncher, gameoverlayui.so, libvideo.so, steam, steamclient.so, steamservice.so, steamsysinfo, steamui.so, steamwebhelper |
+| `@nSpewThrottleTriggerThreshold` | `10` | Int, default 10. Log throttling: a message repeated this many times in one period starts being throttled. *(medium)* |  | 0x4 | friendsui.so, gamelauncher, gameoverlayui.so, libvideo.so, steam, steamclient.so, steamservice.so, steamsysinfo, steamui.so, steamwebhelper |
+| `@nSpewThrottleUnconditionalResumeMs` | `5000` | Int ms, default 5000. Log throttling: normal logging always resumes after this long, regardless of the message rate. *(medium)* |  | 0x4 | friendsui.so, gamelauncher, gameoverlayui.so, libvideo.so, steam, steamclient.so, steamservice.so, steamsysinfo, steamui.so, steamwebhelper |
+| `@nSpewThrottleUnconditionalTriggerCount` | `50` | Int, default 50. Log throttling: this many messages always triggers throttling, whatever the rate. *(low)* |  | 0x4 | friendsui.so, gamelauncher, gameoverlayui.so, libvideo.so, steam, steamclient.so, steamservice.so, steamsysinfo, steamui.so, steamwebhelper |
+| `@nThreadedProtobufParseMinBytes` | `128` | Int bytes, default 128. CM message handling: protobuf bodies at least this big are parsed on a worker thread instead of the job thread. 0 turns threaded parsing off. Run 'protobuf_parse_stats reset' after changing it. | Parse protobuf message bodies of at least this many bytes on a worker thread instead of on the job thread.  0 disables threaded parsing entirely. | 0x400000004 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `@nThreadedProtobufParseThreads` | `2` | Int, default 2. CM message handling: the maximum number of worker threads that parse protobuf bodies (see @nThreadedProtobufParseMinBytes). Takes effect immediately. | Max worker threads in the dedicated pool used for threaded protobuf body parses (see @nThreadedProtobufParseMinBytes).  Changes take effect live. | 0x400000004 | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `@nVoicePostActivityXmitMS` | `250` | Int ms, default 250. Voice chat: keeps transmitting this long after voice activity stops, even if it's silent, so word endings aren't cut off. | after voice activity, continue recording for this many ms even if there is silence | 0x4 | steamui.so |
+| `@nWatchdogSteamUIPercentReport` | `1` | Int percent, default 1. Steam UI watchdog: the share of clients that report a stall when RunSteamPlatform goes without a watchdog signal for too long ('appears to have stalled'). *(medium)* |  | 0x4 | steamui.so |
+| `@OSJumpListMRUSize` | `5` | Int, default 5. The number of recently played games (steam://rungameid links) shown in the taskbar jump list or tray menu. *(high)* |  | 0x0 | steamui.so |
+| `p2p_connecttimeout` | `15` | Int seconds, default 15. Legacy P2P networking (ISteamNetworking): a P2P connection request with no answer after this long times out. *(high)* |  | 0x0 | steamclient.so |
+| `p2p_unusedtimeout` | `120` | Int seconds, default 120. Legacy P2P networking: a P2P session with no traffic for this long is closed. *(medium)* |  | 0x0 | steamclient.so |
+| `@PeerContentClientMaxJobs` | `1` | Int, default 1. Local network game transfers: the number of LAN peers downloaded from at the same time. | number of peer sources used at the same time | 0x4 | steamclient.so |
+| `@PeerContentServerMaxClients` | `8` | Int, default 8. Local network game transfers: the maximum number of peers that can download from this machine at once. | limit number of peers connected | 0x4 | steamclient.so |
+| `@PeerContentServerPort` | `27040` | Int TCP port, default 27040. Local network game transfers: the port this client listens on to serve game content to LAN peers ('port %u unavailable' if it is in use). | If peer content server, will listen on this port for TCP connections from peers | 0x4 | steamclient.so |
+| `@PeerContentServerRetryDelay` | `60` | Int seconds, default 60. Local network game transfers: how long to wait before trying a failed peer content server again. | seconds before retrying peer content server | 0x4 | steamclient.so |
+| `@PyrowaveHeightFactor` | `2` | Number, default 2. Game recording / Remote Play with the 'Pyrowave' video codec: a factor in the base bitrate calculation from resolution (Mbit/s for width x height at 60 FPS, then scaled by quality and frame rate). *(low)* |  | 0x0 | steamui.so |
+| `@PyrowavePSNR` | `35` | Number dB, default 35. Pyrowave video encoder: the target PSNR (quality) used to work out the base bitrate. *(medium)* |  | 0x0 | steamui.so |
+| `@sBroadcastPreset` |  | String x264 preset (e.g. ultrafast, superfast, veryfast). Steam Broadcasting / game recording with the libx264 encoder: overrides the encoder preset. Empty uses the built-in choice. *(high)* |  | 0x0 | steamui.so |
+| `@sBroadcastTune` | `film` | String x264 tune, default 'film' ('zerolatency' also appears). Steam Broadcasting / recording with libx264: the encoder tune setting. *(high)* |  | 0x0 | steamui.so |
+| `sc_kalman_a_vel` | `1.0` | Float, default 1.0. Steam Input trackpad smoothing: the 'A' (state transition) value for velocity in the trackpad Kalman filter. For tuning. *(medium)* |  | 0x0 | steamclient.so |
+| `sc_kalman_fastq` | `0` | Float, default 0. Steam Input trackpad Kalman filter: the process noise (Q) used for fast movement. 0 probably means the built-in value. *(low)* |  | 0x0 | steamclient.so |
+| `sc_kalman_h_vel` | `1.0` | Float, default 1.0. Steam Input trackpad Kalman filter: the 'H' (observation) value for velocity. *(medium)* |  | 0x0 | steamclient.so |
+| `sc_kalman_q_vel` | `2.0` | Float, default 2.0. Steam Input trackpad Kalman filter: the process noise (Q) for velocity. *(medium)* |  | 0x0 | steamclient.so |
+| `sc_kalman_r_vel` | `2.0` | Float, default 2.0. Steam Input trackpad Kalman filter: the measurement noise (R) for velocity. Higher values smooth more. *(medium)* |  | 0x0 | steamclient.so |
+| `sc_kalman_repeated_sample` | `0` | Bool (0/1), default 0. Steam Input trackpad Kalman filter: how repeated (cloned) samples are handled, e.g. 'Clone Triton Packet' on the Triton controller. *(low)* |  | 0x0 | steamclient.so |
+| `sc_kalman_slowq` | `0` | Float, default 0. Steam Input trackpad Kalman filter: the process noise (Q) used for slow movement. 0 probably means the built-in value. *(low)* |  | 0x0 | steamclient.so |
+| `@sCSDSVirtualHostHeader` |  | String. Content downloads: probably overrides the HTTP Host (virtual host) header sent to the content server directory service (CSDS) or to content servers. *(low)* |  | 0x4 | steamclient.so |
+| `sDepotDownloadFileFilter` |  | String of wildcards separated by ';' (e.g. '*.exe;*.dll'). Content updates: only files matching the filter are downloaded. Useful in steamcmd for partial downloads. | only download matching files, eg *.exe;*.dll | 0x4 | steamclient.so |
+| `@sForceLocalContentCache` |  | String host[:port]. Content downloads: always use this LAN content cache ('Enabling local content cache at %s as directed'). Without it, the client looks up lancache.steamcontent.com or uses the cache a site-license server provides. *(high)* |  | 0x4 | steamclient.so |
+| `@sHardwareUpdateForceRequiredPriorityTS` |  | String (timestamp). Valve hardware firmware updates (hardwareupdatecontroller): marks firmware updates up to this timestamp as required (must_update), for testing the required-update flow. *(low)* |  | 0x4 | steamui.so |
+| `spew_controller_loss` | `0` | Bool (0/1), default 0. Steam Input: logs controller packet loss or disconnects. *(low)* |  | 0x0 | steamclient.so |
+| `@sSiteLicenseProxyCacheDirectory` | `appcache/slscache` | String path, default 'appcache/slscache'. Site-license provider: where the local content cache is stored on disk. | If local content cache is enabled, use this path for disk cache | 0x0 | steamclient.so |
+| `@sSiteLicenseProxyExplicitIP` |  | String IP. Site-license provider: if set, clients are told to use this IP for the content cache instead of the address they discover. Needed when the cache runs as an external process. | Local content cache: if not blank, will instruct clients to go to this IP for the content cache. | 0x0 | steamclient.so |
+| `@sSteamCmdForcePlatformBitness` |  | '32' or '64'. steamcmd: pretend to be this platform bitness when picking depots (osarch), so you can download builds for another architecture. | Must be one of: [32 \| 64] | 0x4 | steamclient.so |
+| `@sSteamCmdForcePlatformCPU` |  | 'x86' or 'arm64'. steamcmd: pretend to be this CPU type when picking depots (oscpu). | Must be one of: [x86 \| arm64] | 0x4 | steamclient.so |
+| `@sSteamCmdForcePlatformType` |  | 'windows', 'macos', 'linux' or 'android'. steamcmd: pretend to be this OS when picking depots (oslist), e.g. to download Windows game servers on Linux. | Must be one of: [windows \| macos \| linux \| android] | 0x4 | steamclient.so |
+| `steam_controller_force_oobe` | `0` | Bool (0/1), default 0. Steam Controller: forces the first-time setup (out-of-box experience) and registration flow, even if the controller is already registered. *(medium)* |  | 0x0 | steamclient.so |
+| `@strCSNoCacheHeader` | `no-cache` | String, default 'no-cache'. Content downloads: the Cache-Control header value sent when cache bypass is on (see @bCSForceNoCache). *(high)* |  | 0x4 | steamclient.so |
+| `@StreamClientArgs` |  | String. Remote Play: extra command-line arguments for the Remote Play client process, added to the generated '--universe ... --server ... --transport ...' arguments. *(medium)* |  | 0x0 | steamclient.so |
+| `streaming_log_spikes` | `0` | Bool (0/1), default 0. Remote Play / game streaming: logs frame-time or latency spikes. *(low)* |  | 0x0 | steamui.so |
+| `@StreamTransportICEPenalty` | `0` | Int ms, default 0. Remote Play: an extra penalty added to ICE (direct P2P) when choosing the streaming transport. Raise it to prefer SDR relays. | Add penalty (ms) to ICE for streaming transport selection | 0x0 | steamui.so |
+| `@StreamTransportSDRPenalty` | `0` | Int ms, default 0. Remote Play: an extra penalty added to SDR (Steam Datagram Relay) when choosing the streaming transport. Raise it to prefer direct ICE. | Add penalty (ms) to SDR for streaming transport selection | 0x0 | steamui.so |
+| `@sTrustedLocalContentCacheName` |  | String machine name. Content downloads: the host of a trusted local Steam download cache, used when available. Non-trusted caches found by lookup are ignored ('Ignoring non-trusted local content cache'). | Set this to the machine name where a trusted local Steam download cache is hosted, and we'll use it if available. | 0x4 | steamclient.so |
+| `@test_bCloudForceSyncConflict` | `0` | Bool (0/1), default 0. Steam Cloud testing: together with @test_nCloudForceSyncFailureAppID, the forced failure is a file conflict instead of a generic error. | If @test_nCloudForceSyncFailureAppID is set, then set this so that the failure case is 'file conflict' instead of generic failure | 0x0 | steamclient.so |
+| `@test_nCloudForceSyncFailureAppID` | `0` | App ID, default 0. Steam Cloud testing: the next cloud sync for this app fails, to test the sync-failure UI. | Set this to a non-zero App ID to test cloud sync failure. The next sync request will fail. | 0x0 | steamclient.so |
+| `testappcloudpaths` | `0` | App ID, default 0. Steam Cloud: turns on Auto-Cloud for this app locally, for developers testing their Auto-Cloud path configuration ('Run testappcloudpaths <appid> in the console to enable it'). *(high)* |  | 0x10 | steamclient.so |
+| `triton_imu_sensortime_log` | `0` | Bool (0/1), default 0. Steam Input: logs IMU sensor timings (delta-µs and sensor time) for the 'Triton' controller (Valve's internal codename, believed to be the new Steam Controller). | Spew the triton IMU sensor timings to console. | 0x0 | steamclient.so |
+| `@uDownloadLANPeerPort` | `27038` | Int TCP port, default 27038. LAN peer-to-peer downloads: the port used to accept connections from peers in the download group. Every member of the group must use the same port. | If LAN p2p download enabled, will listen on this port for TCP connections from peers. Must be set consistently across all members of the group! | 0x4 | steamclient.so |
+| `ugc_query_default_cache_time` | `600` | Int seconds, default 600. Workshop (ISteamUGC queries): how long query results stay cached when a game allows cached responses. *(medium)* |  | 0x4 | steamclient.so |
+| `ugc_query_max_get_details` | `2000` | Int, default 2000. Workshop: the maximum number of items per PublishedFile.GetDetails batch when fetching item details not in the cache. *(medium)* |  | 0x4 | steamclient.so |
+| `UGCCDNReportPct` | `100` | Int percent, default 100. Workshop/UGC downloads: the share of downloads that send a Cloud.CDNReport (success/failure telemetry) to Valve. *(medium)* |  | 0x4 | steamclient.so |
+| `@unMinimumShaderDownloadSizeInUI` | `33554432` | Int bytes, default 33554432 (32 MB). Shader pre-caching: shader downloads smaller than this are not shown in the downloads UI. *(medium)* |  | 0x4 | steamclient.so, steamui.so |
+| `unShaderBackgroundProcessingThreads` | `0` | Int, default 0 (= automatic). Shader cache manager: the number of threads for background Fossilize shader processing (replay). *(medium)* |  | 0x4 | steamclient.so |
+| `unShaderHighPriorityProcessingThreads` | `0` | Int, default 0 (= automatic). Shader cache manager: the number of threads for high-priority shader processing, e.g. when you launch a game whose shaders aren't processed yet. *(medium)* |  | 0x4 | steamclient.so |
+| `unShaderHitCacheGeneration` | `0` | Int, default 0. Shader cache manager: the local 'hit cache' generation number. When Valve's server raises its generation, local hit caches are thrown away ('dropping caches'). *(medium)* |  | 0x4 | steamclient.so |
+| `unShaderMaxHeadersPerMessage` | `1024` | Int, default 1024. Shader pre-caching: the maximum number of shader headers per message when reporting the local shader inventory to Valve. *(medium)* |  | 0x4 | steamclient.so |
+| `unShaderMaxUploadMessageSizeKb` | `256` | Int KB, default 256. Shader pre-caching: the maximum size of one Shader.SendShader upload message. A single larger shader is sent on its own. *(high)* |  | 0x4 | steamclient.so |
+| `@unUserStatsTest` | `0` | Int, default 0. User stats and achievements (RequestUserStats): a test or debug switch. What it does is unclear. *(low)* |  | 0x4 | steamclient.so |
+| `@uRemoteDiscoveryPortOverride` | `0` | Int UDP port, default 0 (= the default broadcast port). LAN discovery for Remote Play and site license: listen for discovery broadcasts on this port instead. | If non-zero, will listen on this port for broadcasts instead of k_nBroadcastPort | 0x4 | steamclient.so |
+| `@uRemoteDiscoveryPortTransmit` | `0` | Int UDP port, default 0 (= the listen port). LAN discovery: send outgoing discovery broadcasts on this port. | If non-zero, will transmit outgoing broadcasts on this port instead of on the listen port | 0x4 | steamclient.so |
+| `verifySignaturesBeforeLaunch` | `1` | Bool (0/1), default 1. Game launch: checks executable or binary signatures before launching. *(low)* |  | 0x0 | steamui.so |
+| `vgui_autocomplete_new_style` | `1` | Bool (0/1), default 1. Legacy VGUI: uses the newer style for autocomplete dropdowns, probably in the developer console. *(low)* |  | 0x0 | steamui.so |
+| `voice_api_optimalrate` | `24000` | Int Hz, default 24000. Voice API (ISteamUser voice): the optimal sample rate reported to games for decompressed voice (GetVoiceOptimalSampleRate). *(medium)* |  | 0x10 | steamclient.so |
+| `voice_autogain` | `0` | Bool (0/1), default 0. Voice chat: applies automatic gain to incoming (decoded) voice. *(low)* |  | 0x0 | steamclient.so |
+| `voice_fakeloss` | `0` | Int (probably percent), default 0. Voice chat testing: drops some voice packets on purpose to simulate packet loss. *(medium)* |  | 0x0 | steamclient.so |
+| `@voice_minabs` | `0.15` | Float, default 0.15. Voice activity detection: the minimum absolute (peak) sample level counted as speech. *(medium)* |  | 0x0 | libvideo.so, steamclient.so, steamui.so |
+| `@voice_minavg` | `1.0` | Float, default 1.0. Voice activity detection: the minimum average sample level counted as speech. *(medium)* |  | 0x0 | libvideo.so, steamclient.so, steamui.so |
+| `voice_outputdevice` | `0` | Int enum, default 0. Voice chat playback backend: 0 = Miles, 1 = XAudio2. Windows backends, so probably unused on Linux. | 0=>Miles 1=>XAudio2 | 0x0 | steamclient.so |
+| `voice_outputfile` |  | File path. Voice chat debugging: writes the voice system's mixed output to this file as a WAV file. Close Steam before using the file. | causes output from voice system to be written out to the specified file | 0x0 | steamclient.so |
+| `voice_preprocess` | `0` | Bool (0/1), default 0. Voice chat: cleans up microphone input (noise suppression etc.) with the Speex preprocessor. | enables voice cleanup on incoming microphone data | 0x0 | steamclient.so |
+| `voice_quality` | `4` | Int, default 4. Voice chat: the encoder quality level for the voice codec (Opus/SILK). Higher means better quality and more bandwidth. *(medium)* |  | 0x0 | steamclient.so |
+| `voice_resample_quality` | `1` | Int, default 1. Voice: the quality setting for resampling voice audio between sample rates. *(medium)* |  | 0x10 | steamclient.so |
+| `voice_silk_bitrate` | `30000` | Int bits/s, default 30000. Voice chat: the target bitrate for the SILK voice encoder. *(high)* |  | 0x10 | steamclient.so |
+| `@voice_spew_activity_check` | `0` | Bool (0/1), default 0. Voice activity detection debugging: logs each frame's average sample, maximum and high-sample count. *(high)* |  | 0x0 | libvideo.so, steamclient.so, steamui.so |
+| `@WatchdogThreadPercentReport` | `5` | Int percent, default 5. Steam engine watchdog: the share of clients that report a stall when the CSteamEngine main loop stops signalling for too long. *(medium)* |  | 0x4 | steamclient.so |
+| `workshop_items_cache_days` | `14` | Int days, default 14. Workshop: how long unused or unsubscribed workshop items stay on disk before they are removed ('removing unused item', 'keeping unsubscribed item'). *(medium)* |  | 0x4 | steamclient.so |
+| `workshop_items_full_check_interval` | `86400` | Int seconds, default 86400 (1 day). Workshop: how often the full list of an app's workshop items is checked against the server. *(high)* |  | 0x4 | steamclient.so |
+| `workshop_items_update_interval` | `2700` | Int seconds, default 2700 (45 min). Workshop: how often installed workshop items are checked for updates. *(medium)* |  | 0x4 | steamclient.so |

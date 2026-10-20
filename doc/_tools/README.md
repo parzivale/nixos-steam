@@ -28,6 +28,11 @@ nix shell --impure --expr 'with import (builtins.getFlake "nixpkgs") {}; python3
 6. **`protodump.py <outdir> <elf>...`** carves serialized `FileDescriptorProto`s out of the binaries and prints
    them as `.proto` text (`../protobuf/`). **`settings2md.py steamui.so <out.md>`** renders
    `CMsgClientSettings` together with its custom field options (`../settings/client-settings.md`).
+7. **`usage.py <elf> <binary-key> records.json <calls.jsonl>`** collects usage context for each record:
+   strings near the call site, or near every access to a ConVar object. Function boundaries come from
+   `.eh_frame_hdr`. **`mkctx.py`** turns that into per-category context files. Those files were used to write the
+   "What it does" descriptions ([descriptions/](descriptions/)*.json; copy them to `desc/` before running
+   `render.py` and `settings2md.py`).
 
 ## Limitations
 

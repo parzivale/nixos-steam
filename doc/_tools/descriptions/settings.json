@@ -1,0 +1,1622 @@
+{
+ "no_save_personal_info": {
+  "what": "Probably a legacy 'public computer' flag telling the client not to persist personal/account information on this machine; stored in config.vdf and read by steamclient, with no UI in this build.",
+  "ui": "not shown in UI",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "preferred_monitor": {
+  "what": "Which monitor Big Picture Mode opens on (monitor identifier string). Written via the dedicated SteamClient.Settings.SetPreferredMonitor API, not the generic setter.",
+  "ui": "Big Picture Settings > Display (monitor selector), via dedicated API",
+  "basis": "js-usage",
+  "confidence": "medium"
+ },
+ "steam_cef_gpu_blocklist_disabled": {
+  "what": "When true, the Steam web views (CEF/Chromium) ignore Chromium's GPU driver blocklist so GPU acceleration is used even on blocklisted drivers. Takes effect after restarting Steam.",
+  "ui": "'Disable GPU Blocklist' - Settings > Interface (advanced), requires restart",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "bigpicture_windowed": {
+  "what": "Runs Big Picture Mode in a window instead of fullscreen. Available before login; set through SteamClient.Settings.SetWindowed.",
+  "ui": "Big Picture display options (dedicated API); not a generic settings control",
+  "basis": "js-usage",
+  "confidence": "medium"
+ },
+ "display_name": {
+  "what": "Read-only state: name of the display the Steam UI is currently on (used by the display/scaling UI).",
+  "ui": "not shown in UI (state used by the Display page)",
+  "basis": "js-usage",
+  "confidence": "medium"
+ },
+ "is_external_display": {
+  "what": "Read-only state: whether the current display is an external monitor rather than the built-in panel (e.g. Steam Deck docked).",
+  "ui": "not shown in UI (state)",
+  "basis": "js-usage",
+  "confidence": "medium"
+ },
+ "steam_os_underscan_level": {
+  "what": "SteamOS underscan amount (float) that shrinks the picture to compensate for TV overscan; only meaningful while underscan is enabled.",
+  "ui": "Big Picture/SteamOS Settings > Display > Underscan (read via legacy settings object)",
+  "basis": "js-usage",
+  "confidence": "medium"
+ },
+ "steam_os_underscan_enabled": {
+  "what": "Enables SteamOS display underscan (shrinking the image so its edges are not cut off on TVs that overscan).",
+  "ui": "Big Picture/SteamOS Settings > Display > Underscan (read via legacy settings object)",
+  "basis": "js-usage",
+  "confidence": "medium"
+ },
+ "min_scale_factor": {
+  "what": "Read-only state: smallest UI scale factor allowed for the current display; bounds the scaling slider.",
+  "ui": "not shown in UI (bounds the Display > Scaling slider)",
+  "basis": "js-usage",
+  "confidence": "medium"
+ },
+ "max_scale_factor": {
+  "what": "Read-only state: largest UI scale factor allowed for the current display; bounds the scaling slider.",
+  "ui": "not shown in UI (bounds the Display > Scaling slider)",
+  "basis": "js-usage",
+  "confidence": "medium"
+ },
+ "auto_scale_factor": {
+  "what": "Read-only state: the scale factor Steam picks automatically for the current display when 'auto' scaling is used.",
+  "ui": "not shown in UI (used by Display > Scaling)",
+  "basis": "js-usage",
+  "confidence": "medium"
+ },
+ "small_mode": {
+  "what": "Desktop library 'Small Mode' (compact game list without the large library view). The client switches it off automatically when it needs to show a page in the main window.",
+  "ui": "Desktop client menu View > Small Mode",
+  "basis": "js-usage",
+  "confidence": "high"
+ },
+ "skip_steamvr_install_dialog": {
+  "what": "Suppresses the 'install SteamVR' prompt shown when a VR headset is detected (stored as system\\SteamVRHMDVGUIWarning).",
+  "ui": "'Don't Show this dialog again' checkbox on the SteamVR install dialog",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "always_show_user_chooser": {
+  "what": "When enabled, Steam shows the account picker at every start instead of logging in the remembered account automatically.",
+  "ui": "'Ask which account to use each time Steam starts' - Settings > Interface / account switcher",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "os_version_unsupported": {
+  "what": "Probably a flag the client sets when the running OS version is no longer supported, used to show an unsupported-OS warning.",
+  "ui": "not shown in UI",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "show_family_sharing_notifications": {
+  "what": "Probably controls notifications related to Steam Family / Family Sharing activity; computed by the client, no UI reference in this build.",
+  "ui": "not shown in UI",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "show_copy_count_in_library": {
+  "what": "Shows how many copies of a game the Steam Family owns in the library (default on).",
+  "ui": "'Show number of copies in Steam Family library' - Settings > Library",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "overlay_fps_counter_corner": {
+  "what": "Position of the in-game performance monitor/FPS counter: Off, Top-left, Top-center, Top-right, Bottom-right, Bottom-center or Bottom-left (Off disables it; other perf-overlay options appear only when it is not Off).",
+  "ui": "'Show performance monitor' dropdown - Settings > In Game; also Steam Deck QAM Performance",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "overlay_fps_counter_high_contrast": {
+  "what": "Draws the FPS counter in a high-contrast style for readability.",
+  "ui": "'FPS High Contrast' - Big Picture/Steam Deck QAM > Performance",
+  "basis": "loc-label",
+  "confidence": "medium"
+ },
+ "overlay_key": {
+  "what": "Keyboard shortcut that opens the Steam Overlay in game (default Shift+Tab).",
+  "ui": "'Overlay shortcut key(s)' - Settings > In Game",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "screenshot_key": {
+  "what": "Keyboard shortcut that takes a Steam screenshot in game (default F12).",
+  "ui": "'Take a screenshot' shortcut - Settings > In Game > Screenshots",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "enable_overlay": {
+  "what": "Master switch for the Steam Overlay in games (default on); when off, the overlay and features relying on it are unavailable in-game.",
+  "ui": "'Enable the Steam Overlay while in-game' - Settings > In Game",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "enable_screenshot_notification": {
+  "what": "Shows a notification toast when a screenshot is taken (default on).",
+  "ui": "'When a screenshot is taken, display a notification' - Settings > In Game > Screenshots",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "enable_screenshot_sound": {
+  "what": "Plays a sound when a screenshot is taken (default on).",
+  "ui": "'When a screenshot is taken, play a sound' - Settings > In Game > Screenshots",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "save_uncompressed_screenshots": {
+  "what": "Also saves an external (uncompressed/lossless) copy of each screenshot to the screenshot folder in addition to Steam's JPEG copy.",
+  "ui": "'Save an external copy of my screenshots' - Settings > In Game > Screenshots",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "screenshots_path": {
+  "what": "Folder where external screenshot copies are saved; computed/forwarded to the screenshot manager.",
+  "ui": "Screenshot folder picker - Settings > In Game > Screenshots",
+  "basis": "loc-label",
+  "confidence": "medium"
+ },
+ "default_ping_rate": {
+  "what": "Read-only: the automatic server-browser ping rate the client computed from network speed; shown as 'Automatic (N)' in the ping-rate dropdown.",
+  "ui": "Shown as the 'Automatic (%s)' option of 'Server browser pings/minute' - Settings > In Game",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "server_ping_rate": {
+  "what": "Server browser pings per minute: Automatic or a fixed 5000/3000/1500/1000/500/250. Lower it if browsing game servers causes connection problems.",
+  "ui": "'Server browser pings/minute' - Settings > In Game",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "steam_networking_share_ip": {
+  "what": "Whether games using Steam Networking may share your IP address for a faster (direct) connection: Default, Never, Friends Only, or Always.",
+  "ui": "'Steam Networking' dropdown - Settings > In Game",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "web_browser_home": {
+  "what": "Home page URL for the Steam Overlay web browser.",
+  "ui": "'Web browser home page' - Settings > In Game",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "voice_mic_device_name": {
+  "what": "Name of the microphone device Steam voice chat uses (forwarded to the voice subsystem).",
+  "ui": "'Current Mic Name' - Settings > Voice",
+  "basis": "loc-label",
+  "confidence": "medium"
+ },
+ "voice_mic_input_gain": {
+  "what": "Microphone input volume/gain for Steam voice (float, forwarded to the voice subsystem).",
+  "ui": "'Input volume/gain' slider - Settings > Voice",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "voice_speaker_output_gain": {
+  "what": "Output volume/gain for incoming Steam voice audio (float).",
+  "ui": "'Output volume/gain' slider - Settings > Voice",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "voice_push_to_talk_setting": {
+  "what": "Probably the voice transmit mode (e.g. open mic vs. push-to-talk/mute) for in-game Steam voice; no JS reference in this build.",
+  "ui": "not shown in UI (generic setting); voice UI uses friends settings",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "voice_push_to_talk_key": {
+  "what": "Probably the push-to-talk hotkey for in-game Steam voice; no JS reference in this build.",
+  "ui": "not shown in UI",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "overlay_toolbar_list_view": {
+  "what": "Shows the Steam Overlay toolbar as a list view instead of icons.",
+  "ui": "'Show toolbar as list view' - Settings > In Game > Toolbar preferences",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "always_use_gamepadui_overlay": {
+  "what": "Uses the Big Picture (gamepad) overlay instead of the desktop overlay when playing with a controller.",
+  "ui": "'Use the Big Picture Overlay when using a controller' - Settings > In Game",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "overlay_tabs": {
+  "what": "JSON array of {window, visible} entries that sets which overlay toolbar tabs (e.g. GameServers, Timeline) are shown and in what order; roams across machines.",
+  "ui": "Overlay toolbar preferences (Settings > In Game > Toolbar preferences / overlay toolbar)",
+  "basis": "js-usage",
+  "confidence": "medium"
+ },
+ "overlay_scale_interface": {
+  "what": "Scales Steam Overlay text and icons to match the monitor's DPI scaling (default on).",
+  "ui": "'Scale Steam Overlay text and icons to match monitor settings' - Settings > In Game",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "overlay_restore_browser_tabs": {
+  "what": "Reopens the overlay web browser's previous tabs when a game starts (default on).",
+  "ui": "'Restore my previous browser tabs when starting a game' - Settings > In Game",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "enable_avif_screenshots": {
+  "what": "Saves external copies of HDR screenshots as AVIF files.",
+  "ui": "'Save external HDR screenshots as AVIF' - Settings > In Game > Screenshots",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "overlay_fps_counter_detail_level": {
+  "what": "Amount of detail in the performance monitor: FPS Single Value, FPS Details, FPS Details + CPU & GPU Utilization, or FPS/CPU/GPU/RAM Full Details (default 1 = simplest). Graph options appear only at higher levels.",
+  "ui": "'Performance detail level' - Settings > In Game (shown when performance monitor is on)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "overlay_fps_counter_saturation_factor": {
+  "what": "Text contrast/saturation of the performance monitor (slider 0-1, step 0.1; default 1).",
+  "ui": "'Text contrast/saturation' - Settings > In Game > Performance monitor",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "overlay_fps_counter_bgopacity": {
+  "what": "Background opacity of the performance monitor (slider 0-1, step 0.1; default 0.8).",
+  "ui": "'Background opacity' - Settings > In Game > Performance monitor",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "overlay_fps_counter_scale_factor": {
+  "what": "Text size scaling of the performance monitor (slider 0.2-1.4, step 0.1; default 0.7).",
+  "ui": "'Text size scaling' - Settings > In Game > Performance monitor",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "overlay_fps_counter_key": {
+  "what": "Hotkey that toggles the in-game performance monitor (default 'Default', i.e. unbound/built-in).",
+  "ui": "'Toggle performance monitor key(s)' - Settings > In Game > Overlay Performance Monitor",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "overlay_fps_counter_fps_graph": {
+  "what": "Shows the FPS average/minimum graph in the performance monitor (only offered at detail level above the simplest).",
+  "ui": "'Show FPS Avg/Min Graph' - Settings > In Game > Performance monitor",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "overlay_fps_counter_cpu_graph": {
+  "what": "Shows the per-core CPU utilization graph in the performance monitor (offered only at the higher detail levels).",
+  "ui": "'Show CPU Utilization Per-Core Graph' - Settings > In Game > Performance monitor",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "overlay_fps_counter_allow_km_driver": {
+  "what": "Allows the performance monitor to use a kernel-mode driver on Windows for extra metrics such as CPU temperature (default on).",
+  "ui": "'Enable kernel driver based metrics (CPU Temperature)' - Settings > In Game (Windows)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "achievement_notification_toast": {
+  "what": "Shows a toast when you unlock an achievement (default on).",
+  "ui": "Toast checkbox for the achievement-unlocked row - Settings > Notifications",
+  "basis": "loc-label",
+  "confidence": "medium"
+ },
+ "achievement_notification_sound": {
+  "what": "Plays a sound when you unlock an achievement (default on).",
+  "ui": "Sound checkbox for the achievement-unlocked row - Settings > Notifications",
+  "basis": "loc-label",
+  "confidence": "medium"
+ },
+ "controllerconnect_notification_toast": {
+  "what": "Shows a toast when a controller connects (default on).",
+  "ui": "Toast checkbox for the controller-connected row - Settings > Notifications",
+  "basis": "loc-label",
+  "confidence": "medium"
+ },
+ "controllerconnect_notification_sound": {
+  "what": "Plays a sound when a controller connects (default off).",
+  "ui": "Sound checkbox for the controller-connected row - Settings > Notifications",
+  "basis": "loc-label",
+  "confidence": "medium"
+ },
+ "controller_low_battery_notification_toast": {
+  "what": "Shows a toast when a controller's battery is low (default on).",
+  "ui": "Toast checkbox for the controller-low-battery row - Settings > Notifications",
+  "basis": "loc-label",
+  "confidence": "medium"
+ },
+ "controller_low_battery_notification_sound": {
+  "what": "Plays a sound when a controller's battery is low (default off).",
+  "ui": "Sound checkbox for the controller-low-battery row - Settings > Notifications",
+  "basis": "loc-label",
+  "confidence": "medium"
+ },
+ "logged_in_as_user_notification_toast": {
+  "what": "Shows a toast saying which account you are logged in as (default on).",
+  "ui": "Toast checkbox for the 'logged in as user' row - Settings > Notifications",
+  "basis": "loc-label",
+  "confidence": "medium"
+ },
+ "logged_in_as_user_notification_sound": {
+  "what": "Plays a sound with the 'logged in as user' notification (default off).",
+  "ui": "Sound checkbox for the 'logged in as user' row - Settings > Notifications",
+  "basis": "loc-label",
+  "confidence": "medium"
+ },
+ "smooth_scroll_webviews": {
+  "what": "Enables smooth scrolling in Steam's web views; requires a Steam restart.",
+  "ui": "'Enable smooth scrolling in web views (requires restart)' - Settings > Interface",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "enable_gpu_accelerated_webviews": {
+  "what": "Enables GPU-accelerated rendering for Steam's web views (CEF); requires restart. Game Recording reports it as required ('Requires Steam Client GPU Acceleration').",
+  "ui": "'Enable GPU accelerated rendering in web views (requires restart)' - Settings > Interface",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "enable_hardware_video_decoding": {
+  "what": "Uses hardware video decoding in Steam web views/video when supported; requires restart.",
+  "ui": "'Enable hardware video decoding, if supported (requires restart)' - Settings > Interface",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "run_at_startup": {
+  "what": "Starts Steam automatically when you log in to the computer (computed from the OS autostart entry).",
+  "ui": "'Run Steam when my computer starts' - Settings > Interface",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "enable_dpi_scaling": {
+  "what": "Scales Steam's text and icons to match the OS monitor scaling; requires restart.",
+  "ui": "'Scale text and icons to match monitor settings (requires restart)' - Settings > Interface",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "enable_marketing_messages": {
+  "what": "Allows notifications about additions/changes to your games, new releases and upcoming releases (default on).",
+  "ui": "'Notify me about additions or changes to my games, new releases, and upcoming releases' - Settings > Interface",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "start_in_big_picture_mode": {
+  "what": "Starts Steam directly in Big Picture Mode (on SteamOS: when in Desktop Mode).",
+  "ui": "'Start Steam in Big Picture Mode' (SteamOS: '...when in Desktop Mode') - Settings > Interface",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "jumplist_flags": {
+  "what": "Bitmask of entries shown in the Windows taskbar jump list / tray menu (status Online/Away/Invisible/Offline plus Store, Library, Community, Friends, Screenshots, Servers, Settings, Big Picture, SteamVR, Exit, etc.); default 77680.",
+  "ui": "Taskbar preferences checkboxes - Settings > Interface (Windows)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "enable_ui_sounds": {
+  "what": "Plays Steam UI navigation sounds (default on).",
+  "ui": "'Enable UI sounds' - Settings > Audio (Big Picture/Steam Deck)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "enable_gamescope_composer": {
+  "what": "Developer option: uses gamescope to composite Steam's browser views; requires restart (default off).",
+  "ui": "'Enable gamescope browser composer' - Settings > Developer",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "enable_gamescope_composer_vr": {
+  "what": "Developer option: uses the gamescope browser composer in VR; requires restart (default on).",
+  "ui": "'Enable gamescope VR browser composer' - Settings > Developer",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "show_switch_to_desktop_at_login": {
+  "what": "On SteamOS, offers a 'Switch to Desktop' option on the login screen when no user is logged in.",
+  "ui": "'Show Switch To Desktop option when not logged in' - Settings > Interface (SteamOS)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "enable_steamrt64_client": {
+  "what": "Opts into the experimental 64-bit Steam client running in the Steam Linux Runtime 3 (steamrt64); requires restart.",
+  "ui": "'Use experimental SteamRT3 Steam Client' - Settings > Interface (Linux)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "disable_all_toasts": {
+  "what": "Together with disable_toasts_in_game drives 'Show Notification Toasts...': both false = Anytime, only in-game disabled = When I'm not in-game, this true = Never.",
+  "ui": "'Show Notification Toasts...' dropdown (Anytime/When I'm not in-game/Never) - Settings > Notifications",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "disable_toasts_in_game": {
+  "what": "Suppresses notification toasts while a game is running ('When I'm not in-game' choice of the notification-toasts dropdown).",
+  "ui": "'Show Notification Toasts...' dropdown - Settings > Notifications",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "play_sound_on_toast": {
+  "what": "Plays a sound when a notification toast is shown (default on); when off, per-notification sound checkboxes are disabled.",
+  "ui": "'Play a sound when a notification toast is displayed' - Settings > Notifications",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "library_display_size": {
+  "what": "Size of library UI elements/capsules: Automatic, Small, Medium or Large.",
+  "ui": "'Display size for Library user interface elements' - Settings > Library",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "library_whats_new_show_only_product_updates": {
+  "what": "Limits the library home 'What's New' shelf to product updates (no other event types).",
+  "ui": "'Only show product updates in What's New' - Library home shelf settings",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "show_store_content_on_home": {
+  "what": "Shows personalized store content on the library home (default on).",
+  "ui": "'Show personalized store content on my Home' - Library home settings",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "start_page": {
+  "what": "Window/page Steam opens at startup: Store, Library, News, Friends, Friend Activity, Community Home or Servers (string value, e.g. 'library').",
+  "ui": "'Start Up Location' - Settings > Interface",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "library_low_bandwidth_mode": {
+  "what": "Reduces bandwidth use by disabling features like auto-loading community content in the library.",
+  "ui": "'Low Bandwidth Mode' - Settings > Library",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "library_low_perf_mode": {
+  "what": "Improves library performance by disabling some graphical effects and transitions.",
+  "ui": "'Low Performance Mode' - Settings > Library",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "library_disable_community_content": {
+  "what": "Stops the library game page from automatically loading community content.",
+  "ui": "'Disable Community Content' - Settings > Library",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "library_display_icon_in_game_list": {
+  "what": "Shows game icons in the library's left-hand game list (default on).",
+  "ui": "'Show game icons in the left column' - Settings > Library",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "ready_to_play_includes_streaming": {
+  "what": "Includes games streamable from another PC in the library's 'Ready to Play' filter and defaults their Play button to streaming.",
+  "ui": "'Ready to Play should include streamable games' - Settings > Library",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "show_steam_deck_info": {
+  "what": "Shows Steam Deck compatibility information in the library.",
+  "ui": "'Show Steam Deck compatibility information in library' - Settings > Library",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "library_home_big_art": {
+  "what": "Big Picture/Deck home screen alternate layout that highlights background art for the selected Recent Games title.",
+  "ui": "'Big Art Mode' - Settings > Customization (Big Picture/Steam Deck)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "enable_shader_precache": {
+  "what": "Enables Shader Pre-caching: Steam downloads/collects precompiled shaders for your system (slightly more disk and bandwidth). The label shows the current cache size.",
+  "ui": "'Enable Shader Pre-caching (N MB pre-cached)' - Settings > Downloads",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "enable_shader_background_processing": {
+  "what": "Allows Steam to compile/process Vulkan shaders in the background (e.g. while idle) so games start with fewer stutters.",
+  "ui": "'Allow background processing of Vulkan shaders' - Settings > Downloads",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "shader_precached_size": {
+  "what": "Read-only: current size of the shader pre-cache (shown in MB in the pre-caching label).",
+  "ui": "Shown inside 'Enable Shader Pre-caching (%s MB pre-cached)' - Settings > Downloads",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "needs_steam_service_repair": {
+  "what": "Probably a read-only flag indicating the Windows Steam Client Service needs repair; no JS reference in this build.",
+  "ui": "not shown in UI",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "download_peer_content": {
+  "what": "Game File Transfer over Local Network: off (don't allow local transfers) or allow transfers to/from Only me, Steam Friends, or Anyone.",
+  "ui": "'Game File Transfer over Local Network' toggle + 'Allow transfers from this device to' dropdown - Settings > Downloads",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "download_rate_bits_per_s": {
+  "what": "Displays download rates in bits per second (Kbps/Mbps) instead of bytes per second; also changes the unit of the speed-limit field.",
+  "ui": "'Display download rates in bits per second' - Settings > Downloads",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "restrict_auto_updates": {
+  "what": "Only lets automatic game updates run inside the scheduled window given by restrict_auto_updates_start/_end.",
+  "ui": "'Schedule auto-updates' - Settings > Downloads",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "restrict_auto_updates_start": {
+  "what": "Start hour of the auto-update window (hour value chosen from the client-provided list of valid hours).",
+  "ui": "'Schedule auto-updates' start-time dropdown - Settings > Downloads",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "restrict_auto_updates_end": {
+  "what": "End hour of the auto-update window.",
+  "ui": "'Schedule auto-updates' end-time dropdown - Settings > Downloads",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "download_region": {
+  "what": "Content server region used for downloads (region ID from the client's region list).",
+  "ui": "'Download region' - Settings > Downloads",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "download_while_app_running": {
+  "what": "Allows downloads to continue while a game is running.",
+  "ui": "'Allow downloads during gameplay' - Settings > Downloads",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "download_throttle_while_streaming": {
+  "what": "Limits download speed while Remote Play streaming to keep stream quality high.",
+  "ui": "'Throttle downloads while streaming' - Settings > Downloads",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "download_throttle_rate": {
+  "what": "Download speed limit (0 = unlimited); entered in KB/s or Kbps depending on download_rate_bits_per_s. Downloads show a throttle indicator when set.",
+  "ui": "'Limit download speed' - Settings > Downloads",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "default_app_update_behavior": {
+  "what": "Global default for automatic game updates used by games set to 'Use global setting': Wait until I launch the game, Let Steam decide when to update, or Immediately download updates.",
+  "ui": "Automatic Updates default - Settings > Downloads (also referenced in game Properties > Updates)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "cloud_enabled": {
+  "what": "Master switch for Steam Cloud synchronization of saves for supporting games (default on).",
+  "ui": "'Enable Steam Cloud' - Settings > Cloud",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "show_screenshot_manager": {
+  "what": "Opens the Screenshot Manager after closing a game in which screenshots were taken.",
+  "ui": "'Screenshot Management' - Settings > Cloud",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "music_volume": {
+  "what": "Steam music player (soundtrack) volume, 0-100 in steps of 10.",
+  "ui": "'Volume' slider - Settings > Music",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "music_pause_on_app_start": {
+  "what": "Pauses Steam music playback when an application starts.",
+  "ui": "'Pause music when starting an application' - Settings > Music",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "music_pause_on_voice_chat": {
+  "what": "Pauses Steam music playback during voice chat.",
+  "ui": "'Pause music when voice chatting' - Settings > Music",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "music_download_high_quality": {
+  "what": "Downloads high-quality audio files for soundtracks.",
+  "ui": "'Download high quality audio files' - Settings > Music",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "broadcast_permissions": {
+  "what": "Who may watch your Steam Broadcast: 0 Disabled, 1 Friends can request to watch (approve), 2 Friends can watch without asking, 3 Anyone can watch (public), 4 subscribers (default 1).",
+  "ui": "'Privacy setting' - Settings > Broadcast",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "broadcast_output_width": {
+  "what": "Broadcast video width in pixels; set together with broadcast_output_height by the video-dimensions dropdown.",
+  "ui": "'Video Dimensions' dropdown (paired with height) - Settings > Broadcast",
+  "basis": "js-usage",
+  "confidence": "medium"
+ },
+ "broadcast_output_height": {
+  "what": "Broadcast video height in pixels (default 720); chosen via the video-dimensions dropdown which also sets the width.",
+  "ui": "'Video Dimensions' - Settings > Broadcast",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "broadcast_bitrate": {
+  "what": "Maximum broadcast bitrate in kbps (default 2500), selected from a dropdown.",
+  "ui": "'Maximum Bitrate' - Settings > Broadcast",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "broadcast_encoding_option": {
+  "what": "Broadcast encoder preference: 0 best quality, 1 best performance.",
+  "ui": "'Optimize encoding for' - Settings > Broadcast",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "broadcast_record_all_video": {
+  "what": "Captures video from all applications/the desktop rather than only the game while broadcasting.",
+  "ui": "'Record video from all applications on this machine' - Settings > Broadcast",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "broadcast_record_all_audio": {
+  "what": "Captures audio from all applications on the machine while broadcasting.",
+  "ui": "'Record audio from all applications on this machine' - Settings > Broadcast",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "broadcast_record_microphone": {
+  "what": "Includes your microphone in the broadcast.",
+  "ui": "'Record my microphone' - Settings > Broadcast",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "broadcast_show_upload_stats": {
+  "what": "Shows broadcast upload statistics (debug info) in game.",
+  "ui": "'Show upload stats' - Settings > Broadcast",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "broadcast_show_live_reminder": {
+  "what": "Always shows the 'Live' indicator in game while broadcasting (default on).",
+  "ui": "'Always show Live status' - Settings > Broadcast",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "broadcast_chat_corner": {
+  "what": "Screen corner where viewers' chat is shown in game, using the same Off/Top-left/Top-center/Top-right/Bottom-right/Bottom-center/Bottom-left choices as the performance monitor (default 1).",
+  "ui": "'Show viewers' chat in game' - Settings > Broadcast",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "gamestream_hardware_video_encode": {
+  "what": "Uses GPU hardware video encoding for game recording/streaming (default on).",
+  "ui": "'Enable GPU hardware encoding' - Settings > Game Recording",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "gamestream_enable_video_h265": {
+  "what": "Allows the HEVC (H.265) codec for game recording/streaming video (default on).",
+  "ui": "'Enable HEVC (H.265) video codec' - Settings > Game Recording",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "steam_input_configurator_error_msg_enable": {
+  "what": "Steam Input layout dev mode: shows developer menu options and parse-error popups in the controller configurator; requires restart.",
+  "ui": "'Steam Input Layout Dev Mode' - Settings > Developer",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "controller_guide_button_focus_steam": {
+  "what": "Pressing the controller Guide/Steam button brings Steam (Big Picture) to the foreground (default on).",
+  "ui": "'Guide button focuses Steam' - Settings > Controller",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "controller_ps_support": {
+  "what": "Steam Input for PlayStation controllers: Not Enabled, Enabled in Games w/o Support (value 1, default), or Enabled (value 2).",
+  "ui": "'PlayStation Controller Support' - Settings > Controller",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "controller_xbox_support": {
+  "what": "Enables Steam Input (remapping/configurations) for Xbox controllers.",
+  "ui": "'Enable Steam Input for Xbox controllers' - Settings > Controller",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "controller_xbox_driver": {
+  "what": "Probably toggles Steam's extended Xbox controller driver (e.g. xpad/xone-style driver support); no JS reference in this build.",
+  "ui": "not shown in UI",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "controller_switch_support": {
+  "what": "Enables Steam Input for Nintendo Switch Pro controllers.",
+  "ui": "'Enable Steam Input for Switch Pro controllers' - Settings > Controller",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "controller_generic_support": {
+  "what": "Enables Steam Input for generic (non-Xbox/PS/Switch) gamepads.",
+  "ui": "'Enable Steam Input for generic controllers' - Settings > Controller",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "controller_power_off_timeout": {
+  "what": "Minutes of inactivity before Steam turns off wireless controllers: 5, 10, 15 (default), 30, 60, 120 or Never (stored as 9999).",
+  "ui": "Controller turn-off timeout dropdown - Settings > Controller",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "turn_off_controller_on_exit": {
+  "what": "Turns off connected controllers when you exit Big Picture Mode.",
+  "ui": "'Turn off controllers when exiting Big Picture Mode' - Settings > Controller",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "controller_combine_nintendo_joycons": {
+  "what": "Treats a pair of Joy-Cons as one combined controller.",
+  "ui": "'Combine Joy-Con Pairs' - Big Picture/Steam Deck QAM > Controller settings",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "controller_enable_chord": {
+  "what": "Enables Guide-button chord shortcuts (Guide + another button) on controllers (default on).",
+  "ui": "'Enable Guide Button Chords for controllers' - Settings > Controller",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "controller_poll_rate": {
+  "what": "Probably a controller USB/HID polling-rate setting (declared bool but defaults to 2, so likely used as a small enum); no JS reference.",
+  "ui": "not shown in UI",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "controller_siapi_config_author_mode": {
+  "what": "Steam Input API config author mode: forces new Steam Input API action sets to be shown so developers can author a new configuration.",
+  "ui": "'Steam Input API Config Author Mode' - Settings > Developer",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "controller_show_ibex_tour": {
+  "what": "Whether to show the Steam Controller welcome tour (codename 'Ibex') (default on).",
+  "ui": "'Show Steam Controller Tour' - Settings > Developer > Miscellaneous",
+  "basis": "loc-label",
+  "confidence": "medium"
+ },
+ "controller_chat_radial_menu_option_0": {
+  "what": "Probably the text/emote for slot 0 of the controller chat radial menu (quick chat messages sent from the in-game chat radial); stored under SteamInput/ChatRadialMenu/0, no direct JS reference by name.",
+  "ui": "not shown in UI as a setting (chat radial menu slot)",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "controller_chat_radial_menu_option_1": {
+  "what": "Probably the text/emote for slot 1 of the controller chat radial menu (quick chat messages sent from the in-game chat radial); stored under SteamInput/ChatRadialMenu/1, no direct JS reference by name.",
+  "ui": "not shown in UI as a setting (chat radial menu slot)",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "controller_chat_radial_menu_option_2": {
+  "what": "Probably the text/emote for slot 2 of the controller chat radial menu (quick chat messages sent from the in-game chat radial); stored under SteamInput/ChatRadialMenu/2, no direct JS reference by name.",
+  "ui": "not shown in UI as a setting (chat radial menu slot)",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "controller_chat_radial_menu_option_3": {
+  "what": "Probably the text/emote for slot 3 of the controller chat radial menu (quick chat messages sent from the in-game chat radial); stored under SteamInput/ChatRadialMenu/3, no direct JS reference by name.",
+  "ui": "not shown in UI as a setting (chat radial menu slot)",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "controller_chat_radial_menu_option_4": {
+  "what": "Probably the text/emote for slot 4 of the controller chat radial menu (quick chat messages sent from the in-game chat radial); stored under SteamInput/ChatRadialMenu/4, no direct JS reference by name.",
+  "ui": "not shown in UI as a setting (chat radial menu slot)",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "controller_chat_radial_menu_option_5": {
+  "what": "Probably the text/emote for slot 5 of the controller chat radial menu (quick chat messages sent from the in-game chat radial); stored under SteamInput/ChatRadialMenu/5, no direct JS reference by name.",
+  "ui": "not shown in UI as a setting (chat radial menu slot)",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "controller_chat_radial_menu_option_6": {
+  "what": "Probably the text/emote for slot 6 of the controller chat radial menu (quick chat messages sent from the in-game chat radial); stored under SteamInput/ChatRadialMenu/6, no direct JS reference by name.",
+  "ui": "not shown in UI as a setting (chat radial menu slot)",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "controller_chat_radial_menu_option_7": {
+  "what": "Probably the text/emote for slot 7 of the controller chat radial menu (quick chat messages sent from the in-game chat radial); stored under SteamInput/ChatRadialMenu/7, no direct JS reference by name.",
+  "ui": "not shown in UI as a setting (chat radial menu slot)",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "startup_movie_id": {
+  "what": "Community item ID of the equipped Big Picture/Steam Deck startup movie (set together with startup_movie_local_path when you equip one).",
+  "ui": "Startup movie picker - Settings > Customization (Big Picture/Steam Deck)",
+  "basis": "js-usage",
+  "confidence": "medium"
+ },
+ "startup_movie_local_path": {
+  "what": "Local file path of the startup movie video to play at boot.",
+  "ui": "Startup movie picker - Settings > Customization",
+  "basis": "js-usage",
+  "confidence": "medium"
+ },
+ "startup_movie_shuffle": {
+  "what": "Plays a random startup movie from your owned movies instead of a fixed one.",
+  "ui": "'Shuffle Startup Movie' - Settings > Customization",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "startup_movie_used_for_resume": {
+  "what": "Also plays the startup movie when the device resumes from sleep.",
+  "ui": "Toggle next to the startup movie options - Settings > Customization",
+  "basis": "js-usage",
+  "confidence": "medium"
+ },
+ "screensaver_current_id": {
+  "what": "ID of the selected screensaver (e.g. a game slideshow/'All Games' screenshots or a downloaded screensaver).",
+  "ui": "Screensaver dropdown - Settings > Customization",
+  "basis": "loc-label",
+  "confidence": "medium"
+ },
+ "screensaver_settings": {
+  "what": "JSON blob of per-screensaver options (e.g. gameslideshow screenshot source all/general/none).",
+  "ui": "Screensaver options - Settings > Customization",
+  "basis": "js-usage",
+  "confidence": "medium"
+ },
+ "screensaver_while_ingame": {
+  "what": "Allows the screensaver to start while a game is running (default on).",
+  "ui": "'Show screensavers when playing a game' - Settings > Customization",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "game_notes_enable_spellcheck": {
+  "what": "Enables spellcheck in the game notes editor (default on).",
+  "ui": "Spellcheck toggle in the Game Notes editor",
+  "basis": "js-usage",
+  "confidence": "medium"
+ },
+ "screenshot_items_per_row": {
+  "what": "Probably the number of thumbnails per row in the screenshot viewer/manager grid (default 1); no JS reference in this build.",
+  "ui": "not shown in UI",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "gamerecording_background_path": {
+  "what": "Folder where game recordings (background/manual recordings) are stored; changing it needs a Steam restart.",
+  "ui": "'Recordings folder' - Settings > Game Recording",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "gamerecording_background_max_keep": {
+  "what": "Background recording length kept on disk, as 'Nmin' or 'infinite' (default '120min'); oldest footage is overwritten once full.",
+  "ui": "'Background recording disk space' / Length - Settings > Game Recording",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "gamerecording_background_time_resolution": {
+  "what": "Probably the time granularity of background recording segments/timeline in milliseconds (default 60000 = 1 minute); no JS reference.",
+  "ui": "not shown in UI",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "gamerecording_background_mk": {
+  "what": "Hotkey that adds a timeline marker to the recording (default Ctrl+F12).",
+  "ui": "'Add a timeline marker' shortcut - Settings > Game Recording > Shortcut Keys",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "gamerecording_background_tg": {
+  "what": "Hotkey that starts/stops recording (or saving a clip) (default Ctrl+F11).",
+  "ui": "'Start/stop recording' shortcut - Settings > Game Recording > Shortcut Keys",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "gamerecording_background_a_m": {
+  "what": "Records your microphone along with gameplay audio.",
+  "ui": "'Record Microphone' - Settings > Game Recording > Audio Recording",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "gamerecording_video_bitrate": {
+  "what": "Recording quality preset string (default 'preset_default' = High); presets Ultra, High, Medium, Low trade quality vs. disk space.",
+  "ui": "'Recording Quality' - Settings > Game Recording",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "gamerecording_background_mode": {
+  "what": "Game recording mode: 0 Recording Off, 1 Record in Background (always), 2 Record Manually (only after pressing the hotkey).",
+  "ui": "'Record my games...' mode selector - Settings > Game Recording; also overlay/QAM Game Recording",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "gamerecording_background_audio": {
+  "what": "Audio sources to record: 0 Game Audio Only, 1 All System Audio, 2 Game and Selected Programs.",
+  "ui": "'Record Audio from...' - Settings > Game Recording",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "gamerecording_max_fps": {
+  "what": "Maximum recording frame rate (clamped 24-120, default 60).",
+  "ui": "'Maximum frame rate' - Settings > Game Recording",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "gamerecording_hotkey_ic": {
+  "what": "Hotkey that saves the last N seconds (gamerecording_ic_seconds) as an instant clip (unbound by default).",
+  "ui": "'Save the last N seconds of gameplay as a clip' shortcut - Settings > Game Recording > Shortcut Keys",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "gamerecording_ic_seconds": {
+  "what": "Instant clip duration in seconds (default 30).",
+  "ui": "'Clip duration' - Settings > Game Recording",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "gamerecording_export_limit_type": {
+  "what": "Remembered export mode in the Export Clip dialog: 0 Original, 1 File Size limit, 2 Custom (resolution/frame rate/bitrate).",
+  "ui": "Export Clip dialog limit type (Original / File Size / Custom)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "gamerecording_export_limit_size_mb": {
+  "what": "Max file size in MB used by the 'File Size' export mode (default 100).",
+  "ui": "'Max File Size' - Export Clip dialog",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "gamerecording_export_limit_bitrate": {
+  "what": "Bitrate choice remembered for 'Custom' clip export (default 1; options Original/Ultra/High/Medium/Low).",
+  "ui": "'Bitrate' - Export Clip dialog (Custom)",
+  "basis": "loc-label",
+  "confidence": "medium"
+ },
+ "gamerecording_export_limit_width": {
+  "what": "Output width remembered for 'Custom' clip export (default 3840).",
+  "ui": "'Resolution' - Export Clip dialog (Custom)",
+  "basis": "loc-label",
+  "confidence": "medium"
+ },
+ "gamerecording_export_limit_height": {
+  "what": "Output height remembered for 'Custom' clip export (default 2160; options 720p-4k, never above the source).",
+  "ui": "'Resolution' - Export Clip dialog (Custom)",
+  "basis": "loc-label",
+  "confidence": "medium"
+ },
+ "gamerecording_export_limit_frame_rate": {
+  "what": "Frame rate remembered for 'Custom' clip export (default 60).",
+  "ui": "'Frame Rate' - Export Clip dialog (Custom)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "gamerecording_export_directory": {
+  "what": "Last folder used when exporting clips to MP4.",
+  "ui": "Export Clip dialog folder ('Browse...')",
+  "basis": "js-usage",
+  "confidence": "high"
+ },
+ "gamerecording_export_codec": {
+  "what": "Codec for exported clips: 0 Default, 1 H.264, 2 H.265 (HEVC).",
+  "ui": "'Codec' - Export Clip dialog",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "gamerecording_video_maxheight": {
+  "what": "Maximum recorded video height (0 = native, clamp 0-2160); width follows the game's aspect ratio.",
+  "ui": "'Maximum video height' - Settings > Game Recording",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "gamerecording_force_mic_mono": {
+  "what": "Records the microphone as mono (fixes mic heard in only one channel).",
+  "ui": "'Force Microphone to Mono' - Settings > Game Recording",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "gamerecording_automatic_gain_control": {
+  "what": "Applies automatic gain control to the recorded microphone (default on).",
+  "ui": "'Automatic Gain Control' - Settings > Game Recording",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "show_timestamps_in_console": {
+  "what": "Prefixes lines in the Steam console with timestamps.",
+  "ui": "'Show timestamps in Steam console' - Settings > Developer",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "override_browser_composer_mode": {
+  "what": "Developer override of the browser composer mode; the toggle switches between two enum values (system composer vs. default) and prompts a restart.",
+  "ui": "'Force system browser composer' - Settings > Developer",
+  "basis": "loc-label",
+  "confidence": "medium"
+ },
+ "cef_remote_debugging_enabled": {
+  "what": "Auto-enables CEF (Chromium) remote debugging of Steam's UI at startup; requires restart.",
+  "ui": "'CEF Remote Debugging' - Settings > Developer",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "force_deck_perf_tab": {
+  "what": "Debug: forces the QAM Performance tab to show all Steam Deck settings on other hardware; its UI toggle is compiled out in this build.",
+  "ui": "not shown in UI (developer toggle compiled out)",
+  "basis": "js-usage",
+  "confidence": "medium"
+ },
+ "force_fake_mandatory_update": {
+  "what": "Debug: makes the UI show a mandatory-update gate; applying it clears the flag.",
+  "ui": "not shown in UI",
+  "basis": "js-usage",
+  "confidence": "medium"
+ },
+ "hdr_compat_testing": {
+  "what": "Ignores previously published per-app HDR compatibility information (for testing HDR in games).",
+  "ui": "'HDR Compatibility Testing' - Settings > Developer",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "developer_mode_enabled": {
+  "what": "Enables Developer Mode, which unlocks the Developer settings page (and other dev features, also exposed to SteamVR).",
+  "ui": "'Enable Developer Mode' - Settings > System",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "show_advanced_update_channels": {
+  "what": "Shows additional (advanced) SteamOS update channels in the update channel picker.",
+  "ui": "'Show Advanced Update Channels' - Settings > Developer",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "browserview_underlays_allowed": {
+  "what": "Allows browser views to use hardware underlays when requirements are met; requires restart.",
+  "ui": "'Enable browserview underlays' - Settings > Developer > Miscellaneous",
+  "basis": "js-usage",
+  "confidence": "medium"
+ },
+ "gamescope_hdr_visualization": {
+  "what": "Gamescope HDR debug visualization: 0 None, 1 Heatmap, 2 Waveform/Color Gamut (Analysis), 3 Heatmap Extended, 4 Heatmap Classic.",
+  "ui": "'HDR Debug Visualization' - Settings > Developer",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "gamescope_app_target_framerate": {
+  "what": "Per-game (and per-display) frame limit in FPS that gamescope enforces (0 = default/off); slider values depend on the display's refresh rate.",
+  "ui": "'Frame Limit' slider - Steam Deck/SteamOS QAM > Performance",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "gamescope_enable_app_target_framerate": {
+  "what": "Enables unified frame limit management, where the frame limit and refresh rate are managed together (default on).",
+  "ui": "'Enable Unified Frame Limit Management' - QAM > Performance (SteamOS)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "gamescope_disable_framelimit": {
+  "what": "Per-game: disables the frame limit so the game renders as fast as possible, even above the display refresh rate.",
+  "ui": "'Disable Frame Limit' - QAM > Performance (SteamOS)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "gamescope_display_refresh_rate": {
+  "what": "Per-game/per-display panel refresh rate in Hz used while that game runs (0 = default).",
+  "ui": "'Refresh Rate' slider - QAM > Performance (SteamOS)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "gamescope_use_game_refresh_rate_in_steam": {
+  "what": "Keeps the game's display refresh rate while the Steam UI is shown instead of switching back (default on).",
+  "ui": "'Use game display refresh rate in Steam' - Valve Internal/Developer > Display",
+  "basis": "loc-label",
+  "confidence": "medium"
+ },
+ "gamescope_disable_mura_correction": {
+  "what": "Disables the display's mura (panel non-uniformity) compensation on supported SteamOS hardware.",
+  "ui": "'Disable Mura Compensation' - Settings > Display (SteamOS)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "gamescope_include_steamui_in_screenshots": {
+  "what": "Includes Steam UI elements (overlays, QAM etc.) in gamescope screenshots.",
+  "ui": "'Include Steam UI elements in screenshots' - Settings > In Game (SteamOS)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "gamescope_allow_tearing": {
+  "what": "Per-game: lets the game present unsynchronized with the display (tearing) to reduce latency.",
+  "ui": "'Allow Tearing' - QAM > Performance (SteamOS)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "gamescope_composite_debug": {
+  "what": "Gamescope debug option that visualizes compositing (e.g. when gamescope composites vs. scans out directly).",
+  "ui": "'Composite Debug' - QAM > Performance (developer)",
+  "basis": "loc-label",
+  "confidence": "medium"
+ },
+ "gamescope_force_composite": {
+  "what": "Forces gamescope to always composite frames instead of using direct scanout.",
+  "ui": "'Force Composite' - QAM > Performance (developer)",
+  "basis": "loc-label",
+  "confidence": "medium"
+ },
+ "gamescope_game_resolution_global": {
+  "what": "Global default maximum resolution for games under gamescope (string, default 'Default'); per-game resolution overrides take precedence.",
+  "ui": "'Maximum Game Resolution' - Settings > Display (SteamOS/gamescope)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "gamescope_guide_hotkey": {
+  "what": "Keyboard shortcut that opens the Steam main menu in gamescope sessions (default Shift+Tab).",
+  "ui": "'Main Menu shortcut key(s)' - Settings > In Game (SteamOS)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "gamescope_qam_hotkey": {
+  "what": "Keyboard shortcut that opens the Quick Access Menu in gamescope sessions (default Ctrl+Shift+Tab).",
+  "ui": "'Quick Access Menu shortcut key(s)' - Settings > In Game (SteamOS)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "gamescope_hdr_enabled": {
+  "what": "Enables HDR output in gamescope (per display, default on).",
+  "ui": "'Enable HDR' - Settings > Display (SteamOS)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "gamescope_native_external_res_in_steam": {
+  "what": "Runs the Steam UI at the external display's native resolution in gamescope.",
+  "ui": "'Enable Native Resolution on External Displays' - Valve Internal settings (gamescope)",
+  "basis": "js-usage",
+  "confidence": "medium"
+ },
+ "steamos_status_led_brightness": {
+  "what": "Brightness of the device status/power LED, 0-100 (default 100).",
+  "ui": "'Status LED Brightness' - Settings > Display (SteamOS)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "steamos_tdp_limit_enabled": {
+  "what": "Per-game: enables a TDP (processor power) limit.",
+  "ui": "'TDP Limit' - QAM > Performance (SteamOS)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "steamos_tdp_limit": {
+  "what": "Per-game TDP limit value in watts (range supplied by the hardware); lower values reduce power draw and performance.",
+  "ui": "TDP limit slider ('Watts') - QAM > Performance (SteamOS)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "steamos_cec_enabled": {
+  "what": "Enables HDMI-CEC support (control/wake of TVs over HDMI) (default on).",
+  "ui": "'Enable HDMI CEC Support' - Settings > Display (SteamOS)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "steamos_cec_wake_on_resume": {
+  "what": "Wakes the TV via HDMI-CEC when the device resumes from sleep (default on).",
+  "ui": "'Wake TV when device resumes from sleep' - Settings > Display > HDMI-CEC",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "steamos_wifi_debug": {
+  "what": "Enables Wi-Fi debug data collection on SteamOS.",
+  "ui": "'Enable Wi-Fi debug data collection' - Settings > Developer (SteamOS)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "steamos_wifi_force_wpa_supplicant": {
+  "what": "Forces the wpa_supplicant Wi-Fi backend (instead of the default backend, e.g. iwd) on SteamOS.",
+  "ui": "'Force WPA Supplicant Wi-Fi backend' - Settings > Developer (SteamOS)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "steamos_magnifier_scale": {
+  "what": "Zoom level of the screen magnifier, 120-300% in 10% steps (default 150).",
+  "ui": "'Magnifier Scale' - Settings > Display (SteamOS)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "steamos_manual_gpu_clock_enabled": {
+  "what": "Per-game: locks the GPU to a fixed clock instead of automatic scaling.",
+  "ui": "'Manual GPU Clock' - QAM > Performance (SteamOS)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "steamos_manual_gpu_clock_hz": {
+  "what": "Per-game fixed GPU clock; despite the 'hz' name the UI shows MHz (step 100, default 1000).",
+  "ui": "'GPU Clock Frequency' slider (MHz) - QAM > Performance (SteamOS)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "steamos_platform_performance_profile": {
+  "what": "Per-game platform performance profile name (options provided by the hardware/OS, e.g. a power/performance profile).",
+  "ui": "'Performance Profile' - QAM > Performance (SteamOS, when available)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "steamos_charge_limit_enabled": {
+  "what": "Enables a battery charge limit to reduce battery wear.",
+  "ui": "'Enable battery charging limit' - Settings > Power (SteamOS)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "steamos_charge_limit": {
+  "what": "Battery charge limit in percent (default 80).",
+  "ui": "'Battery charging limit' - Settings > Power (SteamOS)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "steamos_charge_limit_devmode": {
+  "what": "Allows the full range of charge limit values (developer option).",
+  "ui": "'Allow battery limit full range' - Settings > Power/Developer (SteamOS)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "steamos_system_tracing_enabled": {
+  "what": "Enables background tracing of CPU/GPU events for performance analysis (per-game).",
+  "ui": "'Enable System Tracing' - Settings > Developer (SteamOS)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "steamos_vrs_enabled": {
+  "what": "Per-game Half Rate Shading (variable rate shading) that lowers shading quality to save power/improve performance.",
+  "ui": "'Half Rate Shading' - QAM > Performance (SteamOS)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "steamos_separate_led_colors": {
+  "what": "Allows LED strip colors to be controlled individually rather than as one color (on-disk key is misspelled 'SeparaeLEDColors').",
+  "ui": "'Control LED strip colors individually' - Settings > Display/LED (SteamOS)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "steamos_wifi_reload_wifi_driver_on_sleep": {
+  "what": "Reloads the Wi-Fi driver around sleep/resume as a workaround for Wi-Fi issues.",
+  "ui": "'Reload Wi-Fi driver on sleep' - Settings > Developer (SteamOS)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "steamos_wifi_power_management_enabled": {
+  "what": "Enables Wi-Fi power saving (default on); disabling it may improve reliability on 5GHz networks.",
+  "ui": "'Enable Wi-Fi Power Management' - Settings > Developer (SteamOS)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "steamos_cec_control": {
+  "what": "Accepts TV remote control input via HDMI-CEC (default on).",
+  "ui": "'Enable remote control input' - Settings > Display > HDMI-CEC",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "steamos_cec_suspend_tv": {
+  "what": "Turns the TV off via HDMI-CEC when the device goes to sleep (default on).",
+  "ui": "'Turn off TV when going to sleep' - Settings > Display > HDMI-CEC",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "steamos_cec_suspend_device": {
+  "what": "Puts the device to sleep when the TV is turned off (default on).",
+  "ui": "'Sleep when turning off the TV' - Settings > Display > HDMI-CEC",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "steamos_cec_wake_tv": {
+  "what": "Turns the TV on via HDMI-CEC when the device resumes (default on).",
+  "ui": "'Turn on TV when resuming from sleep' - Settings > Display > HDMI-CEC",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "steamos_cec_wake_device": {
+  "what": "Resumes the device from sleep when the TV is turned on (default on).",
+  "ui": "'Resume from sleep when turning on the TV' - Settings > Display > HDMI-CEC",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "steamos_ec_logging_enabled": {
+  "what": "Outputs the embedded controller (EC) firmware log to the system journal.",
+  "ui": "'Enable EC logging' - Settings > Developer (SteamOS)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "setting_validation_bool": {
+  "what": "Test-only dummy bool field used to exercise the settings pipeline/controls; has no effect on Steam.",
+  "ui": "GamepadUI 'Settings Zoo' developer test page (/zoo/clientsettings) only",
+  "basis": "js-usage",
+  "confidence": "high"
+ },
+ "setting_validation_enum": {
+  "what": "Test-only dummy enum field used to exercise the settings pipeline/controls; has no effect on Steam.",
+  "ui": "GamepadUI 'Settings Zoo' developer test page (/zoo/clientsettings) only",
+  "basis": "js-usage",
+  "confidence": "high"
+ },
+ "setting_validation_int32": {
+  "what": "Test-only dummy int32 field used to exercise the settings pipeline/controls; has no effect on Steam.",
+  "ui": "GamepadUI 'Settings Zoo' developer test page (/zoo/clientsettings) only",
+  "basis": "js-usage",
+  "confidence": "high"
+ },
+ "setting_validation_uint32": {
+  "what": "Test-only dummy uint32 field used to exercise the settings pipeline/controls; has no effect on Steam.",
+  "ui": "GamepadUI 'Settings Zoo' developer test page (/zoo/clientsettings) only",
+  "basis": "js-usage",
+  "confidence": "high"
+ },
+ "setting_validation_uint64": {
+  "what": "Test-only dummy uint64 field used to exercise the settings pipeline/controls; has no effect on Steam.",
+  "ui": "GamepadUI 'Settings Zoo' developer test page (/zoo/clientsettings) only",
+  "basis": "js-usage",
+  "confidence": "high"
+ },
+ "setting_validation_float": {
+  "what": "Test-only dummy float field used to exercise the settings pipeline/controls; has no effect on Steam.",
+  "ui": "GamepadUI 'Settings Zoo' developer test page (/zoo/clientsettings) only",
+  "basis": "js-usage",
+  "confidence": "high"
+ },
+ "setting_validation_string": {
+  "what": "Test-only dummy string field used to exercise the settings pipeline/controls; has no effect on Steam.",
+  "ui": "GamepadUI 'Settings Zoo' developer test page (/zoo/clientsettings) only",
+  "basis": "js-usage",
+  "confidence": "high"
+ },
+ "setting_validation_hotkey": {
+  "what": "Test-only dummy hotkey field used to exercise the settings pipeline/controls; has no effect on Steam.",
+  "ui": "GamepadUI 'Settings Zoo' developer test page (/zoo/clientsettings) only",
+  "basis": "js-usage",
+  "confidence": "high"
+ },
+ "system_bluetooth_enabled": {
+  "what": "Turns Bluetooth on or off on SteamOS devices (enabled automatically during setup when the service is available).",
+  "ui": "'Enable Bluetooth' - Settings > Bluetooth and QAM",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "hardware_updater_enabled": {
+  "what": "Enables the hardware (firmware) updater; requires restart.",
+  "ui": "'Enable Hardware Updater' - Valve Internal > Miscellaneous",
+  "basis": "js-usage",
+  "confidence": "medium"
+ },
+ "system_idle_suspend_battery_sec": {
+  "what": "Seconds of idle on battery before the device sleeps (default 900 = 15 min).",
+  "ui": "'Sleep after' (When On Battery and Idle) - Settings > Power (SteamOS)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "system_idle_suspend_ac_sec": {
+  "what": "Seconds of idle while plugged in before the device sleeps (default 3600 = 1 h).",
+  "ui": "'Sleep after' (When Plugged In and Idle) - Settings > Power (SteamOS)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "system_enable_low_power_downloads": {
+  "what": "Lets downloads finish in a low-power, display-off state when the device sleeps (default on).",
+  "ui": "'Finish downloads with display off before sleeping' - Settings > Power (SteamOS)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "system_allow_battery_low_power_downloads": {
+  "what": "Allows display-off downloads on battery; the device sleeps if battery falls below 20%.",
+  "ui": "'Enable display-off downloads on battery power' - Settings > Power (SteamOS)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "system_idle_screensaver_battery_sec": {
+  "what": "Seconds of idle on battery before the screensaver starts (default 0 = off).",
+  "ui": "'Start screensaver after' (battery) - Settings > Power / Customization",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "system_idle_screensaver_ac_sec": {
+  "what": "Seconds of idle while plugged in before the screensaver starts (default 300 = 5 min).",
+  "ui": "'Start screensaver after' / 'When idle, start screensaver after' - Settings > Power / Customization",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "vr_show_perf_graph_in_hmd": {
+  "what": "Probably shows the SteamVR performance (frame timing) graph inside the headset; no JS reference in this build.",
+  "ui": "not shown in UI",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "accessibility_debug_visualizer": {
+  "what": "Developer visualizer that highlights accessibility (screen reader) information in the UI.",
+  "ui": "'Enable Accessibility Debug Visualizer' - Valve Internal > Accessibility",
+  "basis": "js-usage",
+  "confidence": "medium"
+ },
+ "accessibility_screen_reader_enabled": {
+  "what": "Enables the Steam UI screen reader.",
+  "ui": "'Enable Screen Reader' - Settings > Accessibility",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "accessibility_screen_reader_rate": {
+  "what": "Screen reader speech rate, 0-1 (step 0.05, default 0.5). Note: stored on disk under the key 'ScreenReaderPitch' (keys swapped with pitch).",
+  "ui": "'Reader Rate' - Settings > Accessibility",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "accessibility_screen_reader_pitch": {
+  "what": "Screen reader voice pitch, 0-1 (step 0.05, default 0.5). Stored on disk under 'ScreenReaderRate'.",
+  "ui": "'Reader Pitch' - Settings > Accessibility",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "accessibility_screen_reader_volume": {
+  "what": "Screen reader volume, 0-1 (step 0.05, default 1).",
+  "ui": "'Reader Volume' - Settings > Accessibility",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "accessibility_high_contrast_mode": {
+  "what": "Makes Steam text, buttons and icons more distinct from the background.",
+  "ui": "'High Contrast Mode' - Settings > Accessibility",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "accessibility_reduce_motion": {
+  "what": "Disables certain Steam animations, effects and transitions.",
+  "ui": "'Reduce Motion' - Settings > Accessibility",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "accessibility_minimum_font_size": {
+  "what": "Minimum font size for Steam UI text, 8-24 (0 = off/default).",
+  "ui": "'Minimum Font Size' slider (unlocalized label, probably dev/internal) - Accessibility",
+  "basis": "js-usage",
+  "confidence": "medium"
+ },
+ "accessibility_color_filter_name": {
+  "what": "Name of the color filter (e.g. color-blindness filter) applied to the display in-game and in Steam; '' = none.",
+  "ui": "'Color Filter' - Settings > Accessibility (when available)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "accessibility_desktop_ui_scale": {
+  "what": "Desktop Steam UI scale factor (default 1; slider from 0.5 with Smaller/Larger text notches).",
+  "ui": "'UI Scale' - Settings > Display / Accessibility (desktop)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "accessibility_screen_reader_locale": {
+  "what": "Language/voice used by the screen reader ('auto' = follow Steam language).",
+  "ui": "'Reader Language' - Settings > Accessibility",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "accessibility_mono_audio": {
+  "what": "Probably mixes audio down to mono for accessibility; no JS reference in this build.",
+  "ui": "not shown in UI",
+  "basis": "name",
+  "confidence": "low"
+ },
+ "remote_play_wifi_ap_enabled": {
+  "what": "Enables the Wireless Streaming Adapter (Steam Frame) access point used for Remote Play to the headset (default on).",
+  "ui": "'Wireless Streaming Adapter (Steam Frame)' section - Settings > Remote Play",
+  "basis": "js-usage",
+  "confidence": "medium"
+ },
+ "remote_play_wifi_ap_channel_5ghz": {
+  "what": "Wi-Fi channel for the adapter's 5GHz operation (0 = Auto).",
+  "ui": "'Channel (for 5GHz operation)' - Settings > Remote Play (advanced)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "remote_play_wifi_ap_channel_6ghz": {
+  "what": "Wi-Fi channel for the adapter's 6GHz operation (0 = Auto).",
+  "ui": "'Channel (for 6GHz operation)' - Settings > Remote Play (advanced)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "remote_play_wifi_ap_channel_width": {
+  "what": "Wi-Fi channel width for the adapter: Auto (0), 80 MHz or 160 MHz.",
+  "ui": "'Channel Width' - Settings > Remote Play (advanced)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "remote_play_wifi_ap_hotspot_mode": {
+  "what": "Connection Management: Steam (false, default) or Custom (true), where the HMD acts as a Wi-Fi hotspot you connect to manually.",
+  "ui": "'Connection Management' (Steam/Custom) - Settings > Remote Play",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "remote_play_wifi_ap_hotspot_ssid": {
+  "what": "SSID of the custom hotspot.",
+  "ui": "'Hotspot SSID' - Settings > Remote Play (Custom mode)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "remote_play_wifi_ap_hotspot_password": {
+  "what": "Password of the custom hotspot (stored in plain text in config.vdf).",
+  "ui": "'Hotspot Password' - Settings > Remote Play (Custom mode)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "remote_play_wifi_ap_hotspot_routing": {
+  "what": "Internet access for hotspot clients: 'noroute' = None (streaming only, default) or NAT via the HMD's Wi-Fi.",
+  "ui": "'Hotspot Client Internet' - Settings > Remote Play (Custom mode)",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "remote_play_wifi_ap_show_advanced": {
+  "what": "Shows the advanced Wi-Fi settings (channels/width) for the streaming adapter.",
+  "ui": "'Show Advanced Wi-Fi Settings' - Settings > Remote Play",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "remote_play_wifi_ap_paired_ssid": {
+  "what": "SSID of the Wireless Streaming Adapter this device is paired to (state, used for the Pair/Unpair UI).",
+  "ui": "Pair/Unpair status - Settings > Remote Play",
+  "basis": "js-usage",
+  "confidence": "medium"
+ },
+ "skip_steamframe_pairing_dialog": {
+  "what": "Suppresses the Steam Frame wireless adapter pairing dialog.",
+  "ui": "'Don't show again' on the Steam Frame adapter pairing dialog",
+  "basis": "js-usage",
+  "confidence": "medium"
+ },
+ "skip_steamframe_troubleshooting_dialog": {
+  "what": "Suppresses the Steam Frame wireless adapter troubleshooting dialog.",
+  "ui": "'Don't show this dialog again' on the adapter troubleshooting dialog",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "skip_steamframe_airplane_dialog": {
+  "what": "Suppresses the Steam Frame wireless adapter airplane-mode dialog.",
+  "ui": "'Don't show this dialog again' on the adapter airplane-mode dialog",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "oobe_completed": {
+  "what": "State: true once stage 1 of the out-of-box experience (first-run setup) is done, or on platforms without OOBE.",
+  "ui": "not shown in UI (OOBE state)",
+  "basis": "js-usage",
+  "confidence": "high"
+ },
+ "oobe_test_mode_enabled": {
+  "what": "Read-only: OOBE test mode, enabled by -testoobe or force_oobe; completion is then tracked in memory only.",
+  "ui": "not shown in UI (read-only state)",
+  "basis": "js-usage",
+  "confidence": "high"
+ },
+ "force_oobe": {
+  "what": "Forces the out-of-box (first-run) experience on every device start.",
+  "ui": "'Force OOBE' - Valve Internal > OOBE",
+  "basis": "loc-label",
+  "confidence": "high"
+ },
+ "oobe_stage_2_completed": {
+  "what": "State: true once OOBE stage 2 is completed, or on platforms without OOBE.",
+  "ui": "not shown in UI (OOBE state)",
+  "basis": "js-usage",
+  "confidence": "high"
+ },
+ "oobe_stage_2_test_mode_enabled": {
+  "what": "Read-only: OOBE stage-2 test mode, enabled by -testoobe or force_stage_2_oobe.",
+  "ui": "not shown in UI (read-only state)",
+  "basis": "js-usage",
+  "confidence": "high"
+ },
+ "force_stage_2_oobe": {
+  "what": "Forces OOBE stage 2 on every device start.",
+  "ui": "'Force OOBE Stage 2' - Valve Internal > OOBE",
+  "basis": "js-usage",
+  "confidence": "high"
+ },
+ "compat_show_all_tools": {
+  "what": "Lists all compatibility tools (e.g. every Proton version) in Steam Play/compatibility choosers.",
+  "ui": "'Show all compatibility tools' - Settings > Compatibility",
+  "basis": "loc-label",
+  "confidence": "high"
+ }
+}

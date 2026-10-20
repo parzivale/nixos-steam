@@ -1,5 +1,9 @@
 # Environment variables
 
+> **What it does** is written from how the option is used in the code (strings and log messages near each
+> read site, related options, Valve help). The confidence tag *(high/medium/low)* follows each inferred description.
+> Untagged descriptions restate Valve's own help text.
+>
 > Generated from the Steam Linux client, bootstrap manifest version **1791918634**, by static analysis of the
 > 64-bit binaries in `steamrt64/` and `ubuntu12_64/`. See [../README.md](../README.md) for method and caveats.
 
@@ -9,180 +13,180 @@ plus **103** variables injected into game processes. Valve ships no descriptions
 have none. The names are usually self-explanatory, and many are also handled in the shell scripts
 (see [../launcher/](../launcher/)).
 
-| Variable | Access | Value / default seen at call site | Binaries |
-|---|---|---|---|
-| `_STEAM_SETENV_MANAGER` | read |  | crashhandler.so, friendsui.so, gamelauncher, steam, steamclient.so, steamservice.so, steamui.so |
-| `ALL_PROXY` | read |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `all_proxy` | read |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `BREAKPAD_DUMP_LOCATION` | read; set (CEF crash reporter) |  | chromehtml.so, crashhandler.so, friendsui.so, gamelauncher, steam, steamclient.so, steamservice.so, steamui.so |
-| `breakpad_testfile` | read |  | crashhandler.so |
-| `breakpad_verbose` | read |  | crashhandler.so |
-| `CEF_CRASH_REPORTER_PRODUCT_VERSION` | set (CEF crash reporter) |  | chromehtml.so |
-| `CEF_CRASH_REPORTER_SERVER_URL` | set (CEF crash reporter) | `https://crash.steampowered.com/submit` | chromehtml.so |
-| `CPU_MHZ` | read |  | gamelauncher, libtier0_s.so, libvideo.so, steam, steamservice.so, streaming_client |
-| `DBG_PATHMATCH` | read |  | chromehtml.so, crashhandler.so, filesystem_stdio.so, friendsui.so, gamelauncher, gameoverlayui.so, libtier0_s.so, libvideo.so, libvstdlib_s.so, steam, steam_monitor, steamclient.so, steamservice.so, steamsysinfo, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `DEBUG_DRM` | read |  | steamui.so, streaming_client |
-| `DISPLAY` | read |  | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `DONT_BREAK_ON_ASSERT` | read |  | crashhandler.so, gamelauncher, libtier0_s.so, libvideo.so, steam, steam_monitor, steamservice.so, steamsysinfo, streaming_client |
-| `DXVK_STATE_CACHE_PATH` | read |  | steamclient.so |
-| `ENABLE_VULKAN_RENDERDOC_CAPTURE` | set |  | steam-launch-wrapper |
-| `EnableConfiguratorSupport` | read |  | steamclient.so |
-| `FOSSILIZE_APPLICATION_INFO_FILTER_PATH` | read |  | libVkLayer_steam_fossilize.so |
-| `FOSSILIZE_DISABLE_RATE_LIMITER` | read |  | fossilize_replay |
-| `FOSSILIZE_DUMP_SYNC` | read |  | libVkLayer_steam_fossilize.so |
-| `FOSSILIZE_REPLAY_WRAPPER` | read |  | fossilize_replay |
-| `FOSSILIZE_REPLAY_WRAPPER_ORIGINAL_APP` | set |  | fossilize_replay |
-| `fs_debug` | read |  | filesystem_stdio.so, gamelauncher, steam |
-| `GAMESCOPE_DISPLAY_DISABLED` | read |  | streaming_client |
-| `GAMESCOPE_MODE_SAVE_FILE` | read |  | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GAMESCOPE_WAYLAND_DISPLAY` | read |  | crashhandler.so, gamelauncher, gameoverlayrenderer.so, libtier0_s.so, libvideo.so, steam, steam_monitor, steamclient.so, steamservice.so, steamsysinfo, steamui.so, streaming_client |
-| `GDK_SCALE` | read |  | vgui2_s.so |
-| `GLIBCXX_TUNABLES` | read |  | chromehtml.so, crashhandler.so, filesystem_stdio.so, fossilize_replay, friendsui.so, gamelauncher, gameoverlayrenderer.so, gameoverlayui.so, libVkLayer_steam_fossilize.so, libtier0_s.so, libvideo.so, libvstdlib_s.so, steam, steam_monitor, steamclient.so, steamoverlayvulkanlayer.so, steamservice.so, steamsysinfo, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `GLOVERLAYCOREPROFILE` | read |  | gameoverlayrenderer.so |
-| `HOME` | read |  | chromehtml.so, crashhandler.so, filesystem_stdio.so, friendsui.so, gamelauncher, gameoverlayui.so, libtier0_s.so, libvideo.so, libvstdlib_s.so, steam, steam_monitor, steamclient.so, steamservice.so, steamsysinfo, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `HOMETEST_DESKTOP_SESSION` | read |  | steamui.so |
-| `HOMETEST_DESKTOP_USER` | read |  | steamui.so |
-| `HTTP_PROXY` | read |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `http_proxy` | read |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `HTTPS_PROXY` | read |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `https_proxy` | read |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `IgnoreChildProcesses` | read |  | gameoverlayrenderer.so, gameoverlayui.so |
-| `JPEGMEM` | read |  | friendsui.so, gameoverlayui.so, steam, steamclient.so, steamui.so, steamwebhelper, streaming_client |
-| `LANG` | read |  | steamclient.so, steamui.so, vgui2_s.so |
-| `LC_ALL` | read |  | steamclient.so, steamui.so |
-| `MANGOHUD_CONFIGFILE` | read |  | steamclient.so |
-| `NO_PROXY` | read |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `no_proxy` | read |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
-| `OBJCOPY` | read |  | steamclient.so, steamservice.so |
-| `OPENSSL_ia32cap` | read |  | friendsui.so, gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `PATH` | read; set |  | steam-launch-wrapper |
-| `PRESSURE_VESSEL_SYSTEMD_SCOPE` | set | `0` | steam-launch-wrapper |
-| `RADV_DEBUG` | read |  | steamclient.so |
-| `RADV_FORCE_VRS_CONFIG_FILE` | read |  | gamelauncher, gameoverlayui.so, steam, steamclient.so, steamservice.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `SDL_ENABLE_STEAM_CONTROLLER_MOUSE_MODE` | read |  | streaming_client |
-| `SDL_GAMECONTROLLER_IGNORE_DEVICES` | read |  | gameoverlayrenderer.so |
-| `SDR_CERT` | read (SteamNetworkingSockets/SDR) |  | steamclient.so |
-| `SDR_CLIENT_PORT` | read (SteamNetworkingSockets/SDR) |  | steamclient.so |
-| `SDR_DEVTICKET` | read (SteamNetworkingSockets/SDR) |  | steamclient.so |
-| `SDR_IP` | read (SteamNetworkingSockets/SDR) |  | steamclient.so |
-| `SDR_IP6` | read (SteamNetworkingSockets/SDR) |  | steamclient.so |
-| `SDR_LISTEN_PORT` | read (SteamNetworkingSockets/SDR) |  | steamclient.so |
-| `SDR_NETWORK_CONFIG` | read (SteamNetworkingSockets/SDR) |  | steamclient.so |
-| `SDR_POPID` | read (SteamNetworkingSockets/SDR) |  | steamclient.so |
-| `SDR_PRIVATE_KEY` | read (SteamNetworkingSockets/SDR) |  | steamclient.so |
-| `SDR_PROBE_RELAY_INTERVAL` | read (SteamNetworkingSockets/SDR) |  | steamclient.so |
-| `SDR_PROBE_RELAY_INTERVAL_BUSY` | read (SteamNetworkingSockets/SDR) |  | steamclient.so |
-| `SESSION_MANAGER` | read |  | vgui2_s.so |
-| `SITE_SERVER_GUI` | read |  | steamclient.so |
-| `SLEEP_BEFORE_ELEVATED_UPDATE` | read |  | gamelauncher, steam |
-| `STEAM_ALLOW_DRIVE_ADOPT` | read |  | steamui.so |
-| `STEAM_ALLOW_DRIVE_UNMOUNT` | read |  | steamui.so |
-| `STEAM_BOOTSTRAP_LOG_VERBOSE` | read |  | gamelauncher, steam |
-| `STEAM_BROWSER_RESIZE_WORKAROUND` | read |  | steamwebhelper |
-| `STEAM_CEF_GPU_CMD_PREFIX` | read |  | chromehtml.so, steamclient.so |
-| `STEAM_CLIENT_CONFIG_FILE` | read |  | gamelauncher, steam, steamclient.so |
-| `STEAM_CLIENT_LOG_FOLDER` | read |  | gamelauncher, gameoverlayui.so, steam, steamclient.so, steamsysinfo, steamui.so, steamwebhelper |
-| `STEAM_CLOUD_GAMING_PLATFORM` | read |  | steamclient.so |
-| `STEAM_COMPAT_LAUNCHER_SERVICE` | read |  | steamclient.so |
-| `STEAM_COMPAT_MOUNTS` | read |  | steamclient.so |
-| `STEAM_COMPAT_PROTON` | read |  | steamclient.so |
-| `STEAM_COMPAT_PROTON_SUPPRESS` | read |  | steamclient.so |
-| `STEAM_COMPAT_TOOL_MAPPINGS` | read |  | steamclient.so |
-| `STEAM_DEBUGCEF` | read |  | chromehtml.so, steamclient.so |
-| `STEAM_DESKTOP_APP_AFFINITY_LIST` | read |  | crashhandler.so, gamelauncher, gameoverlayrenderer.so, libtier0_s.so, libvideo.so, steam, steam_monitor, steamservice.so, steamsysinfo, streaming_client |
-| `STEAM_DISABLE_BROWSER_SHUTDOWN_WORKAROUND` | read |  | steamwebhelper |
-| `STEAM_DISABLE_LIBNM_IPV6_WORKAROUND` | read |  | steamclient.so |
-| `STEAM_DISABLE_MANGOAPP_ATOM_WORKAROUND` | read |  | steamclient.so |
-| `STEAM_DISPLAY_REFRESH_LIMITS` | read |  | steamclient.so |
-| `STEAM_ENABLE_AMD_LAYER` | read |  | steamclient.so |
-| `STEAM_ENABLE_DYNAMIC_BACKLIGHT` | read |  | gamelauncher, gameoverlayui.so, steam, steamclient.so, steamservice.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `STEAM_ENABLE_FAN_CONTROL` | read |  | steamclient.so |
-| `STEAM_ENABLE_SHADER_CACHE_MANAGEMENT` | read |  | steamclient.so |
-| `STEAM_ENABLE_VOLUME_HANDLER` | read |  | steamui.so |
-| `STEAM_ENABLE_XCOMPOSITE_WORKAROUND` | read |  | steamwebhelper |
-| `STEAM_EXTRA_COMPAT_TOOLS_PATHS` | read |  | steamclient.so |
-| `STEAM_FOSSILIZE_DUMP_PATH` | read |  | libVkLayer_steam_fossilize.so |
-| `STEAM_FOSSILIZE_DUMP_PATH_READ_ONLY` | read |  | libVkLayer_steam_fossilize.so |
-| `STEAM_FOSSILIZE_IDENTIFIER_DUMP_PATH` | read |  | libVkLayer_steam_fossilize.so |
-| `STEAM_FOSSILIZE_LAST_USE_TAG` | read |  | libVkLayer_steam_fossilize.so |
-| `STEAM_FOSSILIZE_PIPELINE_USE_DUMP_PATH` | read |  | libVkLayer_steam_fossilize.so |
-| `STEAM_FOSSILIZE_PRECOMPILE_QA` | read |  | libVkLayer_steam_fossilize.so |
-| `STEAM_FOSSILIZE_REPLAY_WRAP` | read |  | steamclient.so |
-| `STEAM_GAME_LAUNCH_SHELL` | read |  | steamclient.so |
-| `STEAM_GAMESCOPE_DYNAMIC_FPSLIMITER` | read |  | steamclient.so |
-| `STEAM_GAMESCOPE_DYNAMIC_REFRESH_IN_STEAM_SUPPORTED` | read |  | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `STEAM_GAMESCOPE_NIS_SUPPORTED` | read |  | steamclient.so |
-| `STEAM_GAMESCOPE_VRR_SUPPORTED` | read |  | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `STEAM_GAMESERVER_A2S_INFO_STRICT_LEGACY_PROTOCOL` | read |  | steamclient.so |
-| `STEAM_GAMESERVER_ADVERTISE_SDR_LOCATION` | read |  | steamclient.so |
-| `STEAM_GAMESERVER_PACKET_HANDLER_NO_IPC` | read |  | steamclient.so |
-| `STEAM_GAMESERVER_RATE_LIMIT_200MS` | read |  | steamclient.so |
-| `STEAM_GLCOMPOSER_USE_MAKECURRENT_LEGACY` | read |  | steamwebhelper |
-| `STEAM_IGNORE_INDIRECT_RENDERING` | read |  | vgui2_s.so |
-| `STEAM_LAUNCH_WRAPPER_DEBUG` | read (bool) | `0` | steam-launch-wrapper |
-| `STEAM_LAUNCH_WRAPPER_GAME_BIN` | read (bool) | `1` | steam-launch-wrapper |
-| `STEAM_LAUNCH_WRAPPER_JOURNAL` | read (bool) | `0` | steam-launch-wrapper |
-| `STEAM_LAUNCH_WRAPPER_SCOPE` | read (bool) | `0` | steam-launch-wrapper |
-| `STEAM_MANGOAPP_HORIZONTAL_SUPPORTED` | read |  | steamclient.so |
-| `STEAM_MANGOAPP_PRESETS_SUPPORTED` | read |  | steamclient.so |
-| `steam_master_ipc_name_override` | read; set |  | steamclient.so, steamui.so |
-| `STEAM_MULTIPLE_XWAYLANDS` | read |  | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `STEAM_NO_FAST_PPT` | read |  | steamclient.so |
-| `STEAM_OPENAL_SKIP_CAPTURE` | read |  | steamclient.so |
-| `STEAM_OVERLAY_DISABLE_WAIT_FOR_CEF_FRAME` | read |  | gameoverlayrenderer.so |
-| `STEAM_OVERLAY_FRAME_TIME_LOGGING` | read |  | gameoverlayrenderer.so |
-| `STEAM_OVERLAY_LOGGING` | read |  | gameoverlayrenderer.so |
-| `STEAM_OVERLAY_LOGGING_FLUSH` | read |  | gameoverlayrenderer.so |
-| `STEAM_OVERLAY_VULKAN_LAYER_FORCE_COMPUTE` | read |  | steamoverlayvulkanlayer.so |
-| `STEAM_OVERLAY_WINDOW_BLACKLIST` | read |  | gameoverlayrenderer.so |
-| `STEAM_RUNTIME` | read |  | gamelauncher, steam, steam-launch-wrapper, steamui.so |
-| `STEAM_RUNTIME_LIBRARY_PATH` | read |  | steamclient.so |
-| `STEAM_RUNTIME_LOGGER` | read |  | gamelauncher, steam |
-| `STEAM_RUNTIME_STEAMRT` | read |  | gamelauncher, gameoverlayui.so, steam, steamclient.so, steamservice.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `STEAM_SPEW_LEVELS` | read |  | steamclient.so |
-| `STEAM_UPDATEUI_PNG_BACKGROUND` | read |  | steam |
-| `STEAM_USE_DYNAMIC_VRS` | read |  | gamelauncher, gameoverlayui.so, steam, steamclient.so, steamservice.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `STEAM_USE_MANGOAPP` | read |  | steamclient.so |
-| `STEAM_USE_WPASUPPLICANT` | read |  | steamui.so |
-| `STEAM_VKOVERLAY_FORCE_YCBCR_SUPPORT` | read |  | steamoverlayvulkanlayer.so |
-| `SteamAppId` | read |  | steam-launch-wrapper, steamclient.so |
-| `SteamDeck` | read |  | gameoverlayrenderer.so, steamclient.so |
-| `SteamDisableOverlayDPIScaling` | read |  | gameoverlayrenderer.so |
-| `SteamEnv` | read |  | steamclient.so |
-| `SteamGameId` | read |  | gameoverlayrenderer.so |
-| `SteamGamepadUI` | read |  | gameoverlayrenderer.so |
-| `STEAMNETWORKINGSOCKETS_LOG_FILE` | read |  | steamclient.so, streaming_client |
-| `STEAMNETWORKINGSOCKETS_LOG_LEVEL` | read |  | steamclient.so, streaming_client |
-| `SteamNoOverlayUIDrawing` | read |  | gameoverlayrenderer.so |
-| `SteamOS` | read |  | steamclient.so |
-| `STEAMOS_STEAM_REBOOT_SENTINEL` | read |  | steamui.so |
-| `STEAMOS_STEAM_SHUTDOWN_SENTINEL` | read |  | steamui.so |
-| `SteamOverlayGameId` | read |  | gameoverlayrenderer.so |
-| `SteamOverlayUseXFilterEvent` | read |  | gameoverlayrenderer.so |
-| `SteamRealm` | read |  | gamelauncher, gameoverlayui.so, steam, steamclient.so |
-| `SteamStreamingAllowGameVsync` | read |  | gameoverlayrenderer.so |
-| `SteamStreamingVideo` | read |  | gameoverlayrenderer.so |
-| `SteamStreamingVideoDisableVSync` | read |  | gameoverlayrenderer.so |
-| `SteamTenfoot` | read |  | steamclient.so |
-| `SteamUniverse` | read |  | gamelauncher, gameoverlayui.so, steam, steamclient.so |
-| `STEAMVIDEOTOKEN` | read; set |  | chromehtml.so, crashhandler.so, friendsui.so, gamelauncher, steam, steamclient.so, steamservice.so, steamui.so, steamwebhelper |
-| `STEAMVIDEOTOKEN2` | set | `7b7fe2a66d548a0daf01c44056f5` | steamwebhelper |
-| `StreamForOpenVR` | read |  | gameoverlayrenderer.so |
-| `SUPPRESS_STEAM_OVERLAY` | read |  | steamclient.so |
-| `SYSTEM_LD_LIBRARY_PATH` | read |  | steamclient.so |
-| `SYSTEM_PATH` | read |  | steamclient.so |
-| `TMPDIR` | read |  | chromehtml.so, crashhandler.so, filesystem_stdio.so, friendsui.so, gamelauncher, gameoverlayui.so, libvideo.so, libvstdlib_s.so, steam, steamclient.so, steamservice.so, steamsysinfo, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `TZDIR` | read |  | steamui.so |
-| `USER` | read |  | crashhandler.so, gamelauncher, gameoverlayrenderer.so, libtier0_s.so, libvideo.so, steam, steam_monitor, steamclient.so, steamservice.so, steamsysinfo, streaming_client |
-| `VR_CONFIG_PATH` | read |  | steamclient.so, steamui.so |
-| `VR_LOG_PATH` | read |  | steamclient.so, steamui.so |
-| `VR_OVERRIDE` | read |  | steamclient.so, steamui.so |
-| `WAYLAND_DISPLAY` | read |  | steamui.so, streaming_client |
-| `WSL_DISTRO_NAME` | read |  | crashhandler.so, gamelauncher, libtier0_s.so, libvideo.so, steam, steam_monitor, steamservice.so, steamsysinfo, streaming_client |
-| `XDG_CONFIG_HOME` | read |  | gamelauncher, gameoverlayui.so, steam, steamclient.so, steamservice.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
-| `XDG_DATA_HOME` | read |  | steamclient.so, steamui.so |
-| `XDG_RUNTIME_DIR` | read |  | steam-launch-wrapper |
-| `XDG_SESSION_TYPE` | read |  | gameoverlayrenderer.so, steamui.so |
+| Variable | What it does | Access | Value seen at call site | Binaries |
+|---|---|---|---|---|
+| `_STEAM_SETENV_MANAGER` | Internal handshake for Steam's CProcessEnvironmentManager, which preallocates environment slots (BREAKPAD_DUMP_LOCATION, STEAMVIDEOTOKEN, overlay layer switches, ...) in the main process so that loaded DLLs can update them safely. If it is set from outside, the manager disables itself ("disabled by external environment setting"); users should not set it. *(medium)* | read |  | crashhandler.so, friendsui.so, gamelauncher, steam, steamclient.so, steamservice.so, steamui.so |
+| `ALL_PROXY` | Standard proxy variable. Steam reads it with the other *_proxy variables to auto-detect proxy settings for its HTTP downloads (logged as "Auto-detected proxy settings: auto-detect, proxy, proxy-https, exclude"). Format is a URL such as http://host:port. *(high)* | read |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `all_proxy` | Lowercase spelling of ALL_PROXY. Steam checks both when auto-detecting the proxy for its HTTP traffic. *(high)* | read |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `BREAKPAD_DUMP_LOCATION` | Directory where Breakpad writes crash minidumps. Steam preallocates it in its process-environment manager and sets it for the CEF/steamwebhelper crash reporter; users can set it to redirect where minidumps land. *(medium)* | read; set (CEF crash reporter) |  | chromehtml.so, crashhandler.so, friendsui.so, gamelauncher, steam, steamclient.so, steamservice.so, steamui.so |
+| `breakpad_testfile` | Debug switch read by crashhandler.so while installing the Breakpad exception handler; probably makes it write a test minidump/file to verify crash reporting works. Value format unknown. *(low)* | read |  | crashhandler.so |
+| `breakpad_verbose` | Debug switch for crashhandler.so. When set, the Breakpad handler prints verbose trace messages ("Writing", "Skipping, no context", filter-callback messages) while handling a crash. *(medium)* | read |  | crashhandler.so |
+| `CEF_CRASH_REPORTER_PRODUCT_VERSION` | Set by chromehtml.so before starting steamwebhelper so the CEF crash reporter tags its crash reports with the Steam client build/version. *(medium)* | set (CEF crash reporter) |  | chromehtml.so |
+| `CEF_CRASH_REPORTER_SERVER_URL` | Set by chromehtml.so for steamwebhelper to https://crash.steampowered.com/submit, the endpoint the CEF crash reporter uploads web-helper crash dumps to. *(high)* | set (CEF crash reporter) | `https://crash.steampowered.com/submit` | chromehtml.so |
+| `CPU_MHZ` | Fallback CPU clock speed in MHz, used by tier0 when it cannot read /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq (the bootstrapper says "Try defining CPU_MHZ"). Set it to a number such as 3600 on systems without cpufreq. *(high)* | read |  | gamelauncher, libtier0_s.so, libvideo.so, steam, steamservice.so, streaming_client |
+| `DBG_PATHMATCH` | Debug switch in the shared filesystem/path code. When set, the case-insensitive path-matching logic logs each step ("Matched '%s' -> '%s'", "Unmatched", "Lowered"), which helps diagnose files not found because of case differences. *(medium)* | read |  | chromehtml.so, crashhandler.so, filesystem_stdio.so, friendsui.so, gamelauncher, gameoverlayui.so, libtier0_s.so, libvideo.so, libvstdlib_s.so, steam, steam_monitor, steamclient.so, steamservice.so, steamsysinfo, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `DEBUG_DRM` | Debug switch read where Steam dynamically loads libdrm (drmGetDevices2, drmModeGetResources, ...), in steamui and streaming_client. Probably enables extra logging of DRM/KMS device enumeration. *(low)* | read |  | steamui.so, streaming_client |
+| `DISPLAY` | Standard X11 display name. Steam's UI, webhelper and streaming client connect to this X server; with STEAM_MULTIPLE_XWAYLANDS (gamescope) Steam also builds other display names in the form :N. *(high)* | read |  | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `DONT_BREAK_ON_ASSERT` | When set, failed asserts in Steam's tier0 code do not break into a debugger or show the assert dialog. steam.sh sets it to 1 for valgrind runs. Related to the -noassert command-line option. *(high)* | read |  | crashhandler.so, gamelauncher, libtier0_s.so, libvideo.so, steam, steam_monitor, steamservice.so, steamsysinfo, streaming_client |
+| `DXVK_STATE_CACHE_PATH` | DXVK's directory for its state cache. steamclient reads it when it prepares the per-app shader cache, and Steam points it at a DXVK_state_cache folder inside the app's shader-cache directory, creating the directory if needed. *(medium)* | read |  | steamclient.so |
+| `ENABLE_VULKAN_RENDERDOC_CAPTURE` | RenderDoc's Vulkan layer enable switch (1 = load the capture layer). steam-launch-wrapper can set it for a game, probably from the per-app environment files under $XDG_RUNTIME_DIR/steam/env/. *(medium)* | set |  | steam-launch-wrapper |
+| `EnableConfiguratorSupport` | Read by steamclient. The name matches the Steam Input setting that enables controller configuration support for each controller type (a bitmask). Probably an environment override for that setting. *(low)* | read |  | steamclient.so |
+| `FOSSILIZE_APPLICATION_INFO_FILTER_PATH` | Path to a Fossilize application-info filter file that the Steam Fossilize Vulkan layer reads to decide which applications/engines to record pipelines for. If the file cannot be parsed, recording goes ahead anyway. *(high)* | read |  | libVkLayer_steam_fossilize.so |
+| `FOSSILIZE_DISABLE_RATE_LIMITER` | Read by fossilize_replay. When set, it turns off the replayer's rate limiter, so background shader pre-compilation is not throttled (the same as --disable-rate-limiter). *(medium)* | read |  | fossilize_replay |
+| `FOSSILIZE_DUMP_SYNC` | Read by the Steam Fossilize layer. When set, it probably writes recorded pipeline state to disk synchronously instead of from a background thread, which makes captures more reliable when a crash is expected. *(medium)* | read |  | libVkLayer_steam_fossilize.so |
+| `FOSSILIZE_REPLAY_WRAPPER` | Read by fossilize_replay. It names a wrapper program (for example a debugger or tracer) that the replayer re-execs itself through when it starts replay processes. *(low)* | read |  | fossilize_replay |
+| `FOSSILIZE_REPLAY_WRAPPER_ORIGINAL_APP` | Set by fossilize_replay when it re-launches itself through FOSSILIZE_REPLAY_WRAPPER, so the wrapped process knows the path of the original replayer binary. Internal. *(medium)* | set |  | fossilize_replay |
+| `fs_debug` | Debug switch for filesystem_stdio and the bootstrapper. When set, it probably logs file-system access or writes a batch-style debug script (the nearby strings are '@echo off ... set fs_target'). Mostly a Windows leftover. *(low)* | read |  | filesystem_stdio.so, gamelauncher, steam |
+| `GAMESCOPE_DISPLAY_DISABLED` | Read by streaming_client next to GAMESCOPE_WAYLAND_DISPLAY. When set, the streaming client does not use gamescope's Wayland display for video output and falls back to its normal SDL/X11 window. *(medium)* | read |  | streaming_client |
+| `GAMESCOPE_MODE_SAVE_FILE` | Listed as an environment read, but its strings sit among the gamescope X atoms, so it is probably really the gamescope root-window property of the same name. That property holds the path of the file where gamescope saves the user display-mode choices. Steam reads it in a gamescope session to manage saved resolution and refresh settings. *(low)* | read |  | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GAMESCOPE_WAYLAND_DISPLAY` | Name of gamescope's private Wayland socket (for example gamescope-0), which gamescope exports. Steam uses it to detect a gamescope session, and the overlay and streaming client connect to it for gamescope_xwayland/dmabuf integration. Without it, Wayland init is skipped. *(high)* | read |  | crashhandler.so, gamelauncher, gameoverlayrenderer.so, libtier0_s.so, libvideo.so, steam, steam_monitor, steamclient.so, steamservice.so, steamsysinfo, steamui.so, streaming_client |
+| `GDK_SCALE` | GTK integer UI scale factor. The Steam vgui2 X11 surface reads it, together with the -display-scale= option, to choose the scale for legacy VGUI windows. *(medium)* | read |  | vgui2_s.so |
+| `GLIBCXX_TUNABLES` | libstdc++ tunables string that every binary reads through the statically linked C++ runtime, for example glibcxx.eh_pool.obj_size and obj_count to size the exception emergency pool. It is not a Steam-specific setting. *(high)* | read |  | chromehtml.so, crashhandler.so, filesystem_stdio.so, fossilize_replay, friendsui.so, gamelauncher, gameoverlayrenderer.so, gameoverlayui.so, libVkLayer_steam_fossilize.so, libtier0_s.so, libvideo.so, libvstdlib_s.so, steam, steam_monitor, steamclient.so, steamoverlayvulkanlayer.so, steamservice.so, steamsysinfo, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `GLOVERLAYCOREPROFILE` | Read by gameoverlayrenderer.so in its OpenGL path. When set, it probably forces the overlay to render with a shader/core-profile path instead of fixed-function. The overlay logs which mode it uses ("OpenGL version ... overlay will use %s"). *(low)* | read |  | gameoverlayrenderer.so |
+| `HOME` | User home directory. Steam uses it to find ~/.steam, ~/.local/share/applications (for desktop shortcuts) and, when XDG variables are unset, XDG user directories. Steam asserts if it cannot find a home directory. *(high)* | read |  | chromehtml.so, crashhandler.so, filesystem_stdio.so, friendsui.so, gamelauncher, gameoverlayui.so, libtier0_s.so, libvideo.so, libvstdlib_s.so, steam, steam_monitor, steamclient.so, steamservice.so, steamsysinfo, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `HOMETEST_DESKTOP_SESSION` | Test override for the desktop session name (default plasma) that steamui legacy "Switch to Desktop" path selects through steamos-session-select or the display manager D-Bus API, when SteamOS Manager is unavailable. *(medium)* | read |  | steamui.so |
+| `HOMETEST_DESKTOP_USER` | Test override for the user account that steamui legacy "Switch to Desktop" path switches the session for (logged as "Switching to session %s for user %s"); used with HOMETEST_DESKTOP_SESSION when SteamOS Manager is unavailable. *(medium)* | read |  | steamui.so |
+| `HTTP_PROXY` | Standard HTTP proxy URL (http://host:port). Steam reads it during proxy auto-detection for its downloads and web requests. *(high)* | read |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `http_proxy` | Lowercase spelling of HTTP_PROXY. Steam checks it during proxy auto-detection. *(high)* | read |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `HTTPS_PROXY` | Standard HTTPS proxy URL. Steam reads it during proxy auto-detection and uses it as the proxy-https setting. *(high)* | read |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `https_proxy` | Lowercase spelling of HTTPS_PROXY. Steam checks it during proxy auto-detection. *(high)* | read |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `IgnoreChildProcesses` | Read by the game overlay. When set, the overlay probably does not inject into or attach to child processes of the game, and stays attached only to the original game process. *(low)* | read |  | gameoverlayrenderer.so, gameoverlayui.so |
+| `JPEGMEM` | libjpeg's limit on memory use (for example 50M; the value is parsed as number plus K/M suffix). It is read by the libjpeg linked into Steam binaries; Steam itself does not use it. *(high)* | read |  | friendsui.so, gameoverlayui.so, steam, steamclient.so, steamui.so, steamwebhelper, streaming_client |
+| `LANG` | Standard locale variable. Steam reads it for X input-method setup in vgui2 (XOpenIM), as the fallback locale, and in the hardware survey. Steam may also reset it to C/host values for games. *(high)* | read |  | steamclient.so, steamui.so, vgui2_s.so |
+| `LC_ALL` | Standard locale override. steamclient reads it when building a game's environment: the host value is kept as HOST_LC_ALL, and Proton/compat launches may get a Steam-chosen locale unless the app sets DisableLinuxLocaleOverride. *(medium)* | read |  | steamclient.so, steamui.so |
+| `MANGOHUD_CONFIGFILE` | MangoHud config file path. On gamescope/Steam Deck, steamclient reads or sets it so that mangoapp (the performance overlay) uses Steam's generated config/mangohud.conf. *(high)* | read |  | steamclient.so |
+| `NO_PROXY` | Comma-separated list of hosts or domains that bypass the proxy. Steam reads it as the "exclude" list during proxy auto-detection (each entry is matched as *%s). *(high)* | read |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `no_proxy` | Lowercase spelling of NO_PROXY: the proxy bypass list Steam reads during proxy auto-detection. *(high)* | read |  | gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so |
+| `OBJCOPY` | Path to the objcopy tool (default <prefix>objcopy). steamclient and steamservice use it to add or remove ELF sections in binaries ("--add-section", "--remove-section"), probably when stamping or stripping signature data. Developer-only. *(medium)* | read |  | steamclient.so, steamservice.so |
+| `OPENSSL_ia32cap` | OpenSSL's CPU-capability mask override. The OpenSSL statically linked into Steam reads it, so it can disable SIMD/AES-NI code paths when debugging crypto problems. *(high)* | read |  | friendsui.so, gamelauncher, libvideo.so, steam, steamclient.so, steamservice.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `PATH` | Executable search path. steam-launch-wrapper reads it and, when the game-bin option is on, prepends <dir>/game-bin to it before running the game ("Unable to set new PATH" on failure). *(high)* | read; set |  | steam-launch-wrapper |
+| `PRESSURE_VESSEL_SYSTEMD_SCOPE` | steam-launch-wrapper sets it to 0 after it has placed the game in its own transient systemd scope, so pressure-vessel does not try to create another scope. *(high)* | set | `0` | steam-launch-wrapper |
+| `RADV_DEBUG` | Mesa RADV debug flags (comma-separated). steamclient reads it when building the shader-pre-compilation (Fossilize replay) environment and appends ,nomemorycache, so the replay fills the on-disk cache instead of RADV's in-memory cache. *(high)* | read |  | steamclient.so |
+| `RADV_FORCE_VRS_CONFIG_FILE` | Mesa RADV variable that names a file whose contents (1x1 or 2x2) set the forced variable-rate-shading rate. Steam (Deck dynamic VRS, STEAM_USE_DYNAMIC_VRS) writes 1x1 or 2x2 into that file at runtime to change the shading rate of running games. *(high)* | read |  | gamelauncher, gameoverlayui.so, steam, steamclient.so, steamservice.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `SDL_ENABLE_STEAM_CONTROLLER_MOUSE_MODE` | Read by the SDL HIDAPI Steam Controller driver in streaming_client. When set, it leaves the Steam Controller's built-in mouse and keyboard emulation on instead of clearing the digital mappings. *(medium)* | read |  | streaming_client |
+| `SDL_GAMECONTROLLER_IGNORE_DEVICES` | SDL list of controller VID/PID pairs to ignore (0xVID/0xPID, comma-separated). The overlay renderer reads it, probably so that the virtual Steam Input devices are hidden from the game. *(medium)* | read |  | gameoverlayrenderer.so |
+| `SDR_CERT` | Steam Datagram Relay certificate for a hosted dedicated server. It must be set together with SDR_PRIVATE_KEY; setting only one of them is an error. Used when running a server behind Valve's relay network without Steam login. *(high)* | read (SteamNetworkingSockets/SDR) |  | steamclient.so |
+| `SDR_CLIENT_PORT` | Read by SteamNetworkingSockets (SDR client). Probably fixes the local UDP port that the client uses for relay traffic. *(low)* | read (SteamNetworkingSockets/SDR) |  | steamclient.so |
+| `SDR_DEVTICKET` | Developer/debug SDR authorization ticket (base64). When set, the client uses it to connect to a gameserver through Steam Datagram Relay instead of getting a real ticket. The ticket must match the remote host and the local identity. *(high)* | read (SteamNetworkingSockets/SDR) |  | steamclient.so |
+| `SDR_IP` | Public IPv4 address (or enable/auto) that a hosted dedicated server advertises for Steam Datagram Relay. *(medium)* | read (SteamNetworkingSockets/SDR) |  | steamclient.so |
+| `SDR_IP6` | IPv6 counterpart of SDR_IP for hosted dedicated server SDR routing (address, enable or auto). *(medium)* | read (SteamNetworkingSockets/SDR) |  | steamclient.so |
+| `SDR_LISTEN_PORT` | UDP port on which a hosted dedicated server listens for relayed SDR traffic. Use a number or 'any' (the OS chooses). It is required when SDR_POPID is set; otherwise the POP ID becomes 'err'. *(high)* | read (SteamNetworkingSockets/SDR) |  | steamclient.so |
+| `SDR_NETWORK_CONFIG` | Path to (or contents of) an SDR network config, the relay/POP list, for hosted dedicated servers. It lets the server start relay routing without downloading the config from Steam. *(medium)* | read (SteamNetworkingSockets/SDR) |  | steamclient.so |
+| `SDR_POPID` | Valve data-center POP code (for example 'iad') where a hosted dedicated server is located. It must exist in the SDR network config, otherwise relayed traffic cannot be received. Requires SDR_LISTEN_PORT. *(high)* | read (SteamNetworkingSockets/SDR) |  | steamclient.so |
+| `SDR_PRIVATE_KEY` | Private key matching SDR_CERT for a hosted dedicated server on Steam Datagram Relay. Both must be set. *(high)* | read (SteamNetworkingSockets/SDR) |  | steamclient.so |
+| `SDR_PROBE_RELAY_INTERVAL` | Interval at which a hosted SDR server sends ping probes to relays (parsed as a number; "Failed to parse %s value" if invalid). Requires a signed cert. *(medium)* | read (SteamNetworkingSockets/SDR) |  | steamclient.so |
+| `SDR_PROBE_RELAY_INTERVAL_BUSY` | Relay probe interval that a hosted SDR server uses while it is busy (has active traffic); the busy-state version of SDR_PROBE_RELAY_INTERVAL. *(medium)* | read (SteamNetworkingSockets/SDR) |  | steamclient.so |
+| `SESSION_MANAGER` | X Session Management (XSMP) address. vgui2 reads it to connect Steam's legacy UI to the desktop session manager ("Could not connect to X session manager"). *(high)* | read |  | vgui2_s.so |
+| `SITE_SERVER_GUI` | Read by steamclient. When set, it probably enables the built-in SiteServerUI web interface (/siteserver/, /login routes) used for Steam cafe/site-license server administration. *(low)* | read |  | steamclient.so |
+| `SLEEP_BEFORE_ELEVATED_UPDATE` | Debug switch for the bootstrapper. Before an elevated (admin) self-update it makes the process sleep ("pid %u sleeping...") so a debugger can attach. Mostly relevant on Windows. *(medium)* | read |  | gamelauncher, steam |
+| `STEAM_ALLOW_DRIVE_ADOPT` | Read by steamui's UDisks2 storage manager (SteamOS). It enables or disables "adopting" external drives as Steam library drives (logged as "Allow drive adopt: %d"). *(medium)* | read |  | steamui.so |
+| `STEAM_ALLOW_DRIVE_UNMOUNT` | Read by steamui's UDisks2 storage manager (SteamOS). It enables or disables unmounting drives from the Steam storage UI (logged as "Allow drive unmount: %d"). *(medium)* | read |  | steamui.so |
+| `STEAM_BOOTSTRAP_LOG_VERBOSE` | When set, the bootstrapper writes verbose update and unpack logging (each file deleted, folder created and package unzipped) to logs/bootstrap_log.txt. *(medium)* | read |  | gamelauncher, steam |
+| `STEAM_BROWSER_RESIZE_WORKAROUND` | Read by steamwebhelper. It probably turns on a workaround for window-resize rendering glitches in the CEF browser windows. *(low)* | read |  | steamwebhelper |
+| `STEAM_CEF_GPU_CMD_PREFIX` | Developer switch. Its value is passed to steamwebhelper as --gpu-launcher='<value>', so the CEF GPU process starts under a wrapper or debugger (similar to the renderer gdb prefix used with STEAM_DEBUGCEF). *(high)* | read |  | chromehtml.so, steamclient.so |
+| `STEAM_CLIENT_CONFIG_FILE` | Path to steam.cfg (bootstrapper inhibit settings, CMForce, ...). The bootstrapper and client read it to override the location, and Steam exports it to games as <steamroot>/steam.cfg. *(high)* | read |  | gamelauncher, steam, steamclient.so |
+| `STEAM_CLIENT_LOG_FOLDER` | Name of the log directory under the Steam data dir (default logs). Client components, the webhelper and steamsysinfo write their log files there. *(high)* | read |  | gamelauncher, gameoverlayui.so, steam, steamclient.so, steamsysinfo, steamui.so, steamwebhelper |
+| `STEAM_CLOUD_GAMING_PLATFORM` | Identifies the cloud-gaming host Steam is running on. Recognised values are Valve and NVIDIA (GeForce NOW); anything else logs "Unknown cloud gaming platform". *(high)* | read |  | steamclient.so |
+| `STEAM_COMPAT_LAUNCHER_SERVICE` | Names a compat tool (for example proton or container-runtime) in which Steam starts steam-runtime-launcher-service, so developers can run commands inside the game's container or Proton environment. steamclient reads it and passes it on to the tool environment. *(medium)* | read |  | steamclient.so |
+| `STEAM_COMPAT_MOUNTS` | Colon-separated extra host paths that the pressure-vessel container should share with the game. Steam reads any user value and appends its own (for example library and tool paths) when it builds the compat environment. *(high)* | read |  | steamclient.so |
+| `STEAM_COMPAT_PROTON` | Set to 1 by Steam when the selected compat tool is Proton. steamclient also reads it, together with STEAM_COMPAT_PROTON_SUPPRESS, to decide Proton-specific behaviour. *(medium)* | read |  | steamclient.so |
+| `STEAM_COMPAT_PROTON_SUPPRESS` | Read next to STEAM_COMPAT_PROTON. When set, it probably stops Steam from marking or treating the launch as Proton. *(low)* | read |  | steamclient.so |
+| `STEAM_COMPAT_TOOL_MAPPINGS` | Read by steamclient while it loads local compatibility tools (compatibilitytools.d). It probably lets developers override the app-to-compat-tool mapping (normally stored in the CompatToolMapping config) from the environment. *(low)* | read |  | steamclient.so |
+| `STEAM_DEBUGCEF` | Developer switch for the Steam web UI. It adds --remote-debugging-port, disables the hang monitor and seccomp sandbox, and can run the CEF renderer under gdb, making steamwebhelper debuggable. *(high)* | read |  | chromehtml.so, steamclient.so |
+| `STEAM_DESKTOP_APP_AFFINITY_LIST` | CPU-affinity list that tier0 and its helpers read for desktop (non-game) processes. Probably used on Steam Deck to keep Steam's own processes off the cores reserved for games. *(low)* | read |  | crashhandler.so, gamelauncher, gameoverlayrenderer.so, libtier0_s.so, libvideo.so, steam, steam_monitor, steamservice.so, steamsysinfo, streaming_client |
+| `STEAM_DISABLE_BROWSER_SHUTDOWN_WORKAROUND` | When set, steamwebhelper skips its "safe browser shutdown workaround" (the same as -disable_safe_shutdown_workaround). *(high)* | read |  | steamwebhelper |
+| `STEAM_DISABLE_LIBNM_IPV6_WORKAROUND` | SteamOS network manager switch. When set, steamclient does not apply its libnm IPv6 workaround, which sets the IPv6 addr-gen-mode when configuring connections through NetworkManager (logged as "SetIPv6Config: IPv6 libnm workaround: %d"). *(medium)* | read |  | steamclient.so |
+| `STEAM_DISABLE_MANGOAPP_ATOM_WORKAROUND` | gamescope/Steam Deck switch. When set, Steam stops using an X atom workaround to control the mangoapp performance overlay (logged as "Using mangoapp atom workaround: %d"). gamescope-session sets it on newer gamescope versions. *(medium)* | read |  | steamclient.so |
+| `STEAM_DISPLAY_REFRESH_LIMITS` | Minimum and maximum refresh rate as '<min>,<max>' in Hz (for example 40,60). gamescope-session sets it to tell Steam the range its refresh-rate slider and FPS limiter may use. Invalid values or min greater than max are rejected. *(high)* | read |  | steamclient.so |
+| `STEAM_ENABLE_AMD_LAYER` | Read by steamclient while it builds the game launch environment, next to the overlay and Vulkan-layer variables. Probably enables an AMD Vulkan layer for the launched game. *(low)* | read |  | steamclient.so |
+| `STEAM_ENABLE_DYNAMIC_BACKLIGHT` | Steam Deck/gamescope session switch that turns on dynamic backlight control in the client. gamescope-session sets it on supported hardware. *(medium)* | read |  | gamelauncher, gameoverlayui.so, steam, steamclient.so, steamservice.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `STEAM_ENABLE_FAN_CONTROL` | SteamOS switch that turns on Steam's fan-control feature: the System\FanMode setting and the fan-mode selector. gamescope-session sets it on supported handhelds. *(medium)* | read |  | steamclient.so |
+| `STEAM_ENABLE_SHADER_CACHE_MANAGEMENT` | Controls the shader cache manager (pre-caching, Fossilize background processing). steamclient checks it with the convar, command-line and registry switches; a disabling value logs "Shader manager disabled by environment". *(high)* | read |  | steamclient.so |
+| `STEAM_ENABLE_VOLUME_HANDLER` | SteamOS session switch. When set, steamui's CSystemAudioController handles the hardware volume keys and system volume itself (logged as "handle volume keys: %d"). *(medium)* | read |  | steamui.so |
+| `STEAM_ENABLE_XCOMPOSITE_WORKAROUND` | steamwebhelper switch (0/1, logged as "Setting xcomposite workaround enabled via env var"). It makes the webhelper capture window textures through an XComposite workaround, like -use_xcomposite_workaround. *(high)* | read |  | steamwebhelper |
+| `STEAM_EXTRA_COMPAT_TOOLS_PATHS` | Colon-separated list of extra directories that Steam scans for custom compatibility tools (Proton builds and so on), in addition to /usr/share/steam/compatibilitytools.d, /usr/local/share/steam/compatibilitytools.d and <steamroot>/compatibilitytools.d. *(high)* | read |  | steamclient.so |
+| `STEAM_FOSSILIZE_DUMP_PATH` | Path prefix where the Steam Fossilize layer writes recorded Vulkan pipeline state (.foz) for the game. Steam sets it per app inside the shader cache, and the layer logs "Overriding serialization path". *(high)* | read |  | libVkLayer_steam_fossilize.so |
+| `STEAM_FOSSILIZE_DUMP_PATH_READ_ONLY` | Path to an existing, read-only Fossilize database (for example Steam's downloaded pipeline cache). The layer reads it so pipelines that are already known are not recorded again. *(medium)* | read |  | libVkLayer_steam_fossilize.so |
+| `STEAM_FOSSILIZE_IDENTIFIER_DUMP_PATH` | Path where the Steam Fossilize layer writes only pipeline identifiers/hashes, not full state, so Steam can track which pipelines a game uses. *(medium)* | read |  | libVkLayer_steam_fossilize.so |
+| `STEAM_FOSSILIZE_LAST_USE_TAG` | Tag (a hex value) that the Steam Fossilize layer attaches to recorded pipeline usage so Steam can tell which pipelines were used most recently, probably for cache pruning. *(low)* | read |  | libVkLayer_steam_fossilize.so |
+| `STEAM_FOSSILIZE_PIPELINE_USE_DUMP_PATH` | Path where the Steam Fossilize layer writes pipeline-usage records, meaning which pipelines were actually bound at runtime, as opposed to full pipeline state. *(medium)* | read |  | libVkLayer_steam_fossilize.so |
+| `STEAM_FOSSILIZE_PRECOMPILE_QA` | QA switch for the Steam Fossilize layer, read next to FOSSILIZE_DUMP_SYNC. Probably used to check that a game's pipelines were already pre-compiled by Steam's shader pre-caching. *(low)* | read |  | libVkLayer_steam_fossilize.so |
+| `STEAM_FOSSILIZE_REPLAY_WRAP` | Developer override read by steamclient's shader-compile job. Its value probably prefixes or wraps the fossilize_replay command line, for example with a debugger or profiler, when Steam pre-compiles pipelines in the background. *(low)* | read |  | steamclient.so |
+| `STEAM_GAME_LAUNCH_SHELL` | Shell that runs game launch command lines, including user launch options with %command% (default /bin/sh). *(high)* | read |  | steamclient.so |
+| `STEAM_GAMESCOPE_DYNAMIC_FPSLIMITER` | gamescope-session switch that tells Steam gamescope supports the dynamic FPS limiter, so Steam uses it for the frame-limit slider (logged as "Dynamic FPS limiter: %d"). *(high)* | read |  | steamclient.so |
+| `STEAM_GAMESCOPE_DYNAMIC_REFRESH_IN_STEAM_SUPPORTED` | gamescope-session capability flag. It tells Steam that gamescope supports changing the display refresh rate dynamically while the Steam UI is focused (see the GAMESCOPE_DYNAMIC_REFRESH_IN_STEAM atom). *(medium)* | read |  | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `STEAM_GAMESCOPE_NIS_SUPPORTED` | gamescope-session capability flag. It tells Steam that gamescope supports NVIDIA Image Scaling, so the NIS scaling filter appears in the Quick Access scaling options. *(high)* | read |  | steamclient.so |
+| `STEAM_GAMESCOPE_VRR_SUPPORTED` | gamescope-session capability flag. It tells Steam that gamescope supports variable refresh rate (adaptive sync), so the VRR toggle can be shown. *(medium)* | read |  | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `STEAM_GAMESERVER_A2S_INFO_STRICT_LEGACY_PROTOCOL` | Game-server switch. When set, steamclient's master-server updater answers A2S_INFO ("Source Engine Query") with the strict legacy protocol, probably without the newer challenge or extended fields. *(medium)* | read |  | steamclient.so |
+| `STEAM_GAMESERVER_ADVERTISE_SDR_LOCATION` | Game-server switch. When set, the server's heartbeat to the Steam master server also reports its SDR ping location, so matchmaking can estimate ping. *(medium)* | read |  | steamclient.so |
+| `STEAM_GAMESERVER_PACKET_HANDLER_NO_IPC` | Game-server switch. When set, the client game-server packet handler is probably used in-process instead of through the steamclient IPC pipe. *(low)* | read |  | steamclient.so |
+| `STEAM_GAMESERVER_RATE_LIMIT_200MS` | Game-server switch. When set, it probably applies a rate limit of one reply per 200 ms per source to game-server query replies, to protect against floods. *(low)* | read |  | steamclient.so |
+| `STEAM_GLCOMPOSER_USE_MAKECURRENT_LEGACY` | steamwebhelper GL composer switch (0/1, default false, logged as "GLComposer: makecurrent legacy mode: env: %d"). It makes the composer use the older glXMakeCurrent behaviour, to work around driver issues. *(high)* | read |  | steamwebhelper |
+| `STEAM_IGNORE_INDIRECT_RENDERING` | When set, Steam's legacy VGUI surface no longer shows the warning "OpenGL GLX context is not using direct rendering" (useful with remote X or software GL). *(high)* | read |  | vgui2_s.so |
+| `STEAM_LAUNCH_WRAPPER_DEBUG` | Boolean (default 0). It turns on steam-launch-wrapper debug output, like --debug. *(high)* | read (bool) | `0` | steam-launch-wrapper |
+| `STEAM_LAUNCH_WRAPPER_GAME_BIN` | Boolean (default 1). When true, steam-launch-wrapper prepends <dir>/game-bin to PATH for the game; --no-game-bin turns this off. *(high)* | read (bool) | `1` | steam-launch-wrapper |
+| `STEAM_LAUNCH_WRAPPER_JOURNAL` | Boolean (default 0). When true, steam-launch-wrapper sends the game's stdout and stderr to the systemd Journal under the identifier steam-app<ID>, like --journal. *(high)* | read (bool) | `0` | steam-launch-wrapper |
+| `STEAM_LAUNCH_WRAPPER_SCOPE` | Boolean (default 0). When true, steam-launch-wrapper puts the game in a transient systemd user scope app-steam-app<ID>-<pid>.scope, like --scope. Steam's launch environment may set it. *(high)* | read (bool) | `0` | steam-launch-wrapper |
+| `STEAM_MANGOAPP_HORIZONTAL_SUPPORTED` | gamescope-session capability flag. It tells Steam that mangoapp supports the horizontal (single-line) performance overlay layout (logged as "Using mangoapp horizontal: %d"). *(high)* | read |  | steamclient.so |
+| `STEAM_MANGOAPP_PRESETS_SUPPORTED` | gamescope-session capability flag. It tells Steam that mangoapp supports preset-based performance overlay levels (logged as "Using mangoapp presets: %d"). *(high)* | read |  | steamclient.so |
+| `steam_master_ipc_name_override` | Overrides the name of the Steam master IPC pipe (default Steam3Master) that steamui and steamclient use to connect to the running Steam instance. It is read and set internally, so a second client or test harness can use a separate IPC namespace. *(medium)* | read; set |  | steamclient.so, steamui.so |
+| `STEAM_MULTIPLE_XWAYLANDS` | Set by gamescope-session when gamescope runs more than one Xwayland server. Steam then connects to the extra X displays (:N) as well as $DISPLAY, so it can manage games on other Xwaylands. *(high)* | read |  | steamclient.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `STEAM_NO_FAST_PPT` | Steam Deck/amdgpu power switch read in the TDP-limit code. When set, Steam probably sets only the sustained power cap (power1_cap) and not the fast/boost PPT limit (power2_cap). *(medium)* | read |  | steamclient.so |
+| `STEAM_OPENAL_SKIP_CAPTURE` | When set, steamclient probably skips opening OpenAL capture (microphone) devices, which avoids audio-device probing problems. *(low)* | read |  | steamclient.so |
+| `STEAM_OVERLAY_DISABLE_WAIT_FOR_CEF_FRAME` | Read by gameoverlayrenderer.so. When set, the game overlay probably stops waiting for a new frame from the CEF overlay UI before presenting, which cuts latency but may show stale overlay frames. *(low)* | read |  | gameoverlayrenderer.so |
+| `STEAM_OVERLAY_FRAME_TIME_LOGGING` | When set, the game overlay renderer writes per-frame timing to its log, /tmp/gameoverlayrenderer.<pid>.log. *(medium)* | read |  | gameoverlayrenderer.so |
+| `STEAM_OVERLAY_LOGGING` | When set, the game overlay renderer, injected into games, writes a debug log to /tmp/gameoverlayrenderer.<pid>.log. *(high)* | read |  | gameoverlayrenderer.so |
+| `STEAM_OVERLAY_LOGGING_FLUSH` | When set, the overlay renderer flushes /tmp/gameoverlayrenderer.<pid>.log after every write, so no lines are lost if the game crashes. *(high)* | read |  | gameoverlayrenderer.so |
+| `STEAM_OVERLAY_VULKAN_LAYER_FORCE_COMPUTE` | Read by the Steam overlay Vulkan layer around swapchain creation and present. When set, the layer probably draws the overlay with its compute-shader path instead of the graphics path. *(low)* | read |  | steamoverlayvulkanlayer.so |
+| `STEAM_OVERLAY_WINDOW_BLACKLIST` | Read by gameoverlayrenderer.so at startup with the game IDs. It probably lists executables or windows the overlay must not attach to, similar to the built-in vrmonitor exclusion. *(low)* | read |  | gameoverlayrenderer.so |
+| `STEAM_RUNTIME` | Path of the Steam Runtime in use, or empty/0. The bootstrapper uses it when re-executing between scout and steamrt3, the hardware survey reports "<Runtime disabled>" when it is off, and steam-launch-wrapper logs "STEAM_RUNTIME not in use". steam.sh unsets it on the steamrt3 path. *(high)* | read |  | gamelauncher, steam, steam-launch-wrapper, steamui.so |
+| `STEAM_RUNTIME_LIBRARY_PATH` | The Steam Runtime's library search path. steamclient reads it to build the game's LD_LIBRARY_PATH and LD_PRELOAD (adding gameoverlayrenderer.so) unless the overlay is suppressed. *(high)* | read |  | steamclient.so |
+| `STEAM_RUNTIME_LOGGER` | Controls srt-logger capture of the client's output into logs/console-linux.txt. 0 disables it, which helps when attaching debuggers; the bootstrapper logs "enable configured via STEAM_RUNTIME_LOGGER". *(high)* | read |  | gamelauncher, steam |
+| `STEAM_RUNTIME_STEAMRT` | Developer override for the steamrt3c (sniper-based) runtime directory, default <steamroot>/steamrt64/pv-runtime/steam-runtime-steamrt. The client, webhelper and helpers read it to locate the runtime. *(high)* | read |  | gamelauncher, gameoverlayui.so, steam, steamclient.so, steamservice.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `STEAM_SPEW_LEVELS` | Debug switch for per-group log verbosity. Comma-separated 'group=consolelevel,loglevel' pairs (parsed as %[^=]=%d,%d); invalid specs and unknown groups are ignored with a warning. *(high)* | read |  | steamclient.so |
+| `STEAM_UPDATEUI_PNG_BACKGROUND` | Path to a custom image for the bootstrapper's update/progress window, replacing the default tenfoot/resource/images/bootstrapper.jpg. *(medium)* | read |  | steam |
+| `STEAM_USE_DYNAMIC_VRS` | Steam Deck/gamescope session switch that enables dynamic variable-rate shading. Steam writes 1x1 or 2x2 into the file named by RADV_FORCE_VRS_CONFIG_FILE to change the shading rate of running games. *(high)* | read |  | gamelauncher, gameoverlayui.so, steam, steamclient.so, steamservice.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `STEAM_USE_MANGOAPP` | gamescope-session switch. It tells Steam to use mangoapp (MangoHud running as a gamescope overlay app) for the Quick Access performance overlay, driven by config/mangohud.conf (logged as "Using mangoapp: %d"). *(high)* | read |  | steamclient.so |
+| `STEAM_USE_WPASUPPLICANT` | SteamOS session switch read by steamui. It probably makes Steam's Wi-Fi management talk to wpa_supplicant directly instead of going through NetworkManager. *(low)* | read |  | steamui.so |
+| `STEAM_VKOVERLAY_FORCE_YCBCR_SUPPORT` | Read by the Steam overlay Vulkan layer. It forces the layer to treat VK_KHR_sampler_ycbcr_conversion as supported (and enables its dependencies), probably so overlay video and streaming frames in YCbCr formats can be sampled. *(medium)* | read |  | steamoverlayvulkanlayer.so |
+| `SteamAppId` | AppID of the game Steam is running. steamclient reads it (for example when writing steam_appid.txt for Steamworks), and steam-launch-wrapper uses it to name the systemd scope and journal identifier steam-app<ID>. *(high)* | read |  | steam-launch-wrapper, steamclient.so |
+| `SteamDeck` | Set to 1 when running on a Steam Deck/SteamOS session. Games can check it, and the overlay and steamclient read it to change behaviour on the Deck. *(high)* | read |  | gameoverlayrenderer.so, steamclient.so |
+| `SteamDisableOverlayDPIScaling` | When set, the in-game overlay does not scale its UI by display DPI (SetScaleFactors). *(medium)* | read |  | gameoverlayrenderer.so |
+| `SteamEnv` | Set to 1 in processes started by Steam. steamclient reads it when connecting to the global user, to know the process was launched from inside a Steam environment. *(medium)* | read |  | steamclient.so |
+| `SteamGameId` | Game ID (64-bit; for plain Steam apps it equals the AppID, and non-Steam shortcuts have larger IDs) of the running game. Steam sets it, and the overlay reads it to identify which game it is attached to. gamescope also uses it to map windows to apps. *(high)* | read |  | gameoverlayrenderer.so |
+| `SteamGamepadUI` | Set to 1 when the game was launched from the Big Picture/Gamepad UI. The overlay renderer reads it to use the gamepad-UI overlay behaviour. *(medium)* | read |  | gameoverlayrenderer.so |
+| `STEAMNETWORKINGSOCKETS_LOG_FILE` | Path of a debug log for SteamNetworkingSockets in steamclient and streaming_client (default name steamnetworkingsockets.log). Use with STEAMNETWORKINGSOCKETS_LOG_LEVEL. *(high)* | read |  | steamclient.so, streaming_client |
+| `STEAMNETWORKINGSOCKETS_LOG_LEVEL` | Numeric verbosity of the SteamNetworkingSockets debug log written to STEAMNETWORKINGSOCKETS_LOG_FILE. *(high)* | read |  | steamclient.so, streaming_client |
+| `SteamNoOverlayUIDrawing` | When set, the overlay renderer stays loaded but does not draw the overlay UI (logged as "SteamNoOverlayUIDrawing was set"), so hooks such as screenshots and FPS keep working without overlay rendering. *(medium)* | read |  | gameoverlayrenderer.so |
+| `SteamOS` | Set to 1 on SteamOS. steamclient reads it around the overlay-enabled checks to adjust overlay and platform behaviour. *(medium)* | read |  | steamclient.so |
+| `STEAMOS_STEAM_REBOOT_SENTINEL` | Path of a sentinel file set by the SteamOS session. When Steam is asked to reboot, it writes this file and exits so the session wrapper performs the reboot ("Enabling SteamOS reboot workaround"). *(high)* | read |  | steamui.so |
+| `STEAMOS_STEAM_SHUTDOWN_SENTINEL` | Path of a sentinel file set by the SteamOS session. On shutdown, Steam writes it and exits so the session wrapper powers off the machine ("Enabling SteamOS shutdown workaround"). *(high)* | read |  | steamui.so |
+| `SteamOverlayGameId` | The game ID the overlay should present as. It is usually the same as SteamGameId, but differs for things like non-Steam shortcuts or tools. Steam sets it, and the overlay renderer reads it. *(high)* | read |  | gameoverlayrenderer.so |
+| `SteamOverlayUseXFilterEvent` | When set, the overlay passes X key events through XFilterEvent (input-method filtering) before translating them to characters, which helps IME/compose-key input in the overlay. *(medium)* | read |  | gameoverlayrenderer.so |
+| `SteamRealm` | Steam realm, either the global Steam or Steam China. Steam sets it for child processes, and the overlay UI and launcher read it to choose realm-specific config file names and paths (for example local_<realm>.vdf). *(high)* | read |  | gamelauncher, gameoverlayui.so, steam, steamclient.so |
+| `SteamStreamingAllowGameVsync` | Read by the overlay renderer while the game is being streamed (Remote Play). When set, the game's vsync is left on instead of being disabled for streaming. *(medium)* | read |  | gameoverlayrenderer.so |
+| `SteamStreamingVideo` | Set by Steam for games launched during a Remote Play/streaming session. The overlay renderer reads it to turn on frame capture for video streaming. *(medium)* | read |  | gameoverlayrenderer.so |
+| `SteamStreamingVideoDisableVSync` | Set during Remote Play streaming. The overlay renderer reads it to force the game's vsync off so captured frames are not limited by the host display. *(medium)* | read |  | gameoverlayrenderer.so |
+| `SteamTenfoot` | Set to 1 when the game was launched from Big Picture ("tenfoot") mode. steamclient reads it, probably so that nested launches inherit Big Picture behaviour. *(medium)* | read |  | steamclient.so |
+| `SteamUniverse` | Steam universe of the running client (Public, Beta, ...). Steam sets it for child processes, and the bootstrapper, overlay UI and client read it to choose universe-specific paths (for example ~/.steam/steambeta, local_<x>.vdf). *(high)* | read |  | gamelauncher, gameoverlayui.so, steam, steamclient.so |
+| `STEAMVIDEOTOKEN` | Token that steamwebhelper sets (through the process environment manager) to unlock licensed H.264/HEVC video decoding in CEF ("h264_unlock", steam_video_token). Internal; users should not set it. *(medium)* | read; set |  | chromehtml.so, crashhandler.so, friendsui.so, gamelauncher, steam, steamclient.so, steamservice.so, steamui.so, steamwebhelper |
+| `STEAMVIDEOTOKEN2` | Second video-unlock token that steamwebhelper sets to a fixed constant (7b7fe2a66d548a0daf01c44056f5) alongside STEAMVIDEOTOKEN, so the bundled CEF/ffmpeg allows proprietary codecs. Internal. *(medium)* | set | `7b7fe2a66d548a0daf01c44056f5` | steamwebhelper |
+| `StreamForOpenVR` | Read by the overlay renderer with the SteamStreaming* variables. When set, the game's frames are streamed for OpenVR/SteamVR (for example to a VR headset streaming session) and not for normal Remote Play. *(low)* | read |  | gameoverlayrenderer.so |
+| `SUPPRESS_STEAM_OVERLAY` | If it is set in the environment when Steam builds a launch, steamclient leaves gameoverlayrenderer.so out of LD_PRELOAD, which disables the in-game overlay for that launch. *(high)* | read |  | steamclient.so |
+| `SYSTEM_LD_LIBRARY_PATH` | The host LD_LIBRARY_PATH that steam.sh saved before adding the runtime. steamclient reads it to restore the host library path for processes that must run outside the Steam Runtime. *(high)* | read |  | steamclient.so |
+| `SYSTEM_PATH` | The host PATH that steam.sh saved before adding the runtime. steamclient reads it to build the PATH for launched games and shell commands. *(high)* | read |  | steamclient.so |
+| `TMPDIR` | Standard temporary directory (default /tmp). Steam uses it for steamXXXXXX temp files, the webhelper's scoped_dir_steam* directories and GL composer debug frame dumps. *(high)* | read |  | chromehtml.so, crashhandler.so, filesystem_stdio.so, friendsui.so, gamelauncher, gameoverlayui.so, libvideo.so, libvstdlib_s.so, steam, steamclient.so, steamservice.so, steamsysinfo, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `TZDIR` | Standard timezone database directory. steamui reads it with /etc/localtime and /etc/timezone to work out the system timezone, probably for the SteamOS time zone settings. *(medium)* | read |  | steamui.so |
+| `USER` | Current user name. tier0 and others read it, for example for per-user names of temp files, IPC objects or locks. *(medium)* | read |  | crashhandler.so, gamelauncher, gameoverlayrenderer.so, libtier0_s.so, libvideo.so, steam, steam_monitor, steamclient.so, steamservice.so, steamsysinfo, streaming_client |
+| `VR_CONFIG_PATH` | OpenVR override for the directory that holds SteamVR config (instead of ~/.config/openvr). Steam reads it with VR_OVERRIDE and VR_LOG_PATH to find the active VR runtime. *(medium)* | read |  | steamclient.so, steamui.so |
+| `VR_LOG_PATH` | OpenVR override for the SteamVR log directory. Steam reads it with VR_OVERRIDE and VR_CONFIG_PATH. *(medium)* | read |  | steamclient.so, steamui.so |
+| `VR_OVERRIDE` | OpenVR override that names the VR runtime directory to use instead of the one registered in openvrpaths.vrpath. Steam reads it when it locates SteamVR. *(medium)* | read |  | steamclient.so, steamui.so |
+| `WAYLAND_DISPLAY` | Standard Wayland socket name. steamui and streaming_client check it, together with XDG_SESSION_TYPE=wayland, to detect a Wayland session; this affects things such as using DRM directly versus going through the compositor for game streaming and recording. *(high)* | read |  | steamui.so, streaming_client |
+| `WSL_DISTRO_NAME` | Set by Windows Subsystem for Linux. tier0 and others read it to detect that Steam is running under WSL. *(medium)* | read |  | crashhandler.so, gamelauncher, libtier0_s.so, libvideo.so, steam, steam_monitor, steamservice.so, steamsysinfo, streaming_client |
+| `XDG_CONFIG_HOME` | XDG config directory (default ~/.config). Steam reads it to resolve XDG user directories (user-dirs.dirs) and other per-user config paths. *(high)* | read |  | gamelauncher, gameoverlayui.so, steam, steamclient.so, steamservice.so, steamui.so, steamwebhelper, streaming_client, vgui2_s.so |
+| `XDG_DATA_HOME` | XDG data directory (default ~/.local/share). Steam writes game .desktop shortcuts and steam_icon_<appid> icons under it, in icons/hicolor/<size>/apps. *(high)* | read |  | steamclient.so, steamui.so |
+| `XDG_RUNTIME_DIR` | Per-user runtime directory (/run/user/<uid>). steam-launch-wrapper uses it to reach the systemd user manager's private socket for scopes, and to read per-app environment files under steam/env/. *(high)* | read |  | steam-launch-wrapper |
+| `XDG_SESSION_TYPE` | Session type (x11 or wayland). steamui and the overlay renderer check for 'wayland' to adjust behaviour in Wayland sessions. *(high)* | read |  | gameoverlayrenderer.so, steamui.so |
 
 ## Environment Steam sets for launched games
 
@@ -190,108 +194,108 @@ Steam builds a launch environment for every game process (`steamclient.so`). The
 name passed to that setter. An empty value means the client computes it at runtime (paths, app IDs and so on).
 Games, Proton, pressure-vessel and the overlay read these. On NixOS they matter for FHS/steam-run wrappers.
 
-| Variable | Value written (if constant) |
-|---|---|
-| `__GL_SHADER_DISK_CACHE_APP_NAME` | `steamapp_shader_cache` |
-| `__GL_SHADER_DISK_CACHE_PATH` |  |
-| `__GL_SHADER_DISK_CACHE_READ_ONLY_APP_NAME` | `steam_shader_cache;steamapp_merged_shader_cache` |
-| `__GL_SHADER_DISK_CACHE_SKIP_CLEANUP` | `1` |
-| `AMD_VK_PIPELINE_CACHE_FILENAME` | `steamapp_shader_cache` |
-| `AMD_VK_PIPELINE_CACHE_PATH` |  |
-| `AMD_VK_USE_PIPELINE_CACHE` | `1` |
-| `BREAKPAD_DUMP_LOCATION` |  |
-| `CEF_CRASH_REPORTER_PRODUCT_VERSION` |  |
-| `CEF_CRASH_REPORTER_SERVER_URL` | `https://crash.steampowered.com/submit` |
-| `DISABLE_LAYER_AMD_SWITCHABLE_GRAPHICS_1` | `1` |
-| `DISPLAY` |  |
-| `ENABLE_VK_LAYER_VALVE_steam_fossilize_1` | `1` |
-| `ENABLE_VK_LAYER_VALVE_steam_overlay_1` | `1` |
-| `EnableConfiguratorSupport` |  |
-| `FOSSILIZE_APPLICATION_INFO_FILTER_PATH` |  |
-| `GameOverlay_BlockOculusSDK` |  |
-| `GameOverlay_CompatMode` |  |
-| `GameOverlay_TestMode` | `1` |
-| `HOST_LC_ALL` |  |
-| `http_proxy` |  |
-| `https_proxy` |  |
-| `IgnoreChildProcesses` | `1` |
-| `LC_ALL` | `C` |
-| `MESA_DISK_CACHE_READ_ONLY_FOZ_DBS` |  |
-| `MESA_DISK_CACHE_SINGLE_FILE` | `1` |
-| `MESA_GLSL_CACHE_DIR` |  |
-| `MESA_GLSL_CACHE_MAX_SIZE` | `5G` |
-| `MESA_SHADER_CACHE_DIR` |  |
-| `MESA_SHADER_CACHE_MAX_SIZE` | `5G` |
-| `MESA_VK_TRACE` | `rgp` |
-| `MESA_VK_TRACE_TRIGGER` | `/tmp/rgp.trigger` |
-| `no_proxy` | `localhost,127.0.0.0/8` |
-| `PATH` |  |
-| `PRESSURE_VESSEL_BATCH` | `1` |
-| `PROTON_CRASH_REPORT_DIR` | `/tmp/proton_crashreports` |
-| `PROTON_HIDE_PROCESS_WINDOW` | `1` |
-| `PROTON_REMOTE_DEBUG_CMD` |  |
-| `PROTON_WAIT_ATTACH` |  |
-| `RADV_DEBUG` |  |
-| `SDL_ENABLE_STEAM_SCREEN_KEYBOARD` | `1` |
-| `SDL_GAMECONTROLLER_ALLOW_STEAM_VIRTUAL_GAMEPAD` | `1` |
-| `SDL_GAMECONTROLLER_IGNORE_DEVICES` |  |
-| `SDL_GAMECONTROLLER_USE_BUTTON_LABELS` |  |
-| `SDL_JOYSTICK_HIDAPI_STEAMXBOX` | `0` |
-| `STEAM_CLIENT_CONFIG_FILE` |  |
-| `STEAM_COMPAT_APP_ID` | `0` |
-| `STEAM_COMPAT_CLIENT_INSTALL_PATH` |  |
-| `STEAM_COMPAT_CONFIG` |  |
-| `STEAM_COMPAT_DATA_PATH` |  |
-| `STEAM_COMPAT_FLAGS` | `search-cwd` |
-| `STEAM_COMPAT_INSTALL_PATH` |  |
-| `STEAM_COMPAT_LAUNCHER_SERVICE` |  |
-| `STEAM_COMPAT_LIBRARY_PATHS` |  |
-| `STEAM_COMPAT_MEDIA_PATH` |  |
-| `STEAM_COMPAT_MOUNTS` |  |
-| `STEAM_COMPAT_PROTON` | `1` |
-| `STEAM_COMPAT_SHADER_PATH` |  |
-| `STEAM_COMPAT_TOOL_PATHS` |  |
-| `STEAM_COMPAT_TRACING` | `1` |
-| `STEAM_COMPAT_TRANSCODED_MEDIA_PATH` |  |
-| `STEAM_FOSSILIZE_DUMP_PATH` |  |
-| `STEAM_FOSSILIZE_DUMP_PATH_READ_ONLY` |  |
-| `STEAM_GAME_PIDS` |  |
-| `STEAM_LAUNCH_WRAPPER_SCOPE` | `1` |
-| `STEAM_OVERLAY_DISABLE_WAIT_FOR_CEF_FRAME` | `1` |
-| `STEAM_OVERLAY_LOGGING_FLUSH` | `1` |
-| `STEAM_OVERLAY_WINDOW_BLACKLIST` |  |
-| `SteamAppId` |  |
-| `SteamAppUser` |  |
-| `SteamClientLaunch` | `1` |
-| `SteamDeck` | `1` |
-| `SteamDisableOverlayDPIScaling` | `1` |
-| `SteamEnv` | `1` |
-| `SteamGameId` |  |
-| `SteamGamepadUI` | `1` |
-| `SteamGenericControllers` |  |
-| `SteamNoOverlayUI` | `1` |
-| `SteamOS` | `1` |
-| `SteamOverlayGameId` |  |
-| `SteamRealm` |  |
-| `SteamStreaming` | `1` |
-| `SteamStreamingAllowGameVsync` |  |
-| `SteamStreamingAudio` |  |
-| `SteamStreamingForceWindowedD3D9` |  |
-| `SteamStreamingInput` |  |
-| `SteamStreamingMaximumResolution` | `0x0` |
-| `SteamStreamingVideo` | `1` |
-| `SteamStreamingVideoDisableVSync` |  |
-| `SteamStreamingVRPairedInvite` |  |
-| `SteamStreamingVRTransitionInvite` |  |
-| `SteamTenfoot` | `1` |
-| `SteamTraceEnter` |  |
-| `SteamTraceExit` |  |
-| `SteamTraceModule` |  |
-| `SteamUniverse` |  |
-| `SteamUserDataFolder` |  |
-| `STEAMVIDEOTOKEN` |  |
-| `SteamVirtualGamepadInfo` |  |
-| `SteamVirtualGamepadInfo_Proton` |  |
-| `StreamForOpenVR` |  |
-| `StreamingTargetAudioChannels` |  |
-| `XR_RUNTIME_JSON` |  |
+| Variable | What it does | Value written (if constant) |
+|---|---|---|
+| `__GL_SHADER_DISK_CACHE_APP_NAME` | NVIDIA driver setting for the name of the writable shader cache. Steam sets it to steamapp_shader_cache so the game's compiled shaders go into Steam's per-app shader cache. *(high)* | `steamapp_shader_cache` |
+| `__GL_SHADER_DISK_CACHE_PATH` | NVIDIA driver setting for the shader cache directory. Steam points it at the game's folder in the Steam shader cache (shadercache/<appid>) so the cache can be managed and shared. *(high)* |  |
+| `__GL_SHADER_DISK_CACHE_READ_ONLY_APP_NAME` | NVIDIA driver setting for extra read-only shader caches. Steam sets it to 'steam_shader_cache;steamapp_merged_shader_cache' so the driver also loads shaders that Steam downloaded or merged. *(high)* | `steam_shader_cache;steamapp_merged_shader_cache` |
+| `__GL_SHADER_DISK_CACHE_SKIP_CLEANUP` | Steam sets it to 1 so the NVIDIA driver does not clean up or size-limit the shader cache; Steam manages the cache itself. *(high)* | `1` |
+| `AMD_VK_PIPELINE_CACHE_FILENAME` | AMD proprietary/AMDVLK Vulkan driver setting for the pipeline cache file name. Steam sets it to steamapp_shader_cache. *(high)* | `steamapp_shader_cache` |
+| `AMD_VK_PIPELINE_CACHE_PATH` | AMD Vulkan driver setting for the pipeline cache directory. Steam points it at the game's Steam shader-cache folder. *(high)* |  |
+| `AMD_VK_USE_PIPELINE_CACHE` | Steam sets it to 1 to turn on the AMD Vulkan driver's on-disk pipeline cache (stored in Steam's shader cache). *(high)* | `1` |
+| `BREAKPAD_DUMP_LOCATION` | Minidump directory that Steam puts in the environment of processes it launches (including steamwebhelper), so Breakpad-enabled children write crash dumps where Steam collects them. *(medium)* |  |
+| `CEF_CRASH_REPORTER_PRODUCT_VERSION` | Set in the environment of the steamwebhelper (CEF) process that Steam starts, so its crash reports carry the Steam client version. *(medium)* |  |
+| `CEF_CRASH_REPORTER_SERVER_URL` | Set to https://crash.steampowered.com/submit in the environment of the steamwebhelper process, so CEF crash reports go to Valve's crash server. *(high)* | `https://crash.steampowered.com/submit` |
+| `DISABLE_LAYER_AMD_SWITCHABLE_GRAPHICS_1` | Steam sets it to 1 to disable AMD's VK_LAYER_AMD_switchable_graphics implicit Vulkan layer in games. That layer can hide GPUs or break device selection, and the overlay layer conflicts with it. *(high)* | `1` |
+| `DISPLAY` | X display that Steam sets for launched games and install scripts. On gamescope or with multiple Xwaylands, Steam chooses which Xwayland display the game uses. *(medium)* |  |
+| `ENABLE_VK_LAYER_VALVE_steam_fossilize_1` | Steam sets it to 1 to turn on its implicit Fossilize Vulkan layer in the game. The layer records pipeline state into STEAM_FOSSILIZE_DUMP_PATH for shader pre-caching. *(high)* | `1` |
+| `ENABLE_VK_LAYER_VALVE_steam_overlay_1` | Steam sets it to 1 to turn on the implicit Steam overlay Vulkan layer (steamoverlayvulkanlayer.so) for Vulkan games, including those running under Proton. *(high)* | `1` |
+| `EnableConfiguratorSupport` | Steam Input setting passed to the game, probably the bitmask of controller types for which Steam Input configuration is enabled. The game's SDL and Steam Input integration use it to decide which controllers Steam remaps. *(low)* |  |
+| `FOSSILIZE_APPLICATION_INFO_FILTER_PATH` | Steam sets it to the path of the Fossilize application-info filter file. The Fossilize layer uses the file to decide whether to record pipelines for this game or engine. *(high)* |  |
+| `GameOverlay_BlockOculusSDK` | Per-app setting passed to the overlay. It probably tells the overlay to block or ignore the Oculus SDK in the game, to avoid conflicts with OpenVR/SteamVR. *(low)* |  |
+| `GameOverlay_CompatMode` | Per-app overlay compatibility mode, taken from the app's config (config/GameOverlay_CompatMode) or registry key. The overlay renderer uses it to change its hooking for games that need special handling. *(medium)* |  |
+| `GameOverlay_TestMode` | Set to 1 when the app config enables overlay test mode (config/GameOverlay_TestMode). It puts the overlay renderer into a testing/debug mode. *(medium)* | `1` |
+| `HOST_LC_ALL` | Holds the user's original LC_ALL when Steam overrides LC_ALL for a game (for example a Proton launch), so the game or Proton can restore the host locale. *(high)* |  |
+| `http_proxy` | When a proxy is set in Steam's settings, Steam exports it to launched games as http_proxy (URL form). *(high)* |  |
+| `https_proxy` | Steam exports its configured HTTPS proxy to launched games as https_proxy. *(high)* |  |
+| `IgnoreChildProcesses` | Steam sets it to 1 for some launches so the overlay renderer injected through LD_PRELOAD does not hook child processes started by the game. Only the main game gets the overlay. *(medium)* | `1` |
+| `LC_ALL` | Steam sets it to C for Proton/compat launches, after saving the user's value in HOST_LC_ALL, unless the app has DisableLinuxLocaleOverride. This avoids locale-dependent parsing bugs, such as decimal commas, in Windows games. *(high)* | `C` |
+| `MESA_DISK_CACHE_READ_ONLY_FOZ_DBS` | Mesa setting for read-only Fossilize databases. Steam sets it to the steam_precompiled[_<x>] databases so Mesa drivers use shaders Steam pre-compiled (logged as "Setting MESA_GLSL_CACHE_DIR=... MESA_DISK_CACHE_READ_ONLY_FOZ_DBS=..."). *(high)* |  |
+| `MESA_DISK_CACHE_SINGLE_FILE` | Steam sets it to 1 so Mesa uses a single-file disk cache instead of many small files in the per-app shader cache directory. *(high)* | `1` |
+| `MESA_GLSL_CACHE_DIR` | Older Mesa name for the shader cache directory. Steam sets it to the game's Steam shader-cache folder, together with MESA_SHADER_CACHE_DIR. *(high)* |  |
+| `MESA_GLSL_CACHE_MAX_SIZE` | Older Mesa name for the shader cache size limit. Steam sets it to 5G. *(high)* | `5G` |
+| `MESA_SHADER_CACHE_DIR` | Mesa shader cache directory. Steam points it at the game's folder in the Steam shader cache (steamapps/shadercache/<appid>). *(high)* |  |
+| `MESA_SHADER_CACHE_MAX_SIZE` | Mesa shader cache size limit. Steam sets it to 5G for games. *(high)* | `5G` |
+| `MESA_VK_TRACE` | Mesa Vulkan tracing mode. Steam sets it to rgp (Radeon GPU Profiler captures) when SteamOS system tracing is enabled (SteamOS/SystemTracingEnabled). *(high)* | `rgp` |
+| `MESA_VK_TRACE_TRIGGER` | Mesa trigger file for tracing. Steam sets it to /tmp/rgp.trigger with MESA_VK_TRACE=rgp; touching that file makes RADV capture an RGP trace. *(high)* | `/tmp/rgp.trigger` |
+| `no_proxy` | When Steam exports its proxy to games, it also sets no_proxy=localhost,127.0.0.0/8 so local connections bypass the proxy. *(high)* | `localhost,127.0.0.0/8` |
+| `PATH` | PATH for launched games, built from SYSTEM_PATH (the host PATH) plus Steam/runtime entries, so games and launch options find host tools. *(high)* |  |
+| `PRESSURE_VESSEL_BATCH` | Steam sets it to 1 when it runs pressure-vessel helper commands, for example gathering container runtime info into logs/container-runtime-info.txt. It turns off interactive pressure-vessel features. *(high)* | `1` |
+| `PROTON_CRASH_REPORT_DIR` | Steam sets it to /tmp/proton_crashreports so Proton/Wine write crash reports there, where Steam can collect them. *(high)* | `/tmp/proton_crashreports` |
+| `PROTON_HIDE_PROCESS_WINDOW` | Steam sets it to 1 for helper processes it runs through Proton (for example the DRM-download job), so Proton hides their console or process window. *(medium)* | `1` |
+| `PROTON_REMOTE_DEBUG_CMD` | Set when the app's steam_play_debug setting is enabled. It holds a command (msvsmon.exe from Visual Studio <version>, run with /noauth /anyuser /silent ...) that Proton starts next to the game so a Windows developer can attach the Visual Studio remote debugger. *(high)* |  |
+| `PROTON_WAIT_ATTACH` | Set from a per-app setting (registry key Software\Valve\Steam\Apps\<appid>). It tells Proton to pause the game at startup until a debugger attaches, and is used together with steam_play_debug and PROTON_REMOTE_DEBUG_CMD. *(medium)* |  |
+| `RADV_DEBUG` | Steam sets RADV_DEBUG for its background fossilize_replay shader pre-compilation, adding ',nomemorycache' to any existing value, so RADV writes compiled pipelines to the disk cache instead of keeping them in memory. *(high)* |  |
+| `SDL_ENABLE_STEAM_SCREEN_KEYBOARD` | Set to 1, in Big Picture or Gamepad UI launches, so SDL games show the Steam on-screen keyboard when they start text input. *(high)* | `1` |
+| `SDL_GAMECONTROLLER_ALLOW_STEAM_VIRTUAL_GAMEPAD` | Set to 1 so that SDL in the game uses the Steam Input virtual gamepads. SDL normally ignores them, but here Steam Input is remapping the physical controllers. *(high)* | `1` |
+| `SDL_GAMECONTROLLER_IGNORE_DEVICES` | Steam fills it with a comma-separated list of 0xVID/0xPID entries for the physical controllers that Steam Input has taken over. The game's SDL then ignores those devices and sees only the Steam virtual gamepad, which avoids double input. *(high)* |  |
+| `SDL_GAMECONTROLLER_USE_BUTTON_LABELS` | Steam sets it (0 or 1, depending on the user's Steam Input button-layout setting) to tell SDL whether to map face buttons by printed label or by position, for example Nintendo-style controllers. *(medium)* |  |
+| `SDL_JOYSTICK_HIDAPI_STEAMXBOX` | Steam sets it to 0 so the game's SDL does not use its HIDAPI driver for Steam's virtual Xbox-style controllers, which avoids conflicts with Steam Input. *(medium)* | `0` |
+| `STEAM_CLIENT_CONFIG_FILE` | Steam sets it to <steamroot>/steam.cfg for launched processes, so tools and runtimes can find the client's steam.cfg overrides. *(high)* |  |
+| `STEAM_COMPAT_APP_ID` | AppID of the game that a compatibility tool such as Proton or the Steam Linux Runtime is running (0 when not applicable). Proton uses it, for example, to apply per-game fixes. *(high)* | `0` |
+| `STEAM_COMPAT_CLIENT_INSTALL_PATH` | Steam's install directory (for example ~/.steam/steam). Steam passes it to compat tools so Proton can find Steam's files, such as steamclient.so and the lsteamclient bridge. *(high)* |  |
+| `STEAM_COMPAT_CONFIG` | Comma-separated per-app compatibility config options from the app's Steam Play settings (for example 'gamedrive' or 'noesync'). Proton reads them as option flags, similar to PROTON_* variables. *(high)* |  |
+| `STEAM_COMPAT_DATA_PATH` | Per-game compatibility data directory, steamapps/compatdata/<appid>. Proton keeps the Wine prefix in it (the pfx/ subdirectory). *(high)* |  |
+| `STEAM_COMPAT_FLAGS` | Comma-separated flags for the Steam Runtime/compat layer. Steam sets search-cwd so the game's working directory is added to the library search path, a behaviour that LD_LIBRARY_PATH-based runtimes need. *(high)* | `search-cwd` |
+| `STEAM_COMPAT_INSTALL_PATH` | The game's install directory, for example steamapps/common/<game>. Steam passes it to compat tools, and pressure-vessel shares it into the container. *(high)* |  |
+| `STEAM_COMPAT_LAUNCHER_SERVICE` | Name of the compat tool layer (for example proton or container-runtime) in which Steam asks steam-runtime-launcher-service to run. Developers can then run commands inside the game's environment; this follows the CompatTool_LauncherService setting. *(medium)* |  |
+| `STEAM_COMPAT_LIBRARY_PATHS` | Colon-separated list of Steam library folders that the game and tools may need. pressure-vessel shares them into the container. *(high)* |  |
+| `STEAM_COMPAT_MEDIA_PATH` | Directory for Proton's media converter (fozmediav<N> databases of pre-transcoded audio and video). Proton's media foundation and gstreamer path uses it to find converted video and audio. *(medium)* |  |
+| `STEAM_COMPAT_MOUNTS` | Colon-separated extra paths that pressure-vessel should share into the game's container. Steam passes on any user value and adds its own paths. *(high)* |  |
+| `STEAM_COMPAT_PROTON` | Set to 1 when the selected compat tool is Proton, so layers and tools know the game runs under Wine/Proton. *(high)* | `1` |
+| `STEAM_COMPAT_SHADER_PATH` | The game's shader cache directory, steamapps/shadercache/<appid>. Proton and DXVK/VKD3D use it for their caches, and pressure-vessel shares it into the container. *(high)* |  |
+| `STEAM_COMPAT_TOOL_PATHS` | Colon-separated directories of all the compat tools stacked for this launch (for example Proton plus the Steam Linux Runtime). pressure-vessel shares them into the container. *(high)* |  |
+| `STEAM_COMPAT_TRACING` | Set to 1 when SteamOS system tracing is enabled (SteamOS/SystemTracingEnabled), together with MESA_VK_TRACE=rgp. It tells compat tools such as Proton to turn on their tracing support. *(medium)* | `1` |
+| `STEAM_COMPAT_TRANSCODED_MEDIA_PATH` | Directory where Proton's media converter stores and finds transcoded video (the fozmediav<N> or swarm data). Steam sets it next to STEAM_COMPAT_MEDIA_PATH. *(medium)* |  |
+| `STEAM_FOSSILIZE_DUMP_PATH` | Steam sets it to the game's pipeline-recording path (shadercache/<appid>/fozpipelinesv<N>/steamapprun_pipeline_cache). The Steam Fossilize layer records the game's Vulkan pipelines there for later pre-compilation and upload. *(high)* |  |
+| `STEAM_FOSSILIZE_DUMP_PATH_READ_ONLY` | Steam sets it to '$bucketdir/steam_pipeline_cache.foz;$bucketdir/steamapp_pipeline_cache.foz', the downloaded and merged pipeline databases. The Fossilize layer then skips pipelines that are already known. *(high)* |  |
+| `STEAM_GAME_PIDS` | Set for the overlay UI helper process that Steam starts for a game ("GameOverlay: started '%s' (pid %d) for game process %d"). It lists the PIDs of the game processes the overlay serves. *(medium)* |  |
+| `STEAM_LAUNCH_WRAPPER_SCOPE` | Steam sets it to 1 so steam-launch-wrapper puts the game in its own transient systemd scope (app-steam-app<ID>-<pid>.scope). *(high)* | `1` |
+| `STEAM_OVERLAY_DISABLE_WAIT_FOR_CEF_FRAME` | Steam sets it to 1 for some launches, probably on Steam Deck/SteamOS, so the in-game overlay does not wait for a fresh CEF UI frame before presenting. *(low)* | `1` |
+| `STEAM_OVERLAY_LOGGING_FLUSH` | Steam sets it to 1 when overlay trace or test mode is enabled in the app config, so the overlay renderer flushes its /tmp/gameoverlayrenderer.<pid>.log after every line. *(medium)* | `1` |
+| `STEAM_OVERLAY_WINDOW_BLACKLIST` | Filled from the app's OverlayWindowBlacklist setting. It lists windows or executables the overlay renderer should not hook in this game. *(medium)* |  |
+| `SteamAppId` | AppID of the running game. Steamworks (SteamAPI_Init) reads it instead of steam_appid.txt, and steam-launch-wrapper uses it for scope and journal names. *(high)* |  |
+| `SteamAppUser` | Account name of the logged-in Steam user, passed to the game. Older games and Proton use it, for example to name the Wine user profile. *(medium)* |  |
+| `SteamClientLaunch` | Set to 1 so the game and Steamworks know they were started by the Steam client, not run directly. *(high)* | `1` |
+| `SteamDeck` | Set to 1 when running on a Steam Deck, or when the app is configured to identify as one (ForceIdentAsSteamDeck). Games use it to choose Deck-appropriate defaults. *(high)* | `1` |
+| `SteamDisableOverlayDPIScaling` | Set to 1 for some launches (for example in Gamepad UI) so the in-game overlay does not apply DPI scaling. *(medium)* | `1` |
+| `SteamEnv` | Set to 1 so the launched process knows it is running inside a Steam-provided environment. *(medium)* | `1` |
+| `SteamGameId` | Game ID of the launch (AppID, or a 64-bit ID for non-Steam shortcuts and mods). The overlay uses it to identify the game, and gamescope uses it (through the STEAM_GAME window atom) to associate windows with apps. *(high)* |  |
+| `SteamGamepadUI` | Set to 1 when the game is launched from the Gamepad UI/Big Picture, so the overlay and games use controller-friendly behaviour. *(high)* | `1` |
+| `SteamGenericControllers` | Set to describe which generic controllers Steam Input is handling for this game. It is part of the SDL and Steam Input controller environment, and the value format is not visible. *(low)* |  |
+| `SteamNoOverlayUI` | Set to 1 for some launches (probably when the overlay UI is disabled or the session draws the overlay itself, such as SteamOS/gamescope), telling the overlay renderer not to draw its own UI. *(medium)* | `1` |
+| `SteamOS` | Set to 1 when Steam runs on SteamOS, so games and tools can detect it. *(high)* | `1` |
+| `SteamOverlayGameId` | Game ID the overlay should use for this launch. It usually equals SteamGameId but can differ, for example for shortcuts or tools launched for another app. *(high)* |  |
+| `SteamRealm` | Steam realm of the client (global Steam or Steam China), passed to launched processes so the overlay and Steamworks pick realm-specific behaviour. *(high)* |  |
+| `SteamStreaming` | Set to 1 when the game is launched for, or during, a Remote Play streaming session. *(medium)* | `1` |
+| `SteamStreamingAllowGameVsync` | Set from the app's extended/StreamingAllowGameVsync setting. It lets the game keep vsync on while being streamed. *(medium)* |  |
+| `SteamStreamingAudio` | Set during Remote Play so the overlay or streaming hooks capture the game's audio for the stream. *(medium)* |  |
+| `SteamStreamingForceWindowedD3D9` | Set from the app's extended/StreamingForceWindowedD3D9 setting. When streaming, it forces D3D9 games into windowed mode so their frames can be captured; mostly relevant to Windows or Proton. *(medium)* |  |
+| `SteamStreamingInput` | Set during Remote Play so the game, overlay and Steam Input know input is coming from a remote streaming client. *(medium)* |  |
+| `SteamStreamingMaximumResolution` | Maximum resolution the streaming client wants, in WxH format (0x0 means no limit). Streaming-aware hooks may use it to cap the game's resolution. *(medium)* | `0x0` |
+| `SteamStreamingVideo` | Set to 1 when the game's video should be captured for Remote Play streaming. *(medium)* | `1` |
+| `SteamStreamingVideoDisableVSync` | Set during streaming to tell the overlay or hooks to disable the game's vsync, unless SteamStreamingAllowGameVsync allows it. *(medium)* |  |
+| `SteamStreamingVRPairedInvite` | Set for launches that come from a Steam Link/VR streaming pairing invite. It probably carries the invite or session identifier so the game or VR runtime can complete the pairing. *(low)* |  |
+| `SteamStreamingVRTransitionInvite` | Set for launches that move a streaming session into VR. It probably carries an invite token used during the VR transition. *(low)* |  |
+| `SteamTenfoot` | Set to 1 when the game is launched from Big Picture ("tenfoot") mode. *(high)* | `1` |
+| `SteamTraceEnter` | Set from the app's config/SteamTraceEnter setting. Together with SteamTraceModule and SteamTraceExit, it configures the overlay renderer's function-tracing debug feature, probably the entry symbol to trace. *(low)* |  |
+| `SteamTraceExit` | Set from the app's config/SteamTraceExit setting, as part of the overlay tracing debug feature; probably the exit symbol to trace. *(low)* |  |
+| `SteamTraceModule` | Set from the app's config/SteamTraceModule setting, as part of the overlay tracing debug feature; probably the module to trace. *(low)* |  |
+| `SteamUniverse` | Steam universe of the client (Public, Beta, ...), passed to launched processes. Steamworks and the overlay use it to connect to the matching universe. *(high)* |  |
+| `SteamUserDataFolder` | Path of the logged-in user's userdata folder (userdata/<accountid>). Passed to games and Proton, for example for cloud saves or screenshots. *(medium)* |  |
+| `STEAMVIDEOTOKEN` | Video-unlock token that Steam passes to child processes, especially steamwebhelper, so the bundled media stack enables licensed codecs. Internal. *(low)* |  |
+| `SteamVirtualGamepadInfo` | Describes the Steam Input virtual gamepads for this launch, probably the index or slot of each virtual controller and the real device behind it. SDL in the game reads it so virtual pads report correct types and order. *(medium)* |  |
+| `SteamVirtualGamepadInfo_Proton` | Proton-specific version of SteamVirtualGamepadInfo. It probably points to the virtual gamepad info in a form usable inside the Wine/Proton container. *(low)* |  |
+| `StreamForOpenVR` | Set from an app setting when the game is streamed to an OpenVR/SteamVR client. It tells the overlay to capture frames for VR streaming. *(low)* |  |
+| `StreamingTargetAudioChannels` | Number of audio channels the Remote Play client wants (for example 2 or 6). Streaming audio capture uses it to match the client's speaker setup. *(medium)* |  |
+| `XR_RUNTIME_JSON` | OpenXR loader override that names the active runtime's manifest JSON. Steam sets it for games, probably from a per-app setting or the SteamVR install, so OpenXR games load SteamVR's OpenXR runtime. *(medium)* |  |
