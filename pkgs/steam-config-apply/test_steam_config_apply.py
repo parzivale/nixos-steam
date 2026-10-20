@@ -66,23 +66,56 @@ class TextVdf(unittest.TestCase):
 
 
 class Shortcuts(unittest.TestCase):
+    def entries(self, e):
+        items, _ = sca.bkv_parse(e.read(ROOT + 'userdata/123/config/shortcuts.vdf', binary=True))
+        return [dict((k, v) for k, v in en) for _, en in items[0][1]]
+
     def test_roundtrip_and_upsert(self):
         e = Env()
         existing = sca.bkv_dump([['shortcuts', [['0', [['appid', ('i32', 5)], ['AppName', 'Mine'], ['Exe', '"/bin/x"'],
                                                      ['LastPlayTime', ('i32', 7)], ['tags', []]]]]]])
         self.assertEqual(sca.bkv_dump(sca.bkv_parse(existing)[0]), existing)
         e.write(ROOT + 'userdata/123/config/shortcuts.vdf', existing, binary=True)
-        cfg = {'shortcuts': [{'appName': 'Game', 'exe': '/opt/game/run', 'launchOptions': '-x', 'tags': ['nix']}]}
+        cfg = {'shortcuts': [{'key': 'game', 'appName': 'Game', 'exe': '/opt/game/run', 'launchOptions': '-x', 'tags': ['nix']}]}
         e.run(cfg)
-        items, _ = sca.bkv_parse(e.read(ROOT + 'userdata/123/config/shortcuts.vdf', binary=True))
-        entries = [v for _, v in items[0][1]]
-        self.assertEqual(len(entries), 2)
-        names = [dict((k, v) for k, v in en)['AppName'] for en in entries]
-        self.assertEqual(names, ['Mine', 'Game'])
-        game = dict((k, v) for k, v in entries[1])
-        self.assertEqual(game['appid'][1] & 0xFFFFFFFF, sca.shortcut_appid('"/opt/game/run"', 'Game'))
-        self.assertEqual(game['StartDir'], '"/opt/game"')
+        en = self.entries(e)
+        self.assertEqual([x['AppName'] for x in en], ['Mine', 'Game'])
+        self.assertEqual(en[1]['appid'][1] & 0xFFFFFFFF, sca.shortcut_appid('"/opt/game/run"', 'Game'))
+        self.assertEqual(en[1]['StartDir'], '"/opt/game"')
         self.assertEqual(e.run(cfg), '')  # idempotent
+
+    def test_path_change_replaces_and_cleans_up(self):
+        e = Env()
+        art = os.path.join(e.tmp.name, 'hero.jpg')
+        with open(art, 'wb') as f:
+            f.write(b'img')
+
+        def cfg(exe):
+            return {'shortcuts': [{'key': 'ra', 'appName': 'RetroArch', 'exe': exe, 'compatTool': 'proton_9',
+                                   'artwork': {'hero': art, 'grid': None}}]}
+        e.run(cfg('/nix/store/aaa-retroarch/bin/retroarch'))
+        old = sca.shortcut_appid('"/nix/store/aaa-retroarch/bin/retroarch"', 'RetroArch')
+        grid = os.path.join(e.root, 'userdata/123/config/grid')
+        self.assertTrue(os.path.exists(os.path.join(grid, f'{old}_hero.jpg')))
+        conf = e.read(ROOT + 'config/config.vdf')
+        self.assertIn(f'"{old}"', conf)
+        self.assertIn('"proton_9"', conf)
+        # store path changes on update: the entry is replaced, not duplicated
+        e.run(cfg('/nix/store/bbb-retroarch/bin/retroarch'))
+        new = sca.shortcut_appid('"/nix/store/bbb-retroarch/bin/retroarch"', 'RetroArch')
+        en = self.entries(e)
+        self.assertEqual([x['appid'][1] & 0xFFFFFFFF for x in en], [new])
+        self.assertFalse(os.path.exists(os.path.join(grid, f'{old}_hero.jpg')))
+        self.assertTrue(os.path.exists(os.path.join(grid, f'{new}_hero.jpg')))
+        conf = e.read(ROOT + 'config/config.vdf')
+        self.assertNotIn(f'"{old}"', conf)
+        self.assertIn(f'"{new}"', conf)
+        # removed from config: entry, mapping and artwork go away
+        e.run({'shortcuts': []})
+        self.assertEqual(self.entries(e), [])
+        self.assertFalse(os.path.exists(os.path.join(grid, f'{new}_hero.jpg')))
+        self.assertNotIn(f'"{new}"', e.read(ROOT + 'config/config.vdf'))
+        self.assertFalse(os.path.exists(os.path.join(e.root, sca.STATE)))
 
 
 class Libraries(unittest.TestCase):

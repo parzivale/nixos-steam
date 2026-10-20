@@ -109,9 +109,17 @@ def dump(items, depth=0):
 
 
 def set_path(items, path, value):
+    """Set path to value (str or nested list); value None deletes the key (and its subtree) if present."""
     for i, comp in enumerate(path):
         last = i == len(path) - 1
         hit = next((kv for kv in items if kv[0].lower() == comp.lower()), None)
+        if last and value is None:
+            if hit is None:
+                return False
+            items.remove(hit)
+            return True
+        if not last and value is None and (hit is None or not isinstance(hit[1], list)):
+            return False
         if last:
             if hit is None:
                 items.append([comp, value])
@@ -259,8 +267,9 @@ def shortcut_appid(exe, name):
     return (zlib.crc32((exe + name).encode()) & 0xFFFFFFFF) | 0x80000000
 
 
-def apply_shortcuts(path, wanted):
-    """Upsert managed non-Steam shortcuts (matched by their generated appid); other shortcuts are kept."""
+def apply_shortcuts(path, wanted, remove=()):
+    """Upsert managed non-Steam shortcuts (matched by their generated appid) and drop the managed ones in
+    `remove` (appids this tool created earlier that are no longer configured). Other shortcuts are kept."""
     try:
         items, _ = bkv_parse(open(path, 'rb').read())
     except FileNotFoundError:
@@ -277,6 +286,10 @@ def apply_shortcuts(path, wanted):
                 return v[1] & 0xFFFFFFFF
         return None
 
+    remove = set(remove)
+    before = len(entries)
+    entries = [e for e in entries if appid_of(e) not in remove]
+    removed_any = len(entries) != before
     for w in wanted:
         exe = '"' + w['exe'] + '"'
         aid = shortcut_appid(exe, w['appName'])
@@ -305,7 +318,8 @@ def apply_shortcuts(path, wanted):
         if open(path, 'rb').read() == data:
             return False
     except FileNotFoundError:
-        pass
+        if not entries and not removed_any:
+            return False
     os.makedirs(os.path.dirname(path), exist_ok=True)
     if os.path.exists(path) and not os.path.exists(path + '.nixos-steam.bak'):
         with open(path, 'rb') as a, open(path + '.nixos-steam.bak', 'wb') as b_:
@@ -380,13 +394,36 @@ def apply_library_folders(root, wanted):
 STATE = '.nixos-steam-managed.json'
 
 
-def apply_files(root, files):
-    """files: {relative path: content or null}. Files created earlier but no longer configured are removed."""
-    state_path = os.path.join(root, STATE)
+def load_state(root):
     try:
-        managed = set(json.load(open(state_path)))
+        st = json.load(open(os.path.join(root, STATE)))
     except (FileNotFoundError, ValueError):
-        managed = set()
+        st = {}
+    if isinstance(st, list):  # first format: list of managed files
+        st = {'files': st}
+    st.setdefault('files', [])
+    st.setdefault('shortcuts', {})
+    return st
+
+
+def save_state(root, st):
+    path = os.path.join(root, STATE)
+    text = json.dumps(st, sort_keys=True)
+    if not st['files'] and not st['shortcuts']:
+        if os.path.exists(path):
+            os.remove(path)
+        return
+    try:
+        if open(path).read() == text:
+            return
+    except FileNotFoundError:
+        pass
+    write_atomic(path, text)
+
+
+def apply_files(root, files, state):
+    """files: {relative path: content or null}. Files created earlier but no longer configured are removed."""
+    managed = set(state['files'])
     log = []
     for rel, content in files.items():
         p = os.path.join(root, rel)
@@ -405,9 +442,26 @@ def apply_files(root, files):
             os.remove(p)
             log.append(rel + ' (removed)')
         managed.discard(rel)
-    if managed or os.path.exists(state_path):
-        write_atomic(state_path, json.dumps(sorted(managed)))
+    state['files'] = sorted(managed)
     return log
+
+
+GRID_SUFFIX = {'grid': 'p', 'wide': '', 'hero': '_hero', 'logo': '_logo', 'icon': '_icon'}
+
+
+def copy_if_changed(src, dst):
+    data = open(src, 'rb').read()
+    try:
+        if open(dst, 'rb').read() == data:
+            return False
+    except FileNotFoundError:
+        pass
+    os.makedirs(os.path.dirname(dst), exist_ok=True)
+    fd, tmp = tempfile.mkstemp(dir=os.path.dirname(dst), prefix='.nixos-steam.')
+    with os.fdopen(fd, 'wb') as f:
+        f.write(data)
+    os.replace(tmp, dst)
+    return True
 
 
 def main():
@@ -425,6 +479,20 @@ def main():
     for s in cfg.get('settings', []):
         if not s['store'].startswith('json:'):
             by_store.setdefault(s['store'], []).append((s['key'], s['value']))
+
+    state = load_state(root)
+    shortcuts = cfg.get('shortcuts') or []
+    for w in shortcuts:
+        w['appid'] = shortcut_appid('"' + w['exe'] + '"', w['appName'])
+    current = {w['key']: w['appid'] for w in shortcuts}
+    stale = set(state['shortcuts'].values()) - set(current.values())
+    compat = 'Software\\Valve\\Steam\\CompatToolMapping\\'
+    for w in shortcuts:
+        if w.get('compatTool'):
+            for leaf, v in (('name', w['compatTool']), ('config', w.get('compatToolConfig') or ''), ('priority', '250')):
+                by_store.setdefault('install', []).append((f"{compat}{w['appid']}\\{leaf}", v))
+    for aid in stale:
+        by_store.setdefault('install', []).append((f'{compat}{aid}', None))
 
     log = []
     if by_store.get('install'):
@@ -468,22 +536,24 @@ def main():
             rel, root_key = user_files[st]
             if apply_json_values(os.path.join(udir, uid, rel), root_key, container, values):
                 log.append(f'userdata/{uid}/{rel} ({container.split(chr(92))[-1]})')
-        if cfg.get('shortcuts') and apply_shortcuts(os.path.join(udir, uid, 'config', 'shortcuts.vdf'), cfg['shortcuts']):
+        if (shortcuts or stale) and apply_shortcuts(os.path.join(udir, uid, 'config', 'shortcuts.vdf'), shortcuts, stale):
             log.append(f'userdata/{uid}/config/shortcuts.vdf')
+        grid = os.path.join(udir, uid, 'config', 'grid')
+        for w in shortcuts:
+            for kind, src in (w.get('artwork') or {}).items():
+                if src:
+                    ext = os.path.splitext(src)[1] or '.png'
+                    if copy_if_changed(src, os.path.join(grid, f"{w['appid']}{GRID_SUFFIX[kind]}{ext}")):
+                        log.append(f"userdata/{uid}/config/grid/{w['appid']}{GRID_SUFFIX[kind]}{ext}")
+        if stale and os.path.isdir(grid):
+            for fn in os.listdir(grid):
+                stem = os.path.splitext(fn)[0]
+                if any(stem in (f'{a}p', f'{a}', f'{a}_hero', f'{a}_logo', f'{a}_icon') for a in stale):
+                    os.remove(os.path.join(grid, fn))
+                    log.append(f'userdata/{uid}/config/grid/{fn} (removed)')
         for rel, src in (cfg.get('userFiles') or {}).items():
-            dst = os.path.join(udir, uid, rel)
-            data = open(src, 'rb').read()
-            try:
-                if open(dst, 'rb').read() == data:
-                    continue
-            except FileNotFoundError:
-                pass
-            os.makedirs(os.path.dirname(dst), exist_ok=True)
-            fd, tmp = tempfile.mkstemp(dir=os.path.dirname(dst), prefix='.nixos-steam.')
-            with os.fdopen(fd, 'wb') as f:
-                f.write(data)
-            os.replace(tmp, dst)
-            log.append(f'userdata/{uid}/{rel}')
+            if copy_if_changed(src, os.path.join(udir, uid, rel)):
+                log.append(f'userdata/{uid}/{rel}')
 
     scfg = cfg.get('steamCfg')
     if scfg is not None:
@@ -498,7 +568,9 @@ def main():
             os.remove(path)
             log.append('steam.cfg (removed)')
 
-    log += apply_files(root, cfg.get('files') or {})
+    log += apply_files(root, cfg.get('files') or {}, state)
+    state['shortcuts'] = current
+    save_state(root, state)
     if log:
         print('steam-config-apply: updated ' + ', '.join(log), file=sys.stderr)
 

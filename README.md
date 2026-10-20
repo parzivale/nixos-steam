@@ -37,7 +37,11 @@ hidden, recovered by analysing the client itself (see [doc/](doc/README.md)).
             # compatibility tools, libraries, non-Steam games
             defaultCompatTool = "proton_experimental";
             libraryFolders = [ "/mnt/games/SteamLibrary" ];
-            shortcuts = [ { appName = "RetroArch"; exe = "${pkgs.retroarch}/bin/retroarch"; } ];
+            shortcuts.RetroArch.exe = "${pkgs.retroarch}/bin/retroarch";
+            shortcuts."Some Windows Game" = {
+              exe = "/mnt/games/SomeGame/Game.exe";
+              compatTool = "proton_experimental";
+            };
 
             # environment variables and SDL hints
             environment.STEAM_SPEW_LEVELS = "Overlay=4,4";
@@ -83,7 +87,7 @@ hidden, recovered by analysing the client itself (see [doc/](doc/README.md)).
 | `runAtStartup` | 1 | System-wide XDG autostart entry. |
 | `defaultCompatTool` | 1 | Global compatibility tool (`CompatToolMapping/0`). |
 | `libraryFolders` | list | Registered in `steamapps/libraryfolders.vdf`. |
-| `shortcuts` | list | Non-Steam games in `shortcuts.vdf`. |
+| `shortcuts.<name>` | any | Non-Steam games in `shortcuts.vdf`, with per-shortcut Proton and artwork. A path change (e.g. a new Nix store path) replaces the old entry, and removing a shortcut from the config removes it from Steam. |
 | `clientBeta`, `client64`, `cefRemoteDebugging`, `forceUpdate`, `devConfig`, `extraFiles` | | Files in the Steam root (`package/beta`, marker files, `steam_dev.cfg`, ...). |
 | `steamCfg.<Key>` | 8 | `<steam root>/steam.cfg` (bootstrapper / updater control). |
 | `vdf.{install,local,roaming,registry}` | any | Raw keys for anything without a dedicated option. |
