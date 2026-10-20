@@ -219,3 +219,30 @@ for opt, leaf, typ, what in [
     props.append(dict(option=opt, file='localconfig', path=f'GameRecording/PerGameSettings/<appid>/{leaf}', type=typ,
                       values=None, boolEncoding=['1', '0'], what=what, confidence='medium', settable=True))
 write('app-properties.json', props)
+
+# ---------------------------------------------------------------- extra settings (research/extra-settings.json)
+XS = 'research/extra-settings.json'
+extra = {}
+for x in (json.load(open(XS))['settings'] if os.path.exists(XS) else []):
+    if not x.get('settable') or x['store'] == 'none' or x.get('templated') or x.get('file'):
+        continue
+    store, container = x['store'], None
+    if store.startswith('localJson:'):
+        container = store.split(':', 1)[1]
+        store = 'json:' + (x.get('containerStore') or 'local')
+    vals = x.get('values')
+    labels = None
+    if x['type'] == 'enum' and vals:
+        # research gives {stored: label}; options use the label (identifier-ised) and store the number
+        labels = {re.sub(r'[^A-Za-z0-9]+', '', str(lbl).split('(')[0]) or str(k): str(k) for k, lbl in vals.items()}
+    if x['group'] == 'customfunc':
+        group, name = 'settings', x.get('field')
+    elif x['group'] == 'friends' or x['option'].startswith('friends'):
+        rest = x['option'][len('friends'):] if x['option'].startswith('friends') else x['option']
+        group, name = 'friends', rest[:1].lower() + rest[1:]
+    else:
+        group, name = 'extraSettings', x['option']
+    extra[name] = dict(group=group,
+                       store=store, container=container, key=x['key'], type=x['type'], values=labels,
+                       transform=x.get('transform'), default=x.get('default'), what=x['what'], confidence=x['confidence'])
+write('extra-settings.json', extra)

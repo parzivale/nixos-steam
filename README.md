@@ -72,12 +72,15 @@ hidden, recovered by analysing the client itself (see [doc/](doc/README.md)).
 
 | Option | Count | Applied as |
 |---|---|---|
-| `settings.<name>` | 226 | Merged into Steam's own config store for that setting (`config.vdf`, `localconfig.vdf`, `sharedconfig.vdf`, `registry.vdf`) by `steam-config-apply` before every launch. |
+| `settings.<name>` | 261 | Merged into Steam's own config store for that setting (`config.vdf`, `localconfig.vdf`, `sharedconfig.vdf`, `registry.vdf`) by `steam-config-apply` before every launch. |
 | `switches.<name>` | 252 | Command-line switches. Session-only, internal and test-hook switches are flagged in their descriptions. |
 | `convars.<name>` | 449 | `+name value` on the command line. |
 | `environment.<NAME>` | 249 | Steam process environment: client variables, SDL hints and typed launcher/runtime variables. |
 | `gameEnvironment.<NAME>` | 157 declared, plus any name | Environment of every game, applied after Steam builds it, so it overrides Steam's values. |
 | `games.<appid>.*` | 24 per game | `launchOptions`, `environment`, `compatTool`, `artwork.*`, and 19 properties from the game's Properties dialog (overlay, auto-update, cloud, Steam Input, resolution, language, beta, DLC, ...). |
+| `extraSettings.<name>` | 43 | Keys outside the settings schema: `autoLoginUser`, `language`, GPU-accelerated web views, download region and throttling, auto-update window, SteamOS display and fan, start page, ... |
+| `friends.<name>` | 41 | Friends & Chat and voice settings. Most are stored as JSON inside `sharedconfig.vdf` / `localconfig.vdf`. |
+| `runAtStartup` | 1 | System-wide XDG autostart entry. |
 | `defaultCompatTool` | 1 | Global compatibility tool (`CompatToolMapping/0`). |
 | `libraryFolders` | list | Registered in `steamapps/libraryfolders.vdf`. |
 | `shortcuts` | list | Non-Steam games in `shortcuts.vdf`. |
@@ -91,7 +94,8 @@ the UI, is left alone. Each option's description says what it does (inferred fro
 confidence tag where inferred), where Steam stores it, and Steam's default.
 
 Not exposed yet, or not possible to set:
-* 44 settings that have no on-disk key (computed in code) or are read-only. Their storage is still being researched;
+* a few computed or read-only settings: the measured default ping rate, shader cache size, microphone input
+  gain (PulseAudio owns it on Linux), OOBE test modes and service-repair state;
 * per-game data stored on Valve's servers (collections, hidden games, beta passwords), and the encoded per-game
   performance profiles;
 * console commands, because they are actions, not configuration;

@@ -276,7 +276,7 @@ let
   }) (filterAttrs (_: g: g.launchOptions != null) cfg.games);
 
   # ------------------------------------------------------------------ apply
-  managedSettings = filterAttrs (_: v: v != null) cfg.settings;
+  managedSettings = filterAttrs (n: v: v != null && settingsData ? ${n}) cfg.settings;
   steamCfg = filterAttrs (_: v: v != null) cfg.steamCfg;
 
   applyData = {
@@ -303,6 +303,7 @@ in
     ./library.nix
     ./files.nix
     ./presets.nix
+    ./extra.nix
   ];
 
   options.programs.steam.client = {

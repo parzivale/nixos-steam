@@ -104,6 +104,28 @@ class Libraries(unittest.TestCase):
         self.assertFalse(os.path.exists(os.path.join(lib, 'steamapps', 'appmanifest_999.acf')))
 
 
+class JsonInVdf(unittest.TestCase):
+    def test_merge_json_blob_and_accountid(self):
+        e = Env()
+        e.write(ROOT + 'userdata/123/7/remote/sharedconfig.vdf',
+                '"UserRoamingConfigStore"\n{\n\t"Software"\n\t{\n\t\t"Valve"\n\t\t{\n\t\t\t"Steam"\n\t\t\t{\n'
+                '\t\t\t\t"FriendsUI"\n\t\t\t\t{\n\t\t\t\t\t"FriendsUIJSON"\t\t"{\\"bCompactFriendsList\\":true}"\n'
+                '\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}\n')
+        cfg = {'settings': [
+            {'store': 'json:roaming', 'container': 'Software\\Valve\\Steam\\FriendsUI\\FriendsUIJSON',
+             'key': 'nChatFlashMode', 'json': '2'},
+            {'store': 'json:local', 'container': 'WebStorage\\SteamVoiceSettings_<accountid>', 'key': 'inputGain', 'json': '0.5'},
+            {'store': 'local', 'key': 'friends\\Note_<accountid>', 'value': 'x'}]}
+        e.run(cfg)
+        items = sca.parse(e.read(ROOT + 'userdata/123/7/remote/sharedconfig.vdf'))
+        blob = sca.get_path(items[0][1], ['Software', 'Valve', 'Steam', 'FriendsUI', 'FriendsUIJSON'])
+        self.assertEqual(json.loads(blob), {'bCompactFriendsList': True, 'nChatFlashMode': 2})
+        local = sca.parse(e.read(ROOT + 'userdata/123/config/localconfig.vdf'))
+        self.assertEqual(json.loads(sca.get_path(local[0][1], ['WebStorage', 'SteamVoiceSettings_123'])), {'inputGain': 0.5})
+        self.assertEqual(sca.get_path(local[0][1], ['friends', 'Note_123']), 'x')
+        self.assertEqual(e.run(cfg), '')
+
+
 class UserFiles(unittest.TestCase):
     def test_copies_into_each_account(self):
         e = Env()

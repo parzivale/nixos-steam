@@ -169,6 +169,42 @@ def apply_file(path, root_key, entries, prefix=()):
     return changed
 
 
+def get_path(items, path):
+    for comp in path:
+        hit = next((kv for kv in items if kv[0].lower() == comp.lower()), None)
+        if hit is None:
+            return None
+        items = hit[1]
+    return items
+
+
+def apply_json_values(path, root_key, container, values):
+    """Merge {jsonKey: value} into a JSON object stored as a string value at `container` inside a VDF file."""
+    try:
+        items = parse(open(path, encoding='utf-8', errors='replace').read())
+    except FileNotFoundError:
+        items = []
+    root = next((kv for kv in items if kv[0].lower() == root_key.lower() and isinstance(kv[1], list)), None)
+    if root is None:
+        root = [root_key, []]
+        items.append(root)
+    comps = [c for c in container.replace('/', '\\').split('\\') if c]
+    cur = get_path(root[1], comps)
+    try:
+        obj = json.loads(cur) if isinstance(cur, str) and cur.strip() else {}
+    except ValueError:
+        obj = {}
+    if not isinstance(obj, dict):
+        obj = {}
+    new = dict(obj)
+    new.update(values)
+    if new == obj and cur is not None:
+        return False
+    set_path(root[1], comps, json.dumps(new, separators=(',', ':')))
+    write_atomic(path, dump(items))
+    return True
+
+
 def registry_path(key):
     """setting_name for the registry store: 'HKEY_CURRENT_USER\\Software\\Valve\\Steam\\X' -> HKCU/Software/Valve/Steam/X."""
     parts = [p for p in key.replace('/', '\\').split('\\') if p]
@@ -387,7 +423,8 @@ def main():
 
     by_store = {}
     for s in cfg.get('settings', []):
-        by_store.setdefault(s['store'], []).append((s['key'], s['value']))
+        if not s['store'].startswith('json:'):
+            by_store.setdefault(s['store'], []).append((s['key'], s['value']))
 
     log = []
     if by_store.get('install'):
@@ -414,13 +451,23 @@ def main():
 
     udir = os.path.join(root, 'userdata')
     ids = cfg.get('userIds') or ([d for d in os.listdir(udir) if d.isdigit() and d != '0'] if os.path.isdir(udir) else [])
+    user_files = {'local': ('config/localconfig.vdf', ROOTS['local']), 'roaming': ('7/remote/sharedconfig.vdf', ROOTS['roaming'])}
+    json_entries = [e for e in cfg.get('settings', []) if e['store'].startswith('json:')]
     for uid in ids:
         if not os.path.isdir(os.path.join(udir, uid)):
             continue
-        if by_store.get('local') and apply_file(os.path.join(udir, uid, 'config', 'localconfig.vdf'), ROOTS['local'], by_store['local']):
-            log.append(f'userdata/{uid}/config/localconfig.vdf')
-        if by_store.get('roaming') and apply_file(os.path.join(udir, uid, '7', 'remote', 'sharedconfig.vdf'), ROOTS['roaming'], by_store['roaming']):
-            log.append(f'userdata/{uid}/7/remote/sharedconfig.vdf')
+        for st, (rel, root_key) in user_files.items():
+            entries = [(k.replace('<accountid>', uid), v) for k, v in by_store.get(st, [])]
+            if entries and apply_file(os.path.join(udir, uid, rel), root_key, entries):
+                log.append(f'userdata/{uid}/{rel}')
+        groups = {}
+        for e in json_entries:
+            st = e['store'].split(':', 1)[1]
+            groups.setdefault((st, e['container'].replace('<accountid>', uid)), {})[e['key']] = json.loads(e['json'])
+        for (st, container), values in groups.items():
+            rel, root_key = user_files[st]
+            if apply_json_values(os.path.join(udir, uid, rel), root_key, container, values):
+                log.append(f'userdata/{uid}/{rel} ({container.split(chr(92))[-1]})')
         if cfg.get('shortcuts') and apply_shortcuts(os.path.join(udir, uid, 'config', 'shortcuts.vdf'), cfg['shortcuts']):
             log.append(f'userdata/{uid}/config/shortcuts.vdf')
         for rel, src in (cfg.get('userFiles') or {}).items():
