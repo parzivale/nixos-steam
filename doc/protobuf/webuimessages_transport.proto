@@ -1,0 +1,19 @@
+// webuimessages_transport.proto
+syntax = "proto2";
+import "steammessages_base.proto";
+import "webuimessages_base.proto";
+
+message CTransportAuth_Authenticate_Request {
+	optional string auth_key = 1;
+}
+
+message CTransportAuth_Authenticate_Response {
+}
+
+message CTransportAuth_StartShutdown_Notification {
+}
+
+service TransportAuth [(webui_service_execution_site) = 3] {
+	rpc Authenticate (.CTransportAuth_Authenticate_Request) returns (.CTransportAuth_Authenticate_Response);
+	rpc NotifyStartShutdown (.CTransportAuth_StartShutdown_Notification) returns (.WebUINoResponse);
+}

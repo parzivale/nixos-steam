@@ -1,0 +1,8 @@
+// google/protobuf/source_context.proto
+syntax = "proto3";
+package google.protobuf;
+
+message SourceContext {
+	optional string file_name = 1;
+}
+

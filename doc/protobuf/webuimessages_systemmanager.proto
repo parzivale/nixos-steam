@@ -1,0 +1,23 @@
+// webuimessages_systemmanager.proto
+syntax = "proto2";
+import "steammessages_base.proto";
+import "webuimessages_base.proto";
+
+message CSystemManager_Hibernate_Request {
+}
+
+message CSystemManager_Hibernate_Response {
+}
+
+message CSystemManager_WriteFile_Request {
+	optional string path = 1;
+	optional bytes data = 2;
+}
+
+message CSystemManager_WriteFile_Response {
+}
+
+service SystemManager [(webui_service_execution_site) = 2] {
+	rpc Hibernate (.CSystemManager_Hibernate_Request) returns (.CSystemManager_Hibernate_Response);
+	rpc WriteFile (.CSystemManager_WriteFile_Request) returns (.CSystemManager_WriteFile_Response);
+}

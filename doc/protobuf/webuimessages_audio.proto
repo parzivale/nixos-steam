@@ -1,0 +1,182 @@
+// webuimessages_audio.proto
+syntax = "proto2";
+import "steammessages_base.proto";
+import "webuimessages_base.proto";
+import "enums.proto";
+
+message CAudio_GetSupportedFeatures_Request {
+}
+
+message CAudio_GetSupportedFeatures_Response {
+	optional bool mono_downmix = 1;
+	optional bool use_bluetooth_for_mic = 2;
+	optional bool reset_config = 3;
+	optional bool bluetooth_audio_preference = 4;
+	optional bool spatialize = 5;
+	optional bool spatialize_surround = 6;
+}
+
+message CAudio_GetMonoDownmixEnabled_Request {
+}
+
+message CAudio_GetMonoDownmixEnabled_Response {
+	optional bool enabled = 1;
+}
+
+message CAudio_SetMonoDownmixEnabled_Request {
+	optional bool enabled = 1;
+}
+
+message CAudio_SetMonoDownmixEnabled_Response {
+}
+
+message CAudio_GetUseBluetoothForMic_Request {
+}
+
+message CAudio_GetUseBluetoothForMic_Response {
+	optional bool enabled = 1;
+}
+
+message CAudio_SetUseBluetoothForMic_Request {
+	optional bool enabled = 1;
+}
+
+message CAudio_SetUseBluetoothForMic_Response {
+}
+
+message CAudio_GetBluetoothAudioPreference_Request {
+}
+
+message CAudio_GetBluetoothAudioPreference_Response {
+	optional .EBluetoothAudioPreference preference = 1;
+}
+
+message CAudio_SetBluetoothAudioPreference_Request {
+	optional .EBluetoothAudioPreference preference = 1;
+}
+
+message CAudio_SetBluetoothAudioPreference_Response {
+}
+
+message CAudio_SupportsHdmiCec_Request {
+	optional int32 sink_id = 1;
+}
+
+message CAudio_SupportsHdmiCec_Response {
+	optional bool enabled = 1;
+}
+
+message CAudio_GetHdmiCecEnabled_Request {
+	optional int32 sink_id = 1;
+}
+
+message CAudio_GetHdmiCecEnabled_Response {
+	optional bool enabled = 1;
+}
+
+message CAudio_GetHdmiCecActive_Request {
+	optional int32 sink_id = 1;
+}
+
+message CAudio_GetHdmiCecActive_Response {
+	optional bool active = 1;
+}
+
+message CAudio_SetHdmiCecEnabled_Request {
+	optional int32 sink_id = 1;
+	optional bool enabled = 2;
+}
+
+message CAudio_SetHdmiCecEnabled_Response {
+}
+
+message CAudio_SendHdmiCecVolume_Request {
+	optional int32 sink_id = 1;
+	optional bool up = 2;
+}
+
+message CAudio_SendHdmiCecVolume_Response {
+}
+
+message CAudio_ToggleHdmiCecMute_Request {
+	optional int32 sink_id = 1;
+}
+
+message CAudio_ToggleHdmiCecMute_Response {
+}
+
+message CAudio_ResetConfig_Request {
+}
+
+message CAudio_ResetConfig_Response {
+}
+
+message CAudio_PlaySpeakerTestOnChannel_Request {
+	optional int32 channel_num = 1;
+}
+
+message CAudio_PlaySpeakerTestOnChannel_Response {
+	optional bool success = 1;
+}
+
+message CAudio_SetSpeakerConfiguration_Request {
+	optional int32 sink_id = 1;
+	optional .ESpeakerConfiguration config = 2;
+}
+
+message CAudio_SetSpeakerConfiguration_Response {
+	optional .ESpeakerConfiguration config = 1;
+	optional int32 channels = 2;
+	optional string sdescription = 3;
+}
+
+message CAudio_GetSpatializeEnabled_Request {
+}
+
+message CAudio_GetSpatializeEnabled_Response {
+	optional bool enabled = 1;
+}
+
+message CAudio_SetSpatializeEnabled_Request {
+	optional bool enabled = 1;
+}
+
+message CAudio_SetSpatializeEnabled_Response {
+}
+
+message CAudio_GetSpatializeSurroundEnabled_Request {
+}
+
+message CAudio_GetSpatializeSurroundEnabled_Response {
+	optional bool enabled = 1;
+}
+
+message CAudio_SetSpatializeSurroundEnabled_Request {
+	optional bool enabled = 1;
+}
+
+message CAudio_SetSpatializeSurroundEnabled_Response {
+}
+
+service Audio [(webui_service_execution_site) = 1] {
+	rpc GetSupportedFeatures (.CAudio_GetSupportedFeatures_Request) returns (.CAudio_GetSupportedFeatures_Response);
+	rpc GetMonoDownmixEnabled (.CAudio_GetMonoDownmixEnabled_Request) returns (.CAudio_GetMonoDownmixEnabled_Response);
+	rpc SetMonoDownmixEnabled (.CAudio_SetMonoDownmixEnabled_Request) returns (.CAudio_SetMonoDownmixEnabled_Response);
+	rpc GetUseBluetoothForMic (.CAudio_GetUseBluetoothForMic_Request) returns (.CAudio_GetUseBluetoothForMic_Response);
+	rpc SetUseBluetoothForMic (.CAudio_SetUseBluetoothForMic_Request) returns (.CAudio_SetUseBluetoothForMic_Response);
+	rpc GetBluetoothAudioPreference (.CAudio_GetBluetoothAudioPreference_Request) returns (.CAudio_GetBluetoothAudioPreference_Response);
+	rpc SetBluetoothAudioPreference (.CAudio_SetBluetoothAudioPreference_Request) returns (.CAudio_SetBluetoothAudioPreference_Response);
+	rpc SupportsHdmiCec (.CAudio_SupportsHdmiCec_Request) returns (.CAudio_SupportsHdmiCec_Response);
+	rpc GetHdmiCecEnabled (.CAudio_GetHdmiCecEnabled_Request) returns (.CAudio_GetHdmiCecEnabled_Response);
+	rpc GetHdmiCecActive (.CAudio_GetHdmiCecActive_Request) returns (.CAudio_GetHdmiCecActive_Response);
+	rpc SetHdmiCecEnabled (.CAudio_SetHdmiCecEnabled_Request) returns (.CAudio_SetHdmiCecEnabled_Response);
+	rpc SendHdmiCecVolume (.CAudio_SendHdmiCecVolume_Request) returns (.CAudio_SendHdmiCecVolume_Response);
+	rpc ToggleHdmiCecMute (.CAudio_ToggleHdmiCecMute_Request) returns (.CAudio_ToggleHdmiCecMute_Response);
+	rpc GetSpatializeEnabled (.CAudio_GetSpatializeEnabled_Request) returns (.CAudio_GetSpatializeEnabled_Response);
+	rpc SetSpatializeEnabled (.CAudio_SetSpatializeEnabled_Request) returns (.CAudio_SetSpatializeEnabled_Response);
+	rpc GetSpatializeSurroundEnabled (.CAudio_GetSpatializeSurroundEnabled_Request) returns (.CAudio_GetSpatializeSurroundEnabled_Response);
+	rpc SetSpatializeSurroundEnabled (.CAudio_SetSpatializeSurroundEnabled_Request) returns (.CAudio_SetSpatializeSurroundEnabled_Response);
+	rpc ResetConfig (.CAudio_ResetConfig_Request) returns (.CAudio_ResetConfig_Response);
+	rpc PlaySpeakerTestOnChannel (.CAudio_PlaySpeakerTestOnChannel_Request) returns (.CAudio_PlaySpeakerTestOnChannel_Response);
+	rpc SetSpeakerConfiguration (.CAudio_SetSpeakerConfiguration_Request) returns (.CAudio_SetSpeakerConfiguration_Response);
+}
