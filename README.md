@@ -31,6 +31,14 @@ hidden, recovered by analysing the client itself (see [doc/](doc/README.md)).
             # console variables (passed as +name value)
             convars.nPeerContentDefaultMode = 0;
 
+            # drop Steam's background helpers
+            presets.noBackgroundServices = true;
+
+            # compatibility tools, libraries, non-Steam games
+            defaultCompatTool = "proton_experimental";
+            libraryFolders = [ "/mnt/games/SteamLibrary" ];
+            shortcuts = [ { appName = "RetroArch"; exe = "${pkgs.retroarch}/bin/retroarch"; } ];
+
             # environment variables and SDL hints
             environment.STEAM_SPEW_LEVELS = "Overlay=4,4";
 
@@ -47,6 +55,10 @@ hidden, recovered by analysing the client itself (see [doc/](doc/README.md)).
             games."570" = {
               launchOptions = "-novid %command%";
               environment.DXVK_HUD = "fps";
+              compatTool = "proton_9";
+              overlay = false;
+              autoUpdate = "onLaunch";
+              steamInput = "enable";
             };
           };
         }
@@ -60,20 +72,28 @@ hidden, recovered by analysing the client itself (see [doc/](doc/README.md)).
 
 | Option | Count | Applied as |
 |---|---|---|
-| `programs.steam.client.settings.<name>` | 226 | Merged into `config/config.vdf`, `userdata/<id>/config/localconfig.vdf`, `userdata/<id>/7/remote/sharedconfig.vdf` or `~/.steam/registry.vdf` (whichever store Steam itself uses for that setting) by `steam-config-apply`, which runs inside the Steam sandbox before every launch. Skipped while Steam is already running. |
-| `programs.steam.client.switches.<name>` | 252 | Command-line switches (`-name`, or `-name <value>`). |
-| `programs.steam.client.convars.<name>` | 449 | `+name value` on the command line. |
-| `programs.steam.client.environment.<NAME>` | 222 | Environment variables and SDL hints. |
-| `programs.steam.client.steamCfg.<Key>` | 8 | `<steam root>/steam.cfg` (bootstrapper / updater control). |
-| `programs.steam.client.gameEnvironment.<NAME>` | 103 declared, plus any name | Environment of every launched game, applied **after** Steam has built it, so it overrides Steam's own values. |
-| `programs.steam.client.games.<appid>.environment` / `.launchOptions` | any | Per-game variables, and the game's Launch Options (`localconfig.vdf`). |
+| `settings.<name>` | 226 | Merged into Steam's own config store for that setting (`config.vdf`, `localconfig.vdf`, `sharedconfig.vdf`, `registry.vdf`) by `steam-config-apply` before every launch. |
+| `switches.<name>` | 252 | Command-line switches. Session-only, internal and test-hook switches are flagged in their descriptions. |
+| `convars.<name>` | 449 | `+name value` on the command line. |
+| `environment.<NAME>` | 249 | Steam process environment: client variables, SDL hints and typed launcher/runtime variables. |
+| `gameEnvironment.<NAME>` | 157 declared, plus any name | Environment of every game, applied after Steam builds it, so it overrides Steam's values. |
+| `games.<appid>.*` | 24 per game | `launchOptions`, `environment`, `compatTool`, `artwork.*`, and 19 properties from the game's Properties dialog (overlay, auto-update, cloud, Steam Input, resolution, language, beta, DLC, ...). |
+| `defaultCompatTool` | 1 | Global compatibility tool (`CompatToolMapping/0`). |
+| `libraryFolders` | list | Registered in `steamapps/libraryfolders.vdf`. |
+| `shortcuts` | list | Non-Steam games in `shortcuts.vdf`. |
+| `clientBeta`, `client64`, `cefRemoteDebugging`, `forceUpdate`, `devConfig`, `extraFiles` | | Files in the Steam root (`package/beta`, marker files, `steam_dev.cfg`, ...). |
+| `steamCfg.<Key>` | 8 | `<steam root>/steam.cfg` (bootstrapper / updater control). |
+| `vdf.{install,local,roaming,registry}` | any | Raw keys for anything without a dedicated option. |
+| `presets.noBackgroundServices` | 1 | Turns off helper processes and listeners (launcher service, crash monitor, hardware updater, LAN discovery, background recording, ...). |
 
-Every option defaults to `null`, which means "not managed": Steam's own default, or whatever the user picked in
+All options live under `programs.steam.client`. Every option defaults to `null`, which means "not managed": Steam's own default, or whatever the user picked in
 the UI, is left alone. Each option's description says what it does (inferred from how the client uses it, with a
 confidence tag where inferred), where Steam stores it, and Steam's default.
 
-Not exposed as options:
-* 44 settings that have no on-disk key (computed in code) or are read-only;
+Not exposed yet, or not possible to set:
+* 44 settings that have no on-disk key (computed in code) or are read-only. Their storage is still being researched;
+* per-game data stored on Valve's servers (collections, hidden games, beta passwords), and the encoded per-game
+  performance profiles;
 * console commands, because they are actions, not configuration;
 * gamescope X11 atoms, because Steam sets these at runtime.
 
