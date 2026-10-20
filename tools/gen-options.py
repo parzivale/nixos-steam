@@ -160,3 +160,15 @@ for name, e in env.items():
     e['binaries'] = sorted(e['binaries'])
     e['what'], e['confidence'] = d(e['kind'], name)
 write('environment.json', env)
+
+# ---------------------------------------------------------------- environment Steam builds for games
+genv = {}
+for r in recs:
+    if r['kind'] != 'game-env':
+        continue
+    e = genv.setdefault(r['name'], dict(values=[]))
+    if r.get('value') not in (None, '') and str(r['value']) not in e['values']:
+        e['values'].append(str(r['value']))
+for name, e in genv.items():
+    e['what'], e['confidence'] = d('game-env', name)
+write('game-environment.json', genv)

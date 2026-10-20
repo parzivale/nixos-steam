@@ -36,6 +36,18 @@ hidden, recovered by analysing the client itself (see [doc/](doc/README.md)).
 
             # steam.cfg in the install root
             steamCfg.BootStrapperInhibitAll = "enable";
+
+            # environment for every game (overrides what Steam sets)
+            gameEnvironment = {
+              MESA_SHADER_CACHE_MAX_SIZE = "20G";
+              MANGOHUD = true;
+            };
+
+            # per game, by app ID
+            games."570" = {
+              launchOptions = "-novid %command%";
+              environment.DXVK_HUD = "fps";
+            };
           };
         }
       ];
@@ -53,6 +65,8 @@ hidden, recovered by analysing the client itself (see [doc/](doc/README.md)).
 | `programs.steam.client.convars.<name>` | 449 | `+name value` on the command line. |
 | `programs.steam.client.environment.<NAME>` | 222 | Environment variables and SDL hints. |
 | `programs.steam.client.steamCfg.<Key>` | 8 | `<steam root>/steam.cfg` (bootstrapper / updater control). |
+| `programs.steam.client.gameEnvironment.<NAME>` | 103 declared, plus any name | Environment of every launched game, applied **after** Steam has built it, so it overrides Steam's own values. |
+| `programs.steam.client.games.<appid>.environment` / `.launchOptions` | any | Per-game variables, and the game's Launch Options (`localconfig.vdf`). |
 
 Every option defaults to `null`, which means "not managed": Steam's own default, or whatever the user picked in
 the UI, is left alone. Each option's description says what it does (inferred from how the client uses it, with a
@@ -61,9 +75,19 @@ confidence tag where inferred), where Steam stores it, and Steam's default.
 Not exposed as options:
 * 44 settings that have no on-disk key (computed in code) or are read-only;
 * console commands, because they are actions, not configuration;
-* variables Steam sets for games, and gamescope X11 atoms, because Steam sets these at runtime.
+* gamescope X11 atoms, because Steam sets these at runtime.
 
 Use `extraArgs` for anything else.
+
+## How game variables are applied
+
+Steam builds each game's environment and then runs `$STEAM_GAME_LAUNCH_SHELL -c "<command line>"`, with
+`/bin/sh` as the default. This sequence was recovered from `steamclient.so`; see
+[doc/binaries/environment.md](doc/binaries/environment.md). When `gameEnvironment` or `games.*.environment` is
+set, the module points `STEAM_GAME_LAUNCH_SHELL` at a generated script. The script exports your variables,
+adds the per-game ones by matching `$SteamAppId`, and then `exec`s the real shell. Steam, Proton,
+pressure-vessel and non-Steam shortcuts are unaffected apart from the extra variables. If you also set
+`environment.STEAM_GAME_LAUNCH_SHELL`, the generated script hands over to your shell instead of `/bin/sh`.
 
 ## Notes
 

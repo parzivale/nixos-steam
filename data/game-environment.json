@@ -1,0 +1,601 @@
+{
+ "AMD_VK_PIPELINE_CACHE_FILENAME": {
+  "confidence": "high",
+  "values": [
+   "steamapp_shader_cache"
+  ],
+  "what": "AMD proprietary/AMDVLK Vulkan driver setting for the pipeline cache file name. Steam sets it to steamapp_shader_cache."
+ },
+ "AMD_VK_PIPELINE_CACHE_PATH": {
+  "confidence": "high",
+  "values": [],
+  "what": "AMD Vulkan driver setting for the pipeline cache directory. Steam points it at the game's Steam shader-cache folder."
+ },
+ "AMD_VK_USE_PIPELINE_CACHE": {
+  "confidence": "high",
+  "values": [
+   "1"
+  ],
+  "what": "Steam sets it to 1 to turn on the AMD Vulkan driver's on-disk pipeline cache (stored in Steam's shader cache)."
+ },
+ "BREAKPAD_DUMP_LOCATION": {
+  "confidence": "medium",
+  "values": [],
+  "what": "Minidump directory that Steam puts in the environment of processes it launches (including steamwebhelper), so Breakpad-enabled children write crash dumps where Steam collects them."
+ },
+ "CEF_CRASH_REPORTER_PRODUCT_VERSION": {
+  "confidence": "medium",
+  "values": [],
+  "what": "Set in the environment of the steamwebhelper (CEF) process that Steam starts, so its crash reports carry the Steam client version."
+ },
+ "CEF_CRASH_REPORTER_SERVER_URL": {
+  "confidence": "high",
+  "values": [
+   "https://crash.steampowered.com/submit"
+  ],
+  "what": "Set to https://crash.steampowered.com/submit in the environment of the steamwebhelper process, so CEF crash reports go to Valve's crash server."
+ },
+ "DISABLE_LAYER_AMD_SWITCHABLE_GRAPHICS_1": {
+  "confidence": "high",
+  "values": [
+   "1"
+  ],
+  "what": "Steam sets it to 1 to disable AMD's VK_LAYER_AMD_switchable_graphics implicit Vulkan layer in games. That layer can hide GPUs or break device selection, and the overlay layer conflicts with it."
+ },
+ "DISPLAY": {
+  "confidence": "medium",
+  "values": [],
+  "what": "X display that Steam sets for launched games and install scripts. On gamescope or with multiple Xwaylands, Steam chooses which Xwayland display the game uses."
+ },
+ "ENABLE_VK_LAYER_VALVE_steam_fossilize_1": {
+  "confidence": "high",
+  "values": [
+   "1"
+  ],
+  "what": "Steam sets it to 1 to turn on its implicit Fossilize Vulkan layer in the game. The layer records pipeline state into STEAM_FOSSILIZE_DUMP_PATH for shader pre-caching."
+ },
+ "ENABLE_VK_LAYER_VALVE_steam_overlay_1": {
+  "confidence": "high",
+  "values": [
+   "1"
+  ],
+  "what": "Steam sets it to 1 to turn on the implicit Steam overlay Vulkan layer (steamoverlayvulkanlayer.so) for Vulkan games, including those running under Proton."
+ },
+ "EnableConfiguratorSupport": {
+  "confidence": "low",
+  "values": [],
+  "what": "Steam Input setting passed to the game, probably the bitmask of controller types for which Steam Input configuration is enabled. The game's SDL and Steam Input integration use it to decide which controllers Steam remaps."
+ },
+ "FOSSILIZE_APPLICATION_INFO_FILTER_PATH": {
+  "confidence": "high",
+  "values": [],
+  "what": "Steam sets it to the path of the Fossilize application-info filter file. The Fossilize layer uses the file to decide whether to record pipelines for this game or engine."
+ },
+ "GameOverlay_BlockOculusSDK": {
+  "confidence": "low",
+  "values": [],
+  "what": "Per-app setting passed to the overlay. It probably tells the overlay to block or ignore the Oculus SDK in the game, to avoid conflicts with OpenVR/SteamVR."
+ },
+ "GameOverlay_CompatMode": {
+  "confidence": "medium",
+  "values": [],
+  "what": "Per-app overlay compatibility mode, taken from the app's config (config/GameOverlay_CompatMode) or registry key. The overlay renderer uses it to change its hooking for games that need special handling."
+ },
+ "GameOverlay_TestMode": {
+  "confidence": "medium",
+  "values": [
+   "1"
+  ],
+  "what": "Set to 1 when the app config enables overlay test mode (config/GameOverlay_TestMode). It puts the overlay renderer into a testing/debug mode."
+ },
+ "HOST_LC_ALL": {
+  "confidence": "high",
+  "values": [],
+  "what": "Holds the user's original LC_ALL when Steam overrides LC_ALL for a game (for example a Proton launch), so the game or Proton can restore the host locale."
+ },
+ "IgnoreChildProcesses": {
+  "confidence": "medium",
+  "values": [
+   "1"
+  ],
+  "what": "Steam sets it to 1 for some launches so the overlay renderer injected through LD_PRELOAD does not hook child processes started by the game. Only the main game gets the overlay."
+ },
+ "LC_ALL": {
+  "confidence": "high",
+  "values": [
+   "C"
+  ],
+  "what": "Steam sets it to C for Proton/compat launches, after saving the user's value in HOST_LC_ALL, unless the app has DisableLinuxLocaleOverride. This avoids locale-dependent parsing bugs, such as decimal commas, in Windows games."
+ },
+ "MESA_DISK_CACHE_READ_ONLY_FOZ_DBS": {
+  "confidence": "high",
+  "values": [],
+  "what": "Mesa setting for read-only Fossilize databases. Steam sets it to the steam_precompiled[_<x>] databases so Mesa drivers use shaders Steam pre-compiled (logged as \"Setting MESA_GLSL_CACHE_DIR=... MESA_DISK_CACHE_READ_ONLY_FOZ_DBS=...\")."
+ },
+ "MESA_DISK_CACHE_SINGLE_FILE": {
+  "confidence": "high",
+  "values": [
+   "1"
+  ],
+  "what": "Steam sets it to 1 so Mesa uses a single-file disk cache instead of many small files in the per-app shader cache directory."
+ },
+ "MESA_GLSL_CACHE_DIR": {
+  "confidence": "high",
+  "values": [],
+  "what": "Older Mesa name for the shader cache directory. Steam sets it to the game's Steam shader-cache folder, together with MESA_SHADER_CACHE_DIR."
+ },
+ "MESA_GLSL_CACHE_MAX_SIZE": {
+  "confidence": "high",
+  "values": [
+   "5G"
+  ],
+  "what": "Older Mesa name for the shader cache size limit. Steam sets it to 5G."
+ },
+ "MESA_SHADER_CACHE_DIR": {
+  "confidence": "high",
+  "values": [],
+  "what": "Mesa shader cache directory. Steam points it at the game's folder in the Steam shader cache (steamapps/shadercache/<appid>)."
+ },
+ "MESA_SHADER_CACHE_MAX_SIZE": {
+  "confidence": "high",
+  "values": [
+   "5G"
+  ],
+  "what": "Mesa shader cache size limit. Steam sets it to 5G for games."
+ },
+ "MESA_VK_TRACE": {
+  "confidence": "high",
+  "values": [
+   "rgp"
+  ],
+  "what": "Mesa Vulkan tracing mode. Steam sets it to rgp (Radeon GPU Profiler captures) when SteamOS system tracing is enabled (SteamOS/SystemTracingEnabled)."
+ },
+ "MESA_VK_TRACE_TRIGGER": {
+  "confidence": "high",
+  "values": [
+   "/tmp/rgp.trigger"
+  ],
+  "what": "Mesa trigger file for tracing. Steam sets it to /tmp/rgp.trigger with MESA_VK_TRACE=rgp; touching that file makes RADV capture an RGP trace."
+ },
+ "PATH": {
+  "confidence": "high",
+  "values": [],
+  "what": "PATH for launched games, built from SYSTEM_PATH (the host PATH) plus Steam/runtime entries, so games and launch options find host tools."
+ },
+ "PRESSURE_VESSEL_BATCH": {
+  "confidence": "high",
+  "values": [
+   "1"
+  ],
+  "what": "Steam sets it to 1 when it runs pressure-vessel helper commands, for example gathering container runtime info into logs/container-runtime-info.txt. It turns off interactive pressure-vessel features."
+ },
+ "PROTON_CRASH_REPORT_DIR": {
+  "confidence": "high",
+  "values": [
+   "/tmp/proton_crashreports"
+  ],
+  "what": "Steam sets it to /tmp/proton_crashreports so Proton/Wine write crash reports there, where Steam can collect them."
+ },
+ "PROTON_HIDE_PROCESS_WINDOW": {
+  "confidence": "medium",
+  "values": [
+   "1"
+  ],
+  "what": "Steam sets it to 1 for helper processes it runs through Proton (for example the DRM-download job), so Proton hides their console or process window."
+ },
+ "PROTON_REMOTE_DEBUG_CMD": {
+  "confidence": "high",
+  "values": [],
+  "what": "Set when the app's steam_play_debug setting is enabled. It holds a command (msvsmon.exe from Visual Studio <version>, run with /noauth /anyuser /silent ...) that Proton starts next to the game so a Windows developer can attach the Visual Studio remote debugger."
+ },
+ "PROTON_WAIT_ATTACH": {
+  "confidence": "medium",
+  "values": [],
+  "what": "Set from a per-app setting (registry key Software\\Valve\\Steam\\Apps\\<appid>). It tells Proton to pause the game at startup until a debugger attaches, and is used together with steam_play_debug and PROTON_REMOTE_DEBUG_CMD."
+ },
+ "RADV_DEBUG": {
+  "confidence": "high",
+  "values": [],
+  "what": "Steam sets RADV_DEBUG for its background fossilize_replay shader pre-compilation, adding ',nomemorycache' to any existing value, so RADV writes compiled pipelines to the disk cache instead of keeping them in memory."
+ },
+ "SDL_ENABLE_STEAM_SCREEN_KEYBOARD": {
+  "confidence": "high",
+  "values": [
+   "1"
+  ],
+  "what": "Set to 1, in Big Picture or Gamepad UI launches, so SDL games show the Steam on-screen keyboard when they start text input."
+ },
+ "SDL_GAMECONTROLLER_ALLOW_STEAM_VIRTUAL_GAMEPAD": {
+  "confidence": "high",
+  "values": [
+   "1"
+  ],
+  "what": "Set to 1 so that SDL in the game uses the Steam Input virtual gamepads. SDL normally ignores them, but here Steam Input is remapping the physical controllers."
+ },
+ "SDL_GAMECONTROLLER_IGNORE_DEVICES": {
+  "confidence": "high",
+  "values": [],
+  "what": "Steam fills it with a comma-separated list of 0xVID/0xPID entries for the physical controllers that Steam Input has taken over. The game's SDL then ignores those devices and sees only the Steam virtual gamepad, which avoids double input."
+ },
+ "SDL_GAMECONTROLLER_USE_BUTTON_LABELS": {
+  "confidence": "medium",
+  "values": [],
+  "what": "Steam sets it (0 or 1, depending on the user's Steam Input button-layout setting) to tell SDL whether to map face buttons by printed label or by position, for example Nintendo-style controllers."
+ },
+ "SDL_JOYSTICK_HIDAPI_STEAMXBOX": {
+  "confidence": "medium",
+  "values": [
+   "0"
+  ],
+  "what": "Steam sets it to 0 so the game's SDL does not use its HIDAPI driver for Steam's virtual Xbox-style controllers, which avoids conflicts with Steam Input."
+ },
+ "STEAMVIDEOTOKEN": {
+  "confidence": "low",
+  "values": [],
+  "what": "Video-unlock token that Steam passes to child processes, especially steamwebhelper, so the bundled media stack enables licensed codecs. Internal."
+ },
+ "STEAM_CLIENT_CONFIG_FILE": {
+  "confidence": "high",
+  "values": [],
+  "what": "Steam sets it to <steamroot>/steam.cfg for launched processes, so tools and runtimes can find the client's steam.cfg overrides."
+ },
+ "STEAM_COMPAT_APP_ID": {
+  "confidence": "high",
+  "values": [
+   "0"
+  ],
+  "what": "AppID of the game that a compatibility tool such as Proton or the Steam Linux Runtime is running (0 when not applicable). Proton uses it, for example, to apply per-game fixes."
+ },
+ "STEAM_COMPAT_CLIENT_INSTALL_PATH": {
+  "confidence": "high",
+  "values": [],
+  "what": "Steam's install directory (for example ~/.steam/steam). Steam passes it to compat tools so Proton can find Steam's files, such as steamclient.so and the lsteamclient bridge."
+ },
+ "STEAM_COMPAT_CONFIG": {
+  "confidence": "high",
+  "values": [],
+  "what": "Comma-separated per-app compatibility config options from the app's Steam Play settings (for example 'gamedrive' or 'noesync'). Proton reads them as option flags, similar to PROTON_* variables."
+ },
+ "STEAM_COMPAT_DATA_PATH": {
+  "confidence": "high",
+  "values": [],
+  "what": "Per-game compatibility data directory, steamapps/compatdata/<appid>. Proton keeps the Wine prefix in it (the pfx/ subdirectory)."
+ },
+ "STEAM_COMPAT_FLAGS": {
+  "confidence": "high",
+  "values": [
+   "search-cwd"
+  ],
+  "what": "Comma-separated flags for the Steam Runtime/compat layer. Steam sets search-cwd so the game's working directory is added to the library search path, a behaviour that LD_LIBRARY_PATH-based runtimes need."
+ },
+ "STEAM_COMPAT_INSTALL_PATH": {
+  "confidence": "high",
+  "values": [],
+  "what": "The game's install directory, for example steamapps/common/<game>. Steam passes it to compat tools, and pressure-vessel shares it into the container."
+ },
+ "STEAM_COMPAT_LAUNCHER_SERVICE": {
+  "confidence": "medium",
+  "values": [],
+  "what": "Name of the compat tool layer (for example proton or container-runtime) in which Steam asks steam-runtime-launcher-service to run. Developers can then run commands inside the game's environment; this follows the CompatTool_LauncherService setting."
+ },
+ "STEAM_COMPAT_LIBRARY_PATHS": {
+  "confidence": "high",
+  "values": [],
+  "what": "Colon-separated list of Steam library folders that the game and tools may need. pressure-vessel shares them into the container."
+ },
+ "STEAM_COMPAT_MEDIA_PATH": {
+  "confidence": "medium",
+  "values": [],
+  "what": "Directory for Proton's media converter (fozmediav<N> databases of pre-transcoded audio and video). Proton's media foundation and gstreamer path uses it to find converted video and audio."
+ },
+ "STEAM_COMPAT_MOUNTS": {
+  "confidence": "high",
+  "values": [],
+  "what": "Colon-separated extra paths that pressure-vessel should share into the game's container. Steam passes on any user value and adds its own paths."
+ },
+ "STEAM_COMPAT_PROTON": {
+  "confidence": "high",
+  "values": [
+   "1"
+  ],
+  "what": "Set to 1 when the selected compat tool is Proton, so layers and tools know the game runs under Wine/Proton."
+ },
+ "STEAM_COMPAT_SHADER_PATH": {
+  "confidence": "high",
+  "values": [],
+  "what": "The game's shader cache directory, steamapps/shadercache/<appid>. Proton and DXVK/VKD3D use it for their caches, and pressure-vessel shares it into the container."
+ },
+ "STEAM_COMPAT_TOOL_PATHS": {
+  "confidence": "high",
+  "values": [],
+  "what": "Colon-separated directories of all the compat tools stacked for this launch (for example Proton plus the Steam Linux Runtime). pressure-vessel shares them into the container."
+ },
+ "STEAM_COMPAT_TRACING": {
+  "confidence": "medium",
+  "values": [
+   "1"
+  ],
+  "what": "Set to 1 when SteamOS system tracing is enabled (SteamOS/SystemTracingEnabled), together with MESA_VK_TRACE=rgp. It tells compat tools such as Proton to turn on their tracing support."
+ },
+ "STEAM_COMPAT_TRANSCODED_MEDIA_PATH": {
+  "confidence": "medium",
+  "values": [],
+  "what": "Directory where Proton's media converter stores and finds transcoded video (the fozmediav<N> or swarm data). Steam sets it next to STEAM_COMPAT_MEDIA_PATH."
+ },
+ "STEAM_FOSSILIZE_DUMP_PATH": {
+  "confidence": "high",
+  "values": [],
+  "what": "Steam sets it to the game's pipeline-recording path (shadercache/<appid>/fozpipelinesv<N>/steamapprun_pipeline_cache). The Steam Fossilize layer records the game's Vulkan pipelines there for later pre-compilation and upload."
+ },
+ "STEAM_FOSSILIZE_DUMP_PATH_READ_ONLY": {
+  "confidence": "high",
+  "values": [],
+  "what": "Steam sets it to '$bucketdir/steam_pipeline_cache.foz;$bucketdir/steamapp_pipeline_cache.foz', the downloaded and merged pipeline databases. The Fossilize layer then skips pipelines that are already known."
+ },
+ "STEAM_GAME_PIDS": {
+  "confidence": "medium",
+  "values": [],
+  "what": "Set for the overlay UI helper process that Steam starts for a game (\"GameOverlay: started '%s' (pid %d) for game process %d\"). It lists the PIDs of the game processes the overlay serves."
+ },
+ "STEAM_LAUNCH_WRAPPER_SCOPE": {
+  "confidence": "high",
+  "values": [
+   "1"
+  ],
+  "what": "Steam sets it to 1 so steam-launch-wrapper puts the game in its own transient systemd scope (app-steam-app<ID>-<pid>.scope)."
+ },
+ "STEAM_OVERLAY_DISABLE_WAIT_FOR_CEF_FRAME": {
+  "confidence": "low",
+  "values": [
+   "1"
+  ],
+  "what": "Steam sets it to 1 for some launches, probably on Steam Deck/SteamOS, so the in-game overlay does not wait for a fresh CEF UI frame before presenting."
+ },
+ "STEAM_OVERLAY_LOGGING_FLUSH": {
+  "confidence": "medium",
+  "values": [
+   "1"
+  ],
+  "what": "Steam sets it to 1 when overlay trace or test mode is enabled in the app config, so the overlay renderer flushes its /tmp/gameoverlayrenderer.<pid>.log after every line."
+ },
+ "STEAM_OVERLAY_WINDOW_BLACKLIST": {
+  "confidence": "medium",
+  "values": [],
+  "what": "Filled from the app's OverlayWindowBlacklist setting. It lists windows or executables the overlay renderer should not hook in this game."
+ },
+ "SteamAppId": {
+  "confidence": "high",
+  "values": [],
+  "what": "AppID of the running game. Steamworks (SteamAPI_Init) reads it instead of steam_appid.txt, and steam-launch-wrapper uses it for scope and journal names."
+ },
+ "SteamAppUser": {
+  "confidence": "medium",
+  "values": [],
+  "what": "Account name of the logged-in Steam user, passed to the game. Older games and Proton use it, for example to name the Wine user profile."
+ },
+ "SteamClientLaunch": {
+  "confidence": "high",
+  "values": [
+   "1"
+  ],
+  "what": "Set to 1 so the game and Steamworks know they were started by the Steam client, not run directly."
+ },
+ "SteamDeck": {
+  "confidence": "high",
+  "values": [
+   "1"
+  ],
+  "what": "Set to 1 when running on a Steam Deck, or when the app is configured to identify as one (ForceIdentAsSteamDeck). Games use it to choose Deck-appropriate defaults."
+ },
+ "SteamDisableOverlayDPIScaling": {
+  "confidence": "medium",
+  "values": [
+   "1"
+  ],
+  "what": "Set to 1 for some launches (for example in Gamepad UI) so the in-game overlay does not apply DPI scaling."
+ },
+ "SteamEnv": {
+  "confidence": "medium",
+  "values": [
+   "1"
+  ],
+  "what": "Set to 1 so the launched process knows it is running inside a Steam-provided environment."
+ },
+ "SteamGameId": {
+  "confidence": "high",
+  "values": [],
+  "what": "Game ID of the launch (AppID, or a 64-bit ID for non-Steam shortcuts and mods). The overlay uses it to identify the game, and gamescope uses it (through the STEAM_GAME window atom) to associate windows with apps."
+ },
+ "SteamGamepadUI": {
+  "confidence": "high",
+  "values": [
+   "1"
+  ],
+  "what": "Set to 1 when the game is launched from the Gamepad UI/Big Picture, so the overlay and games use controller-friendly behaviour."
+ },
+ "SteamGenericControllers": {
+  "confidence": "low",
+  "values": [],
+  "what": "Set to describe which generic controllers Steam Input is handling for this game. It is part of the SDL and Steam Input controller environment, and the value format is not visible."
+ },
+ "SteamNoOverlayUI": {
+  "confidence": "medium",
+  "values": [
+   "1"
+  ],
+  "what": "Set to 1 for some launches (probably when the overlay UI is disabled or the session draws the overlay itself, such as SteamOS/gamescope), telling the overlay renderer not to draw its own UI."
+ },
+ "SteamOS": {
+  "confidence": "high",
+  "values": [
+   "1"
+  ],
+  "what": "Set to 1 when Steam runs on SteamOS, so games and tools can detect it."
+ },
+ "SteamOverlayGameId": {
+  "confidence": "high",
+  "values": [],
+  "what": "Game ID the overlay should use for this launch. It usually equals SteamGameId but can differ, for example for shortcuts or tools launched for another app."
+ },
+ "SteamRealm": {
+  "confidence": "high",
+  "values": [],
+  "what": "Steam realm of the client (global Steam or Steam China), passed to launched processes so the overlay and Steamworks pick realm-specific behaviour."
+ },
+ "SteamStreaming": {
+  "confidence": "medium",
+  "values": [
+   "1"
+  ],
+  "what": "Set to 1 when the game is launched for, or during, a Remote Play streaming session."
+ },
+ "SteamStreamingAllowGameVsync": {
+  "confidence": "medium",
+  "values": [],
+  "what": "Set from the app's extended/StreamingAllowGameVsync setting. It lets the game keep vsync on while being streamed."
+ },
+ "SteamStreamingAudio": {
+  "confidence": "medium",
+  "values": [],
+  "what": "Set during Remote Play so the overlay or streaming hooks capture the game's audio for the stream."
+ },
+ "SteamStreamingForceWindowedD3D9": {
+  "confidence": "medium",
+  "values": [],
+  "what": "Set from the app's extended/StreamingForceWindowedD3D9 setting. When streaming, it forces D3D9 games into windowed mode so their frames can be captured; mostly relevant to Windows or Proton."
+ },
+ "SteamStreamingInput": {
+  "confidence": "medium",
+  "values": [],
+  "what": "Set during Remote Play so the game, overlay and Steam Input know input is coming from a remote streaming client."
+ },
+ "SteamStreamingMaximumResolution": {
+  "confidence": "medium",
+  "values": [
+   "0x0"
+  ],
+  "what": "Maximum resolution the streaming client wants, in WxH format (0x0 means no limit). Streaming-aware hooks may use it to cap the game's resolution."
+ },
+ "SteamStreamingVRPairedInvite": {
+  "confidence": "low",
+  "values": [],
+  "what": "Set for launches that come from a Steam Link/VR streaming pairing invite. It probably carries the invite or session identifier so the game or VR runtime can complete the pairing."
+ },
+ "SteamStreamingVRTransitionInvite": {
+  "confidence": "low",
+  "values": [],
+  "what": "Set for launches that move a streaming session into VR. It probably carries an invite token used during the VR transition."
+ },
+ "SteamStreamingVideo": {
+  "confidence": "medium",
+  "values": [
+   "1"
+  ],
+  "what": "Set to 1 when the game's video should be captured for Remote Play streaming."
+ },
+ "SteamStreamingVideoDisableVSync": {
+  "confidence": "medium",
+  "values": [],
+  "what": "Set during streaming to tell the overlay or hooks to disable the game's vsync, unless SteamStreamingAllowGameVsync allows it."
+ },
+ "SteamTenfoot": {
+  "confidence": "high",
+  "values": [
+   "1"
+  ],
+  "what": "Set to 1 when the game is launched from Big Picture (\"tenfoot\") mode."
+ },
+ "SteamTraceEnter": {
+  "confidence": "low",
+  "values": [],
+  "what": "Set from the app's config/SteamTraceEnter setting. Together with SteamTraceModule and SteamTraceExit, it configures the overlay renderer's function-tracing debug feature, probably the entry symbol to trace."
+ },
+ "SteamTraceExit": {
+  "confidence": "low",
+  "values": [],
+  "what": "Set from the app's config/SteamTraceExit setting, as part of the overlay tracing debug feature; probably the exit symbol to trace."
+ },
+ "SteamTraceModule": {
+  "confidence": "low",
+  "values": [],
+  "what": "Set from the app's config/SteamTraceModule setting, as part of the overlay tracing debug feature; probably the module to trace."
+ },
+ "SteamUniverse": {
+  "confidence": "high",
+  "values": [],
+  "what": "Steam universe of the client (Public, Beta, ...), passed to launched processes. Steamworks and the overlay use it to connect to the matching universe."
+ },
+ "SteamUserDataFolder": {
+  "confidence": "medium",
+  "values": [],
+  "what": "Path of the logged-in user's userdata folder (userdata/<accountid>). Passed to games and Proton, for example for cloud saves or screenshots."
+ },
+ "SteamVirtualGamepadInfo": {
+  "confidence": "medium",
+  "values": [],
+  "what": "Describes the Steam Input virtual gamepads for this launch, probably the index or slot of each virtual controller and the real device behind it. SDL in the game reads it so virtual pads report correct types and order."
+ },
+ "SteamVirtualGamepadInfo_Proton": {
+  "confidence": "low",
+  "values": [],
+  "what": "Proton-specific version of SteamVirtualGamepadInfo. It probably points to the virtual gamepad info in a form usable inside the Wine/Proton container."
+ },
+ "StreamForOpenVR": {
+  "confidence": "low",
+  "values": [],
+  "what": "Set from an app setting when the game is streamed to an OpenVR/SteamVR client. It tells the overlay to capture frames for VR streaming."
+ },
+ "StreamingTargetAudioChannels": {
+  "confidence": "medium",
+  "values": [],
+  "what": "Number of audio channels the Remote Play client wants (for example 2 or 6). Streaming audio capture uses it to match the client's speaker setup."
+ },
+ "XR_RUNTIME_JSON": {
+  "confidence": "medium",
+  "values": [],
+  "what": "OpenXR loader override that names the active runtime's manifest JSON. Steam sets it for games, probably from a per-app setting or the SteamVR install, so OpenXR games load SteamVR's OpenXR runtime."
+ },
+ "__GL_SHADER_DISK_CACHE_APP_NAME": {
+  "confidence": "high",
+  "values": [
+   "steamapp_shader_cache"
+  ],
+  "what": "NVIDIA driver setting for the name of the writable shader cache. Steam sets it to steamapp_shader_cache so the game's compiled shaders go into Steam's per-app shader cache."
+ },
+ "__GL_SHADER_DISK_CACHE_PATH": {
+  "confidence": "high",
+  "values": [],
+  "what": "NVIDIA driver setting for the shader cache directory. Steam points it at the game's folder in the Steam shader cache (shadercache/<appid>) so the cache can be managed and shared."
+ },
+ "__GL_SHADER_DISK_CACHE_READ_ONLY_APP_NAME": {
+  "confidence": "high",
+  "values": [
+   "steam_shader_cache;steamapp_merged_shader_cache"
+  ],
+  "what": "NVIDIA driver setting for extra read-only shader caches. Steam sets it to 'steam_shader_cache;steamapp_merged_shader_cache' so the driver also loads shaders that Steam downloaded or merged."
+ },
+ "__GL_SHADER_DISK_CACHE_SKIP_CLEANUP": {
+  "confidence": "high",
+  "values": [
+   "1"
+  ],
+  "what": "Steam sets it to 1 so the NVIDIA driver does not clean up or size-limit the shader cache; Steam manages the cache itself."
+ },
+ "http_proxy": {
+  "confidence": "high",
+  "values": [],
+  "what": "When a proxy is set in Steam's settings, Steam exports it to launched games as http_proxy (URL form)."
+ },
+ "https_proxy": {
+  "confidence": "high",
+  "values": [],
+  "what": "Steam exports its configured HTTPS proxy to launched games as https_proxy."
+ },
+ "no_proxy": {
+  "confidence": "high",
+  "values": [
+   "localhost,127.0.0.0/8"
+  ],
+  "what": "When Steam exports its proxy to games, it also sets no_proxy=localhost,127.0.0.0/8 so local connections bypass the proxy."
+ }
+}

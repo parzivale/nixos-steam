@@ -29,6 +29,7 @@ let
   switchesData = readData "switches";
   convarsData = readData "convars";
   envData = readData "environment";
+  gameEnvData = readData "game-environment";
 
   confidence = c: optionalString (c != "" && c != "high") " *(${c} confidence)*";
   fmt = v: if builtins.isBool v then (if v then "true" else "false") else builtins.toJSON v;
@@ -182,23 +183,84 @@ let
 
   envValue = v: if builtins.isBool v then (if v then "1" else "0") else toString v;
 
+  # ------------------------------------------------------------------ game environment
+  envValueType = types.oneOf [
+    types.bool
+    types.int
+    types.str
+  ];
+
+  gameEnvDescription =
+    name: d:
+    concatStringsSep "\n\n" (
+      lib.filter (s: s != "") [
+        (d.what + confidence d.confidence)
+        (optionalString (d.values != [ ])
+          "Steam sets: ${concatStringsSep ", " (map (v: "`${v}`") d.values)}."
+        )
+        "Applied after Steam has built the game's environment, so this replaces Steam's own value."
+      ]
+    );
+
+  isShellName = n: builtins.match "[A-Za-z_][A-Za-z0-9_]*" n != null;
+  exportLines =
+    vars:
+    concatStringsSep "\n" (
+      lib.mapAttrsToList (n: v: "export ${n}=${lib.escapeShellArg (envValue v)}") vars
+    );
+
+  gameEnv = filterAttrs (_: v: v != null) cfg.gameEnvironment;
+  perGameEnv = filterAttrs (_: g: g.environment != { }) cfg.games;
+  useLaunchShell = gameEnv != { } || perGameEnv != { };
+
+  # Steam runs every game as `$STEAM_GAME_LAUNCH_SHELL -c "<command line>"` (default /bin/sh) after it
+  # has populated the game's environment; this shell layers our variables on top and hands over.
+  launchShellText = ''
+    ${exportLines gameEnv}
+    case "''${SteamAppId:-''${SteamGameId:-}}" in
+    ${concatStringsSep "\n" (
+      lib.mapAttrsToList (id: g: ''
+        ${lib.escapeShellArg id})
+        ${exportLines g.environment}
+          ;;'') perGameEnv
+    )}
+    esac
+    exec ${
+      if cfg.environment.STEAM_GAME_LAUNCH_SHELL or null != null then
+        toString cfg.environment.STEAM_GAME_LAUNCH_SHELL
+      else
+        "/bin/sh"
+    } "$@"
+  '';
+  launchShell = pkgs.writeShellScript "nixos-steam-game-launch-shell" launchShellText;
+
+  launchOptionSettings = lib.mapAttrsToList (id: g: {
+    store = "local";
+    key = "Software\\Valve\\Steam\\apps\\${id}\\LaunchOptions";
+    value = g.launchOptions;
+  }) (filterAttrs (_: g: g.launchOptions != null) cfg.games);
+
   # ------------------------------------------------------------------ apply
   managedSettings = filterAttrs (_: v: v != null) cfg.settings;
   steamCfg = filterAttrs (_: v: v != null) cfg.steamCfg;
 
   applyData = {
     inherit (cfg) steamRoot userIds;
-    settings = lib.mapAttrsToList (name: v: {
-      inherit (settingsData.${name}) store key;
-      value = settingValue settingsData.${name} v;
-    }) managedSettings;
+    settings =
+      lib.mapAttrsToList (name: v: {
+        inherit (settingsData.${name}) store key;
+        value = settingValue settingsData.${name} v;
+      }) managedSettings
+      ++ launchOptionSettings;
     steamCfg =
       if steamCfg == { } && !cfg.manageSteamCfg then null else lib.mapAttrs (_: toString) steamCfg;
   };
   applyConfig = pkgs.writeText "nixos-steam-client.json" (builtins.toJSON applyData);
 
   allArgs = switchArgs ++ convarArgs ++ cfg.extraArgs;
-  env = mapAttrs (_: envValue) (filterAttrs (_: v: v != null) cfg.environment);
+  env =
+    mapAttrs (_: envValue) (filterAttrs (_: v: v != null) cfg.environment)
+    // lib.optionalAttrs useLaunchShell { STEAM_GAME_LAUNCH_SHELL = "${launchShell}"; };
 in
 {
   options.programs.steam.client = {
@@ -293,6 +355,66 @@ in
       }
     ) envData;
 
+    gameEnvironment = mkOption {
+      type = types.submodule {
+        freeformType = types.attrsOf (types.nullOr envValueType);
+        options = mapAttrs (
+          name: d:
+          mkOption {
+            type = types.nullOr envValueType;
+            default = null;
+            description = gameEnvDescription name d;
+          }
+        ) gameEnvData;
+      };
+      default = { };
+      example = {
+        MANGOHUD = true;
+        DXVK_HUD = "fps";
+        MESA_SHADER_CACHE_MAX_SIZE = "20G";
+        PROTON_ENABLE_WAYLAND = true;
+      };
+      description = ''
+        Environment variables for every game Steam launches. The variables Steam itself sets for games are
+        declared (with descriptions), and any other name is accepted too. They are applied after Steam has built the
+        game's environment, so they override Steam's values, through a launch shell installed as
+        `STEAM_GAME_LAUNCH_SHELL`. Steam runs each game as `$STEAM_GAME_LAUNCH_SHELL -c "<command line>"`.
+        `true`/`false` become `1`/`0`.
+      '';
+    };
+
+    games = mkOption {
+      type = types.attrsOf (
+        types.submodule {
+          options = {
+            environment = mkOption {
+              type = types.attrsOf envValueType;
+              default = { };
+              description = "Environment variables for this game only (applied after {option}`programs.steam.client.gameEnvironment`).";
+            };
+            launchOptions = mkOption {
+              type = types.nullOr types.str;
+              default = null;
+              example = "gamemoderun %command% -novid";
+              description = ''
+                The game's launch options, as typed in Properties > General > Launch Options (use `%command%`
+                for the game's command line). Written to `localconfig.vdf` at
+                `Software/Valve/Steam/apps/<appid>/LaunchOptions` for every managed account.
+              '';
+            };
+          };
+        }
+      );
+      default = { };
+      example = lib.literalExpression ''
+        {
+          "570" = { launchOptions = "-novid %command%"; environment.DXVK_HUD = "fps"; };
+          "1091500".environment.PROTON_ENABLE_NVAPI = true;
+        }
+      '';
+      description = "Per-game configuration, keyed by Steam app ID.";
+    };
+
     manageSteamCfg = mkOption {
       type = types.bool;
       default = false;
@@ -354,10 +476,24 @@ in
   };
 
   config = mkIf cfg.enable {
+    assertions = [
+      {
+        assertion = lib.all isShellName (
+          builtins.attrNames gameEnv
+          ++ lib.concatMap (g: builtins.attrNames g.environment) (builtins.attrValues cfg.games)
+        );
+        message = "programs.steam.client: game environment variable names must be valid shell identifiers.";
+      }
+      {
+        assertion = lib.all (id: builtins.match "[0-9]+" id != null) (builtins.attrNames cfg.games);
+        message = "programs.steam.client.games: keys must be numeric Steam app IDs.";
+      }
+    ];
     programs.steam.client.finalConfig = {
       args = allArgs;
       environment = env;
       apply = applyData;
+      gameLaunchShell = lib.optionalString useLaunchShell launchShellText;
     };
     programs.steam.package = cfg.package.override (prev: {
       extraArgs = concatStringsSep " " (
